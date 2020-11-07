@@ -4,6 +4,9 @@
 #include <string>
 #include "Material.h"
 
+#pragma warning(push)
+#pragma warning(disable: 26812)
+
 class Mesh
 {
 public:

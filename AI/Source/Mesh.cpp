@@ -3,9 +3,10 @@
 #include "GL\glew.h"
 #include "Vertex.h"
 
-Mesh::Mesh(const std::string &meshName)
-	: name(meshName)
-	, mode(DRAW_TRIANGLES)
+Mesh::Mesh(const std::string &meshName):
+	name(meshName),
+	mode(DRAW_TRIANGLES),
+	indexSize(0)
 {
 	glGenBuffers(1, &vertexBuffer);
 	glGenBuffers(1, &indexBuffer);

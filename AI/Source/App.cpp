@@ -52,9 +52,7 @@ int App::GetWindowHeight()
 void App::Init(){
 	glfwSetErrorCallback(error_callback);
 
-	//Initialize GLFW
-	if (!glfwInit())
-	{
+	if(!glfwInit()){
 		exit(EXIT_FAILURE);
 	}
 
@@ -65,11 +63,13 @@ void App::Init(){
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); //We don't want the old OpenGL 
 
-	m_window = glfwCreateWindow(1000, 1000, "App Window", nullptr, nullptr);
+	m_window = glfwCreateWindow(1, 1, "App Window", nullptr, nullptr);
+	glfwHideWindow(m_window);
 	glfwMaximizeWindow(m_window);
+	glfwShowWindow(m_window);
 	glfwGetWindowSize(m_window, &winWidth, &winHeight);
 
-	if (!m_window){
+	if(!m_window){
 		fprintf(stderr, "Failed to open GLFW window.\n");
 		glfwTerminate();
 		exit(EXIT_FAILURE);
