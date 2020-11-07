@@ -53,8 +53,8 @@ public:
 		NUM_GEOMETRY,
 	};
 public:
-	SceneBase();
-	virtual ~SceneBase();
+	SceneBase() = default;
+	virtual ~SceneBase() = default;
 
 	virtual void Init();
 	virtual void Update(double dt);
