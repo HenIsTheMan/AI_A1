@@ -25,8 +25,7 @@ static void error_callback(int error, const char* description)
 }
 
 //Define the key input callback
-static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
+static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods){
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 }
@@ -60,17 +59,7 @@ int App::GetWindowHeight()
 	return m_height;
 }
 
-App::App()
-{
-}
-
-App::~App()
-{
-}
-
-void App::Init()
-{
-	//Set the error callback
+void App::Init(){
 	glfwSetErrorCallback(error_callback);
 
 	//Initialize GLFW
@@ -85,7 +74,6 @@ void App::Init()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); //Request a specific OpenGL version
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); //We don't want the old OpenGL 
-
 
 	//Create a window and create its OpenGL context
 	m_width = 1000;

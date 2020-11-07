@@ -3,17 +3,19 @@
 
 #include "timer.h"
 
-class App
-{
+class App{
 public:
-	static App& GetInstance()
-	{
+	~App() = default;
+
+	static App& GetInstance(){
 		static App app;
 		return app;
 	}
+
 	void Init();
 	void Run();
 	void Exit();
+
 	static bool IsKeyPressed(unsigned short key);
 	static bool IsMousePressed(unsigned short key);
 	static void GetCursorPos(double *xpos, double *ypos);
@@ -21,10 +23,8 @@ public:
 	static int GetWindowHeight();
 
 private:
-	App();
-	~App();
+	App() = default;
 
-	//Declare a window object
 	StopWatch m_timer;
 };
 
