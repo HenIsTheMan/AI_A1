@@ -58,17 +58,16 @@ void App::Init(){
 		exit(EXIT_FAILURE);
 	}
 
-	//Set the GLFW window creation hints - these are optional
 	glfwWindowHint(GLFW_SAMPLES, 4); //Request 4x antialiasing
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); //Request a specific OpenGL version
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); //Request a specific OpenGL version
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); //We don't want the old OpenGL 
 
+	glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 	const GLFWvidmode* const& mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-	m_window = glfwCreateWindow(mode->width, mode->height, "App Window", nullptr, nullptr);
-	glfwSetWindowPos(m_window, 0, 0);
-	glfwHideWindow(m_window);
+	m_window = glfwCreateWindow(mode->width / 2, mode->height / 2, "App Window", nullptr, nullptr);
+	glfwSetWindowPos(m_window, mode->width / 4, mode->height / 4);
 	glfwMaximizeWindow(m_window);
 	glfwShowWindow(m_window);
 	glfwGetWindowSize(m_window, &winWidth, &winHeight);
