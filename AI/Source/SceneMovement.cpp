@@ -80,16 +80,16 @@ void SceneMovement::Update(double dt){
 	
 	static bool isPressedPlus = false;
 	static bool isPressedMinus = false;
-	if(!isPressedPlus && App::IsKeyPressed(VK_OEM_PLUS)){
+	if(!isPressedPlus && App::Key(VK_OEM_PLUS)){
 		m_speed += 0.1f;
 		isPressedPlus = true;
-	} else if(isPressedPlus && !App::IsKeyPressed(VK_OEM_PLUS)){
+	} else if(isPressedPlus && !App::Key(VK_OEM_PLUS)){
 		isPressedPlus = false;
 	}
-	if(!isPressedMinus && App::IsKeyPressed(VK_OEM_MINUS)){
+	if(!isPressedMinus && App::Key(VK_OEM_MINUS)){
 		m_speed = Math::Max(0.f, m_speed - 0.1f);
 		isPressedMinus = true;
-	} else if(isPressedMinus && !App::IsKeyPressed(VK_OEM_MINUS)){
+	} else if(isPressedMinus && !App::Key(VK_OEM_MINUS)){
 		isPressedMinus = false;
 	}
 
@@ -442,8 +442,7 @@ void SceneMovement::RenderGO(GameObject *go)
 	}
 }
 
-void SceneMovement::Render()
-{
+void SceneMovement::Render(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Projection matrix : Orthographic Projection

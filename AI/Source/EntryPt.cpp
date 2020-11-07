@@ -38,7 +38,7 @@ int main(const int&, const char* const* const&){
 	std::thread worker(&MainProcess);
 
 	while(!endLoop){
-		if(App::IsKeyPressed(VK_ESCAPE)){
+		if(App::Key(VK_ESCAPE)){
 			endLoop = true;
 			break;
 		}

@@ -3,7 +3,7 @@
   <ItemGroup>
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\App.cpp">
-      <Filter>App</Filter>
+      <Filter>Others\App</Filter>
     </ClCompile>
     <ClCompile Include="Source\Cam.cpp">
       <Filter>Others\Cam</Filter>
@@ -45,7 +45,7 @@
   <ItemGroup>
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\App.h">
-      <Filter>App</Filter>
+      <Filter>Others\App</Filter>
     </ClInclude>
     <ClInclude Include="Source\Cam.h">
       <Filter>Others\Cam</Filter>
@@ -91,9 +91,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="App">
-      <UniqueIdentifier>{2cecd5b5-12ca-4af9-86a4-d65b0c91073f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{3e478f95-a261-486d-a885-0c948a3e3b5d}</UniqueIdentifier>
     </Filter>
@@ -111,6 +108,9 @@
     </Filter>
     <Filter Include="Others\Geo">
       <UniqueIdentifier>{37d76fe8-74a2-4162-8ab6-ca7cd9ac199f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Others\App">
+      <UniqueIdentifier>{2cecd5b5-12ca-4af9-86a4-d65b0c91073f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

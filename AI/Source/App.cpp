@@ -23,12 +23,12 @@ static void error_callback(int error, const char* description){
 	_fgetchar();
 }
 
-void resize_callback(GLFWwindow* window, int w, int h){
+static void resize_callback(GLFWwindow* window, int w, int h){
 	winWidth = w;
 	winHeight = h;
 }
 
-bool App::IsKeyPressed(unsigned short key)
+bool App::Key(unsigned short key)
 {
     return ((GetAsyncKeyState(key) & 0x8001) != 0);
 }
@@ -95,20 +95,28 @@ void App::Run(){
 	scene->Init();
 
 	static bool isTab = false;
+	static bool isF1 = false;
 
 	m_timer.startTimer();
-	while(!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE)){
+	while(!glfwWindowShouldClose(m_window) && !Key(VK_ESCAPE)){
 		scene->Update(m_timer.getElapsedTime());
 
-		glViewport(0, 0, winWidth, winHeight);
-		if(!isTab && IsKeyPressed(VK_TAB)){
+		if(!isTab && Key(VK_TAB)){
 			glfwGetWindowAttrib(m_window, GLFW_VISIBLE) ? glfwHideWindow(m_window) : glfwShowWindow(m_window);
 			isTab = true;
-		} else if(isTab && !IsKeyPressed(VK_TAB)){
+		} else if(isTab && !Key(VK_TAB)){
 			isTab = false;
+		}
+		if(!isF1 && Key(VK_F1)){
+			const GLFWvidmode* const& mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+			glfwSetWindowMonitor(m_window, glfwGetWindowMonitor(m_window) ?	nullptr : glfwGetPrimaryMonitor(), 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
+			isF1 = true;
+		} else if(isF1 && !Key(VK_F1)){
+			isF1 = false;
 		}
 
 		if(glfwGetWindowAttrib(m_window, GLFW_VISIBLE)){
+			glViewport(0, 0, winWidth, winHeight);
 			scene->Render();
 		}
 

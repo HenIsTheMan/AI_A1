@@ -91,13 +91,13 @@ void SceneBase::Init()
 void SceneBase::Update(double dt)
 {
 	//Keyboard Section
-	if(App::IsKeyPressed('1'))
+	if(App::Key('1'))
 		glEnable(GL_CULL_FACE);
-	if(App::IsKeyPressed('2'))
+	if(App::Key('2'))
 		glDisable(GL_CULL_FACE);
-	if(App::IsKeyPressed('3'))
+	if(App::Key('3'))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	if(App::IsKeyPressed('4'))
+	if(App::Key('4'))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	
 	fps = (float)(1.f / dt);
