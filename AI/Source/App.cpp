@@ -1,4 +1,4 @@
-#include "Application.h"
+#include "App.h"
 
 //Include GLEW
 #include <GL/glew.h>
@@ -39,36 +39,36 @@ void resize_callback(GLFWwindow* window, int w, int h)
 	glViewport(0, 0, w, h);
 }
 
-bool Application::IsKeyPressed(unsigned short key)
+bool App::IsKeyPressed(unsigned short key)
 {
     return ((GetAsyncKeyState(key) & 0x8001) != 0);
 }
-bool Application::IsMousePressed(unsigned short key) //0 - Left, 1 - Right, 2 - Middle
+bool App::IsMousePressed(unsigned short key) //0 - Left, 1 - Right, 2 - Middle
 {
 	return glfwGetMouseButton(m_window, key) != 0;
 }
-void Application::GetCursorPos(double *xpos, double *ypos)
+void App::GetCursorPos(double *xpos, double *ypos)
 {
 	glfwGetCursorPos(m_window, xpos, ypos);
 }
-int Application::GetWindowWidth()
+int App::GetWindowWidth()
 {
 	return m_width;
 }
-int Application::GetWindowHeight()
+int App::GetWindowHeight()
 {
 	return m_height;
 }
 
-Application::Application()
+App::App()
 {
 }
 
-Application::~Application()
+App::~App()
 {
 }
 
-void Application::Init()
+void App::Init()
 {
 	//Set the error callback
 	glfwSetErrorCallback(error_callback);
@@ -122,7 +122,7 @@ void Application::Init()
 	glfwSwapInterval(0);
 }
 
-void Application::Run()
+void App::Run()
 {
 	//Main Loop
 	Scene *scene = new SceneMovement();
@@ -144,7 +144,7 @@ void Application::Run()
 	delete scene;
 }
 
-void Application::Exit()
+void App::Exit()
 {
 	//Close OpenGL window and terminate GLFW
 	glfwDestroyWindow(m_window);

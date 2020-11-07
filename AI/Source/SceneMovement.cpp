@@ -3,7 +3,7 @@
 
 #include "SceneMovement.h"
 #include "GL\glew.h"
-#include "Application.h"
+#include "App.h"
 
 #include "StatesFish.h"
 #include "StatesShark.h"
@@ -14,7 +14,7 @@ void SceneMovement::Init()
 
 	//Calculating aspect ratio
 	m_worldHeight = 100.f;
-	m_worldWidth = m_worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
+	m_worldWidth = m_worldHeight * (float)App::GetWindowWidth() / App::GetWindowHeight();
 
 	//Physics code here
 	m_speed = 1.f;
@@ -76,20 +76,20 @@ void SceneMovement::Update(double dt){
 
 	//Calculating aspect ratio
 	m_worldHeight = 100.f;
-	m_worldWidth = m_worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
+	m_worldWidth = m_worldHeight * (float)App::GetWindowWidth() / App::GetWindowHeight();
 	
 	static bool isPressedPlus = false;
 	static bool isPressedMinus = false;
-	if(!isPressedPlus && Application::IsKeyPressed(VK_OEM_PLUS)){
+	if(!isPressedPlus && App::IsKeyPressed(VK_OEM_PLUS)){
 		m_speed += 0.1f;
 		isPressedPlus = true;
-	} else if(isPressedPlus && !Application::IsKeyPressed(VK_OEM_PLUS)){
+	} else if(isPressedPlus && !App::IsKeyPressed(VK_OEM_PLUS)){
 		isPressedPlus = false;
 	}
-	if(!isPressedMinus && Application::IsKeyPressed(VK_OEM_MINUS)){
+	if(!isPressedMinus && App::IsKeyPressed(VK_OEM_MINUS)){
 		m_speed = Math::Max(0.f, m_speed - 0.1f);
 		isPressedMinus = true;
-	} else if(isPressedMinus && !Application::IsKeyPressed(VK_OEM_MINUS)){
+	} else if(isPressedMinus && !App::IsKeyPressed(VK_OEM_MINUS)){
 		isPressedMinus = false;
 	}
 
@@ -98,7 +98,7 @@ void SceneMovement::Update(double dt){
 	static bool isPressedMMB = false;
 
 	///LMB
-	if(!isPressedLMB && Application::IsMousePressed(0)){
+	if(!isPressedLMB && App::IsMousePressed(0)){
 		isPressedLMB = true;
 
 		GameObject *go = FetchGO(GameObject::GO_FISH);
@@ -110,12 +110,12 @@ void SceneMovement::Update(double dt){
 		go->energy = 8.0f;
 		go->moveSpeed = 5.0f;
 		go->currState = go->nextState = go->sm->GetState("StateFull");
-	} else if(isPressedLMB && !Application::IsMousePressed(0)){
+	} else if(isPressedLMB && !App::IsMousePressed(0)){
 		isPressedLMB = false;
 	}
 
 	///RMB
-	if(!isPressedRMB && Application::IsMousePressed(1)){
+	if(!isPressedRMB && App::IsMousePressed(1)){
 		isPressedRMB = true;
 
 		GameObject *go = FetchGO(GameObject::GO_FISHFOOD);
@@ -126,12 +126,12 @@ void SceneMovement::Update(double dt){
 		go->steps = 0;
 		go->energy = 8.0f;
 		go->moveSpeed = 2.0f;
-	} else if(isPressedRMB && !Application::IsMousePressed(1)){
+	} else if(isPressedRMB && !App::IsMousePressed(1)){
 		isPressedRMB = false;
 	}
 
 	///MMB
-	if(!isPressedMMB && Application::IsMousePressed(2)){
+	if(!isPressedMMB && App::IsMousePressed(2)){
 		isPressedMMB = true;
 
 		GameObject *go = FetchGO(GameObject::GO_SHARK);
@@ -143,7 +143,7 @@ void SceneMovement::Update(double dt){
 		go->energy = 8.0f;
 		go->moveSpeed = 10.0f;
 		go->currState = go->nextState = go->sm->GetState("StateHappy");
-	} else if(isPressedMMB && !Application::IsMousePressed(2)){
+	} else if(isPressedMMB && !App::IsMousePressed(2)){
 		isPressedMMB = false;
 	}
 

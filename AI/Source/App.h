@@ -1,14 +1,14 @@
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#ifndef App_H
+#define App_H
 
 #include "timer.h"
 
-class Application
+class App
 {
 public:
-	static Application& GetInstance()
+	static App& GetInstance()
 	{
-		static Application app;
+		static App app;
 		return app;
 	}
 	void Init();
@@ -21,8 +21,8 @@ public:
 	static int GetWindowHeight();
 
 private:
-	Application();
-	~Application();
+	App();
+	~App();
 
 	//Declare a window object
 	StopWatch m_timer;
