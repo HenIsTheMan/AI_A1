@@ -37,7 +37,7 @@ void SceneBase::Init()
 	glGenVertexArrays(1, &m_vertexArrayID);
 	glBindVertexArray(m_vertexArrayID);
 
-	m_programID = LoadShaders( "Shader//comg.vertexshader", "Shader//comg.fragmentshader" );
+	m_programID = LoadShaders("Shaders//comg.vertexshader", "Shaders//comg.fragmentshader");
 	
 	// Get a handle for our uniform
 	m_parameters[U_MVP] = glGetUniformLocation(m_programID, "MVP");

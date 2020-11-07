@@ -1,73 +1,47 @@
-/******************************************************************************/
-/*!
-\file	Vector3.h
-\author Wen Sheng Tang
-\par	email: tang_wen_sheng\@nyp.edu.sg
-\brief
-Struct to define a 3D vector
-*/
-/******************************************************************************/
+#pragma once
 
-#ifndef VECTOR3_H
-#define VECTOR3_H
-
-#include "MyMath.h"
 #include <iostream>
+#include "MyMath.h"
 
-#pragma warning( disable: 4290 ) //for throw(DivideByZero)
+#pragma warning(push)
+#pragma warning(disable: 4290) //For throw(DivideByZero)
 
-/******************************************************************************/
-/*!
-		Class Vector3:
-\brief	Defines a 3D vector and its methods
-*/
-/******************************************************************************/
-struct Vector3
-{
-	float x, y, z;
-	bool IsEqual(float a, float b) const;
+struct Vector3{
+	Vector3();
+	Vector3(float xyz);
+	Vector3(float x, float y, float z);
+	Vector3(const Vector3&);
+	~Vector3() = default;
 
-	Vector3(float a = 0.0, float b = 0.0, float c = 0.0);
-	Vector3(const Vector3 &rhs);
-	~Vector3();
-	
-	void Set( float a = 0, float b = 0, float c = 0 ); //Set all data
-	void SetZero( void ); //Set all data to zero
-	bool IsZero( void ) const; //Check if data is zero
+	void Set(float, float, float); //Set all data
+	void SetZero(); //Set all data to zero
+	bool IsZero() const; //Check if data is zero
+	bool IsEqual(float, float) const;
 
-	Vector3 operator+( const Vector3& rhs ) const; //Vector addition
-	Vector3& operator+=( const Vector3& rhs ); 
-	
-	Vector3 operator-( const Vector3& rhs ) const; //Vector subtraction
-	Vector3& operator-=( const Vector3& rhs );
-	
-	Vector3 operator-( void ) const; //Unary negation
-	
-	Vector3 operator*( float scalar ) const; //Scalar multiplication
-	Vector3& operator*=( float scalar );
+	Vector3 operator+(const Vector3&) const; //Vector addition
+	Vector3& operator+=(const Vector3&);
+	Vector3 operator-(const Vector3&) const; //Vector subtraction
+	Vector3& operator-=(const Vector3&);
+	Vector3 operator-() const; //Unary negation
+	Vector3 operator*(float) const; //Scalar multiplication
+	Vector3& operator*=(float);
+	bool operator==(const Vector3&) const; //Equality check
+	bool operator!=(const Vector3&) const; //Inequality check
+	Vector3& operator=(const Vector3&);
 
-	bool operator==( const Vector3& rhs ) const; //Equality check
-	bool operator!= ( const Vector3& rhs ) const; //Inequality check
+	float Length() const;
+	float LengthSquared() const;
 
-	Vector3& operator=(const Vector3& rhs); //Assignment operator
+	float Dot(const Vector3&) const;
+	Vector3 Cross(const Vector3&) const;
 
-	float Length( void ) const; //Get magnitude
-	float LengthSquared (void ) const; //Get square of magnitude
-	
-	float Dot( const Vector3& rhs ) const; //Dot product
-	Vector3 Cross( const Vector3& rhs ) const; //Cross product
-	
-	//Return a copy of this vector, normalized
-	//Throw a divide by zero exception if normalizing a zero vector
-	Vector3 Normalized( void ) const throw( DivideByZero );
-	
-	//Normalize this vector and return a reference to it
-	//Throw a divide by zero exception if normalizing a zero vector
-	Vector3& Normalize( void ) throw( DivideByZero );
-	
-	friend std::ostream& operator<<( std::ostream& os, Vector3& rhs); //print to ostream
+	Vector3 Normalized() const throw(DivideByZero); //Return a copy of this vector normalized, throw a divide by zero exception if normalizing a zero/... vector
+	Vector3& Normalize() throw(DivideByZero); //Normalize this vector and return a reference to it, ...
 
-	friend Vector3 operator*( float scalar, const Vector3& rhs ); //what is this for?
+	friend std::ostream& operator<<(std::ostream&, Vector3&); //Print to ostream
+	friend Vector3 operator*(float, const Vector3&);
+
+	float x;
+	float y;
+	float z;
 };
-
-#endif //VECTOR3_H

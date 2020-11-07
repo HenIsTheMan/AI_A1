@@ -4,6 +4,9 @@
 #include "Vertex.h"
 #include "Vector3.h"
 
+#pragma warning(push)
+#pragma warning(disable: 26812)
+
 struct Light
 {
 	enum LIGHT_TYPE

@@ -1,43 +1,17 @@
-/******************************************************************************/
-/*!
-\file	MatrixStack.h
-\author Wen Sheng Tang
-\par	email: tang_wen_sheng\@nyp.edu.sg
-\brief
-Matrix Stack to replace openGL math function
-*/
-/******************************************************************************/
-#ifndef MATRIXSTACK_H
-#define MATRIXSTACK_H
-
+#pragma once
 #include <stack>
 #include "Mtx44.h"
 
-/******************************************************************************/
-/*!
-		Class MS:
-\brief	Matrix Stack class
-*/
-/******************************************************************************/
-class MS {
-	std::stack<Mtx44> ms;
+class MS{
 public:
 	MS();
-	~MS();
-	const Mtx44& Top() const;
-	void PopMatrix();
-	void PushMatrix();
-	void Clear();
-	void LoadIdentity();
-	void LoadMatrix(const Mtx44 &matrix);
-	void MultMatrix(const Mtx44 &matrix);
-	void Rotate(float degrees, float axisX, float axisY, float axisZ);
-	void Scale(float scaleX, float scaleY, float scaleZ);
-	void Translate(float translateX, float translateY, float translateZ);
-	void Frustum(double left, double right, double	bottom, double top, double near, double far);
-	void LookAt(double eyeX, double eyeY, double eyeZ,
-				double centerX, double centerY, double centerZ,
-				double upX, double upY, double upZ);
-};
+	~MS() = default;
 
-#endif
+	const Mtx44& Top() const;
+	void PopMatrix(), PushMatrix(), Clear(), LoadIdentity(), LoadMatrix(const Mtx44&), MultMatrix(const Mtx44&);
+	void Rotate(float, float, float, float), Scale(float, float, float), Translate(float, float, float);
+	void Frustum(double, double, double, double, double, double);
+	void LookAt(double, double, double, double, double, double, double, double, double);
+private:
+	std::stack<Mtx44> ms;
+};

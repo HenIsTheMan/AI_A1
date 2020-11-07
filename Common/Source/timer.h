@@ -1,25 +1,18 @@
-#ifndef _TIMER_H
-#define _TIMER_H
+#pragma once
 
 #include <windows.h>
 
-class StopWatch
-{
- 
- private:
-     
-    LARGE_INTEGER frequency;
-    LARGE_INTEGER prevTime, currTime;
-    double LIToSecs( LARGE_INTEGER & L) ;
-    UINT     wTimerRes;
+class StopWatch{
+public:
+	StopWatch();
+	~StopWatch();
 
- public:
-     StopWatch() ;
-     ~StopWatch();
-     void startTimer();
-     double getElapsedTime(); // get time in seconds since the last call to this function
-     void waitUntil(long long time);  // wait until this time in milliseconds has passed
- };
+	double getElapsedTime(); //Get time in seconds since the last call to this function
+	void startTimer();
+	void waitUntil(long long);
+private:
+	LARGE_INTEGER frequency, prevTime, currTime;
+	UINT wTimerRes;
 
-
-#endif // _TIMER_H
+	double LIToSecs(LARGE_INTEGER&);
+};

@@ -1,230 +1,68 @@
-/******************************************************************************/
-/*!
-\file	MatrixStack.cpp
-\author Wen Sheng Tang
-\par	email: tang_wen_sheng\@nyp.edu.sg
-\brief
-Matrix Stack to replace openGL math function
-*/
-/******************************************************************************/
 #include "MatrixStack.h"
 
-/******************************************************************************/
-/*!
-\brief
-MS default constructor
-*/
-/******************************************************************************/
-MS::MS() {
+MS::MS(){
 	Mtx44 mat;
 	mat.SetToIdentity();
 	ms.push(mat);
 }
 
-/******************************************************************************/
-/*!
-\brief
-MS destructor
-*/
-/******************************************************************************/
-MS::~MS() {
-}
-
-/******************************************************************************/
-/*!
-\brief
-Return the top matrix on the matrix stack
-
-\return
-	A copy of the top matrix
-*/
-/******************************************************************************/
-const Mtx44& MS::Top() const {
+const Mtx44& MS::Top() const{ //Return a copy of the top matrix of the matrix stack
 	return ms.top();
 }
 
-/******************************************************************************/
-/*!
-\brief
-Pop the top matrix on the matrix stack
-*/
-/******************************************************************************/
-void MS::PopMatrix() {
+void MS::PopMatrix(){ //Pop the top matrix...
 	ms.pop();
 }
 
-/******************************************************************************/
-/*!
-\brief
-Make a copy of the top matrix on the matrix stack and push it on top
-*/
-/******************************************************************************/
-void MS::PushMatrix() {
+void MS::PushMatrix(){ //Make a copy of the top matrix... and push it on top
 	ms.push(ms.top());
 }
 
-/******************************************************************************/
-/*!
-\brief
-Clear the matrix stack
-*/
-/******************************************************************************/
-void MS::Clear() {
-	while(ms.size() > 1)
+void MS::Clear(){ //Clear the matrix stack
+	while(ms.size() > 1){
 		ms.pop();
+	}
 }
 
-/******************************************************************************/
-/*!
-\brief
-Replace the top matrix with an identity matrix
-*/
-/******************************************************************************/
-void MS::LoadIdentity() {
+void MS::LoadIdentity(){ //Replace the top matrix... with an identity matrix
 	Mtx44 mat;
 	mat.SetToIdentity();
 	ms.top() = mat;
 }
 
-/******************************************************************************/
-/*!
-\brief
-Return the top matrix with a new matrix
-
-\param matrix
-	The new matrix to replace the top
-*/
-/******************************************************************************/
-void MS::LoadMatrix(const Mtx44 &matrix) {
+void MS::LoadMatrix(const Mtx44 &matrix){ //Replace the top matrix... with a new matrix
 	ms.top() = matrix;
 }
 
-/******************************************************************************/
-/*!
-\brief
-Multiply the top matrix with a new matrix
-
-\param matrix
-	The new matrix to replace the top
-*/
-/******************************************************************************/
-void MS::MultMatrix(const Mtx44 &matrix) {
-	ms.top() = ms.top() * matrix;
+void MS::MultMatrix(const Mtx44 &matrix){ //Multiply the top matrix... with a new matrix
+	ms.top() = ms.top() * matrix; //*= operator not overloaded so cannot be used here
 }
 
-/******************************************************************************/
-/*!
-\brief
-Multiply the top matrix with a rotation matrix based on the following parameters
-
-\param	degrees
-	Angle of rotation, in degrees, clockwise
-\param	axisX
-	X-component of the rotation axis
-\param	axisY
-	Y-component of the rotation axis
-\param	axisZ
-	Z-component of the rotation axis
-*/
-/******************************************************************************/
-void MS::Rotate(float degrees, float axisX, float axisY, float axisZ) {
+void MS::Rotate(float degrees, float axisX, float axisY, float axisZ){ //Multiply the top matrix... with a rotation matrix (...clockwise, param axisX [X-componenent of the rotation axis], ...)
 	Mtx44 mat;
 	mat.SetToRotation(degrees, axisX, axisY, axisZ);
 	ms.top() = ms.top() * mat;
 }
 
-/******************************************************************************/
-/*!
-\brief
-Multiply the top matrix with a scale matrix based on the following parameters
-
-\param	scaleX
-	Factor to scale along x-axis
-\param	scaleY
-	Factor to scale along y-axis
-\param	scaleZ
-	Factor to scale along z-axis
-*/
-/******************************************************************************/
-void MS::Scale(float scaleX, float scaleY, float scaleZ) {
+void MS::Scale(float scaleX, float scaleY, float scaleZ){ //Multiply...
 	Mtx44 mat;
 	mat.SetToScale(scaleX, scaleY, scaleZ);
 	ms.top() = ms.top() * mat;
 }
 
-/******************************************************************************/
-/*!
-\brief
-Multiply the top matrix with a translation matrix based on the following 
-parameters
-
-\param	translateX
-	Offset along x-axis
-\param	scaleY
-	Offset along y-axis
-\param	scaleZ
-	Offset along z-axis
-*/
-/******************************************************************************/
-void MS::Translate(float translateX, float translateY, float translateZ) {
+void MS::Translate(float translateX, float translateY, float translateZ){ //Multiply... (param translateX [offset along x-axis], ...)
 	Mtx44 mat;
 	mat.SetToTranslation(translateX, translateY, translateZ);
 	ms.top() = ms.top() * mat;
 }
 
-/******************************************************************************/
-/*!
-\brief
-Setup frustum matrix and push to matrix stack
-
-\param left
-	Frustum - left 
-\param right
-	Frustum - right 
-\param bottom
-	Frustum - bottom 
-\param top
-	Frustum - top 
-\param near
-	Frustum - front
-\param far
-	Frustum - back
-*/
-/******************************************************************************/
-void MS::Frustum(double left, double right, double bottom, double top, double near, double far) {
+void MS::Frustum(double left, double right, double bottom, double top, double near, double far){ //Setup frustum matrix and push into matrix stack (..., param near [Frustum - front], param far [Frustum - back])
 	Mtx44 mat;
 	mat.SetToFrustum(left, right, bottom, top, near, far);
 	ms.top() = ms.top() * mat;
 }
 
-/******************************************************************************/
-/*!
-\brief Setup lookat matrix and push to matrix stack
-
-\param eyeX
-	eye vector x value
-\param eyeY
-	eye vector y value
-\param eyeZ
-	eye vector z value
-\param centerX
-	target position x value
-\param centerY
-	target position y value
-\param centerZ
-	target position z value
-\param upX
-	up vector x value
-\param upY
-	up vector y value
-\param upZ
-	up vector z value
-*/
-/******************************************************************************/
-void MS::LookAt(double eyeX, double eyeY, double eyeZ,
-				double centerX, double centerY, double centerZ,
-				double upX, double upY, double upZ)
-{
+void MS::LookAt(double eyeX, double eyeY, double eyeZ, double centerX, double centerY, double centerZ, double upX, double upY, double upZ){ //Setup lookat matrix and push...
 	Mtx44 mat;
 	mat.SetToLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
 	ms.top() = ms.top() * mat;
