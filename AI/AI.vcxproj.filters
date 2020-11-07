@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Source\GameObject.cpp" />
-    <ClCompile Include="Source\LoadTGA.cpp" />
     <ClCompile Include="Source\App.cpp">
       <Filter>App</Filter>
     </ClCompile>
@@ -37,10 +36,12 @@
       <Filter>State</Filter>
     </ClCompile>
     <ClCompile Include="Source\EntryPt.cpp" />
+    <ClCompile Include="Source\LoadImg.cpp">
+      <Filter>Others\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameObject.h" />
-    <ClInclude Include="Source\LoadTGA.h" />
     <ClInclude Include="Source\App.h">
       <Filter>App</Filter>
     </ClInclude>
@@ -82,6 +83,9 @@
     </ClInclude>
     <ClInclude Include="Source\Vertex.h">
       <Filter>Geo</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadImg.h">
+      <Filter>Others\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
