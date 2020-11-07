@@ -31,6 +31,15 @@ void MainProcess(){
 
 int main(const int&, const char* const* const&){
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	SetWindowPos(
+		GetConsoleWindow(),
+		0,
+		0,
+		0,
+		GetSystemMetrics(SM_CXFULLSCREEN),
+		GetSystemMetrics(SM_CYFULLSCREEN),
+		0
+	);
 	ShowWindow(GetConsoleWindow(), SW_MAXIMIZE);
 	SetLayeredWindowAttributes(GetConsoleWindow(), NULL, 230, LWA_ALPHA);
 	SetConsoleTitleA(((std::string)"Console Window (" + SLN_CONFIG + ' ' + SLN_PLAT + ')').c_str());

@@ -18,6 +18,8 @@ const unsigned int frameTime = 1000 / FPS; // time for each frame
 
 int winWidth, winHeight;
 
+extern bool endLoop;
+
 static void error_callback(int error, const char* description){
 	fputs(description, stderr);
 	_fgetchar();
@@ -63,7 +65,9 @@ void App::Init(){
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); //We don't want the old OpenGL 
 
-	m_window = glfwCreateWindow(1, 1, "App Window", nullptr, nullptr);
+	const GLFWvidmode* const& mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+	m_window = glfwCreateWindow(mode->width, mode->height, "App Window", nullptr, nullptr);
+	glfwSetWindowPos(m_window, 0, 0);
 	glfwHideWindow(m_window);
 	glfwMaximizeWindow(m_window);
 	glfwShowWindow(m_window);
@@ -98,7 +102,11 @@ void App::Run(){
 	static bool isF1 = false;
 
 	m_timer.startTimer();
-	while(!glfwWindowShouldClose(m_window) && !Key(VK_ESCAPE)){
+	while(!endLoop){
+		if(glfwWindowShouldClose(m_window) || Key(VK_ESCAPE)){
+			endLoop = true;
+		}
+
 		scene->Update(m_timer.getElapsedTime());
 
 		if(!isTab && Key(VK_TAB)){
@@ -127,6 +135,7 @@ void App::Run(){
         //m_timer.waitUntil(frameTime);
 
 	} //Check if the ESC key had been pressed or if the window had been closed
+
 	scene->Exit();
 	delete scene;
 }
