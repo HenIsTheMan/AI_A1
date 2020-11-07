@@ -451,12 +451,12 @@ void SceneMovement::Render()
 	projection.SetToOrtho(0, m_worldWidth, 0, m_worldHeight, -10, 10);
 	projectionStack.LoadMatrix(projection);
 	
-	// Camera matrix
+	// Cam matrix
 	viewStack.LoadIdentity();
 	viewStack.LookAt(
-						camera.position.x, camera.position.y, camera.position.z,
-						camera.target.x, camera.target.y, camera.target.z,
-						camera.up.x, camera.up.y, camera.up.z
+						Cam.position.x, Cam.position.y, Cam.position.z,
+						Cam.target.x, Cam.target.y, Cam.target.z,
+						Cam.up.x, Cam.up.y, Cam.up.z
 					);
 	// Model matrix : an identity matrix (model will be at the origin)
 	modelStack.LoadIdentity();

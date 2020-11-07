@@ -2,36 +2,109 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Source\GameObject.cpp" />
-    <ClCompile Include="Source\SceneBase.cpp" />
-    <ClCompile Include="Source\SceneMovement.cpp" />
-    <ClCompile Include="Source\State.cpp" />
-    <ClCompile Include="Source\StateMachine.cpp" />
-    <ClCompile Include="Source\StatesFish.cpp" />
-    <ClCompile Include="Source\StatesShark.cpp" />
-    <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />
-    <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\Mesh.cpp" />
-    <ClCompile Include="Source\MeshBuilder.cpp" />
-    <ClCompile Include="Source\shader.cpp" />
-    <ClCompile Include="Source\App.cpp" />
+    <ClCompile Include="Source\App.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cam.cpp">
+      <Filter>Others\Cam</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneBase.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneMovement.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mesh.cpp">
+      <Filter>Geo</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshBuilder.cpp">
+      <Filter>Geo</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\shader.cpp">
+      <Filter>Others\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\State.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StateMachine.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StatesFish.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StatesShark.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntryPt.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameObject.h" />
-    <ClInclude Include="Source\SceneBase.h" />
-    <ClInclude Include="Source\SceneMovement.h" />
-    <ClInclude Include="Source\State.h" />
-    <ClInclude Include="Source\StateMachine.h" />
-    <ClInclude Include="Source\StatesFish.h" />
-    <ClInclude Include="Source\StatesShark.h" />
-    <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\LoadTGA.h" />
-    <ClInclude Include="Source\Material.h" />
-    <ClInclude Include="Source\Mesh.h" />
-    <ClInclude Include="Source\MeshBuilder.h" />
-    <ClInclude Include="Source\Scene.h" />
-    <ClInclude Include="Source\shader.hpp" />
-    <ClInclude Include="Source\Vertex.h" />
-    <ClInclude Include="Source\App.h" />
+    <ClInclude Include="Source\App.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Cam.h">
+      <Filter>Others\Cam</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneBase.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneMovement.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh.h">
+      <Filter>Geo</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshBuilder.h">
+      <Filter>Geo</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\shader.h">
+      <Filter>Others\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Material.h">
+      <Filter>Others\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\State.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateMachine.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StatesFish.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StatesShark.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vertex.h">
+      <Filter>Geo</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Geo">
+      <UniqueIdentifier>{37d76fe8-74a2-4162-8ab6-ca7cd9ac199f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="App">
+      <UniqueIdentifier>{2cecd5b5-12ca-4af9-86a4-d65b0c91073f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{3e478f95-a261-486d-a885-0c948a3e3b5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State">
+      <UniqueIdentifier>{f168dbf7-5f9e-420d-9b28-a8347a27380c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Others">
+      <UniqueIdentifier>{72fc995e-75e1-460b-96aa-e851e099c6d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Others\Graphics">
+      <UniqueIdentifier>{22a36be1-6d5a-42b8-8312-e223bf2049ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Others\Cam">
+      <UniqueIdentifier>{da9cd1db-5aa8-488c-8c12-520d42b9fe9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

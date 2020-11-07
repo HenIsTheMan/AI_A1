@@ -1,7 +1,7 @@
 #include "SceneBase.h"
 #include "GL\glew.h"
 
-#include "shader.hpp"
+#include "shader.h"
 #include "MeshBuilder.h"
 #include "App.h"
 #include "LoadTGA.h"
@@ -15,7 +15,7 @@ void SceneBase::Init()
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 	// Enable depth test
 	glEnable(GL_DEPTH_TEST);
-	// Accept fragment if it closer to the camera than the former one
+	// Accept fragment if it closer to the Cam than the former one
 	glDepthFunc(GL_LESS); 
 	
 	glEnable(GL_CULL_FACE);
@@ -52,7 +52,7 @@ void SceneBase::Init()
 	
 	glUniform1i(m_parameters[U_TEXT_ENABLED], 0);
 
-	camera.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
+	Cam.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
 
 	for(int i = 0; i < NUM_GEOMETRY; ++i)
 	{

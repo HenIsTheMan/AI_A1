@@ -5,7 +5,7 @@
 
 #include "Scene.h"
 #include "Mtx44.h"
-#include "Camera.h"
+#include "Cam.h"
 #include "Mesh.h"
 #include "MatrixStack.h"
 #include "Vertex.h"
@@ -70,7 +70,7 @@ protected:
 	unsigned m_programID;
 	unsigned m_parameters[U_TOTAL];
 
-	Camera camera;
+	Cam Cam;
 
 	MS modelStack;
 	MS viewStack;
