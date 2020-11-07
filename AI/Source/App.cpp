@@ -90,19 +90,27 @@ void App::Init(){
 	glfwSwapInterval(0);
 }
 
-void App::Run()
-{
-	//Main Loop
-	Scene *scene = new SceneMovement();
+void App::Run(){
+	Scene* scene = new SceneMovement();
 	scene->Init();
 
-	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
-	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
-	{
+	static bool isTab = false;
+
+	m_timer.startTimer();
+	while(!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE)){
 		scene->Update(m_timer.getElapsedTime());
 
 		glViewport(0, 0, winWidth, winHeight);
-		scene->Render();
+		if(!isTab && IsKeyPressed(VK_TAB)){
+			glfwGetWindowAttrib(m_window, GLFW_VISIBLE) ? glfwHideWindow(m_window) : glfwShowWindow(m_window);
+			isTab = true;
+		} else if(isTab && !IsKeyPressed(VK_TAB)){
+			isTab = false;
+		}
+
+		if(glfwGetWindowAttrib(m_window, GLFW_VISIBLE)){
+			scene->Render();
+		}
 
 		//Swap buffers
 		glfwSwapBuffers(m_window);
