@@ -1,14 +1,15 @@
 #ifndef SCENE_BASE_H
 #define SCENE_BASE_H
 
+#include <vector>
+
 #include "Scene.h"
 #include "Mtx44.h"
 #include "Camera.h"
 #include "Mesh.h"
 #include "MatrixStack.h"
-#include "Light.h"
+#include "Vertex.h"
 #include "GameObject.h"
-#include <vector>
 
 class SceneBase : public Scene
 {
@@ -21,19 +22,6 @@ class SceneBase : public Scene
 		U_MATERIAL_DIFFUSE,
 		U_MATERIAL_SPECULAR,
 		U_MATERIAL_SHININESS,
-		U_LIGHTENABLED,
-		U_NUMLIGHTS,
-		U_LIGHT0_TYPE,
-		U_LIGHT0_POSITION,
-		U_LIGHT0_COLOR,
-		U_LIGHT0_POWER,
-		U_LIGHT0_KC,
-		U_LIGHT0_KL,
-		U_LIGHT0_KQ,
-		U_LIGHT0_SPOTDIRECTION,
-		U_LIGHT0_COSCUTOFF,
-		U_LIGHT0_COSINNER,
-		U_LIGHT0_EXPONENT,
 		U_COLOR_TEXTURE_ENABLED,
 		U_COLOR_TEXTURE,
 		U_TEXT_ENABLED,
@@ -87,8 +75,6 @@ protected:
 	MS modelStack;
 	MS viewStack;
 	MS projectionStack;
-
-	Light lights[1];
 
 	bool bLightEnabled;
 

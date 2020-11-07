@@ -10,14 +10,12 @@
     <ClCompile Include="Source\StatesShark.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
-    <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\SceneTicTacToe.cpp" />
     <ClCompile Include="Source\shader.cpp" />
-    <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameObject.h" />
@@ -29,8 +27,6 @@
     <ClInclude Include="Source\StatesShark.h" />
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Camera.h" />
-    <ClInclude Include="Source\Light.h" />
-    <ClInclude Include="Source\LoadOBJ.h" />
     <ClInclude Include="Source\LoadTGA.h" />
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\Mesh.h" />
@@ -38,7 +34,6 @@
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneTicTacToe.h" />
     <ClInclude Include="Source\shader.hpp" />
-    <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />
   </ItemGroup>
 </Project>
