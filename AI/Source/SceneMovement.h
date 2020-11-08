@@ -26,8 +26,6 @@ public:
 protected:
 	std::vector<GameObject *> im_goList;
 	float im_speed;
-	float im_worldWidth;
-	float im_worldHeight;
 	GameObject *im_ghost;
 	int im_objectCount;
 	int im_noGrid;
@@ -47,6 +45,8 @@ protected:
 
 	void ChooseRandDir(GameObject* go);
 	void Move(GameObject* go, Vector3& dir, double dt);
+
+	void RenderSceneText();
 };
 
 #endif

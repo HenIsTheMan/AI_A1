@@ -1,6 +1,7 @@
 #ifndef SCENE_BASE_H
 #define SCENE_BASE_H
 
+#include <assert.h>
 #include <vector>
 
 #include "Scene.h"

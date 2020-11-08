@@ -5,7 +5,9 @@
 #include "MeshBuilder.h"
 #include "App.h"
 #include "LoadImg.h"
-#include <sstream>
+
+extern int winWidth;
+extern int winHeight;
 
 static const int fontWidth[] = { 0,26,26,26,26,26,26,26,26,26,26,26,26,0,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,12,17,21,26,26,37,35,11,16,16,26,26,13,16,13,20,26,26,26,26,26,26,26,26,26,26,14,14,26,26,26,24,46,30,28,28,32,25,24,33,32,13,17,27,22,44,34,34,27,35,28,24,25,33,30,46,27,25,24,16,20,16,26,26,15,25,27,22,27,26,16,24,27,12,12,24,12,42,27,27,27,27,18,20,17,27,23,37,23,24,21,16,24,16,26,26,26,26,13,16,22,36,26,26,21,54,24,18,45,26,24,26,26,13,13,22,22,26,26,47,23,37,20,18,44,26,21,25,12,17,26,26,26,26,26,26,20,43,21,27,26,16,26,20,18,26,17,17,15,29,30,13,16,13,22,27,33,35,35,24,30,30,30,30,30,30,40,28,25,25,25,25,13,13,13,13,32,34,34,34,34,34,34,26,35,33,33,33,33,25,27,27,25,25,25,25,25,25,40,22,26,26,26,26,12,12,12,12,27,27,27,27,27,27,27,26,28,27,27,27,27,24,27,24 };
 
@@ -41,14 +43,12 @@ void SceneBase::Init(){
 	
 	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 0);
 
-	for(int i = 0; i < (int)GeoType::Amt; ++i)
-	{
+	for(int i = 0; i < (int)GeoType::Amt; ++i){
 		meshList[i] = NULL;
 	}
 	meshList[(int)GeoType::TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[(int)GeoType::TEXT]->textureID = LoadImg("Imgs//calibri.png");
 	meshList[(int)GeoType::TEXT]->material.kAmbient.Set(1, 0, 0);
-
 
 	meshList[(int)GeoType::FISHTOOFULL] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
 	meshList[(int)GeoType::FISHTOOFULL]->textureID = LoadImg("Imgs//toofull.tga");
@@ -126,22 +126,20 @@ void SceneBase::RenderText(Mesh* mesh, std::string text, Color color){
 	glEnable(GL_DEPTH_TEST);
 }
 
-void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y)
-{
-	if(!mesh || mesh->textureID <= 0)
-		return;
+void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y){
+	assert(mesh && mesh->textureID > 0);
 
 	glDisable(GL_DEPTH_TEST);
 	Mtx44 ortho;
-	ortho.SetToOrtho(0, 80, 0, 60, -10, 10);
+	ortho.SetToOrtho(0.0f, (float)winWidth, 0.0f, (float)winHeight);
 	projectionStack.PushMatrix();
 	projectionStack.LoadMatrix(ortho);
 	viewStack.PushMatrix();
 	viewStack.LoadIdentity();
 	modelStack.PushMatrix();
 	modelStack.LoadIdentity();
-	modelStack.Translate(x, y, 0);
-	modelStack.Scale(size, size, size);
+	modelStack.Translate(x, y, 0.0f);
+	modelStack.Scale(size, size, 1.0f);
 	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 1);
 	glUniform3fv(im_parameters[(int)UniType::TEXT_COLOR], 1, &color.r);
 	glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE_ENABLED], 1);
@@ -168,15 +166,13 @@ void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, fl
 	glEnable(GL_DEPTH_TEST);
 }
 
-void SceneBase::RenderMesh(Mesh *mesh, bool enableLight)
-{
+void SceneBase::RenderMesh(Mesh *mesh, bool enableLight){
 	Mtx44 MVP, modelView, modelView_inverse_transpose;
 	
 	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
 	glUniformMatrix4fv(im_parameters[(int)UniType::MVP], 1, GL_FALSE, &MVP.a[0]);
 
-	if(mesh->textureID > 0)
-	{
+	if(mesh->textureID > 0){
 		glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE_ENABLED], 1);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
@@ -193,8 +189,7 @@ void SceneBase::RenderMesh(Mesh *mesh, bool enableLight)
 	}
 }
 
-void SceneBase::Render()
-{
+void SceneBase::Render(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 

@@ -18,10 +18,7 @@ public:
 
 	static bool Key(unsigned short key);
 	static bool IsMousePressed(unsigned short key);
-	static void GetCursorPos(double *xpos, double *ypos);
-	static int GetWindowWidth();
-	static int GetWindowHeight();
-
+	static void GetCursorPos(double* xpos, double* ypos);
 private:
 	App() = default;
 

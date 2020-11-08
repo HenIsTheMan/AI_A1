@@ -16,7 +16,8 @@ GLFWwindow* im_window;
 const unsigned char FPS = 60; // FPS of this game
 const unsigned int frameTime = 1000 / FPS; // time for each frame
 
-int winWidth, winHeight;
+int winWidth;
+int winHeight;
 
 extern bool endLoop;
 
@@ -34,21 +35,15 @@ bool App::Key(unsigned short key)
 {
     return ((GetAsyncKeyState(key) & 0x8001) != 0);
 }
+
 bool App::IsMousePressed(unsigned short key) //0 - Left, 1 - Right, 2 - Middle
 {
 	return glfwGetMouseButton(im_window, key) != 0;
 }
-void App::GetCursorPos(double *xpos, double *ypos)
+
+void App::GetCursorPos(double* xpos, double* ypos)
 {
 	glfwGetCursorPos(im_window, xpos, ypos);
-}
-int App::GetWindowWidth()
-{
-	return winWidth;
-}
-int App::GetWindowHeight()
-{
-	return winHeight;
 }
 
 void App::Init(){
