@@ -18,7 +18,7 @@ public:
 		DRAW_MODE_LAST,
 	};
 	Mesh(const std::string &meshName);
-	~Mesh();
+	virtual ~Mesh();
 	void Render();
 	void Render(unsigned offset, unsigned count);
 

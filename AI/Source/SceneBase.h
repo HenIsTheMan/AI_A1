@@ -47,6 +47,9 @@ public:
 		GEO_SHARKHAPPY,
 		GEO_FISHFOOD,
 
+		GEO_DAY_BG,
+		GEO_NIGHT_BG,
+
 		NUM_GEOMETRY,
 	};
 public:

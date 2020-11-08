@@ -76,26 +76,37 @@ void SceneBase::Init(){
 	meshList[GEO_FISHFOOD] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
 	meshList[GEO_FISHFOOD]->textureID = LoadImg("Imgs//fishfood.tga");
 
+	meshList[GEO_DAY_BG] = MeshBuilder::GenerateSpriteAni("DayBG", 3, 5);
+	meshList[GEO_DAY_BG]->textureID = LoadImg("Image//DayBG.png");
+	meshList[GEO_NIGHT_BG] = MeshBuilder::GenerateSpriteAni("NightBG", 1, 5);
+	meshList[GEO_NIGHT_BG]->textureID = LoadImg("Image//NightBG.png");
+	static_cast<SpriteAni*>(meshList[(int)GEO_DAY_BG])->AddAni("DayBG", 0, 12);
+	static_cast<SpriteAni*>(meshList[(int)GEO_DAY_BG])->Play("DayBG", -1, 1.0f);
+	static_cast<SpriteAni*>(meshList[(int)GEO_NIGHT_BG])->AddAni("NightBG", 0, 4);
+	static_cast<SpriteAni*>(meshList[(int)GEO_NIGHT_BG])->Play("NightBG", -1, 0.33f);
+
 	bLightEnabled = false;
 }
 
-void SceneBase::Update(double dt)
-{
-	//Keyboard Section
-	if(App::Key('1'))
-		glEnable(GL_CULL_FACE);
-	if(App::Key('2'))
-		glDisable(GL_CULL_FACE);
-	if(App::Key('3'))
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	if(App::Key('4'))
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+void SceneBase::Update(double dt){
+	static int polyMode = GL_FILL;
+	static bool isF2 = false;
+
+	if(!isF2 && App::Key(VK_F2)){
+		polyMode += polyMode == GL_FILL ? -2 : 1;
+		glPolygonMode(GL_FRONT_AND_BACK, polyMode);
+		isF2 = true;
+	} else if(isF2 && !App::Key(VK_F2)){
+		isF2 = false;
+	}
+
+	static_cast<SpriteAni*>(meshList[(int)GEO_DAY_BG])->Update((float)dt);
+	static_cast<SpriteAni*>(meshList[(int)GEO_NIGHT_BG])->Update((float)dt);
 	
 	fps = (float)(1.f / dt);
 }
 
-void SceneBase::RenderText(Mesh* mesh, std::string text, Color color)
-{
+void SceneBase::RenderText(Mesh* mesh, std::string text, Color color){
 	if(!mesh || mesh->textureID <= 0)
 		return;
 	
@@ -194,8 +205,7 @@ void SceneBase::Render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void SceneBase::Exit()
-{
+void SceneBase::Exit(){
 	// Cleanup VBO
 	for(int i = 0; i < NUM_GEOMETRY; ++i)
 	{
