@@ -173,14 +173,19 @@ void Mtx44::SetToLookAt(double eyeX, double eyeY, double eyeZ, double centerX, d
 	*this = mat * tran;
 }
 
-void Mtx44::SetToPerspective(double fovy, double aspectRatio, double zNear, double zFar){ //Set matrix to a perspective matrix
-	double f = 1.0 / tan(Math::PI / 180 * fovy / 2);
-	*this = Mtx44(float(f / aspectRatio), 0, 0, 0, 0, (float)f, 0, 0, 0, 0, float((zFar + zNear) / (zNear - zFar)), -1, 0, 0, float(2 * zFar * zNear / (zNear - zFar)), 0);
+void Mtx44::SetToOrtho(double left, double right, double bottom, double top){
+	*this = Mtx44(2 / float(right - left), 0, 0, 0, 0, 2 / float(top - bottom), 0, 0, 0, 0, 1.0f, 0,
+		-float((right + left) / (right - left)), -float((top + bottom) / (top - bottom)), 0, 1.0f);
 }
 
 void Mtx44::SetToOrtho(double left, double right, double bottom, double top, double nearVal, double farVal){ //Set matrix to an orthogonal matrix (..., param nearVal [View box - front], param farVal [View box - back])
 	*this = Mtx44(2 / float(right - left), 0, 0, 0, 0, 2 / float(top - bottom), 0, 0, 0, 0, -2 / float(farVal - nearVal), 0,
 		-float((right + left) / (right - left)), -float((top + bottom) / (top - bottom)), -float((farVal + nearVal) / (farVal - nearVal)), 1);
+}
+
+void Mtx44::SetToPerspective(double fovy, double aspectRatio, double zNear, double zFar){ //Set matrix to a perspective matrix
+	double f = 1.0 / tan(Math::PI / 180 * fovy / 2);
+	*this = Mtx44(float(f / aspectRatio), 0, 0, 0, 0, (float)f, 0, 0, 0, 0, float((zFar + zNear) / (zNear - zFar)), -1, 0, 0, float(2 * zFar * zNear / (zNear - zFar)), 0);
 }
 
 Vector3 Mtx44::operator*(const Vector3 &RHS) const{

@@ -445,34 +445,27 @@ void SceneMovement::RenderGO(GameObject *go)
 void SceneMovement::Render(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// Projection matrix : Orthographic Projection
 	Mtx44 projection;
-	projection.SetToOrtho(0, im_worldWidth, 0, im_worldHeight, -10, 10);
+	projection.SetToOrtho(0, im_worldWidth, 0, im_worldHeight);
 	projectionStack.LoadMatrix(projection);
 	
-	// Cam matrix
 	viewStack.LoadIdentity();
 	viewStack.LookAt(
-						Cam.position.x, Cam.position.y, Cam.position.z,
-						Cam.target.x, Cam.target.y, Cam.target.z,
-						Cam.up.x, Cam.up.y, Cam.up.z
-					);
-	// Model matrix : an identity matrix (model will be at the origin)
+		Cam.position.x, Cam.position.y, Cam.position.z,
+		Cam.target.x, Cam.target.y, Cam.target.z,
+		Cam.up.x, Cam.up.y, Cam.up.z
+	);
 	modelStack.LoadIdentity();
-	
-	RenderMesh(meshList[GEO_AXES], false);
 
 	modelStack.PushMatrix();
-	modelStack.Translate(im_worldHeight * 0.5f, im_worldHeight * 0.5f, -1.f);
-	modelStack.Scale(im_worldHeight, im_worldHeight, im_worldHeight);
+	modelStack.Translate(im_worldHeight * 0.5f, im_worldHeight * 0.5f, 0.0f);
+	modelStack.Scale(im_worldHeight, im_worldHeight, 1.0f);
 	RenderMesh(meshList[GEO_BG], false);
 	modelStack.PopMatrix();
 
-	for(std::vector<GameObject *>::iterator it = im_goList.begin(); it != im_goList.end(); ++it)
-	{
+	for(std::vector<GameObject *>::iterator it = im_goList.begin(); it != im_goList.end(); ++it){
 		GameObject *go = (GameObject *)*it;
-		if(go->active)
-		{
+		if(go->active){
 			RenderGO(go);
 		}
 	}

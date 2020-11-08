@@ -41,7 +41,9 @@
     <ClCompile Include="Source\EntryPt.cpp">
       <Filter>Others</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SpriteAni.cpp" />
+    <ClCompile Include="Source\SpriteAni.cpp">
+      <Filter>Others\Geo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameObject.h" />
@@ -90,7 +92,9 @@
     <ClInclude Include="Source\LoadImg.h">
       <Filter>Others\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SpriteAni.h" />
+    <ClInclude Include="Source\SpriteAni.h">
+      <Filter>Others\Geo</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
