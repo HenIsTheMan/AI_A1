@@ -15,6 +15,10 @@ void Cam::Reset(){
 void Cam::Update(double dt){
 	const float camSpd = 50.0f;
 
+	if(App::Key('R')){
+		return Reset();
+	}
+
 	if(App::Key('W')){
 		pos.y += camSpd * (float)dt;
 		target.y += camSpd * (float)dt;
