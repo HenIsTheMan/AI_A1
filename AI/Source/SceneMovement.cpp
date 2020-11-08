@@ -588,8 +588,40 @@ void SceneMovement::RenderSceneText(){
 	);
 
 	///Others
-	//RenderTextOnScreen(meshList[(int)GeoType::TEXT], "DiedByHunger count: " + std::to_string(im_DiedByHunger), Color(0, 1, 0), 3, 50, 9);
-	//RenderTextOnScreen(meshList[(int)GeoType::TEXT], "EatenByShark count: " + std::to_string(im_EatenByShark), Color(0, 1, 0), 3, 50, 15);
-	//RenderTextOnScreen(meshList[(int)GeoType::TEXT], "Overeat count: " + std::to_string(im_Overeat), Color(0, 1, 0), 3, 50, 12);
-	//RenderTextOnScreen(meshList[(int)GeoType::TEXT], "Fish count: " + std::to_string(im_FishCount), Color(0, 1, 0), 3, 50, 18);
+	RenderTextOnScreen(
+		textMesh,
+		"DiedByHunger count: " + std::to_string(im_DiedByHunger),
+		textColor,
+		textSize,
+		(float)winWidth,
+		textSize * 0.0f,
+		TextAlignment::Right
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"EatenByShark count: " + std::to_string(im_EatenByShark),
+		textColor,
+		textSize,
+		(float)winWidth,
+		textSize * 1.0f,
+		TextAlignment::Right
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Overeat count: " + std::to_string(im_Overeat),
+		textColor,
+		textSize,
+		(float)winWidth,
+		textSize * 2.0f,
+		TextAlignment::Right
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Fish count: " + std::to_string(im_FishCount),
+		textColor,
+		textSize,
+		(float)winWidth,
+		textSize * 3.0f,
+		TextAlignment::Right
+	);
 }

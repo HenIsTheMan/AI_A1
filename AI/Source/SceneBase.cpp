@@ -99,9 +99,10 @@ void SceneBase::Update(double dt){
 	fps = (float)(1.f / dt);
 }
 
-void SceneBase::RenderText(Mesh* mesh, std::string text, Color color){
-	if(!mesh || mesh->textureID <= 0)
+void SceneBase::RenderText(Mesh* mesh, std::string text, Color color, TextAlignment alignment){
+	if(!mesh || mesh->textureID <= 0){
 		return;
+	}
 	
 	glDisable(GL_DEPTH_TEST);
 	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 1);
@@ -110,59 +111,78 @@ void SceneBase::RenderText(Mesh* mesh, std::string text, Color color){
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, mesh->textureID);
 	glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE], 0);
+
 	float accum = 0;
-	for(unsigned i = 0; i < text.length(); ++i)
-	{
+	for(unsigned i = 0; i < text.length(); ++i){
 		Mtx44 characterSpacing;
 		characterSpacing.SetToTranslation(accum, 0, 0); //1.0f is the spacing of each character, you may change this value
 		Mtx44 MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top() * characterSpacing;
 		glUniformMatrix4fv(im_parameters[(int)UniType::MVP], 1, GL_FALSE, &MVP.a[0]);
 	
 		mesh->Render((unsigned)text[i] * 6, 6);
-		accum += (float)fontWidth[(unsigned)text[i]] / 64;
+
+		accum += (float)fontWidth[(unsigned)text[i]] / 64.0f;
 	}
+
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 0);
 	glEnable(GL_DEPTH_TEST);
 }
 
-void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y){
+void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y, TextAlignment alignment){
 	assert(mesh && mesh->textureID > 0);
 
 	glDisable(GL_DEPTH_TEST);
-	Mtx44 ortho;
-	ortho.SetToOrtho(0.0f, (float)winWidth, 0.0f, (float)winHeight);
-	projectionStack.PushMatrix();
-	projectionStack.LoadMatrix(ortho);
-	viewStack.PushMatrix();
-	viewStack.LoadIdentity();
-	modelStack.PushMatrix();
-	modelStack.LoadIdentity();
-	modelStack.Translate(x, y, 0.0f);
-	modelStack.Scale(size, size, 1.0f);
 	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 1);
 	glUniform3fv(im_parameters[(int)UniType::TEXT_COLOR], 1, &color.r);
 	glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE_ENABLED], 1);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, mesh->textureID);
 	glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE], 0);
-	float accum = 0;
-	for(unsigned i = 0; i < text.length(); ++i)
-	{
+
+	modelStack.PushMatrix();
+	modelStack.LoadIdentity();
+	modelStack.Translate(x, y, 0.0f);
+	float textWidth = 0.0f;
+	for(unsigned i = 0; i < text.length(); ++i){
+		textWidth += (float)fontWidth[(unsigned)text[i]] / 64.0f;
+	}
+	modelStack.Scale(size, size, 1.0f);
+
+	viewStack.PushMatrix();
+	viewStack.LoadIdentity();
+
+	Mtx44 ortho;
+	ortho.SetToOrtho(0.0f, (float)winWidth, 0.0f, (float)winHeight);
+	projectionStack.PushMatrix();
+	projectionStack.LoadMatrix(ortho);
+
+	float accum = 0.0f;
+	for(unsigned i = 0; i < text.length(); ++i){
 		Mtx44 characterSpacing;
-		characterSpacing.SetToTranslation(accum + 0.5f, 0.5f, 0); //1.0f is the spacing of each character, you may change this value
+
+		if(alignment == TextAlignment::Right){
+			characterSpacing.SetToTranslation(accum + 0.5f - textWidth, 0.5f, 0);
+		} else if(alignment == TextAlignment::Center){
+			characterSpacing.SetToTranslation(accum + 0.5f - textWidth * 0.5f, 0.5f, 0);
+		} else{
+			characterSpacing.SetToTranslation(accum + 0.5f, 0.5f, 0);
+		}
+
 		Mtx44 MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top() * characterSpacing;
 		glUniformMatrix4fv(im_parameters[(int)UniType::MVP], 1, GL_FALSE, &MVP.a[0]);
 
 		mesh->Render((unsigned)text[i] * 6, 6);
 
-		accum += (float)fontWidth[(unsigned)text[i]] / 64;
+		accum += (float)fontWidth[(unsigned)text[i]] / 64.0f;
 	}
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 0);
+
 	modelStack.PopMatrix();
 	viewStack.PopMatrix();
 	projectionStack.PopMatrix();
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 0);
 	glEnable(GL_DEPTH_TEST);
 }
 

@@ -12,6 +12,13 @@
 #include "Vertex.h"
 #include "GameObject.h"
 
+enum struct TextAlignment: int{
+	Left,
+	Center,
+	Right,
+	Amt
+};
+
 class SceneBase: public Scene{
 public:
 	enum struct UniType: int{
@@ -51,8 +58,8 @@ public:
 	virtual void Render();
 	virtual void Exit();
 
-	void RenderText(Mesh* mesh, std::string text, Color color);
-	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
+	void RenderText(Mesh* mesh, std::string text, Color color, TextAlignment alignment = TextAlignment::Left);
+	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y, TextAlignment alignment = TextAlignment::Left);
 	void RenderMesh(Mesh *mesh, bool enableLight);
 protected:
 	unsigned im_vertexArrayID;
