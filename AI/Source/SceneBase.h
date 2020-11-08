@@ -50,22 +50,20 @@ public:
 		Amt
 	};
 
-	SceneBase() = default;
-	virtual ~SceneBase() = default;
+	SceneBase();
+	virtual ~SceneBase();
 
-	virtual void Init();
-	virtual void Update(double dt);
-	virtual void Render();
-	virtual void Exit();
+	virtual void Update(double dt) override;
+	virtual void Render() override;
 
 	void RenderText(Mesh* mesh, std::string text, Color color, TextAlignment alignment = TextAlignment::Left); //Based on what model mats are alr in modelStack
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y, TextAlignment alignment = TextAlignment::Left);
 	void RenderMesh(Mesh *mesh, bool enableLight);
 protected:
-	unsigned im_vertexArrayID;
-	Mesh* meshList[(int)GeoType::Amt];
-	unsigned im_programID;
 	unsigned im_parameters[(int)UniType::Amt];
+	Mesh* meshList[(int)GeoType::Amt];
+	unsigned im_vertexArrayID;
+	unsigned im_programID;
 
 	Cam im_Cam;
 

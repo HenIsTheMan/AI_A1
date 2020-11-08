@@ -10,34 +10,55 @@
 extern int winWidth;
 extern int winHeight;
 
-void SceneMovement::Init(){
-	SceneBase::Init();
-
-	im_speed = 1.f;
-	
+SceneMovement::SceneMovement():
+	im_goList(),
+	im_speed(1.0f),
+	im_objectCount(0),
+	im_noGrid(20),
+	im_gridSize((float)winHeight / im_noGrid),
+	im_gridOffset(im_gridSize / 2),
+	im_hourOfTheDay(0.0f),
+	im_FishCount(0),
+	im_DiedByHunger(0),
+	im_EatenByShark(0),
+	im_Overeat(0),
+	fishSM(new StateMachine()),
+	sharkSM(new StateMachine()),
+	gridCellWidth(80.0f),
+	gridCellHeight(80.0f),
+	gridLineThickness(10.0f),
+	gridRows(5),
+	gridCols(5),
+	grid(Grid<float>(0.0f, 0.0f, 0.0f, 0, 0))
+{
 	Math::InitRNG();
-	
-	im_objectCount = 0;
-	im_noGrid = 20;
-	im_gridSize = (float)winHeight / im_noGrid;
-	im_gridOffset = im_gridSize / 2;
-	im_hourOfTheDay = 0;
 
-	im_FishCount = 0;
-	im_DiedByHunger = 0;
-	im_EatenByShark = 0;
-	im_Overeat = 0;
-
-	fishSM = new StateMachine();
 	fishSM->AddState(new StateTooFull("StateTooFull"));
 	fishSM->AddState(new StateFull("StateFull"));
 	fishSM->AddState(new StateHungry("StateHungry"));
 	fishSM->AddState(new StateDead("StateDead"));
 
-	sharkSM = new StateMachine();
 	sharkSM ->AddState(new StateCrazy("StateCrazy"));
 	sharkSM ->AddState(new StateNaughty("StateNaughty"));
 	sharkSM ->AddState(new StateHappy("StateHappy"));
+}
+
+SceneMovement::~SceneMovement(){
+	for(GameObject*& go: im_goList){
+		if(go){
+			delete go;
+			go = nullptr;
+		}
+	}
+
+	if(fishSM){
+		delete fishSM;
+		fishSM = nullptr;
+	}
+	if(sharkSM){
+		delete sharkSM;
+		sharkSM = nullptr;
+	}
 }
 
 GameObject* SceneMovement::FetchGO(GameObject::GAMEOBJECT_TYPE type)
@@ -482,33 +503,6 @@ void SceneMovement::Render(){
 	RenderSceneText();
 }
 
-void SceneMovement::Exit()
-{
-	SceneBase::Exit();
-
-	while(im_goList.size() > 0)
-	{
-		GameObject *go = im_goList.back();
-		delete go;
-		im_goList.pop_back();
-	}
-
-	if(fishSM){
-		delete fishSM;
-		fishSM = nullptr;
-	}
-	if(sharkSM){
-		delete sharkSM;
-		sharkSM = nullptr;
-	}
-
-	if(im_ghost)
-	{
-		delete im_ghost;
-		im_ghost = NULL;
-	}
-}
-
 void SceneMovement::ChooseRandDir(GameObject* go){
 	switch(Math::RandIntMinMax(0, 3)){
 		case 0:
@@ -531,6 +525,15 @@ void SceneMovement::Move(GameObject* go, Vector3& dir, double dt){
 		dir.Normalize();
 	} catch(const DivideByZero&){}
 	go->pos += go->moveSpeed * dir * (float)dt * im_speed;
+}
+
+void SceneMovement::UpdateGrid(){
+}
+
+void SceneMovement::RenderGrid(){
+}
+
+void SceneMovement::RenderGridBG(){
 }
 
 void SceneMovement::RenderSceneText(){

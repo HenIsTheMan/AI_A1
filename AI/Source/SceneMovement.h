@@ -1,51 +1,59 @@
 #ifndef SCENE_MOVEMENT_H
 #define SCENE_MOVEMENT_H
 
+#include <vector>
+
 #include "GameObject.h"
 #include "StateMachine.h"
-#include <vector>
 #include "SceneBase.h"
+#include "Grid.h"
 
 #pragma warning(push)
 #pragma warning(disable: 26812)
 
-class SceneMovement : public SceneBase
-{
+class SceneMovement final: public SceneBase{
 public:
-	SceneMovement() = default;
-	~SceneMovement() = default;
+	SceneMovement();
+	~SceneMovement();
 
-	virtual void Init();
-	virtual void Update(double dt);
-	virtual void Render();
-	virtual void Exit();
+	void Update(double dt) override;
+	void Render() override;
 
 	void RenderGO(GameObject *go);
 
 	GameObject* FetchGO(GameObject::GAMEOBJECT_TYPE type);
 protected:
-	std::vector<GameObject *> im_goList;
+	std::vector<GameObject*> im_goList;
 	float im_speed;
-	GameObject *im_ghost;
 	int im_objectCount;
 	int im_noGrid;
 	float im_gridSize;
 	float im_gridOffset;
 	float im_hourOfTheDay;
 
-	int im_FishCount;
-
-	StateMachine* fishSM;
-	StateMachine* sharkSM;
-
 	///Stats
+	int im_FishCount;
 	int im_DiedByHunger;
 	int im_EatenByShark;
 	int im_Overeat;
 
+	StateMachine* fishSM;
+	StateMachine* sharkSM;
+
+	float gridCellWidth;
+	float gridCellHeight;
+	float gridLineThickness;
+	int gridRows;
+	int gridCols;
+	Grid<float> grid;
+
 	void ChooseRandDir(GameObject* go);
 	void Move(GameObject* go, Vector3& dir, double dt);
 
+	void UpdateGrid();
+
+	void RenderGrid();
+	void RenderGridBG();
 	void RenderSceneText();
 };
 

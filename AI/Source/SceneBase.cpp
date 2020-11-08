@@ -11,7 +11,18 @@ extern int winHeight;
 
 static const int fontWidth[] = { 0,26,26,26,26,26,26,26,26,26,26,26,26,0,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,12,17,21,26,26,37,35,11,16,16,26,26,13,16,13,20,26,26,26,26,26,26,26,26,26,26,14,14,26,26,26,24,46,30,28,28,32,25,24,33,32,13,17,27,22,44,34,34,27,35,28,24,25,33,30,46,27,25,24,16,20,16,26,26,15,25,27,22,27,26,16,24,27,12,12,24,12,42,27,27,27,27,18,20,17,27,23,37,23,24,21,16,24,16,26,26,26,26,13,16,22,36,26,26,21,54,24,18,45,26,24,26,26,13,13,22,22,26,26,47,23,37,20,18,44,26,21,25,12,17,26,26,26,26,26,26,20,43,21,27,26,16,26,20,18,26,17,17,15,29,30,13,16,13,22,27,33,35,35,24,30,30,30,30,30,30,40,28,25,25,25,25,13,13,13,13,32,34,34,34,34,34,34,26,35,33,33,33,33,25,27,27,25,25,25,25,25,25,40,22,26,26,26,26,12,12,12,12,27,27,27,27,27,27,27,26,28,27,27,27,27,24,27,24 };
 
-void SceneBase::Init(){
+SceneBase::SceneBase():
+	im_parameters(),
+	meshList(),
+	im_vertexArrayID(0),
+	im_programID(LoadShaders("Shaders//comg.vertexshader", "Shaders//comg.fragmentshader")),
+	im_Cam(Cam()),
+	modelStack(MS()),
+	viewStack(MS()),
+	projectionStack(MS()),
+	bLightEnabled(false),
+	fps(0.0f)
+{
 	glClearColor(1.f, 0.82f, 0.86f, 1.f);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
@@ -21,9 +32,6 @@ void SceneBase::Init(){
 	glGenVertexArrays(1, &im_vertexArrayID);
 	glBindVertexArray(im_vertexArrayID);
 
-	im_programID = LoadShaders("Shaders//comg.vertexshader", "Shaders//comg.fragmentshader");
-	
-	// Get a handle for our uniform
 	im_parameters[(int)UniType::MVP] = glGetUniformLocation(im_programID, "MVP");
 	im_parameters[(int)UniType::MODELVIEW] = glGetUniformLocation(im_programID, "MV");
 	im_parameters[(int)UniType::MODELVIEW_INVERSE_TRANSPOSE] = glGetUniformLocation(im_programID, "MV_inverse_transpose");
@@ -31,21 +39,18 @@ void SceneBase::Init(){
 	im_parameters[(int)UniType::MATERIAL_DIFFUSE] = glGetUniformLocation(im_programID, "material.kDiffuse");
 	im_parameters[(int)UniType::MATERIAL_SPECULAR] = glGetUniformLocation(im_programID, "material.kSpecular");
 	im_parameters[(int)UniType::MATERIAL_SHININESS] = glGetUniformLocation(im_programID, "material.kShininess");
-
-	// Get a handle for our "colorTexture" uniform
 	im_parameters[(int)UniType::COLOR_TEXTURE_ENABLED] = glGetUniformLocation(im_programID, "colorTextureEnabled");
 	im_parameters[(int)UniType::COLOR_TEXTURE] = glGetUniformLocation(im_programID, "colorTexture");
-	// Get a handle for our "textColor" uniform
 	im_parameters[(int)UniType::TEXT_ENABLED] = glGetUniformLocation(im_programID, "textEnabled");
 	im_parameters[(int)UniType::TEXT_COLOR] = glGetUniformLocation(im_programID, "textColor");
-	
+
 	glUseProgram(im_programID);
-	
 	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 0);
 
 	for(int i = 0; i < (int)GeoType::Amt; ++i){
-		meshList[i] = NULL;
+		meshList[i] = nullptr;
 	}
+
 	meshList[(int)GeoType::TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[(int)GeoType::TEXT]->textureID = LoadImg("Imgs//calibri.png");
 	meshList[(int)GeoType::TEXT]->material.kAmbient.Set(1, 0, 0);
@@ -75,8 +80,18 @@ void SceneBase::Init(){
 	static_cast<SpriteAni*>(meshList[(int)GeoType::DAY_BG])->Play("DayBG", -1, 1.0f);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::NIGHT_BG])->AddAni("NightBG", 0, 4);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::NIGHT_BG])->Play("NightBG", -1, 0.33f);
+}
 
-	bLightEnabled = false;
+SceneBase::~SceneBase(){
+	for(int i = 0; i < (int)GeoType::Amt; ++i){
+		if(meshList[i]){
+			delete meshList[i];
+			meshList[i] = nullptr;
+		}
+	}
+
+	glDeleteProgram(im_programID);
+	glDeleteVertexArrays(1, &im_vertexArrayID);
 }
 
 void SceneBase::Update(double dt){
@@ -224,15 +239,4 @@ void SceneBase::RenderMesh(Mesh *mesh, bool enableLight){
 
 void SceneBase::Render(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-}
-
-void SceneBase::Exit(){
-	// Cleanup VBO
-	for(int i = 0; i < (int)GeoType::Amt; ++i)
-	{
-		if(meshList[i])
-			delete meshList[i];
-	}
-	glDeleteProgram(im_programID);
-	glDeleteVertexArrays(1, &im_vertexArrayID);
 }

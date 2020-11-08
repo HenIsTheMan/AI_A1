@@ -90,7 +90,6 @@ void App::Init(){
 
 void App::Run(){
 	Scene* scene = new SceneMovement();
-	scene->Init();
 
 	static bool isTab = false;
 	static bool isF1 = false;
@@ -122,22 +121,18 @@ void App::Run(){
 			scene->Render();
 		}
 
-		//Swap buffers
 		glfwSwapBuffers(im_window);
-		//Get and organize events, like keyboard and mouse input, window resizing, etc...
 		glfwPollEvents();
         //im_timer.waitUntil(frameTime);
+	}
 
-	} //Check if the ESC key had been pressed or if the window had been closed
-
-	scene->Exit();
-	delete scene;
+	if(scene){
+		delete scene;
+		scene = nullptr;
+	}
 }
 
-void App::Exit()
-{
-	//Close OpenGL window and terminate GLFW
+void App::Exit(){
 	glfwDestroyWindow(im_window);
-	//Finalize and clean up GLFW
 	glfwTerminate();
 }
