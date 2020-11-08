@@ -44,6 +44,7 @@
     <ClCompile Include="Source\SpriteAni.cpp">
       <Filter>Others\Geo</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Entity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameObject.h" />
@@ -95,6 +96,15 @@
     <ClInclude Include="Source\SpriteAni.h">
       <Filter>Others\Geo</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Entity.h" />
+    <ClInclude Include="Source\EntityAttribs.hpp" />
+    <ClInclude Include="Source\EntityType.hpp" />
+    <ClInclude Include="Source\Grid.h">
+      <Filter>Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ObjPool.h">
+      <Filter>Obj</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -118,5 +128,19 @@
     <Filter Include="Others\App">
       <UniqueIdentifier>{2cecd5b5-12ca-4af9-86a4-d65b0c91073f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Grid">
+      <UniqueIdentifier>{cce7b4cb-e2ab-4915-bdcc-985e6fb8a541}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Obj">
+      <UniqueIdentifier>{c9054835-fbb9-4de5-b687-d6f14d115968}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\Grid.inl">
+      <Filter>Grid</Filter>
+    </None>
+    <None Include="Source\ObjPool.inl">
+      <Filter>Obj</Filter>
+    </None>
   </ItemGroup>
 </Project>
