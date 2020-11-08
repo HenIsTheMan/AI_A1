@@ -2,29 +2,33 @@
 #include "App.h"
 #include "Mtx44.h"
 
-Cam::Cam()
-{
+Cam::Cam(){
 	Reset();
 }
 
-Cam::~Cam()
-{
+void Cam::Reset(){
+	pos.Set(0.0f, 0.0f, 1.0f);
+	target.Set(0.0f, 0.0f, 0.0f);
+	up.Set(0.0f, 1.0f, 0.0f);
 }
 
-void Cam::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
-{
-	this->position = pos;
-	this->target = target;
-	this->up = up;
-}
+void Cam::Update(double dt){
+	const float camSpd = 50.0f;
 
-void Cam::Reset()
-{
-	position.Set(1, 0, 0);
-	target.Set(0, 0, 0);
-	up.Set(0, 1, 0);
-}
-
-void Cam::Update(double dt)
-{
+	if(App::Key('W')){
+		pos.y += camSpd * (float)dt;
+		target.y += camSpd * (float)dt;
+	}
+	if(App::Key('S')){
+		pos.y -= camSpd * (float)dt;
+		target.y -= camSpd * (float)dt;
+	}
+	if(App::Key('D')){
+		pos.x += camSpd * (float)dt;
+		target.x += camSpd * (float)dt;
+	}
+	if(App::Key('A')){
+		pos.x -= camSpd * (float)dt;
+		target.x -= camSpd * (float)dt;
+	}
 }

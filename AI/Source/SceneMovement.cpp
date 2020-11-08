@@ -370,7 +370,7 @@ void SceneMovement::RenderGO(GameObject *go){
 	switch(go->type){
 		case GameObject::GO_FISH: {
 			modelStack.PushMatrix();
-			modelStack.Translate(go->pos.x, go->pos.y, (float)go->id * 0.1f + 1.0f);
+			modelStack.Translate(go->pos.x, go->pos.y, (float)go->id * 0.1f);
 			modelStack.Scale(go->scale.x, go->scale.y, 1.0f);
 
 			const std::string stateID = go->currState->GetStateID();
@@ -386,7 +386,7 @@ void SceneMovement::RenderGO(GameObject *go){
 
 			std::ostringstream ss;
 			modelStack.PushMatrix();
-				modelStack.Translate(0.3f, 0.8f, 0.0f);
+				modelStack.Translate(0.3f, 0.8f, (float)go->id * 0.1f);
 				ss << "ID: " << go->id;
 				RenderText(meshList[GEO_TEXT], ss.str(), Color(0, 0, 0));
 				ss.str("");
@@ -416,7 +416,7 @@ void SceneMovement::RenderGO(GameObject *go){
 
 			std::ostringstream ss;
 			modelStack.PushMatrix();
-			modelStack.Translate(0.3f, 0.8f, 0.0f);
+			modelStack.Translate(0.3f, 0.8f, (float)go->id * 0.1f);
 			ss << "ID: " << go->id;
 			RenderText(meshList[GEO_TEXT], ss.str(), Color(0, 0, 0));
 			modelStack.PopMatrix();
@@ -431,7 +431,7 @@ void SceneMovement::RenderGO(GameObject *go){
 
 			std::ostringstream ss;
 			modelStack.PushMatrix();
-			modelStack.Translate(0.3f, 0.8f, 0.0f);
+			modelStack.Translate(0.3f, 0.8f, (float)go->id * 0.1f);
 			ss << "ID: " << go->id;
 			RenderText(meshList[GEO_TEXT], ss.str(), Color(0, 0, 0));
 			modelStack.PopMatrix();
@@ -443,18 +443,19 @@ void SceneMovement::RenderGO(GameObject *go){
 void SceneMovement::Render(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	Mtx44 projection;
-	projection.SetToOrtho(0, im_worldWidth, 0, im_worldHeight);
-	projectionStack.LoadMatrix(projection);
-	
-	viewStack.LoadIdentity();
-	viewStack.LookAt(
-		Cam.position.x, Cam.position.y, Cam.position.z,
-		Cam.target.x, Cam.target.y, Cam.target.z,
-		Cam.up.x, Cam.up.y, Cam.up.z
-	);
 	modelStack.LoadIdentity();
 
+	viewStack.LoadIdentity();
+	viewStack.LookAt(
+		im_Cam.pos.x, im_Cam.pos.y, im_Cam.pos.z,
+		im_Cam.target.x, im_Cam.target.y, im_Cam.target.z,
+		im_Cam.up.x, im_Cam.up.y, im_Cam.up.z
+	);
+
+	Mtx44 projection;
+	projection.SetToOrtho(0.0f, im_worldWidth, 0.0f, im_worldHeight, -10.0f, 10.0f);
+	projectionStack.LoadMatrix(projection);
+	
 	modelStack.PushMatrix();
 		modelStack.Translate(im_worldHeight * 0.5f, im_worldHeight * 0.5f, 0.0f);
 		modelStack.Scale(im_worldHeight, im_worldHeight, 1.0f);
@@ -462,7 +463,7 @@ void SceneMovement::Render(){
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-		modelStack.Translate(im_worldWidth * 0.5f, im_worldHeight * 0.5f, 0.0f);
+		modelStack.Translate(im_Cam.pos.x + im_worldWidth * 0.5f, im_Cam.pos.y + im_worldHeight * 0.5f, 0.0f);
 		modelStack.Scale(im_worldWidth, im_worldHeight, 1.0f);
 		RenderMesh(meshList[GEO_DAY_BG], false);
 	modelStack.PopMatrix();

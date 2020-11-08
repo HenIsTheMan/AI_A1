@@ -70,7 +70,7 @@ protected:
 	unsigned im_programID;
 	unsigned im_parameters[U_TOTAL];
 
-	Cam Cam;
+	Cam im_Cam;
 
 	MS modelStack;
 	MS viewStack;

@@ -43,8 +43,6 @@ void SceneBase::Init(){
 	
 	glUniform1i(im_parameters[U_TEXT_ENABLED], 0);
 
-	Cam.Init(Vector3(0, 0, 1), Vector3(0, 0, 0), Vector3(0, 1, 0));
-
 	for(int i = 0; i < NUM_GEOMETRY; ++i)
 	{
 		meshList[i] = NULL;
@@ -89,6 +87,8 @@ void SceneBase::Init(){
 }
 
 void SceneBase::Update(double dt){
+	im_Cam.Update(dt);
+
 	static int polyMode = GL_FILL;
 	static bool isF2 = false;
 

@@ -3,18 +3,16 @@
 
 #include "Vector3.h"
 
-class Cam
-{
+class Cam{
 public:
-	Vector3 position;
-	Vector3 target;
-	Vector3 up;
-
 	Cam();
-	~Cam();
-	virtual void Init(const Vector3& pos, const Vector3& target, const Vector3& up);
+	~Cam() = default;
 	virtual void Reset();
 	virtual void Update(double dt);
+
+	Vector3 pos;
+	Vector3 target;
+	Vector3 up;
 };
 
 #endif
