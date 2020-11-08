@@ -65,10 +65,10 @@ public:
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void RenderMesh(Mesh *mesh, bool enableLight);
 protected:
-	unsigned m_vertexArrayID;
+	unsigned im_vertexArrayID;
 	Mesh* meshList[NUM_GEOMETRY];
-	unsigned m_programID;
-	unsigned m_parameters[U_TOTAL];
+	unsigned im_programID;
+	unsigned im_parameters[U_TOTAL];
 
 	Cam Cam;
 

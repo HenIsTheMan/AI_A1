@@ -15,7 +15,7 @@ public:
 	State* const& GetState(const std::string& stateID) const;
 	void Update(GameObject *go, double dt);
 private:
-	std::map<std::string, State*> m_stateMap;
+	std::map<std::string, State*> im_stateMap;
 };
 
 #endif

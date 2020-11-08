@@ -12,7 +12,7 @@
 
 #include "SceneMovement.h"
 
-GLFWwindow* m_window;
+GLFWwindow* im_window;
 const unsigned char FPS = 60; // FPS of this game
 const unsigned int frameTime = 1000 / FPS; // time for each frame
 
@@ -36,11 +36,11 @@ bool App::Key(unsigned short key)
 }
 bool App::IsMousePressed(unsigned short key) //0 - Left, 1 - Right, 2 - Middle
 {
-	return glfwGetMouseButton(m_window, key) != 0;
+	return glfwGetMouseButton(im_window, key) != 0;
 }
 void App::GetCursorPos(double *xpos, double *ypos)
 {
-	glfwGetCursorPos(m_window, xpos, ypos);
+	glfwGetCursorPos(im_window, xpos, ypos);
 }
 int App::GetWindowWidth()
 {
@@ -66,20 +66,20 @@ void App::Init(){
 
 	glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 	const GLFWvidmode* const& mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-	m_window = glfwCreateWindow(mode->width / 2, mode->height / 2, "App Window", nullptr, nullptr);
-	glfwSetWindowPos(m_window, mode->width / 4, mode->height / 4);
-	glfwMaximizeWindow(m_window);
-	glfwShowWindow(m_window);
-	glfwGetWindowSize(m_window, &winWidth, &winHeight);
+	im_window = glfwCreateWindow(mode->width / 2, mode->height / 2, "App Window", nullptr, nullptr);
+	glfwSetWindowPos(im_window, mode->width / 4, mode->height / 4);
+	glfwMaximizeWindow(im_window);
+	glfwShowWindow(im_window);
+	glfwGetWindowSize(im_window, &winWidth, &winHeight);
 
-	if(!m_window){
+	if(!im_window){
 		fprintf(stderr, "Failed to open GLFW window.\n");
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
-	glfwMakeContextCurrent(m_window);
+	glfwMakeContextCurrent(im_window);
 
-	glfwSetWindowSizeCallback(m_window, resize_callback);
+	glfwSetWindowSizeCallback(im_window, resize_callback);
 
 	glewExperimental = true; // Needed for core profile
 	//Initialize GLEW
@@ -100,38 +100,38 @@ void App::Run(){
 	static bool isTab = false;
 	static bool isF1 = false;
 
-	m_timer.startTimer();
+	im_timer.startTimer();
 	while(!endLoop){
-		if(glfwWindowShouldClose(m_window) || Key(VK_ESCAPE)){
+		if(glfwWindowShouldClose(im_window) || Key(VK_ESCAPE)){
 			endLoop = true;
 		}
 
-		scene->Update(m_timer.getElapsedTime());
+		scene->Update(im_timer.getElapsedTime());
 
 		if(!isTab && Key(VK_TAB)){
-			glfwGetWindowAttrib(m_window, GLFW_VISIBLE) ? glfwHideWindow(m_window) : glfwShowWindow(m_window);
+			glfwGetWindowAttrib(im_window, GLFW_VISIBLE) ? glfwHideWindow(im_window) : glfwShowWindow(im_window);
 			isTab = true;
 		} else if(isTab && !Key(VK_TAB)){
 			isTab = false;
 		}
 		if(!isF1 && Key(VK_F1)){
 			const GLFWvidmode* const& mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-			glfwSetWindowMonitor(m_window, glfwGetWindowMonitor(m_window) ?	nullptr : glfwGetPrimaryMonitor(), 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
+			glfwSetWindowMonitor(im_window, glfwGetWindowMonitor(im_window) ?	nullptr : glfwGetPrimaryMonitor(), 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
 			isF1 = true;
 		} else if(isF1 && !Key(VK_F1)){
 			isF1 = false;
 		}
 
-		if(glfwGetWindowAttrib(m_window, GLFW_VISIBLE)){
+		if(glfwGetWindowAttrib(im_window, GLFW_VISIBLE)){
 			glViewport(0, 0, winWidth, winHeight);
 			scene->Render();
 		}
 
 		//Swap buffers
-		glfwSwapBuffers(m_window);
+		glfwSwapBuffers(im_window);
 		//Get and organize events, like keyboard and mouse input, window resizing, etc...
 		glfwPollEvents();
-        //m_timer.waitUntil(frameTime);
+        //im_timer.waitUntil(frameTime);
 
 	} //Check if the ESC key had been pressed or if the window had been closed
 
@@ -142,7 +142,7 @@ void App::Run(){
 void App::Exit()
 {
 	//Close OpenGL window and terminate GLFW
-	glfwDestroyWindow(m_window);
+	glfwDestroyWindow(im_window);
 	//Finalize and clean up GLFW
 	glfwTerminate();
 }

@@ -13,19 +13,19 @@ void SceneMovement::Init()
 	SceneBase::Init();
 
 	//Calculating aspect ratio
-	m_worldHeight = 100.f;
-	m_worldWidth = m_worldHeight * (float)App::GetWindowWidth() / App::GetWindowHeight();
+	im_worldHeight = 100.f;
+	im_worldWidth = im_worldHeight * (float)App::GetWindowWidth() / App::GetWindowHeight();
 
 	//Physics code here
-	m_speed = 1.f;
+	im_speed = 1.f;
 	
 	Math::InitRNG();
 	
-	m_objectCount = 0;
-	m_noGrid = 20;
-	m_gridSize = m_worldHeight / m_noGrid;
-	m_gridOffset = m_gridSize / 2;
-	m_hourOfTheDay = 0;
+	im_objectCount = 0;
+	im_noGrid = 20;
+	im_gridSize = im_worldHeight / im_noGrid;
+	im_gridOffset = im_gridSize / 2;
+	im_hourOfTheDay = 0;
 
 	im_FishCount = 0;
 	im_DiedByHunger = 0;
@@ -46,13 +46,13 @@ void SceneMovement::Init()
 
 GameObject* SceneMovement::FetchGO(GameObject::GAMEOBJECT_TYPE type)
 {
-	for (std::vector<GameObject *>::iterator it = m_goList.begin(); it != m_goList.end(); ++it)
+	for (std::vector<GameObject *>::iterator it = im_goList.begin(); it != im_goList.end(); ++it)
 	{
 		GameObject *go = (GameObject *)*it;
 		if (!go->active && type == go->type)
 		{
 			go->active = true;
-			++m_objectCount;
+			++im_objectCount;
 			if(go->type == GameObject::GO_FISH){
 				++im_FishCount;
 			}
@@ -66,7 +66,7 @@ GameObject* SceneMovement::FetchGO(GameObject::GAMEOBJECT_TYPE type)
 		} else if(go->type == GameObject::GO_SHARK){
 			go->sm = sharkSM;
 		}
-		m_goList.emplace_back(go);
+		im_goList.emplace_back(go);
 	}
 	return FetchGO(type);
 }
@@ -75,19 +75,19 @@ void SceneMovement::Update(double dt){
 	SceneBase::Update(dt);
 
 	//Calculating aspect ratio
-	m_worldHeight = 100.f;
-	m_worldWidth = m_worldHeight * (float)App::GetWindowWidth() / App::GetWindowHeight();
+	im_worldHeight = 100.f;
+	im_worldWidth = im_worldHeight * (float)App::GetWindowWidth() / App::GetWindowHeight();
 	
 	static bool isPressedPlus = false;
 	static bool isPressedMinus = false;
 	if(!isPressedPlus && App::Key(VK_OEM_PLUS)){
-		m_speed += 0.1f;
+		im_speed += 0.1f;
 		isPressedPlus = true;
 	} else if(isPressedPlus && !App::Key(VK_OEM_PLUS)){
 		isPressedPlus = false;
 	}
 	if(!isPressedMinus && App::Key(VK_OEM_MINUS)){
-		m_speed = Math::Max(0.f, m_speed - 0.1f);
+		im_speed = Math::Max(0.f, im_speed - 0.1f);
 		isPressedMinus = true;
 	} else if(isPressedMinus && !App::Key(VK_OEM_MINUS)){
 		isPressedMinus = false;
@@ -102,9 +102,9 @@ void SceneMovement::Update(double dt){
 		isPressedLMB = true;
 
 		GameObject *go = FetchGO(GameObject::GO_FISH);
-		go->id = m_objectCount;
-		go->pos.Set(m_gridOffset + (float)Math::RandIntMinMax(0, m_noGrid - 1) * m_gridSize, m_gridOffset + (float)Math::RandIntMinMax(0, m_noGrid - 1) * m_gridSize, 0);
-		go->scale.Set(m_gridSize, m_gridSize, m_gridSize);
+		go->id = im_objectCount;
+		go->pos.Set(im_gridOffset + (float)Math::RandIntMinMax(0, im_noGrid - 1) * im_gridSize, im_gridOffset + (float)Math::RandIntMinMax(0, im_noGrid - 1) * im_gridSize, 0);
+		go->scale.Set(im_gridSize, im_gridSize, im_gridSize);
 		go->target = go->pos;
 		go->steps = 0;
 		go->energy = 8.0f;
@@ -119,9 +119,9 @@ void SceneMovement::Update(double dt){
 		isPressedRMB = true;
 
 		GameObject *go = FetchGO(GameObject::GO_FISHFOOD);
-		go->id = m_objectCount;
-		go->scale.Set(m_gridSize, m_gridSize, m_gridSize);
-		go->pos.Set(m_gridOffset + (float)Math::RandIntMinMax(0, m_noGrid - 1) * m_gridSize, m_gridOffset + (float)Math::RandIntMinMax(0, m_noGrid - 1) * m_gridSize, 0);
+		go->id = im_objectCount;
+		go->scale.Set(im_gridSize, im_gridSize, im_gridSize);
+		go->pos.Set(im_gridOffset + (float)Math::RandIntMinMax(0, im_noGrid - 1) * im_gridSize, im_gridOffset + (float)Math::RandIntMinMax(0, im_noGrid - 1) * im_gridSize, 0);
 		go->target = go->pos;
 		go->steps = 0;
 		go->energy = 8.0f;
@@ -135,9 +135,9 @@ void SceneMovement::Update(double dt){
 		isPressedMMB = true;
 
 		GameObject *go = FetchGO(GameObject::GO_SHARK);
-		go->id = m_objectCount;
-		go->scale.Set(m_gridSize, m_gridSize, m_gridSize);
-		go->pos.Set(m_gridOffset + (float)Math::RandIntMinMax(0, m_noGrid - 1) * m_gridSize, m_gridOffset + (float)Math::RandIntMinMax(0, m_noGrid - 1) * m_gridSize, 0);
+		go->id = im_objectCount;
+		go->scale.Set(im_gridSize, im_gridSize, im_gridSize);
+		go->pos.Set(im_gridOffset + (float)Math::RandIntMinMax(0, im_noGrid - 1) * im_gridSize, im_gridOffset + (float)Math::RandIntMinMax(0, im_noGrid - 1) * im_gridSize, 0);
 		go->target = go->pos;
 		go->steps = 0;
 		go->energy = 8.0f;
@@ -147,25 +147,25 @@ void SceneMovement::Update(double dt){
 		isPressedMMB = false;
 	}
 
-	for(std::vector<GameObject *>::iterator it = m_goList.begin(); it != m_goList.end(); ++it){
+	for(std::vector<GameObject *>::iterator it = im_goList.begin(); it != im_goList.end(); ++it){
 		GameObject* const& go = *it;
 		if(go->active){
 			if(go->type == GameObject::GO_FISH){
 				go->SetNextState();
-				go->sm->Update(go, dt * m_speed);
+				go->sm->Update(go, dt * im_speed);
 
 				const std::string currStateID = go->currState->GetStateID();
 
 				///External triggers
 				if(currStateID != "StateDead"){
-					for(std::vector<GameObject*>::iterator iter = m_goList.begin(); iter != m_goList.end(); ++iter){
+					for(std::vector<GameObject*>::iterator iter = im_goList.begin(); iter != im_goList.end(); ++iter){
 						GameObject* other = *iter;
-						if(other->active && other != go && (go->pos - other->pos).LengthSquared() < m_gridSize * m_gridSize){
+						if(other->active && other != go && (go->pos - other->pos).LengthSquared() < im_gridSize * im_gridSize){
 							switch(other->type){
 								case GameObject::GO_FISHFOOD:
 									go->energy += 4.0f;
 									other->active = false;
-									--m_objectCount;
+									--im_objectCount;
 									break;
 								case GameObject::GO_SHARK:
 									go->energy = -1.0f;
@@ -179,11 +179,11 @@ void SceneMovement::Update(double dt){
 
 				if(currStateID == "StateFull"){
 					Vector3 dir = go->target - go->pos;
-					if(dir.Length() < go->moveSpeed * (float)dt * m_speed){
+					if(dir.Length() < go->moveSpeed * (float)dt * im_speed){
 						go->pos = go->target;
 
 						std::map<float, GameObject*> sharks;
-						for(std::vector<GameObject*>::iterator iter = m_goList.begin(); iter != m_goList.end(); ++iter){
+						for(std::vector<GameObject*>::iterator iter = im_goList.begin(); iter != im_goList.end(); ++iter){
 							GameObject* const& other = *iter;
 							if(other->active && other != go && other->type == GameObject::GO_SHARK){
 								sharks[(Vector3(other->pos.x, other->pos.y, 0.0f) - Vector3(go->pos.x, go->pos.y, 0.0f)).LengthSquared()] = other;
@@ -193,12 +193,12 @@ void SceneMovement::Update(double dt){
 							auto pair = *sharks.begin();
 							const float& closestDist = pair.first;
 							const GameObject* const& closestShark = pair.second;
-							if(closestDist > Math::EPSILON && closestDist <= (m_gridSize * 5.0f) * (m_gridSize * 5.0f)){ //Avoid shark
+							if(closestDist > Math::EPSILON && closestDist <= (im_gridSize * 5.0f) * (im_gridSize * 5.0f)){ //Avoid shark
 								const Vector3 vec = go->pos - closestShark->pos;
 								if(fabs(vec.x) > fabs(vec.y)){
-									go->target.x += (closestShark->pos.x < go->pos.x ? m_gridSize : -m_gridSize);
+									go->target.x += (closestShark->pos.x < go->pos.x ? im_gridSize : -im_gridSize);
 								} else{
-									go->target.y += (closestShark->pos.y < go->pos.y ? m_gridSize : -m_gridSize);
+									go->target.y += (closestShark->pos.y < go->pos.y ? im_gridSize : -im_gridSize);
 								}
 								std::cout << go->id << " Avoiding shark...\n";
 							} else{
@@ -216,11 +216,11 @@ void SceneMovement::Update(double dt){
 					}
 				} else if(currStateID == "StateHungry"){
 					Vector3 dir = go->target - go->pos;
-					if(dir.Length() < go->moveSpeed * (float)dt * m_speed){
+					if(dir.Length() < go->moveSpeed * (float)dt * im_speed){
 						go->pos = go->target;
 
 						std::map<float, GameObject*> food;
-						for(std::vector<GameObject*>::iterator iter = m_goList.begin(); iter != m_goList.end(); ++iter){
+						for(std::vector<GameObject*>::iterator iter = im_goList.begin(); iter != im_goList.end(); ++iter){
 							GameObject* const& other = *iter;
 							if(other->active && other != go && other->type == GameObject::GO_FISHFOOD){
 								food[(Vector3(other->pos.x, other->pos.y, 0.0f) - Vector3(go->pos.x, go->pos.y, 0.0f)).LengthSquared()] = other;
@@ -230,12 +230,12 @@ void SceneMovement::Update(double dt){
 							auto pair = *food.begin();
 							const float& closestDist = pair.first;
 							const GameObject* const& closestFood = pair.second;
-							if(closestDist > Math::EPSILON && closestDist <= (m_gridSize * 5.0f) * (m_gridSize * 5.0f)){ //Hunt for food
+							if(closestDist > Math::EPSILON && closestDist <= (im_gridSize * 5.0f) * (im_gridSize * 5.0f)){ //Hunt for food
 								const Vector3 vec = go->pos - closestFood->pos;
 								if(fabs(vec.x) > fabs(vec.y)){
-									go->target.x += (closestFood->pos.x < go->pos.x ? -m_gridSize : m_gridSize);
+									go->target.x += (closestFood->pos.x < go->pos.x ? -im_gridSize : im_gridSize);
 								} else{
-									go->target.y += (closestFood->pos.y < go->pos.y ? -m_gridSize : m_gridSize);
+									go->target.y += (closestFood->pos.y < go->pos.y ? -im_gridSize : im_gridSize);
 								}
 								std::cout << go->id << " Chasing food...\n";
 							} else{
@@ -256,13 +256,13 @@ void SceneMovement::Update(double dt){
 					go->countDown -= (float)dt;
 					if(go->countDown < 0.0f){
 						go->active = false;
-						--m_objectCount;
+						--im_objectCount;
 						--im_FishCount;
 					}
 				}
 			} else if(go->type == GameObject::GO_SHARK){
 				go->SetNextState();
-				go->sm->Update(go, dt * m_speed);
+				go->sm->Update(go, dt * im_speed);
 
 				const std::string currStateID = go->currState->GetStateID();
 
@@ -273,11 +273,11 @@ void SceneMovement::Update(double dt){
 					}
 
 					Vector3 dir = go->target - go->pos;
-					if(dir.Length() < go->moveSpeed * (float)dt * m_speed){
+					if(dir.Length() < go->moveSpeed * (float)dt * im_speed){
 						go->pos = go->target;
 
 						GameObject* highestEnergyFish = nullptr;
-						for(std::vector<GameObject*>::iterator iter = m_goList.begin(); iter != m_goList.end(); ++iter){
+						for(std::vector<GameObject*>::iterator iter = im_goList.begin(); iter != im_goList.end(); ++iter){
 							GameObject* const& other = *iter;
 							if(other->active && other != go && other->type == GameObject::GO_FISH){
 								if(!highestEnergyFish || (highestEnergyFish && highestEnergyFish->energy < other->energy)){
@@ -288,9 +288,9 @@ void SceneMovement::Update(double dt){
 						if(highestEnergyFish){
 							const Vector3 vec = go->pos - highestEnergyFish->pos;
 							if(fabs(vec.x) > fabs(vec.y)){
-								go->target.x += (highestEnergyFish->pos.x < go->pos.x ? -m_gridSize : m_gridSize);
+								go->target.x += (highestEnergyFish->pos.x < go->pos.x ? -im_gridSize : im_gridSize);
 							} else{
-								go->target.y += (highestEnergyFish->pos.y < go->pos.y ? -m_gridSize : m_gridSize);
+								go->target.y += (highestEnergyFish->pos.y < go->pos.y ? -im_gridSize : im_gridSize);
 							}
 							std::cout << go->id << " Chasing fish with highest energy...\n";
 						} else{
@@ -309,11 +309,11 @@ void SceneMovement::Update(double dt){
 					}
 
 					Vector3 dir = go->target - go->pos;
-					if(dir.Length() < go->moveSpeed * (float)dt * m_speed){
+					if(dir.Length() < go->moveSpeed * (float)dt * im_speed){
 						go->pos = go->target;
 
 						GameObject* nearestFedFish = nullptr;
-						for(std::vector<GameObject*>::iterator iter = m_goList.begin(); iter != m_goList.end(); ++iter){
+						for(std::vector<GameObject*>::iterator iter = im_goList.begin(); iter != im_goList.end(); ++iter){
 							GameObject* const& other = *iter;
 							if(other->active && other != go && other->type == GameObject::GO_FISH){
 								const std::string otherCurrStateID = other->currState->GetStateID();
@@ -329,9 +329,9 @@ void SceneMovement::Update(double dt){
 						if(nearestFedFish){
 							const Vector3 vec = go->pos - nearestFedFish->pos;
 							if(fabs(vec.x) > fabs(vec.y)){
-								go->target.x += (nearestFedFish->pos.x < go->pos.x ? -m_gridSize : m_gridSize);
+								go->target.x += (nearestFedFish->pos.x < go->pos.x ? -im_gridSize : im_gridSize);
 							} else{
-								go->target.y += (nearestFedFish->pos.y < go->pos.y ? -m_gridSize : m_gridSize);
+								go->target.y += (nearestFedFish->pos.y < go->pos.y ? -im_gridSize : im_gridSize);
 							}
 							std::cout << go->id << " Chasing nearest fed fish...\n";
 						} else{
@@ -350,7 +350,7 @@ void SceneMovement::Update(double dt){
 			} else{
 				moveRandomly:
 				Vector3 dir = go->target - go->pos;
-				if(dir.Length() < go->moveSpeed * (float)dt * m_speed){
+				if(dir.Length() < go->moveSpeed * (float)dt * im_speed){
 					go->pos = go->target;
 					ChooseRandDir(go);
 				} else{
@@ -360,8 +360,8 @@ void SceneMovement::Update(double dt){
 
 			///Bounds checking
 			go->energy = Math::Max(go->energy, 0.0f);
-			go->pos.x = Math::Clamp(go->pos.x, m_gridOffset, m_gridOffset + m_gridSize * float(m_noGrid - 1));
-			go->pos.y = Math::Clamp(go->pos.y, m_gridOffset, m_gridOffset + m_gridSize * float(m_noGrid - 1));
+			go->pos.x = Math::Clamp(go->pos.x, im_gridOffset, im_gridOffset + im_gridSize * float(im_noGrid - 1));
+			go->pos.y = Math::Clamp(go->pos.y, im_gridOffset, im_gridOffset + im_gridSize * float(im_noGrid - 1));
 		}
 	}
 }
@@ -447,7 +447,7 @@ void SceneMovement::Render(){
 
 	// Projection matrix : Orthographic Projection
 	Mtx44 projection;
-	projection.SetToOrtho(0, m_worldWidth, 0, m_worldHeight, -10, 10);
+	projection.SetToOrtho(0, im_worldWidth, 0, im_worldHeight, -10, 10);
 	projectionStack.LoadMatrix(projection);
 	
 	// Cam matrix
@@ -463,12 +463,12 @@ void SceneMovement::Render(){
 	RenderMesh(meshList[GEO_AXES], false);
 
 	modelStack.PushMatrix();
-	modelStack.Translate(m_worldHeight * 0.5f, m_worldHeight * 0.5f, -1.f);
-	modelStack.Scale(m_worldHeight, m_worldHeight, m_worldHeight);
+	modelStack.Translate(im_worldHeight * 0.5f, im_worldHeight * 0.5f, -1.f);
+	modelStack.Scale(im_worldHeight, im_worldHeight, im_worldHeight);
 	RenderMesh(meshList[GEO_BG], false);
 	modelStack.PopMatrix();
 
-	for(std::vector<GameObject *>::iterator it = m_goList.begin(); it != m_goList.end(); ++it)
+	for(std::vector<GameObject *>::iterator it = im_goList.begin(); it != im_goList.end(); ++it)
 	{
 		GameObject *go = (GameObject *)*it;
 		if(go->active)
@@ -484,7 +484,7 @@ void SceneMovement::Render(){
 	RenderTextOnScreen(meshList[GEO_TEXT], "MMB to spawn shark", Color(0, 1, 0), 3, 50, 21);
 
 	RenderTextOnScreen(meshList[GEO_TEXT], (std::string)" + " + (std::string)"Game Spd: "
-		+ std::to_string(m_speed).substr(0, std::to_string((int)m_speed).length() + 2)
+		+ std::to_string(im_speed).substr(0, std::to_string((int)im_speed).length() + 2)
 		+ (std::string)" - ", Color(0, 1, 0), 3, 50, 3);
 
 	std::ostringstream ss;
@@ -495,7 +495,7 @@ void SceneMovement::Render(){
 	RenderTextOnScreen(meshList[GEO_TEXT], ss.str(), Color(0, 1, 0), 3, 50, 0);
 
 	ss.str("");
-	ss << "Obj count: " << m_objectCount;
+	ss << "Obj count: " << im_objectCount;
 	RenderTextOnScreen(meshList[GEO_TEXT], ss.str(), Color(0, 1, 0), 3, 50, 6);
 
 	ss.str("");
@@ -519,11 +519,11 @@ void SceneMovement::Exit()
 {
 	SceneBase::Exit();
 
-	while(m_goList.size() > 0)
+	while(im_goList.size() > 0)
 	{
-		GameObject *go = m_goList.back();
+		GameObject *go = im_goList.back();
 		delete go;
-		m_goList.pop_back();
+		im_goList.pop_back();
 	}
 
 	if(fishSM){
@@ -535,26 +535,26 @@ void SceneMovement::Exit()
 		sharkSM = nullptr;
 	}
 
-	if(m_ghost)
+	if(im_ghost)
 	{
-		delete m_ghost;
-		m_ghost = NULL;
+		delete im_ghost;
+		im_ghost = NULL;
 	}
 }
 
 void SceneMovement::ChooseRandDir(GameObject* go){
 	switch(Math::RandIntMinMax(0, 3)){
 		case 0:
-			go->target.x += m_gridSize;
+			go->target.x += im_gridSize;
 			break;
 		case 1:
-			go->target.x -= m_gridSize;
+			go->target.x -= im_gridSize;
 			break;
 		case 2:
-			go->target.y += m_gridSize;
+			go->target.y += im_gridSize;
 			break;
 		case 3:
-			go->target.y -= m_gridSize;
+			go->target.y -= im_gridSize;
 			break;
 	}
 }
@@ -563,5 +563,5 @@ void SceneMovement::Move(GameObject* go, Vector3& dir, double dt){
 	try{
 		dir.Normalize();
 	} catch(const DivideByZero&){}
-	go->pos += go->moveSpeed * dir * (float)dt * m_speed;
+	go->pos += go->moveSpeed * dir * (float)dt * im_speed;
 }

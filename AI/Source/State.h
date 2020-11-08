@@ -7,7 +7,7 @@ struct GameObject;
 
 class State
 {
-	const std::string m_stateID;
+	const std::string im_stateID;
 protected:
 	State(const std::string& stateID);
 public:

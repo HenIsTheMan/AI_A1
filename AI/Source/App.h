@@ -25,7 +25,7 @@ public:
 private:
 	App() = default;
 
-	StopWatch m_timer;
+	StopWatch im_timer;
 };
 
 #endif

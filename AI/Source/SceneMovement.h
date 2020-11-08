@@ -24,16 +24,16 @@ public:
 
 	GameObject* FetchGO(GameObject::GAMEOBJECT_TYPE type);
 protected:
-	std::vector<GameObject *> m_goList;
-	float m_speed;
-	float m_worldWidth;
-	float m_worldHeight;
-	GameObject *m_ghost;
-	int m_objectCount;
-	int m_noGrid;
-	float m_gridSize;
-	float m_gridOffset;
-	float m_hourOfTheDay;
+	std::vector<GameObject *> im_goList;
+	float im_speed;
+	float im_worldWidth;
+	float im_worldHeight;
+	GameObject *im_ghost;
+	int im_objectCount;
+	int im_noGrid;
+	float im_gridSize;
+	float im_gridOffset;
+	float im_hourOfTheDay;
 
 	int im_FishCount;
 
