@@ -5,7 +5,7 @@
 
 Mesh::Mesh(const std::string &meshName):
 	name(meshName),
-	mode(DRAW_TRIANGLES),
+	mode(DRAW_MODE::DRAW_TRIANGLES),
 	indexSize(0)
 {
 	glGenBuffers(1, &vertexBuffer);
@@ -41,9 +41,9 @@ void Mesh::Render()
 	//glDrawArrays(GL_TRIANGLES, 0, 3);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 
-	if(mode == DRAW_LINES)
+	if(mode == DRAW_MODE::DRAW_LINES)
 		glDrawElements(GL_LINES, indexSize, GL_UNSIGNED_INT, 0);
-	else if(mode == DRAW_TRIANGLE_STRIP)
+	else if(mode == DRAW_MODE::DRAW_TRIANGLE_STRIP)
 		glDrawElements(GL_TRIANGLE_STRIP, indexSize, GL_UNSIGNED_INT, 0);
 	else
 		glDrawElements(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0);
@@ -77,9 +77,9 @@ void Mesh::Render(unsigned offset, unsigned count)
 	//glDrawArrays(GL_TRIANGLES, offset, count);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 
-	if(mode == DRAW_LINES)
+	if(mode == DRAW_MODE::DRAW_LINES)
 		glDrawElements(GL_LINES, count, GL_UNSIGNED_INT, (void*)(offset * sizeof(GLuint)));
-	else if(mode == DRAW_TRIANGLE_STRIP)
+	else if(mode == DRAW_MODE::DRAW_TRIANGLE_STRIP)
 		glDrawElements(GL_TRIANGLE_STRIP, count, GL_UNSIGNED_INT, (void*)(offset * sizeof(GLuint)));
 	else
 		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, (void*)(offset * sizeof(GLuint)));

@@ -122,9 +122,9 @@ void SpriteAni::Render(){
 	//glDrawArrays(GL_TRIANGLES, 0, 3);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 
-	if(mode == DRAW_LINES){
+	if(mode == DRAW_MODE::DRAW_LINES){
 		glDrawElements(GL_LINES, 6, GL_UNSIGNED_INT, (void*)(currFrame * 6 * sizeof(GLuint)));
-	} else if(mode == DRAW_TRIANGLE_STRIP){
+	} else if(mode == DRAW_MODE::DRAW_TRIANGLE_STRIP){
 		glDrawElements(GL_TRIANGLE_STRIP, 6, GL_UNSIGNED_INT, (void*)(currFrame * 6 * sizeof(GLuint)));
 	} else{
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)(currFrame * 6 * sizeof(GLuint)));

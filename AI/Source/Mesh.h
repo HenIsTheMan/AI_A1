@@ -4,19 +4,16 @@
 #include <string>
 #include "Material.h"
 
-#pragma warning(push)
-#pragma warning(disable: 26812)
-
-class Mesh
-{
+class Mesh{
 public:
-	enum DRAW_MODE
-	{
-		DRAW_TRIANGLES, //default mode
+	enum struct DRAW_MODE: int{
+		DRAW_TRIANGLES,
 		DRAW_TRIANGLE_STRIP,
 		DRAW_LINES,
 		DRAW_MODE_LAST,
+		Amt
 	};
+
 	Mesh(const std::string &meshName);
 	virtual ~Mesh();
 	virtual void Render();

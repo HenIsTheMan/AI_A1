@@ -11,48 +11,37 @@
 #include "Vertex.h"
 #include "GameObject.h"
 
-class SceneBase : public Scene
-{
-	enum UNIFORM_TYPE
-	{
-		U_MVP = 0,
-		U_MODELVIEW,
-		U_MODELVIEW_INVERSE_TRANSPOSE,
-		U_MATERIAL_AMBIENT,
-		U_MATERIAL_DIFFUSE,
-		U_MATERIAL_SPECULAR,
-		U_MATERIAL_SHININESS,
-		U_COLOR_TEXTURE_ENABLED,
-		U_COLOR_TEXTURE,
-		U_TEXT_ENABLED,
-		U_TEXT_COLOR,
-		U_TOTAL,
-	};
+class SceneBase: public Scene{
 public:
-	enum GEOMETRY_TYPE
-	{
-		GEO_AXES,
-		GEO_TEXT,
-		GEO_BALL,
-		GEO_CUBE,
-		GEO_BG,
-		GEO_TARGET,
-
-		GEO_FISHTOOFULL,
-		GEO_FISHFULL,
-		GEO_FISHHUNGRY,
-		GEO_FISHDEAD,
-		GEO_SHARKCRAZY,
-		GEO_SHARKNAUGHTY,
-		GEO_SHARKHAPPY,
-		GEO_FISHFOOD,
-
-		GEO_DAY_BG,
-		GEO_NIGHT_BG,
-
-		NUM_GEOMETRY,
+	enum struct UniType: int{
+		MVP,
+		MODELVIEW,
+		MODELVIEW_INVERSE_TRANSPOSE,
+		MATERIAL_AMBIENT,
+		MATERIAL_DIFFUSE,
+		MATERIAL_SPECULAR,
+		MATERIAL_SHININESS,
+		COLOR_TEXTURE_ENABLED,
+		COLOR_TEXTURE,
+		TEXT_ENABLED,
+		TEXT_COLOR,
+		Amt
 	};
-public:
+	enum struct GeoType: int{
+		TEXT,
+		FISHTOOFULL,
+		FISHFULL,
+		FISHHUNGRY,
+		FISHDEAD,
+		SHARKCRAZY,
+		SHARKNAUGHTY,
+		SHARKHAPPY,
+		FISHFOOD,
+		DAY_BG,
+		NIGHT_BG,
+		Amt
+	};
+
 	SceneBase() = default;
 	virtual ~SceneBase() = default;
 
@@ -66,9 +55,9 @@ public:
 	void RenderMesh(Mesh *mesh, bool enableLight);
 protected:
 	unsigned im_vertexArrayID;
-	Mesh* meshList[NUM_GEOMETRY];
+	Mesh* meshList[(int)GeoType::Amt];
 	unsigned im_programID;
-	unsigned im_parameters[U_TOTAL];
+	unsigned im_parameters[(int)UniType::Amt];
 
 	Cam im_Cam;
 

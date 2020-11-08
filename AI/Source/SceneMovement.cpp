@@ -375,26 +375,26 @@ void SceneMovement::RenderGO(GameObject *go){
 
 			const std::string stateID = go->currState->GetStateID();
 			if(stateID == "StateTooFull"){
-				RenderMesh(meshList[GEO_FISHTOOFULL], false);
+				RenderMesh(meshList[(int)GeoType::FISHTOOFULL], false);
 			} else if(stateID == "StateFull"){
-				RenderMesh(meshList[GEO_FISHFULL], false);
+				RenderMesh(meshList[(int)GeoType::FISHFULL], false);
 			} else if(stateID == "StateHungry"){
-				RenderMesh(meshList[GEO_FISHHUNGRY], false);
+				RenderMesh(meshList[(int)GeoType::FISHHUNGRY], false);
 			} else if(stateID == "StateDead"){
-				RenderMesh(meshList[GEO_FISHDEAD], false);
+				RenderMesh(meshList[(int)GeoType::FISHDEAD], false);
 			}
 
 			std::ostringstream ss;
 			modelStack.PushMatrix();
 				modelStack.Translate(0.3f, 0.8f, (float)go->id * 0.1f);
 				ss << "ID: " << go->id;
-				RenderText(meshList[GEO_TEXT], ss.str(), Color(0, 0, 0));
+				RenderText(meshList[(int)GeoType::TEXT], ss.str(), Color(0, 0, 0));
 				ss.str("");
 			modelStack.PopMatrix();
 			modelStack.PushMatrix();
 				modelStack.Translate(0.3f, -0.8f, 0.0f);
 				ss << go->energy;
-				RenderText(meshList[GEO_TEXT], ss.str(), Color(0, 0, 0));
+				RenderText(meshList[(int)GeoType::TEXT], ss.str(), Color(0, 0, 0));
 				ss.str("");
 			modelStack.PopMatrix();
 			modelStack.PopMatrix();
@@ -407,18 +407,18 @@ void SceneMovement::RenderGO(GameObject *go){
 
 			const std::string stateID = go->currState->GetStateID();
 			if(stateID == "StateCrazy"){
-				RenderMesh(meshList[GEO_SHARKCRAZY], false);
+				RenderMesh(meshList[(int)GeoType::SHARKCRAZY], false);
 			} else if(stateID == "StateNaughty"){
-				RenderMesh(meshList[GEO_SHARKNAUGHTY], false);
+				RenderMesh(meshList[(int)GeoType::SHARKNAUGHTY], false);
 			} else if(stateID == "StateHappy"){
-				RenderMesh(meshList[GEO_SHARKHAPPY], false);
+				RenderMesh(meshList[(int)GeoType::SHARKHAPPY], false);
 			}
 
 			std::ostringstream ss;
 			modelStack.PushMatrix();
 			modelStack.Translate(0.3f, 0.8f, (float)go->id * 0.1f);
 			ss << "ID: " << go->id;
-			RenderText(meshList[GEO_TEXT], ss.str(), Color(0, 0, 0));
+			RenderText(meshList[(int)GeoType::TEXT], ss.str(), Color(0, 0, 0));
 			modelStack.PopMatrix();
 			modelStack.PopMatrix();
 			break;
@@ -427,13 +427,13 @@ void SceneMovement::RenderGO(GameObject *go){
 			modelStack.PushMatrix();
 			modelStack.Translate(go->pos.x, go->pos.y, (float)go->id * 0.1f);
 			modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
-			RenderMesh(meshList[GEO_FISHFOOD], false);
+			RenderMesh(meshList[(int)GeoType::FISHFOOD], false);
 
 			std::ostringstream ss;
 			modelStack.PushMatrix();
 			modelStack.Translate(0.3f, 0.8f, (float)go->id * 0.1f);
 			ss << "ID: " << go->id;
-			RenderText(meshList[GEO_TEXT], ss.str(), Color(0, 0, 0));
+			RenderText(meshList[(int)GeoType::TEXT], ss.str(), Color(0, 0, 0));
 			modelStack.PopMatrix();
 			modelStack.PopMatrix();
 			break;
@@ -455,17 +455,11 @@ void SceneMovement::Render(){
 	Mtx44 projection;
 	projection.SetToOrtho(0.0f, im_worldWidth, 0.0f, im_worldHeight, -10.0f, 10.0f);
 	projectionStack.LoadMatrix(projection);
-	
-	modelStack.PushMatrix();
-		modelStack.Translate(im_worldHeight * 0.5f, im_worldHeight * 0.5f, 0.0f);
-		modelStack.Scale(im_worldHeight, im_worldHeight, 1.0f);
-		RenderMesh(meshList[GEO_BG], false);
-	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 		modelStack.Translate(im_Cam.pos.x + im_worldWidth * 0.5f, im_Cam.pos.y + im_worldHeight * 0.5f, 0.0f);
 		modelStack.Scale(im_worldWidth, im_worldHeight, 1.0f);
-		RenderMesh(meshList[GEO_DAY_BG], false);
+		RenderMesh(meshList[(int)GeoType::DAY_BG], false);
 	modelStack.PopMatrix();
 
 	for(std::vector<GameObject *>::iterator it = im_goList.begin(); it != im_goList.end(); ++it){
@@ -475,13 +469,13 @@ void SceneMovement::Render(){
 		}
 	}
 
-	RenderTextOnScreen(meshList[GEO_TEXT], "LMB to spawn fish", Color(0, 1, 0), 3, 50, 27);
+	RenderTextOnScreen(meshList[(int)GeoType::TEXT], "LMB to spawn fish", Color(0, 1, 0), 3, 50, 27);
 
-	RenderTextOnScreen(meshList[GEO_TEXT], "RMB to spawn food", Color(0, 1, 0), 3, 50, 24);
+	RenderTextOnScreen(meshList[(int)GeoType::TEXT], "RMB to spawn food", Color(0, 1, 0), 3, 50, 24);
 
-	RenderTextOnScreen(meshList[GEO_TEXT], "MMB to spawn shark", Color(0, 1, 0), 3, 50, 21);
+	RenderTextOnScreen(meshList[(int)GeoType::TEXT], "MMB to spawn shark", Color(0, 1, 0), 3, 50, 21);
 
-	RenderTextOnScreen(meshList[GEO_TEXT], (std::string)" + " + (std::string)"Game Spd: "
+	RenderTextOnScreen(meshList[(int)GeoType::TEXT], (std::string)" + " + (std::string)"Game Spd: "
 		+ std::to_string(im_speed).substr(0, std::to_string((int)im_speed).length() + 2)
 		+ (std::string)" - ", Color(0, 1, 0), 3, 50, 3);
 
@@ -490,27 +484,27 @@ void SceneMovement::Render(){
 	ss.str("");
 	ss.precision(5);
 	ss << "FPS: " << fps;
-	RenderTextOnScreen(meshList[GEO_TEXT], ss.str(), Color(0, 1, 0), 3, 50, 0);
+	RenderTextOnScreen(meshList[(int)GeoType::TEXT], ss.str(), Color(0, 1, 0), 3, 50, 0);
 
 	ss.str("");
 	ss << "Obj count: " << im_objectCount;
-	RenderTextOnScreen(meshList[GEO_TEXT], ss.str(), Color(0, 1, 0), 3, 50, 6);
+	RenderTextOnScreen(meshList[(int)GeoType::TEXT], ss.str(), Color(0, 1, 0), 3, 50, 6);
 
 	ss.str("");
 	ss << "DiedByHunger count: " << im_DiedByHunger;
-	RenderTextOnScreen(meshList[GEO_TEXT], ss.str(), Color(0, 1, 0), 3, 50, 9);
+	RenderTextOnScreen(meshList[(int)GeoType::TEXT], ss.str(), Color(0, 1, 0), 3, 50, 9);
 
 	ss.str("");
 	ss << "EatenByShark count: " << im_EatenByShark;
-	RenderTextOnScreen(meshList[GEO_TEXT], ss.str(), Color(0, 1, 0), 3, 50, 15);
+	RenderTextOnScreen(meshList[(int)GeoType::TEXT], ss.str(), Color(0, 1, 0), 3, 50, 15);
 
 	ss.str("");
 	ss << "Overeat count: " << im_Overeat;
-	RenderTextOnScreen(meshList[GEO_TEXT], ss.str(), Color(0, 1, 0), 3, 50, 12);
+	RenderTextOnScreen(meshList[(int)GeoType::TEXT], ss.str(), Color(0, 1, 0), 3, 50, 12);
 
 	ss.str("");
 	ss << "Fish count: " << im_FishCount;
-	RenderTextOnScreen(meshList[GEO_TEXT], ss.str(), Color(0, 1, 0), 3, 50, 18);
+	RenderTextOnScreen(meshList[(int)GeoType::TEXT], ss.str(), Color(0, 1, 0), 3, 50, 18);
 }
 
 void SceneMovement::Exit()

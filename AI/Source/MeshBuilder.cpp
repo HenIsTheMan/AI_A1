@@ -47,7 +47,7 @@ Mesh* MeshBuilder::GenerateAxes(const std::string &meshName, float lengthX, floa
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLuint), &index_buffer_data[0], GL_STATIC_DRAW);
 
 	mesh->indexSize = index_buffer_data.size();
-	mesh->mode = Mesh::DRAW_LINES;
+	mesh->mode = Mesh::DRAW_MODE::DRAW_LINES;
 
 	return mesh;
 }
@@ -94,7 +94,7 @@ Mesh* MeshBuilder::GenerateQuad(const std::string &meshName, Color color, float 
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLuint), &index_buffer_data[0], GL_STATIC_DRAW);
 
 	mesh->indexSize = index_buffer_data.size();
-	mesh->mode = Mesh::DRAW_TRIANGLES;
+	mesh->mode = Mesh::DRAW_MODE::DRAW_TRIANGLES;
 
 	return mesh;
 }
@@ -175,7 +175,7 @@ Mesh* MeshBuilder::GenerateCube(const std::string &meshName, Color color, float 
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLuint), &index_buffer_data[0], GL_STATIC_DRAW);
 
 	mesh->indexSize = 36;
-	mesh->mode = Mesh::DRAW_TRIANGLES;
+	mesh->mode = Mesh::DRAW_MODE::DRAW_TRIANGLES;
 
 	return mesh;
 }
@@ -218,7 +218,7 @@ Mesh* MeshBuilder::GenerateRing(const std::string &meshName, Color color, unsign
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->indexBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLuint), &index_buffer_data[0], GL_STATIC_DRAW);
 
-	mesh->mode = Mesh::DRAW_TRIANGLE_STRIP;
+	mesh->mode = Mesh::DRAW_MODE::DRAW_TRIANGLE_STRIP;
 
 	mesh->indexSize = index_buffer_data.size();
 
@@ -275,7 +275,7 @@ Mesh* MeshBuilder::GenerateSphere(const std::string &meshName, Color color, unsi
 
 	Mesh *mesh = new Mesh(meshName);
 
-	mesh->mode = Mesh::DRAW_TRIANGLE_STRIP;
+	mesh->mode = Mesh::DRAW_MODE::DRAW_TRIANGLE_STRIP;
 
 	glBindBuffer(GL_ARRAY_BUFFER, mesh->vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, vertex_buffer_data.size() * sizeof(Vertex), &vertex_buffer_data[0], GL_STATIC_DRAW);
@@ -319,7 +319,7 @@ Mesh* MeshBuilder::GenerateCone(const std::string &meshName, Color color, unsign
 
 	Mesh *mesh = new Mesh(meshName);
 
-	mesh->mode = Mesh::DRAW_TRIANGLE_STRIP;
+	mesh->mode = Mesh::DRAW_MODE::DRAW_TRIANGLE_STRIP;
 
 	glBindBuffer(GL_ARRAY_BUFFER, mesh->vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, vertex_buffer_data.size() * sizeof(Vertex), &vertex_buffer_data[0], GL_STATIC_DRAW);
@@ -380,7 +380,7 @@ Mesh* MeshBuilder::GenerateText(const std::string &meshName, unsigned numRow, un
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLuint), &index_buffer_data[0], GL_STATIC_DRAW);
 
 	mesh->indexSize = index_buffer_data.size();
-	mesh->mode = Mesh::DRAW_TRIANGLES;
+	mesh->mode = Mesh::DRAW_MODE::DRAW_TRIANGLES;
 
 	return mesh;
 }
@@ -433,6 +433,6 @@ SpriteAni* MeshBuilder::GenerateSpriteAni(const std::string& meshName, unsigned 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->indexBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_buffer_data.size() * sizeof(GLuint), &index_buffer_data[0], GL_STATIC_DRAW);
 	mesh->indexSize = index_buffer_data.size();
-	mesh->mode = Mesh::DRAW_TRIANGLES;
+	mesh->mode = Mesh::DRAW_MODE::DRAW_TRIANGLES;
 	return mesh;
 }

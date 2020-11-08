@@ -22,66 +22,59 @@ void SceneBase::Init(){
 	im_programID = LoadShaders("Shaders//comg.vertexshader", "Shaders//comg.fragmentshader");
 	
 	// Get a handle for our uniform
-	im_parameters[U_MVP] = glGetUniformLocation(im_programID, "MVP");
-	//im_parameters[U_MODEL] = glGetUniformLocation(im_programID, "M");
-	//im_parameters[U_VIEW] = glGetUniformLocation(im_programID, "V");
-	im_parameters[U_MODELVIEW] = glGetUniformLocation(im_programID, "MV");
-	im_parameters[U_MODELVIEW_INVERSE_TRANSPOSE] = glGetUniformLocation(im_programID, "MV_inverse_transpose");
-	im_parameters[U_MATERIAL_AMBIENT] = glGetUniformLocation(im_programID, "material.kAmbient");
-	im_parameters[U_MATERIAL_DIFFUSE] = glGetUniformLocation(im_programID, "material.kDiffuse");
-	im_parameters[U_MATERIAL_SPECULAR] = glGetUniformLocation(im_programID, "material.kSpecular");
-	im_parameters[U_MATERIAL_SHININESS] = glGetUniformLocation(im_programID, "material.kShininess");
+	im_parameters[(int)UniType::MVP] = glGetUniformLocation(im_programID, "MVP");
+	im_parameters[(int)UniType::MODELVIEW] = glGetUniformLocation(im_programID, "MV");
+	im_parameters[(int)UniType::MODELVIEW_INVERSE_TRANSPOSE] = glGetUniformLocation(im_programID, "MV_inverse_transpose");
+	im_parameters[(int)UniType::MATERIAL_AMBIENT] = glGetUniformLocation(im_programID, "material.kAmbient");
+	im_parameters[(int)UniType::MATERIAL_DIFFUSE] = glGetUniformLocation(im_programID, "material.kDiffuse");
+	im_parameters[(int)UniType::MATERIAL_SPECULAR] = glGetUniformLocation(im_programID, "material.kSpecular");
+	im_parameters[(int)UniType::MATERIAL_SHININESS] = glGetUniformLocation(im_programID, "material.kShininess");
 
 	// Get a handle for our "colorTexture" uniform
-	im_parameters[U_COLOR_TEXTURE_ENABLED] = glGetUniformLocation(im_programID, "colorTextureEnabled");
-	im_parameters[U_COLOR_TEXTURE] = glGetUniformLocation(im_programID, "colorTexture");
+	im_parameters[(int)UniType::COLOR_TEXTURE_ENABLED] = glGetUniformLocation(im_programID, "colorTextureEnabled");
+	im_parameters[(int)UniType::COLOR_TEXTURE] = glGetUniformLocation(im_programID, "colorTexture");
 	// Get a handle for our "textColor" uniform
-	im_parameters[U_TEXT_ENABLED] = glGetUniformLocation(im_programID, "textEnabled");
-	im_parameters[U_TEXT_COLOR] = glGetUniformLocation(im_programID, "textColor");
+	im_parameters[(int)UniType::TEXT_ENABLED] = glGetUniformLocation(im_programID, "textEnabled");
+	im_parameters[(int)UniType::TEXT_COLOR] = glGetUniformLocation(im_programID, "textColor");
 	
 	glUseProgram(im_programID);
 	
-	glUniform1i(im_parameters[U_TEXT_ENABLED], 0);
+	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 0);
 
-	for(int i = 0; i < NUM_GEOMETRY; ++i)
+	for(int i = 0; i < (int)GeoType::Amt; ++i)
 	{
 		meshList[i] = NULL;
 	}
-	meshList[GEO_AXES] = MeshBuilder::GenerateAxes("reference", 1000, 1000, 1000);
-	meshList[GEO_BALL] = MeshBuilder::GenerateSphere("ball", Color(1, 0, 0), 10, 10, 1.f);
-	meshList[GEO_TARGET] = MeshBuilder::GenerateSphere("ball", Color(0, 0, 1), 10, 10, 1.f);
-	meshList[GEO_CUBE] = MeshBuilder::GenerateCube("cube", Color(1, 1, 1), 2.f);
-	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
-	meshList[GEO_TEXT]->textureID = LoadImg("Imgs//calibri.png");
-	meshList[GEO_BG] = MeshBuilder::GenerateQuad("bg", Color(1, 1, 1));
-	meshList[GEO_BG]->textureID = LoadImg("Imgs//grid20.tga");
-	meshList[GEO_TEXT]->material.kAmbient.Set(1, 0, 0);
+	meshList[(int)GeoType::TEXT] = MeshBuilder::GenerateText("text", 16, 16);
+	meshList[(int)GeoType::TEXT]->textureID = LoadImg("Imgs//calibri.png");
+	meshList[(int)GeoType::TEXT]->material.kAmbient.Set(1, 0, 0);
 
-	meshList[GEO_FISHTOOFULL] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
-	meshList[GEO_FISHTOOFULL]->textureID = LoadImg("Imgs//toofull.tga");
-	meshList[GEO_FISHFULL] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
-	meshList[GEO_FISHFULL]->textureID = LoadImg("Imgs//full.tga");
-	meshList[GEO_FISHHUNGRY] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
-	meshList[GEO_FISHHUNGRY]->textureID = LoadImg("Imgs//hungry.tga");
-	meshList[GEO_FISHDEAD] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
-	meshList[GEO_FISHDEAD]->textureID = LoadImg("Imgs//dead.tga");
-	meshList[GEO_SHARKCRAZY] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
-	meshList[GEO_SHARKCRAZY]->textureID = LoadImg("Imgs//crazy.tga");
-	meshList[GEO_SHARKNAUGHTY] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
-	meshList[GEO_SHARKNAUGHTY]->textureID = LoadImg("Imgs//shark.tga");
-	meshList[GEO_SHARKHAPPY] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
-	meshList[GEO_SHARKHAPPY]->textureID = LoadImg("Imgs//happy.tga");
-	meshList[GEO_FISHFOOD] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
-	meshList[GEO_FISHFOOD]->textureID = LoadImg("Imgs//fishfood.tga");
 
-	meshList[GEO_DAY_BG] = MeshBuilder::GenerateSpriteAni("DayBG", 3, 5);
-	meshList[GEO_DAY_BG]->textureID = LoadImg("Imgs//DayBG.png");
-	meshList[GEO_NIGHT_BG] = MeshBuilder::GenerateSpriteAni("NightBG", 1, 5);
-	meshList[GEO_NIGHT_BG]->textureID = LoadImg("Imgs//NightBG.png");
-	static_cast<SpriteAni*>(meshList[(int)GEO_DAY_BG])->AddAni("DayBG", 0, 12);
-	static_cast<SpriteAni*>(meshList[(int)GEO_DAY_BG])->Play("DayBG", -1, 1.0f);
-	static_cast<SpriteAni*>(meshList[(int)GEO_NIGHT_BG])->AddAni("NightBG", 0, 4);
-	static_cast<SpriteAni*>(meshList[(int)GEO_NIGHT_BG])->Play("NightBG", -1, 0.33f);
+	meshList[(int)GeoType::FISHTOOFULL] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
+	meshList[(int)GeoType::FISHTOOFULL]->textureID = LoadImg("Imgs//toofull.tga");
+	meshList[(int)GeoType::FISHFULL] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
+	meshList[(int)GeoType::FISHFULL]->textureID = LoadImg("Imgs//full.tga");
+	meshList[(int)GeoType::FISHHUNGRY] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
+	meshList[(int)GeoType::FISHHUNGRY]->textureID = LoadImg("Imgs//hungry.tga");
+	meshList[(int)GeoType::FISHDEAD] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
+	meshList[(int)GeoType::FISHDEAD]->textureID = LoadImg("Imgs//dead.tga");
+	meshList[(int)GeoType::SHARKCRAZY] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
+	meshList[(int)GeoType::SHARKCRAZY]->textureID = LoadImg("Imgs//crazy.tga");
+	meshList[(int)GeoType::SHARKNAUGHTY] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
+	meshList[(int)GeoType::SHARKNAUGHTY]->textureID = LoadImg("Imgs//shark.tga");
+	meshList[(int)GeoType::SHARKHAPPY] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
+	meshList[(int)GeoType::SHARKHAPPY]->textureID = LoadImg("Imgs//happy.tga");
+	meshList[(int)GeoType::FISHFOOD] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
+	meshList[(int)GeoType::FISHFOOD]->textureID = LoadImg("Imgs//fishfood.tga");
+
+	meshList[(int)GeoType::DAY_BG] = MeshBuilder::GenerateSpriteAni("DayBG", 3, 5);
+	meshList[(int)GeoType::DAY_BG]->textureID = LoadImg("Imgs//DayBG.png");
+	meshList[(int)GeoType::NIGHT_BG] = MeshBuilder::GenerateSpriteAni("NightBG", 1, 5);
+	meshList[(int)GeoType::NIGHT_BG]->textureID = LoadImg("Imgs//NightBG.png");
+	static_cast<SpriteAni*>(meshList[(int)GeoType::DAY_BG])->AddAni("DayBG", 0, 12);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::DAY_BG])->Play("DayBG", -1, 1.0f);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::NIGHT_BG])->AddAni("NightBG", 0, 4);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::NIGHT_BG])->Play("NightBG", -1, 0.33f);
 
 	bLightEnabled = false;
 }
@@ -100,8 +93,8 @@ void SceneBase::Update(double dt){
 		isF2 = false;
 	}
 
-	static_cast<SpriteAni*>(meshList[(int)GEO_DAY_BG])->Update((float)dt);
-	static_cast<SpriteAni*>(meshList[(int)GEO_NIGHT_BG])->Update((float)dt);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::DAY_BG])->Update((float)dt);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::NIGHT_BG])->Update((float)dt);
 	
 	fps = (float)(1.f / dt);
 }
@@ -111,25 +104,25 @@ void SceneBase::RenderText(Mesh* mesh, std::string text, Color color){
 		return;
 	
 	glDisable(GL_DEPTH_TEST);
-	glUniform1i(im_parameters[U_TEXT_ENABLED], 1);
-	glUniform3fv(im_parameters[U_TEXT_COLOR], 1, &color.r);
-	glUniform1i(im_parameters[U_COLOR_TEXTURE_ENABLED], 1);
+	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 1);
+	glUniform3fv(im_parameters[(int)UniType::TEXT_COLOR], 1, &color.r);
+	glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE_ENABLED], 1);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, mesh->textureID);
-	glUniform1i(im_parameters[U_COLOR_TEXTURE], 0);
+	glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE], 0);
 	float accum = 0;
 	for(unsigned i = 0; i < text.length(); ++i)
 	{
 		Mtx44 characterSpacing;
 		characterSpacing.SetToTranslation(accum, 0, 0); //1.0f is the spacing of each character, you may change this value
 		Mtx44 MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top() * characterSpacing;
-		glUniformMatrix4fv(im_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
+		glUniformMatrix4fv(im_parameters[(int)UniType::MVP], 1, GL_FALSE, &MVP.a[0]);
 	
 		mesh->Render((unsigned)text[i] * 6, 6);
 		accum += (float)fontWidth[(unsigned)text[i]] / 64;
 	}
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glUniform1i(im_parameters[U_TEXT_ENABLED], 0);
+	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 0);
 	glEnable(GL_DEPTH_TEST);
 }
 
@@ -149,26 +142,26 @@ void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, fl
 	modelStack.LoadIdentity();
 	modelStack.Translate(x, y, 0);
 	modelStack.Scale(size, size, size);
-	glUniform1i(im_parameters[U_TEXT_ENABLED], 1);
-	glUniform3fv(im_parameters[U_TEXT_COLOR], 1, &color.r);
-	glUniform1i(im_parameters[U_COLOR_TEXTURE_ENABLED], 1);
+	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 1);
+	glUniform3fv(im_parameters[(int)UniType::TEXT_COLOR], 1, &color.r);
+	glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE_ENABLED], 1);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, mesh->textureID);
-	glUniform1i(im_parameters[U_COLOR_TEXTURE], 0);
+	glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE], 0);
 	float accum = 0;
 	for(unsigned i = 0; i < text.length(); ++i)
 	{
 		Mtx44 characterSpacing;
 		characterSpacing.SetToTranslation(accum + 0.5f, 0.5f, 0); //1.0f is the spacing of each character, you may change this value
 		Mtx44 MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top() * characterSpacing;
-		glUniformMatrix4fv(im_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
+		glUniformMatrix4fv(im_parameters[(int)UniType::MVP], 1, GL_FALSE, &MVP.a[0]);
 
 		mesh->Render((unsigned)text[i] * 6, 6);
 
 		accum += (float)fontWidth[(unsigned)text[i]] / 64;
 	}
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glUniform1i(im_parameters[U_TEXT_ENABLED], 0);
+	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 0);
 	modelStack.PopMatrix();
 	viewStack.PopMatrix();
 	projectionStack.PopMatrix();
@@ -180,18 +173,18 @@ void SceneBase::RenderMesh(Mesh *mesh, bool enableLight)
 	Mtx44 MVP, modelView, modelView_inverse_transpose;
 	
 	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
-	glUniformMatrix4fv(im_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
+	glUniformMatrix4fv(im_parameters[(int)UniType::MVP], 1, GL_FALSE, &MVP.a[0]);
 
 	if(mesh->textureID > 0)
 	{
-		glUniform1i(im_parameters[U_COLOR_TEXTURE_ENABLED], 1);
+		glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE_ENABLED], 1);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
-		glUniform1i(im_parameters[U_COLOR_TEXTURE], 0);
+		glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE], 0);
 	}
 	else
 	{
-		glUniform1i(im_parameters[U_COLOR_TEXTURE_ENABLED], 0);
+		glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE_ENABLED], 0);
 	}
 	mesh->Render();
 	if(mesh->textureID > 0)
@@ -207,7 +200,7 @@ void SceneBase::Render()
 
 void SceneBase::Exit(){
 	// Cleanup VBO
-	for(int i = 0; i < NUM_GEOMETRY; ++i)
+	for(int i = 0; i < (int)GeoType::Amt; ++i)
 	{
 		if(meshList[i])
 			delete meshList[i];

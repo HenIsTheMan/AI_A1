@@ -11,19 +11,12 @@
 
 class StateMachine;
 
-struct GameObject
-{
-	enum GAMEOBJECT_TYPE
-	{
-		GO_NONE = 0,
-		GO_BALL,
-		GO_CROSS,
-		GO_CIRCLE,
-
+struct GameObject final{
+	enum GAMEOBJECT_TYPE{
+		GO_NONE,
 		GO_FISH,
 		GO_SHARK,
 		GO_FISHFOOD,
-
 		GO_TOTAL
 	};
 
@@ -45,7 +38,7 @@ struct GameObject
 	State *currState;
 	State *nextState;
 
-	GameObject(GAMEOBJECT_TYPE typeValue = GO_BALL);
+	GameObject(GAMEOBJECT_TYPE typeValue);
 	~GameObject();
 
 	void SetNextState();
