@@ -112,10 +112,23 @@ void SceneBase::RenderText(Mesh* mesh, std::string text, Color color, TextAlignm
 	glBindTexture(GL_TEXTURE_2D, mesh->textureID);
 	glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE], 0);
 
+	float textWidth = 0.0f;
+	for(unsigned i = 0; i < text.length(); ++i){
+		textWidth += (float)fontWidth[(unsigned)text[i]] / 64.0f;
+	}
+
 	float accum = 0;
 	for(unsigned i = 0; i < text.length(); ++i){
 		Mtx44 characterSpacing;
-		characterSpacing.SetToTranslation(accum, 0, 0); //1.0f is the spacing of each character, you may change this value
+
+		if(alignment == TextAlignment::Right){
+			characterSpacing.SetToTranslation(accum + 0.5f - textWidth, 0.5f, 0);
+		} else if(alignment == TextAlignment::Center){
+			characterSpacing.SetToTranslation(accum + 0.5f - textWidth * 0.5f, 0.5f, 0);
+		} else{
+			characterSpacing.SetToTranslation(accum + 0.5f, 0.5f, 0);
+		}
+
 		Mtx44 MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top() * characterSpacing;
 		glUniformMatrix4fv(im_parameters[(int)UniType::MVP], 1, GL_FALSE, &MVP.a[0]);
 	

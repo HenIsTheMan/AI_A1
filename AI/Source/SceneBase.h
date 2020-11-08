@@ -58,7 +58,7 @@ public:
 	virtual void Render();
 	virtual void Exit();
 
-	void RenderText(Mesh* mesh, std::string text, Color color, TextAlignment alignment = TextAlignment::Left);
+	void RenderText(Mesh* mesh, std::string text, Color color, TextAlignment alignment = TextAlignment::Left); //Based on what model mats are alr in modelStack
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y, TextAlignment alignment = TextAlignment::Left);
 	void RenderMesh(Mesh *mesh, bool enableLight);
 protected:

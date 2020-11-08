@@ -380,21 +380,23 @@ void SceneMovement::RenderGO(GameObject *go){
 			}
 
 			modelStack.PushMatrix();
-				modelStack.Translate(0.3f, 0.8f, (float)go->id * 0.1f);
-				RenderText(
-					textMesh,
-					"ID: " + std::to_string(go->id),
-					textColor
-				);
+			modelStack.Translate(0.0f, 0.5f, 0.0f);
+			RenderText(
+				textMesh,
+				"ID: " + std::to_string(go->id),
+				textColor,
+				TextAlignment::Center
+			);
 			modelStack.PopMatrix();
 
 			modelStack.PushMatrix();
-				modelStack.Translate(0.3f, -0.8f, 0.0f);
-				RenderText(
-					textMesh,
-					"Energy: " + std::to_string(go->energy),
-					textColor
-				);
+			modelStack.Translate(0.0f, -1.5f, 0.0f);
+			RenderText(
+				textMesh,
+				"Energy: " + std::to_string(go->energy),
+				textColor,
+				TextAlignment::Center
+			);
 			modelStack.PopMatrix();
 
 			modelStack.PopMatrix();
@@ -415,11 +417,12 @@ void SceneMovement::RenderGO(GameObject *go){
 			}
 
 			modelStack.PushMatrix();
-			modelStack.Translate(0.3f, 0.8f, (float)go->id * 0.1f);
+			modelStack.Translate(0.0f, 0.5f, 0.0f);
 			RenderText(
 				textMesh,
 				"ID: " + std::to_string(go->id),
-				textColor
+				textColor,
+				TextAlignment::Center
 			);
 			modelStack.PopMatrix();
 
@@ -433,11 +436,12 @@ void SceneMovement::RenderGO(GameObject *go){
 			RenderMesh(meshList[(int)GeoType::FISHFOOD], false);
 
 			modelStack.PushMatrix();
-			modelStack.Translate(0.3f, 0.8f, (float)go->id * 0.1f);
+			modelStack.Translate(0.0f, 0.5f, 0.0f);
 			RenderText(
 				textMesh,
 				"ID: " + std::to_string(go->id),
-				textColor
+				textColor,
+				TextAlignment::Center
 			);
 			modelStack.PopMatrix();
 
