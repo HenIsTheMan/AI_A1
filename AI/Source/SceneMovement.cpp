@@ -366,14 +366,12 @@ void SceneMovement::Update(double dt){
 	}
 }
 
-void SceneMovement::RenderGO(GameObject *go)
-{
-	switch(go->type)
-	{
+void SceneMovement::RenderGO(GameObject *go){
+	switch(go->type){
 		case GameObject::GO_FISH: {
 			modelStack.PushMatrix();
-			modelStack.Translate(go->pos.x, go->pos.y, (float)go->id * 0.1f);
-			modelStack.Scale(go->scale.x, go->scale.y, go->scale.z);
+			modelStack.Translate(go->pos.x, go->pos.y, (float)go->id * 0.1f + 1.0f);
+			modelStack.Scale(go->scale.x, go->scale.y, 1.0f);
 
 			const std::string stateID = go->currState->GetStateID();
 			if(stateID == "StateTooFull"){
@@ -458,9 +456,15 @@ void SceneMovement::Render(){
 	modelStack.LoadIdentity();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(im_worldHeight * 0.5f, im_worldHeight * 0.5f, 0.0f);
-	modelStack.Scale(im_worldHeight, im_worldHeight, 1.0f);
-	RenderMesh(meshList[GEO_BG], false);
+		modelStack.Translate(im_worldHeight * 0.5f, im_worldHeight * 0.5f, 0.0f);
+		modelStack.Scale(im_worldHeight, im_worldHeight, 1.0f);
+		RenderMesh(meshList[GEO_BG], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+		modelStack.Translate(im_worldWidth * 0.5f, im_worldHeight * 0.5f, 0.0f);
+		modelStack.Scale(im_worldWidth, im_worldHeight, 1.0f);
+		RenderMesh(meshList[GEO_DAY_BG], false);
 	modelStack.PopMatrix();
 
 	for(std::vector<GameObject *>::iterator it = im_goList.begin(); it != im_goList.end(); ++it){

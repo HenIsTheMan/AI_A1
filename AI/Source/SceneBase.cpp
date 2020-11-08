@@ -77,9 +77,9 @@ void SceneBase::Init(){
 	meshList[GEO_FISHFOOD]->textureID = LoadImg("Imgs//fishfood.tga");
 
 	meshList[GEO_DAY_BG] = MeshBuilder::GenerateSpriteAni("DayBG", 3, 5);
-	meshList[GEO_DAY_BG]->textureID = LoadImg("Image//DayBG.png");
+	meshList[GEO_DAY_BG]->textureID = LoadImg("Imgs//DayBG.png");
 	meshList[GEO_NIGHT_BG] = MeshBuilder::GenerateSpriteAni("NightBG", 1, 5);
-	meshList[GEO_NIGHT_BG]->textureID = LoadImg("Image//NightBG.png");
+	meshList[GEO_NIGHT_BG]->textureID = LoadImg("Imgs//NightBG.png");
 	static_cast<SpriteAni*>(meshList[(int)GEO_DAY_BG])->AddAni("DayBG", 0, 12);
 	static_cast<SpriteAni*>(meshList[(int)GEO_DAY_BG])->Play("DayBG", -1, 1.0f);
 	static_cast<SpriteAni*>(meshList[(int)GEO_NIGHT_BG])->AddAni("NightBG", 0, 4);
