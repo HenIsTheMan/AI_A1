@@ -19,7 +19,7 @@ enum struct TextAlignment: int{
 	Amt
 };
 
-class SceneBase: public Scene{
+class SceneBase: public Scene{ //Abstract class
 public:
 	enum struct UniType: int{
 		MVP,
@@ -50,7 +50,6 @@ public:
 		Amt
 	};
 
-	SceneBase();
 	virtual ~SceneBase();
 
 	virtual void Update(double dt) override;
@@ -72,8 +71,9 @@ protected:
 	MS projectionStack;
 
 	bool bLightEnabled;
-
 	float fps;
+
+	SceneBase();
 };
 
 #endif
