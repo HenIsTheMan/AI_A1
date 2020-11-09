@@ -1,3 +1,6 @@
+#pragma warning(push)
+#pragma warning(disable: 4098)
+
 #include "App.h"
 
 #include <crtdbg.h>

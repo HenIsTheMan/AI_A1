@@ -3,6 +3,7 @@
 #include "SceneMovement.h"
 #include "GL\glew.h"
 #include "App.h"
+#include "SpriteAni.h"
 
 extern int winWidth;
 extern int winHeight;
@@ -285,7 +286,7 @@ void SceneMovement::RenderEntities(){
 		gridCellHeight,
 		1.0f
 	);
-	SkeleMove("SkeleMoveUp");
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->Play("SkeleMoveUp", -1, 2.0f);
 	RenderMesh(meshList[(int)GeoType::Skele], false);
 	modelStack.PopMatrix();
 }

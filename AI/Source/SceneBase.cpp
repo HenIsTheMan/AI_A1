@@ -22,15 +22,7 @@ SceneBase::SceneBase():
 	projectionStack(MS()),
 	bLightEnabled(false),
 	elapsedTime(0.0f),
-	FPS(0.0f),
-	SkeleMove(nullptr),
-	SkeleThrust(nullptr),
-	ReptileMove(nullptr),
-	ReptileShoot(nullptr),
-	BoyMove(nullptr),
-	BoySlash(nullptr),
-	OrcMove(nullptr),
-	OrcSmack(nullptr)
+	FPS(0.0f)
 {
 	glClearColor(1.f, 0.82f, 0.86f, 1.f);
 	glEnable(GL_DEPTH_TEST);
@@ -97,12 +89,6 @@ SceneBase::SceneBase():
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleThrustRight", 7 * 13, 7 * 13 + 8);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleHibernate", 20 * 13 + 4, 20 * 13 + 4 + 1);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleFacePlant", 20 * 13 + 5, 20 * 13 + 5 + 1);
-	SkeleMove = [this](const std::string& aniName)->void{
-		static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->Play(aniName, -1, 2.0f);
-	};
-	SkeleThrust = [this](const std::string& aniName)->void{
-		static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->Play(aniName, -1, 1.0f);
-	};
 
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile])->AddAni("ReptileStaticUp", 0, 4);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile])->AddAni("ReptileStaticDown", 0, 4);
@@ -118,12 +104,6 @@ SceneBase::SceneBase():
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile])->AddAni("ReptileShootRight", 0, 4);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile])->AddAni("ReptileProcreate", 0, 4);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile])->AddAni("ReptileFacePlant", 0, 4);
-	ReptileMove = [this](const std::string& aniName)->void{
-		static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile])->Play(aniName, -1, 2.0f);
-	};
-	ReptileShoot = [this](const std::string& aniName)->void{
-		static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile])->Play(aniName, -1, 1.0f);
-	};
 
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Boy])->AddAni("BoyStaticUp", 0, 4);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Boy])->AddAni("BoyStaticDown", 0, 4);
@@ -139,12 +119,6 @@ SceneBase::SceneBase():
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Boy])->AddAni("BoySlashRight", 0, 4);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Boy])->AddAni("BoyHeal", 0, 4);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Boy])->AddAni("BoyFacePlant", 0, 4);
-	BoyMove = [this](const std::string& aniName)->void{
-		static_cast<SpriteAni*>(meshList[(int)GeoType::Boy])->Play(aniName, -1, 2.0f);
-	};
-	BoySlash = [this](const std::string& aniName)->void{
-		static_cast<SpriteAni*>(meshList[(int)GeoType::Boy])->Play(aniName, -1, 1.0f);
-	};
 
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Orc])->AddAni("OrcStaticUp", 0, 4);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Orc])->AddAni("OrcStaticDown", 0, 4);
@@ -160,12 +134,6 @@ SceneBase::SceneBase():
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Orc])->AddAni("OrcSmackRight", 0, 4);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Orc])->AddAni("OrcShield", 0, 4);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::Orc])->AddAni("OrcFacePlant", 0, 4);
-	OrcMove = [this](const std::string& aniName)->void{
-		static_cast<SpriteAni*>(meshList[(int)GeoType::Orc])->Play(aniName, -1, 2.0f);
-	};
-	OrcSmack = [this](const std::string& aniName)->void{
-		static_cast<SpriteAni*>(meshList[(int)GeoType::Orc])->Play(aniName, -1, 1.0f);
-	};
 }
 
 SceneBase::~SceneBase(){
