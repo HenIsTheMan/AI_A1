@@ -19,9 +19,15 @@ SceneMovement::SceneMovement():
 	objPool(new ObjPool<Entity>())
 {
 	Math::InitRNG();
+
+	objPool->CreateObjs(10000);
 }
 
 SceneMovement::~SceneMovement(){
+	if(objPool){
+		delete objPool;
+		objPool = nullptr;
+	}
 }
 
 void SceneMovement::Update(double dt){
@@ -51,22 +57,134 @@ void SceneMovement::Update(double dt){
 		isMMB = false;
 	}
 
+	if(dayNightBT <= elapsedTime){
+		isDay = !isDay;
+		dayNightBT = elapsedTime + 7.0f;
+	}
+
 	UpdateGrid();
+
+	//const float gridWidth = grid.CalcWidth();
+	//const float gridHeight = grid.CalcHeight();
+
+	//const float xOffset = ((float)winWidth - gridWidth) * 0.5f;
+	//const float yOffset = ((float)winHeight - gridHeight) * 0.5f;
+	//const float unitX = gridCellWidth + gridLineThickness;
+	//const float unitY = gridCellHeight + gridLineThickness;
+
+	//const float mouseRow = std::floor((winHeight - lastY - yOffset - gridLineThickness * 0.5f) / unitY);
+	//const float mouseCol = std::floor((lastX - xOffset - gridLineThickness * 0.5f) / unitX);
+	//const float xTranslate = mouseCol * unitX
+	//	+ xOffset
+	//	+ gridCellWidth * 0.5f
+	//	+ gridLineThickness;
+	//const float yTranslate = mouseRow * unitY
+	//	+ yOffset
+	//	+ gridCellHeight * 0.5f
+	//	+ gridLineThickness;
+
+	//if(lastX > xOffset + gridLineThickness * 0.5f && lastX < xOffset + gridWidth - gridLineThickness * 0.5f
+	//	&& lastY > yOffset + gridLineThickness * 0.5f && lastY < yOffset + gridHeight - gridLineThickness * 0.5f){
+	//	if(LMB){
+	//		Entity* const& entity = objPool->RetrieveInactiveObj();
+	//		entity->RetrieveType() = EntityType::Block;
+	//		entity->RetrievePos() = glm::vec3(xTranslate, yTranslate, 0.0f);
+	//	} else if(RMB){
+	//		//grid.SetData(EntityType::Null, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
+	//	}
+	//}
+
+	UpdateEntities();
 }
 
 void SceneMovement::Render(){
 	SceneBase::Render();
 
-	modelStack.PushMatrix();
-		modelStack.Translate(im_Cam.pos.x + (float)winWidth * 0.5f, im_Cam.pos.y + (float)winHeight * 0.5f, 0.0f);
-		modelStack.Scale((float)winWidth, (float)winHeight, 1.0f);
-		RenderMesh(meshList[(int)GeoType::DayBG], false);
-	modelStack.PopMatrix();
-
+	RenderGrid();
+	RenderGridBG();
+	RenderEntities();
+	RenderTranslucentBlock();
+	RenderBG();
 	RenderSceneText();
 }
 
 void SceneMovement::UpdateGrid(){
+	static bool isKeyDown1 = false;
+	static bool isKeyDown2 = false;
+	static bool isKeyDown3 = false;
+	static bool isKeyDown4 = false;
+	static bool isKeyDown5 = false;
+	static bool isKeyDown6 = false;
+	static bool isKeyDown7 = false;
+	static bool isKeyDown8 = false;
+	static bool isKeyDown9 = false;
+	static bool isKeyDown0 = false;
+	if(!isKeyDown1 && App::Key('1')){
+		++gridCellWidth;
+		isKeyDown1 = true;
+	} else if(isKeyDown1 && !App::Key('1')){
+		isKeyDown1 = false;
+	}
+	if(!isKeyDown2 && App::Key('2')){
+		--gridCellWidth;
+		isKeyDown2 = true;
+	} else if(isKeyDown2 && !App::Key('2')){
+		isKeyDown2 = false;
+	}
+	if(!isKeyDown3 && App::Key('3')){
+		++gridCellHeight;
+		isKeyDown3 = true;
+	} else if(isKeyDown3 && !App::Key('3')){
+		isKeyDown3 = false;
+	}
+	if(!isKeyDown4 && App::Key('4')){
+		--gridCellHeight;
+		isKeyDown4 = true;
+	} else if(isKeyDown4 && !App::Key('4')){
+		isKeyDown4 = false;
+	}
+	if(!isKeyDown5 && App::Key('5')){
+		++gridLineThickness;
+		isKeyDown5 = true;
+	} else if(isKeyDown5 && !App::Key('5')){
+		isKeyDown5 = false;
+	}
+	if(!isKeyDown6 && App::Key('6')){
+		--gridLineThickness;
+		isKeyDown6 = true;
+	} else if(isKeyDown6 && !App::Key('6')){
+		isKeyDown6 = false;
+	}
+	if(!isKeyDown7 && App::Key('7')){
+		++gridRows;
+		isKeyDown7 = true;
+	} else if(isKeyDown7 && !App::Key('7')){
+		isKeyDown7 = false;
+	}
+	if(!isKeyDown8 && App::Key('8')){
+		--gridRows;
+		isKeyDown8 = true;
+	} else if(isKeyDown8 && !App::Key('8')){
+		isKeyDown8 = false;
+	}
+	if(!isKeyDown9 && App::Key('9')){
+		++gridCols;
+		isKeyDown9 = true;
+	} else if(isKeyDown9 && !App::Key('9')){
+		isKeyDown9 = false;
+	}
+	if(!isKeyDown0 && App::Key('0')){
+		--gridCols;
+		isKeyDown0 = true;
+	} else if(isKeyDown0 && !App::Key('0')){
+		isKeyDown0 = false;
+	}
+
+	grid.SetCellWidth(gridCellWidth);
+	grid.SetCellHeight(gridCellHeight);
+	grid.SetLineThickness(gridLineThickness);
+	grid.SetRows(gridRows);
+	grid.SetCols(gridCols);
 }
 
 void SceneMovement::UpdateEntities(){
@@ -85,6 +203,11 @@ void SceneMovement::RenderTranslucentBlock(){
 }
 
 void SceneMovement::RenderBG(){
+	modelStack.PushMatrix();
+		modelStack.Translate(im_Cam.pos.x + (float)winWidth * 0.5f, im_Cam.pos.y + (float)winHeight * 0.5f, 0.0f);
+		modelStack.Scale((float)winWidth, (float)winHeight, 1.0f);
+		RenderMesh(meshList[(int)GeoType::DayBG], false);
+	modelStack.PopMatrix();
 }
 
 void SceneMovement::RenderSceneText(){
