@@ -276,51 +276,59 @@ void SceneMovement::RenderGridData(){
 
 void SceneMovement::RenderEntities(){
 	modelStack.PushMatrix();
-	modelStack.Translate(
-		(float)winWidth * 0.5f - gridCellWidth - gridLineThickness,
-		(float)winHeight * 0.5f,
-		0.1f
-	);
-	modelStack.Scale(
-		gridCellWidth,
-		gridCellHeight,
-		1.0f
-	);
 
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->ActivateAni("SkeleMoveDown", 0.1f);
-	RenderMesh(meshList[(int)GeoType::Skele], false);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
 	modelStack.Translate(
 		(float)winWidth * 0.5f,
 		(float)winHeight * 0.5f,
 		0.1f
 	);
+
+	modelStack.PushMatrix();
+
+	modelStack.Translate(
+		0.0f - gridCellWidth - gridLineThickness,
+		0.0f,
+		0.0f
+	);
 	modelStack.Scale(
 		gridCellWidth,
 		gridCellHeight,
 		1.0f
 	);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile])->ActivateAni("ReptileMoveDown", 0.1f);
+	RenderMesh(meshList[(int)GeoType::Reptile], false);
 
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->ActivateAni("SkeleFacePlant", 0.1f);
-	RenderMesh(meshList[(int)GeoType::Skele], false);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
+
+	modelStack.Scale(
+		gridCellWidth,
+		gridCellHeight,
+		1.0f
+	);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile])->ActivateAni("ReptileProcreate", 0.1f);
+	RenderMesh(meshList[(int)GeoType::Reptile], false);
+
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+
 	modelStack.Translate(
-		(float)winWidth * 0.5f + gridCellWidth + gridLineThickness,
-		(float)winHeight * 0.5f,
-		0.1f
+		0.0f + gridCellWidth + gridLineThickness,
+		0.0f,
+		0.0f
 	);
 	modelStack.Scale(
 		gridCellWidth,
 		gridCellHeight,
 		1.0f
 	);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile])->ActivateAni("ReptileShootDown", 0.1f);
+	RenderMesh(meshList[(int)GeoType::Reptile], false);
 
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->ActivateAni("SkeleThrustDown", 0.1f);
-	RenderMesh(meshList[(int)GeoType::Skele], false);
+	modelStack.PopMatrix();
+
 	modelStack.PopMatrix();
 }
 
