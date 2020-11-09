@@ -52,7 +52,7 @@ void SceneMovement::Render(){
 	RenderEntities();
 	RenderTranslucentBlock();
 	RenderBG();
-	RenderSceneText();
+	//RenderSceneText();
 }
 
 void SceneMovement::UpdateGridProperties(){
@@ -314,7 +314,7 @@ void SceneMovement::RenderTranslucentBlock(){
 				gridCellHeight,
 				1.0f
 			);
-			RenderMesh(meshList[(int)GeoType::Block], false);
+			RenderMesh(meshList[(int)GeoType::Block], true, Color(), 0.5f);
 		modelStack.PopMatrix();
 	}
 }

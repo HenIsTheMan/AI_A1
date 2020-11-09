@@ -103,7 +103,7 @@ void SpriteAni::Update(float dt){
 	}
 }
 
-void SpriteAni::Render(){
+void SpriteAni::Render() const{
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);

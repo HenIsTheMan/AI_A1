@@ -40,7 +40,7 @@ public:
 	void AddAni(const std::string& name, const int& start, const int& end);
 	void AddSequenceAni(const std::string& name, const ::std::initializer_list<int>& frames);
 	void Update(float dt);
-	void Render() override;
+	void Render() const override;
 private:
 	float currTime;
 	int currFrame;

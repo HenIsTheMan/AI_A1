@@ -21,8 +21,7 @@ Mesh::~Mesh()
 		glDeleteTextures(1, &textureID);
 }
 
-void Mesh::Render()
-{
+void Mesh::Render() const{
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
@@ -58,8 +57,7 @@ void Mesh::Render()
 	}
 }
 
-void Mesh::Render(unsigned offset, unsigned count)
-{
+void Mesh::Render(unsigned offset, unsigned count) const{
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);

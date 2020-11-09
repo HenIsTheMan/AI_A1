@@ -168,6 +168,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Shaders\AI.fs" />
+    <None Include="Shaders\AI.vs" />
+    <None Include="Shaders\comg.fragmentshader" />
+    <None Include="Shaders\comg.vertexshader" />
     <None Include="Source\Grid.inl" />
     <None Include="Source\ObjPool.inl" />
   </ItemGroup>

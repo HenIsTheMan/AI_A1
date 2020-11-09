@@ -15,7 +15,7 @@ SceneBase::SceneBase():
 	im_parameters(),
 	meshList(),
 	im_vertexArrayID(0),
-	im_programID(LoadShaders("Shaders//comg.vertexshader", "Shaders//comg.fragmentshader")),
+	im_programID(LoadShaders("Shaders//AI.vs", "Shaders//AI.fs")),
 	im_Cam(Cam()),
 	modelStack(MS()),
 	viewStack(MS()),
@@ -204,27 +204,27 @@ void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, fl
 	glEnable(GL_DEPTH_TEST);
 }
 
-void SceneBase::RenderMesh(Mesh *mesh, bool enableLight){
+void SceneBase::RenderMesh(const Mesh* const& mesh, const bool& useCustom, const Color& colour, const float& alpha){
 	Mtx44 MVP, modelView, modelView_inverse_transpose;
-	
 	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
-	glUniformMatrix4fv(im_parameters[(int)UniType::MVP], 1, GL_FALSE, &MVP.a[0]);
 
-	if(mesh->textureID > 0){
-		glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE_ENABLED], 1);
+	glUniformMatrix4fv(glGetUniformLocation(im_programID, "MVP"), 1, GL_FALSE, &MVP.a[0]);
+	glUniform1i(glGetUniformLocation(im_programID, "useCustom"), useCustom);
+	glUniform3fv(glGetUniformLocation(im_programID, "myColour"), 1, &colour.r);
+	glUniform1f(glGetUniformLocation(im_programID, "myAlpha"), alpha);
+
+	if(mesh->textureID){
+		glUniform1i(glGetUniformLocation(im_programID, "useTex"), 1);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
-		glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE], 0);
+		glUniform1i(glGetUniformLocation(im_programID, "tex"), 0);
 	}
-	else
-	{
-		glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE_ENABLED], 0);
-	}
+
 	mesh->Render();
-	if(mesh->textureID > 0)
-	{
-		glBindTexture(GL_TEXTURE_2D, 0);
-	}
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glUniform1i(glGetUniformLocation(im_programID, "useTex"), 0);
+	glUniform1i(glGetUniformLocation(im_programID, "useCustom"), 0);
 }
 
 void SceneBase::Render(){

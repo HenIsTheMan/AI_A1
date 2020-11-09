@@ -116,6 +116,9 @@
     <Filter Include="Obj">
       <UniqueIdentifier>{c9054835-fbb9-4de5-b687-d6f14d115968}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{66b8b471-8130-446e-a930-3e71384e6365}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Grid.inl">
@@ -123,6 +126,18 @@
     </None>
     <None Include="Source\ObjPool.inl">
       <Filter>Obj</Filter>
+    </None>
+    <None Include="Shaders\comg.fragmentshader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\comg.vertexshader">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\AI.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\AI.vs">
+      <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

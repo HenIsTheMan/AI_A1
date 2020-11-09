@@ -16,8 +16,8 @@ public:
 
 	Mesh(const std::string &meshName);
 	virtual ~Mesh();
-	virtual void Render();
-	void Render(unsigned offset, unsigned count);
+	virtual void Render() const;
+	void Render(unsigned offset, unsigned count) const;
 
 	const std::string name;
 	DRAW_MODE mode;
