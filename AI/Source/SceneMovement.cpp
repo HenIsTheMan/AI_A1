@@ -60,7 +60,7 @@ void SceneMovement::Render(){
 	modelStack.PushMatrix();
 		modelStack.Translate(im_Cam.pos.x + (float)winWidth * 0.5f, im_Cam.pos.y + (float)winHeight * 0.5f, 0.0f);
 		modelStack.Scale((float)winWidth, (float)winHeight, 1.0f);
-		RenderMesh(meshList[(int)GeoType::DAY_BG], false);
+		RenderMesh(meshList[(int)GeoType::DayBG], false);
 	modelStack.PopMatrix();
 
 	RenderSceneText();
@@ -88,7 +88,7 @@ void SceneMovement::RenderBG(){
 }
 
 void SceneMovement::RenderSceneText(){
-	static Mesh* textMesh = meshList[(int)GeoType::TEXT];
+	static Mesh* textMesh = meshList[(int)GeoType::Text];
 	static Color textColor = Color();
 	static float textSize = 0.0f;
 	textSize = winHeight * 0.05f;

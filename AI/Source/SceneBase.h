@@ -34,9 +34,9 @@ public:
 		Amt
 	};
 	enum struct GeoType: int{
-		TEXT,
-		DAY_BG,
-		NIGHT_BG,
+		Text,
+		DayBG,
+		NightBG,
 		Amt
 	};
 

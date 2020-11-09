@@ -52,18 +52,18 @@ SceneBase::SceneBase():
 		meshList[i] = nullptr;
 	}
 
-	meshList[(int)GeoType::TEXT] = MeshBuilder::GenerateText("text", 16, 16);
-	meshList[(int)GeoType::TEXT]->textureID = LoadImg("Imgs//calibri.png");
-	meshList[(int)GeoType::TEXT]->material.kAmbient.Set(1, 0, 0);
+	meshList[(int)GeoType::Text] = MeshBuilder::GenerateText("text", 16, 16);
+	meshList[(int)GeoType::Text]->textureID = LoadImg("Imgs//calibri.png");
+	meshList[(int)GeoType::Text]->material.kAmbient.Set(1, 0, 0);
 
-	meshList[(int)GeoType::DAY_BG] = MeshBuilder::GenerateSpriteAni("DayBG", 3, 5);
-	meshList[(int)GeoType::DAY_BG]->textureID = LoadImg("Imgs//DayBG.png");
-	meshList[(int)GeoType::NIGHT_BG] = MeshBuilder::GenerateSpriteAni("NightBG", 1, 5);
-	meshList[(int)GeoType::NIGHT_BG]->textureID = LoadImg("Imgs//NightBG.png");
-	static_cast<SpriteAni*>(meshList[(int)GeoType::DAY_BG])->AddAni("DayBG", 0, 12);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::DAY_BG])->Play("DayBG", -1, 1.0f);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::NIGHT_BG])->AddAni("NightBG", 0, 4);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::NIGHT_BG])->Play("NightBG", -1, 0.33f);
+	meshList[(int)GeoType::DayBG] = MeshBuilder::GenerateSpriteAni("DayBG", 3, 5);
+	meshList[(int)GeoType::DayBG]->textureID = LoadImg("Imgs//DayBG.png");
+	meshList[(int)GeoType::NightBG] = MeshBuilder::GenerateSpriteAni("NightBG", 1, 5);
+	meshList[(int)GeoType::NightBG]->textureID = LoadImg("Imgs//NightBG.png");
+	static_cast<SpriteAni*>(meshList[(int)GeoType::DayBG])->AddAni("DayBG", 0, 12);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::DayBG])->Play("DayBG", -1, 1.0f);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::NightBG])->AddAni("NightBG", 0, 4);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::NightBG])->Play("NightBG", -1, 0.33f);
 }
 
 SceneBase::~SceneBase(){
@@ -95,8 +95,8 @@ void SceneBase::Update(double dt){
 		isF2 = false;
 	}
 
-	static_cast<SpriteAni*>(meshList[(int)GeoType::DAY_BG])->Update((float)dt);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::NIGHT_BG])->Update((float)dt);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::DayBG])->Update((float)dt);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::NightBG])->Update((float)dt);
 }
 
 void SceneBase::RenderText(Mesh* mesh, std::string text, Color color, TextAlignment alignment){
