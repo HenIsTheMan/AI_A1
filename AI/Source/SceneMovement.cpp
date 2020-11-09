@@ -33,67 +33,13 @@ SceneMovement::~SceneMovement(){
 void SceneMovement::Update(double dt){
 	SceneBase::Update(dt);
 
-	///LMB
-	static bool isLMB = false;
-	if(!isLMB && App::IsMousePressed(0)){
-		isLMB = true;
-	} else if(isLMB && !App::IsMousePressed(0)){
-		isLMB = false;
-	}
-
-	///RMB
-	static bool isRMB = false;
-	if(!isRMB && App::IsMousePressed(1)){
-		isRMB = true;
-	} else if(isRMB && !App::IsMousePressed(1)){
-		isRMB = false;
-	}
-
-	///MMB
-	static bool isMMB = false;
-	if(!isMMB && App::IsMousePressed(2)){
-		isMMB = true;
-	} else if(isMMB && !App::IsMousePressed(2)){
-		isMMB = false;
-	}
-
 	if(dayNightBT <= elapsedTime){
 		isDay = !isDay;
 		dayNightBT = elapsedTime + 7.0f;
 	}
 
-	UpdateGrid();
-
-	//const float gridWidth = grid.CalcWidth();
-	//const float gridHeight = grid.CalcHeight();
-
-	//const float xOffset = ((float)winWidth - gridWidth) * 0.5f;
-	//const float yOffset = ((float)winHeight - gridHeight) * 0.5f;
-	//const float unitX = gridCellWidth + gridLineThickness;
-	//const float unitY = gridCellHeight + gridLineThickness;
-
-	//const float mouseRow = std::floor((winHeight - lastY - yOffset - gridLineThickness * 0.5f) / unitY);
-	//const float mouseCol = std::floor((lastX - xOffset - gridLineThickness * 0.5f) / unitX);
-	//const float xTranslate = mouseCol * unitX
-	//	+ xOffset
-	//	+ gridCellWidth * 0.5f
-	//	+ gridLineThickness;
-	//const float yTranslate = mouseRow * unitY
-	//	+ yOffset
-	//	+ gridCellHeight * 0.5f
-	//	+ gridLineThickness;
-
-	//if(lastX > xOffset + gridLineThickness * 0.5f && lastX < xOffset + gridWidth - gridLineThickness * 0.5f
-	//	&& lastY > yOffset + gridLineThickness * 0.5f && lastY < yOffset + gridHeight - gridLineThickness * 0.5f){
-	//	if(LMB){
-	//		Entity* const& entity = objPool->RetrieveInactiveObj();
-	//		entity->RetrieveType() = EntityType::Block;
-	//		entity->RetrievePos() = glm::vec3(xTranslate, yTranslate, 0.0f);
-	//	} else if(RMB){
-	//		//grid.SetData(EntityType::Null, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
-	//	}
-	//}
-
+	UpdateGridProperties();
+	UpdateGridData();
 	UpdateEntities();
 }
 
@@ -108,7 +54,7 @@ void SceneMovement::Render(){
 	RenderSceneText();
 }
 
-void SceneMovement::UpdateGrid(){
+void SceneMovement::UpdateGridProperties(){
 	static bool isKeyDown1 = false;
 	static bool isKeyDown2 = false;
 	static bool isKeyDown3 = false;
@@ -185,6 +131,56 @@ void SceneMovement::UpdateGrid(){
 	grid.SetLineThickness(gridLineThickness);
 	grid.SetRows(gridRows);
 	grid.SetCols(gridCols);
+}
+
+void SceneMovement::UpdateGridData(){
+	static bool isLMB = false;
+	if(!isLMB && App::IsMousePressed(0)){
+		isLMB = true;
+	} else if(isLMB && !App::IsMousePressed(0)){
+		isLMB = false;
+	}
+
+	static bool isRMB = false;
+	if(!isRMB && App::IsMousePressed(1)){
+		isRMB = true;
+	} else if(isRMB && !App::IsMousePressed(1)){
+		isRMB = false;
+	}
+
+	double mouseX;
+	double mouseY;
+	App::GetCursorPos(&mouseX, &mouseY);
+
+	const float gridWidth = grid.CalcWidth();
+	const float gridHeight = grid.CalcHeight();
+
+	const float xOffset = ((float)winWidth - gridWidth) * 0.5f;
+	const float yOffset = ((float)winHeight - gridHeight) * 0.5f;
+	const float unitX = gridCellWidth + gridLineThickness;
+	const float unitY = gridCellHeight + gridLineThickness;
+
+	const float mouseRow = std::floor(((float)winHeight - (float)mouseY - yOffset - gridLineThickness * 0.5f) / unitY);
+	const float mouseCol = std::floor(((float)mouseX - xOffset - gridLineThickness * 0.5f) / unitX);
+	const float xTranslate = mouseCol * unitX
+		+ xOffset
+		+ gridCellWidth * 0.5f
+		+ gridLineThickness;
+	const float yTranslate = mouseRow * unitY
+		+ yOffset
+		+ gridCellHeight * 0.5f
+		+ gridLineThickness;
+
+	if((float)mouseX > xOffset + gridLineThickness * 0.5f && (float)mouseX < xOffset + gridWidth - gridLineThickness * 0.5f
+		&& (float)mouseY > yOffset + gridLineThickness * 0.5f && (float)mouseY < yOffset + gridHeight - gridLineThickness * 0.5f){
+		if(isLMB){
+			//Entity* const& entity = objPool->RetrieveInactiveObj();
+			//entity->RetrieveType() = EntityType::Block;
+			//entity->RetrievePos() = glm::vec3(xTranslate, yTranslate, 0.0f);
+		} else if(isRMB){
+			//grid.SetData(EntityType::Null, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
+		}
+	}
 }
 
 void SceneMovement::UpdateEntities(){

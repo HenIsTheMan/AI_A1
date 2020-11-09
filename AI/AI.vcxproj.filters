@@ -31,7 +31,9 @@
     <ClCompile Include="Source\SpriteAni.cpp">
       <Filter>Others\Geo</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Entity.cpp" />
+    <ClCompile Include="Source\Entity.cpp">
+      <Filter>Obj</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -70,13 +72,19 @@
     <ClInclude Include="Source\SpriteAni.h">
       <Filter>Others\Geo</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Entity.h" />
-    <ClInclude Include="Source\EntityAttribs.hpp" />
-    <ClInclude Include="Source\EntityType.hpp" />
     <ClInclude Include="Source\Grid.h">
       <Filter>Grid</Filter>
     </ClInclude>
     <ClInclude Include="Source\ObjPool.h">
+      <Filter>Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity.h">
+      <Filter>Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityAttribs.hpp">
+      <Filter>Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityType.hpp">
       <Filter>Obj</Filter>
     </ClInclude>
   </ItemGroup>

@@ -27,7 +27,8 @@ protected:
 	float dayNightBT;
 	ObjPool<Entity>* objPool;
 
-	void UpdateGrid();
+	void UpdateGridData();
+	void UpdateGridProperties();
 	void UpdateEntities();
 
 	void RenderGrid();
