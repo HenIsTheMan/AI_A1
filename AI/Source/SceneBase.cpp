@@ -83,20 +83,20 @@ SceneBase::SceneBase():
 	meshList[(int)GeoType::Orc] = MeshBuilder::GenerateSpriteAni("Orc", 21, 13);
 	meshList[(int)GeoType::Orc]->textureID = LoadImg("Imgs//Orc.png");
 
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleStaticUp", 0, 4);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleStaticDown", 0, 4);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleStaticLeft", 0, 4);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleStaticRight", 0, 4);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleMoveUp", 0, 4);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleMoveDown", 0, 4);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleMoveLeft", 0, 4);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleMoveRight", 0, 4);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleThrustUp", 0, 4);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleThrustDown", 0, 4);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleThrustLeft", 0, 4);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleThrustRight", 0, 4);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleHibernate", 0, 4);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleFacePlant", 0, 4);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleStaticUp", 4 * 13, 4 * 13 + 1);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleStaticDown", 6 * 13, 6 * 13 + 1);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleStaticLeft", 5 * 13, 5 * 13 + 1);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleStaticRight", 7 * 13, 7 * 13 + 1);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleMoveUp", 8 * 13, 8 * 13 + 9);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleMoveDown", 10 * 13, 10 * 13 + 9);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleMoveLeft", 9 * 13, 9 * 13 + 9);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleMoveRight", 11 * 13, 11 * 13 + 9);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleThrustUp", 4 * 13, 4 * 13 + 8);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleThrustDown", 6 * 13, 6 * 13 + 8);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleThrustLeft", 5 * 13, 5 * 13 + 8);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleThrustRight", 7 * 13, 7 * 13 + 8);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleHibernate", 20 * 13 + 4, 20 * 13 + 4 + 1);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->AddAni("SkeleFacePlant", 20 * 13 + 5, 20 * 13 + 5 + 1);
 	SkeleMove = [this](const std::string& aniName)->void{
 		static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->Play(aniName, -1, 2.0f);
 	};
