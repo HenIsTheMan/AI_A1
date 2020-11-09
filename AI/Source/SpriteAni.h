@@ -9,20 +9,16 @@ class Ani final{
 	friend class SpriteAni;
 private:
 	Ani():
-		active(false),
-		ended(false),
-		time(0.f),
-		repeatCount(0),
-		name(""),
-		frames({})
+		BT(0.0f),
+		delay(0.0f),
+		currFrameIndex(-1),
+		frames()
 	{
 	}
 
-	bool active;
-	bool ended;
-	float time;
-	int repeatCount;
-	std::string name;
+	float BT;
+	float delay;
+	int currFrameIndex;
 	std::vector<int> frames;
 };
 
@@ -32,21 +28,14 @@ public:
 	SpriteAni(const int& rows, const int& cols);
 	~SpriteAni();
 
-	void Play(const std::string& name, int repeat, float time);
-	void Pause();
-	void Resume();
-	void Reset();
-
+	void ActivateAni(const std::string& name, const float BT);
 	void AddAni(const std::string& name, const int& start, const int& end);
-	void AddSequenceAni(const std::string& name, const ::std::initializer_list<int>& frames);
-	void Update(float dt);
+	void Update(float elapsedTime);
 	void Render() const override;
 private:
-	float currTime;
-	int currFrame;
 	int rows;
 	int cols;
-	int playCount;
-	std::string currAni;
+
+	Ani* currAni;
 	std::unordered_map<std::string, Ani*> allAnis;
 };
