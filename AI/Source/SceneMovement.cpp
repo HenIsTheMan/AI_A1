@@ -52,7 +52,7 @@ void SceneMovement::Render(){
 	RenderEntities();
 	RenderTranslucentBlock();
 	RenderBG();
-	//RenderSceneText();
+	RenderSceneText();
 }
 
 void SceneMovement::UpdateGridProperties(){

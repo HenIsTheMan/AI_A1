@@ -110,12 +110,13 @@ void SceneBase::RenderText(Mesh* mesh, std::string text, Color color, TextAlignm
 	}
 	
 	glDisable(GL_DEPTH_TEST);
-	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 1);
-	glUniform3fv(im_parameters[(int)UniType::TEXT_COLOR], 1, &color.r);
-	glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE_ENABLED], 1);
+	glUniform1i(glGetUniformLocation(im_programID, "useTex"), 1);
+	glUniform1i(glGetUniformLocation(im_programID, "text"), 1);
+	glUniform3fv(glGetUniformLocation(im_programID, "textColour"), 1, &color.r);
+
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, mesh->textureID);
-	glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE], 0);
+	glUniform1i(glGetUniformLocation(im_programID, "tex"), 0);
 
 	float textWidth = 0.0f;
 	for(unsigned i = 0; i < text.length(); ++i){
@@ -142,21 +143,26 @@ void SceneBase::RenderText(Mesh* mesh, std::string text, Color color, TextAlignm
 		accum += (float)fontWidth[(unsigned)text[i]] / 64.0f;
 	}
 
+	glUniform1i(glGetUniformLocation(im_programID, "text"), 0);
+	glUniform1i(glGetUniformLocation(im_programID, "useTex"), 0);
+
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 0);
 	glEnable(GL_DEPTH_TEST);
 }
 
 void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y, TextAlignment alignment){
-	assert(mesh && mesh->textureID > 0);
+	if(!mesh || mesh->textureID <= 0){
+		return;
+	}
 
 	glDisable(GL_DEPTH_TEST);
-	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 1);
-	glUniform3fv(im_parameters[(int)UniType::TEXT_COLOR], 1, &color.r);
-	glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE_ENABLED], 1);
+	glUniform1i(glGetUniformLocation(im_programID, "useTex"), 1);
+	glUniform1i(glGetUniformLocation(im_programID, "text"), 1);
+	glUniform3fv(glGetUniformLocation(im_programID, "textColour"), 1, &color.r);
+
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, mesh->textureID);
-	glUniform1i(im_parameters[(int)UniType::COLOR_TEXTURE], 0);
+	glUniform1i(glGetUniformLocation(im_programID, "tex"), 0);
 
 	modelStack.PushMatrix();
 	modelStack.LoadIdentity();
@@ -199,8 +205,10 @@ void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, fl
 	viewStack.PopMatrix();
 	projectionStack.PopMatrix();
 
+	glUniform1i(glGetUniformLocation(im_programID, "text"), 0);
+	glUniform1i(glGetUniformLocation(im_programID, "useTex"), 0);
+
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 0);
 	glEnable(GL_DEPTH_TEST);
 }
 

@@ -127,12 +127,6 @@
     <None Include="Source\ObjPool.inl">
       <Filter>Obj</Filter>
     </None>
-    <None Include="Shaders\comg.fragmentshader">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Shaders\comg.vertexshader">
-      <Filter>Shaders</Filter>
-    </None>
     <None Include="Shaders\AI.fs">
       <Filter>Shaders</Filter>
     </None>
