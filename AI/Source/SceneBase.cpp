@@ -34,19 +34,15 @@ SceneBase::SceneBase():
 	glBindVertexArray(im_vertexArrayID);
 
 	im_parameters[(int)UniType::MVP] = glGetUniformLocation(im_programID, "MVP");
-	im_parameters[(int)UniType::MODELVIEW] = glGetUniformLocation(im_programID, "MV");
-	im_parameters[(int)UniType::MODELVIEW_INVERSE_TRANSPOSE] = glGetUniformLocation(im_programID, "MV_inverse_transpose");
-	im_parameters[(int)UniType::MATERIAL_AMBIENT] = glGetUniformLocation(im_programID, "material.kAmbient");
-	im_parameters[(int)UniType::MATERIAL_DIFFUSE] = glGetUniformLocation(im_programID, "material.kDiffuse");
-	im_parameters[(int)UniType::MATERIAL_SPECULAR] = glGetUniformLocation(im_programID, "material.kSpecular");
-	im_parameters[(int)UniType::MATERIAL_SHININESS] = glGetUniformLocation(im_programID, "material.kShininess");
-	im_parameters[(int)UniType::COLOR_TEXTURE_ENABLED] = glGetUniformLocation(im_programID, "colorTextureEnabled");
-	im_parameters[(int)UniType::COLOR_TEXTURE] = glGetUniformLocation(im_programID, "colorTexture");
-	im_parameters[(int)UniType::TEXT_ENABLED] = glGetUniformLocation(im_programID, "textEnabled");
-	im_parameters[(int)UniType::TEXT_COLOR] = glGetUniformLocation(im_programID, "textColor");
+	im_parameters[(int)UniType::Text] = glGetUniformLocation(im_programID, "text");
+	im_parameters[(int)UniType::UseTex] = glGetUniformLocation(im_programID, "useTex");
+	im_parameters[(int)UniType::UseCustom] = glGetUniformLocation(im_programID, "useCustom");
+	im_parameters[(int)UniType::MyAlpha] = glGetUniformLocation(im_programID, "myAlpha");
+	im_parameters[(int)UniType::Tex] = glGetUniformLocation(im_programID, "tex");
+	im_parameters[(int)UniType::TextColour] = glGetUniformLocation(im_programID, "textColour");
+	im_parameters[(int)UniType::MyColour] = glGetUniformLocation(im_programID, "myColour");
 
 	glUseProgram(im_programID);
-	glUniform1i(im_parameters[(int)UniType::TEXT_ENABLED], 0);
 
 	for(int i = 0; i < (int)GeoType::Amt; ++i){
 		meshList[i] = nullptr;
@@ -110,13 +106,13 @@ void SceneBase::RenderText(Mesh* mesh, std::string text, Color color, TextAlignm
 	}
 	
 	glDisable(GL_DEPTH_TEST);
-	glUniform1i(glGetUniformLocation(im_programID, "useTex"), 1);
-	glUniform1i(glGetUniformLocation(im_programID, "text"), 1);
-	glUniform3fv(glGetUniformLocation(im_programID, "textColour"), 1, &color.r);
+	glUniform1i(im_parameters[(int)UniType::UseTex], 1);
+	glUniform1i(im_parameters[(int)UniType::Text], 1);
+	glUniform3fv(im_parameters[(int)UniType::TextColour], 1, &color.r);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, mesh->textureID);
-	glUniform1i(glGetUniformLocation(im_programID, "tex"), 0);
+	glUniform1i(im_parameters[(int)UniType::Tex], 0);
 
 	float textWidth = 0.0f;
 	for(unsigned i = 0; i < text.length(); ++i){
@@ -143,8 +139,8 @@ void SceneBase::RenderText(Mesh* mesh, std::string text, Color color, TextAlignm
 		accum += (float)fontWidth[(unsigned)text[i]] / 64.0f;
 	}
 
-	glUniform1i(glGetUniformLocation(im_programID, "text"), 0);
-	glUniform1i(glGetUniformLocation(im_programID, "useTex"), 0);
+	glUniform1i(im_parameters[(int)UniType::Text], 0);
+	glUniform1i(im_parameters[(int)UniType::UseTex], 0);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glEnable(GL_DEPTH_TEST);
@@ -156,13 +152,13 @@ void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, fl
 	}
 
 	glDisable(GL_DEPTH_TEST);
-	glUniform1i(glGetUniformLocation(im_programID, "useTex"), 1);
-	glUniform1i(glGetUniformLocation(im_programID, "text"), 1);
-	glUniform3fv(glGetUniformLocation(im_programID, "textColour"), 1, &color.r);
+	glUniform1i(im_parameters[(int)UniType::UseTex], 1);
+	glUniform1i(im_parameters[(int)UniType::Text], 1);
+	glUniform3fv(im_parameters[(int)UniType::TextColour], 1, &color.r);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, mesh->textureID);
-	glUniform1i(glGetUniformLocation(im_programID, "tex"), 0);
+	glUniform1i(im_parameters[(int)UniType::Tex], 0);
 
 	modelStack.PushMatrix();
 	modelStack.LoadIdentity();
@@ -205,8 +201,8 @@ void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, fl
 	viewStack.PopMatrix();
 	projectionStack.PopMatrix();
 
-	glUniform1i(glGetUniformLocation(im_programID, "text"), 0);
-	glUniform1i(glGetUniformLocation(im_programID, "useTex"), 0);
+	glUniform1i(im_parameters[(int)UniType::Text], 0);
+	glUniform1i(im_parameters[(int)UniType::UseTex], 0);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glEnable(GL_DEPTH_TEST);
@@ -216,23 +212,23 @@ void SceneBase::RenderMesh(const Mesh* const& mesh, const bool& useCustom, const
 	Mtx44 MVP, modelView, modelView_inverse_transpose;
 	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
 
-	glUniformMatrix4fv(glGetUniformLocation(im_programID, "MVP"), 1, GL_FALSE, &MVP.a[0]);
-	glUniform1i(glGetUniformLocation(im_programID, "useCustom"), useCustom);
-	glUniform3fv(glGetUniformLocation(im_programID, "myColour"), 1, &colour.r);
-	glUniform1f(glGetUniformLocation(im_programID, "myAlpha"), alpha);
+	glUniformMatrix4fv(im_parameters[(int)UniType::MVP], 1, GL_FALSE, &MVP.a[0]);
+	glUniform1i(im_parameters[(int)UniType::UseCustom], useCustom);
+	glUniform3fv(im_parameters[(int)UniType::MyColour], 1, &colour.r);
+	glUniform1f(im_parameters[(int)UniType::MyAlpha], alpha);
 
 	if(mesh->textureID){
-		glUniform1i(glGetUniformLocation(im_programID, "useTex"), 1);
+		glUniform1i(im_parameters[(int)UniType::UseTex], 1);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
-		glUniform1i(glGetUniformLocation(im_programID, "tex"), 0);
+		glUniform1i(im_parameters[(int)UniType::Tex], 0);
 	}
 
 	mesh->Render();
 
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glUniform1i(glGetUniformLocation(im_programID, "useTex"), 0);
-	glUniform1i(glGetUniformLocation(im_programID, "useCustom"), 0);
+	glUniform1i(im_parameters[(int)UniType::UseTex], 0);
+	glUniform1i(im_parameters[(int)UniType::UseCustom], 0);
 }
 
 void SceneBase::Render(){

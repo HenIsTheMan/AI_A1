@@ -21,16 +21,13 @@ class SceneBase: public Scene{ //Abstract class
 public:
 	enum struct UniType: int{
 		MVP,
-		MODELVIEW,
-		MODELVIEW_INVERSE_TRANSPOSE,
-		MATERIAL_AMBIENT,
-		MATERIAL_DIFFUSE,
-		MATERIAL_SPECULAR,
-		MATERIAL_SHININESS,
-		COLOR_TEXTURE_ENABLED,
-		COLOR_TEXTURE,
-		TEXT_ENABLED,
-		TEXT_COLOR,
+		Text,
+		UseTex,
+		UseCustom,
+		MyAlpha,
+		Tex,
+		TextColour,
+		MyColour,
 		Amt
 	};
 	enum struct GeoType: int{
