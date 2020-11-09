@@ -295,8 +295,8 @@ void SceneMovement::RenderEntities(){
 		gridCellHeight,
 		1.0f
 	);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile])->ActivateAni("ReptileMoveDown", 0.1f);
-	RenderMesh(meshList[(int)GeoType::Reptile], false);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Boy])->ActivateAni("BoyMoveDown", 0.1f);
+	RenderMesh(meshList[(int)GeoType::Boy], false);
 
 	modelStack.PopMatrix();
 
@@ -307,8 +307,8 @@ void SceneMovement::RenderEntities(){
 		gridCellHeight,
 		1.0f
 	);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile])->ActivateAni("ReptileProcreate", 0.1f);
-	RenderMesh(meshList[(int)GeoType::Reptile], false);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Boy])->ActivateAni("BoyHeal", 0.1f);
+	RenderMesh(meshList[(int)GeoType::Boy], true, Color(0.0f, 1.0f, 0.0f), 1.0f);
 
 	modelStack.PopMatrix();
 
@@ -324,8 +324,8 @@ void SceneMovement::RenderEntities(){
 		gridCellHeight,
 		1.0f
 	);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile])->ActivateAni("ReptileShootDown", 0.1f);
-	RenderMesh(meshList[(int)GeoType::Reptile], false);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Boy])->ActivateAni("BoySlashDown", 0.1f);
+	RenderMesh(meshList[(int)GeoType::Boy], false);
 
 	modelStack.PopMatrix();
 

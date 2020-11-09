@@ -90,7 +90,7 @@ SceneBase::SceneBase():
 	skeleSpriteAni->AddAni("SkeleThrustDown", 6 * 13 + 2, 6 * 13 + 2 + 6);
 	skeleSpriteAni->AddAni("SkeleThrustLeft", 5 * 13 + 2, 5 * 13 + 2 + 6);
 	skeleSpriteAni->AddAni("SkeleThrustRight", 7 * 13 + 2, 7 * 13 + 2 + 6);
-	skeleSpriteAni->AddAni("SkeleHibernate", 20 * 13 + 4, 20 * 13 + 4 + 1);
+	skeleSpriteAni->AddAni("SkeleHibernate", 20 * 13, 20 * 13 + 1);
 	skeleSpriteAni->AddAni("SkeleFacePlant", 20 * 13 + 5, 20 * 13 + 5 + 1);
 
 	SpriteAni* const reptileSpriteAni = static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile]);
@@ -102,28 +102,28 @@ SceneBase::SceneBase():
 	reptileSpriteAni->AddAni("ReptileMoveDown", 10 * 13 + 1, 10 * 13 + 1 + 8);
 	reptileSpriteAni->AddAni("ReptileMoveLeft", 9 * 13 + 1, 9 * 13 + 1 + 8);
 	reptileSpriteAni->AddAni("ReptileMoveRight", 11 * 13 + 1, 11 * 13 + 1 + 8);
-	reptileSpriteAni->AddAni("ReptileShootUp", 16 * 13 + 4, 16 * 13 + 4 + 6);
-	reptileSpriteAni->AddAni("ReptileShootDown", 18 * 13 + 4, 18 * 13 + 4 + 6);
-	reptileSpriteAni->AddAni("ReptileShootLeft", 17 * 13 + 4, 17 * 13 + 4 + 6);
-	reptileSpriteAni->AddAni("ReptileShootRight", 19 * 13 + 4, 19 * 13 + 4 + 6);
-	reptileSpriteAni->AddAni("ReptileProcreate", 20 * 13 + 3, 20 * 13 + 3 + 1);
+	reptileSpriteAni->AddAni("ReptileShootUp", 16 * 13, 16 * 13 + 10);
+	reptileSpriteAni->AddAni("ReptileShootDown", 18 * 13, 18 * 13 + 10);
+	reptileSpriteAni->AddAni("ReptileShootLeft", 17 * 13, 17 * 13 + 10);
+	reptileSpriteAni->AddAni("ReptileShootRight", 19 * 13, 19 * 13 + 10);
+	reptileSpriteAni->AddAni("ReptileProcreate", 20 * 13, 20 * 13 + 1);
 	reptileSpriteAni->AddAni("ReptileFacePlant", 20 * 13 + 5, 20 * 13 + 5 + 1);
 
 	SpriteAni* const boySpriteAni = static_cast<SpriteAni*>(meshList[(int)GeoType::Boy]);
-	boySpriteAni->AddAni("BoyStaticUp", 0, 4);
-	boySpriteAni->AddAni("BoyStaticDown", 0, 4);
-	boySpriteAni->AddAni("BoyStaticLeft", 0, 4);
-	boySpriteAni->AddAni("BoyStaticRight", 0, 4);
-	boySpriteAni->AddAni("BoyMoveUp", 0, 4);
-	boySpriteAni->AddAni("BoyMoveDown", 0, 4);
-	boySpriteAni->AddAni("BoyMoveLeft", 0, 4);
-	boySpriteAni->AddAni("BoyMoveRight", 0, 4);
-	boySpriteAni->AddAni("BoySlashUp", 0, 4);
-	boySpriteAni->AddAni("BoySlashDown", 0, 4);
-	boySpriteAni->AddAni("BoySlashLeft", 0, 4);
-	boySpriteAni->AddAni("BoySlashRight", 0, 4);
-	boySpriteAni->AddAni("BoyHeal", 0, 4);
-	boySpriteAni->AddAni("BoyFacePlant", 0, 4);
+	boySpriteAni->AddAni("BoyStaticUp", 4 * 13, 4 * 13 + 1);
+	boySpriteAni->AddAni("BoyStaticDown", 6 * 13, 6 * 13 + 1);
+	boySpriteAni->AddAni("BoyStaticLeft", 5 * 13, 5 * 13 + 1);
+	boySpriteAni->AddAni("BoyStaticRight", 7 * 13, 7 * 13 + 1);
+	boySpriteAni->AddAni("BoyMoveUp", 8 * 13 + 1, 8 * 13 + 1 + 8);
+	boySpriteAni->AddAni("BoyMoveDown", 10 * 13 + 1, 10 * 13 + 1 + 8);
+	boySpriteAni->AddAni("BoyMoveLeft", 9 * 13 + 1, 9 * 13 + 1 + 8);
+	boySpriteAni->AddAni("BoyMoveRight", 11 * 13 + 1, 11 * 13 + 1 + 8);
+	boySpriteAni->AddAni("BoySlashUp", 12 * 13, 12 * 13 + 6);
+	boySpriteAni->AddAni("BoySlashDown", 14 * 13, 14 * 13 + 6);
+	boySpriteAni->AddAni("BoySlashLeft", 13 * 13, 13 * 13 + 6);
+	boySpriteAni->AddAni("BoySlashRight", 15 * 13, 15 * 13 + 6);
+	boySpriteAni->AddAni("BoyHeal", 20 * 13, 20 * 13 + 1);
+	boySpriteAni->AddAni("BoyFacePlant", 20 * 13 + 5, 20 * 13 + 5 + 1);
 
 	SpriteAni* const orcSpriteAni = static_cast<SpriteAni*>(meshList[(int)GeoType::Orc]);
 	orcSpriteAni->AddAni("OrcStaticUp", 0, 4);
