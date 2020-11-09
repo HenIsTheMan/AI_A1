@@ -48,6 +48,7 @@ void SceneMovement::Render(){
 
 	RenderGrid();
 	RenderGridBG();
+	RenderGridData();
 	RenderEntities();
 	RenderTranslucentBlock();
 	RenderBG();
@@ -174,11 +175,9 @@ void SceneMovement::UpdateGridData(){
 	if((float)mouseX > xOffset + gridLineThickness * 0.5f && (float)mouseX < xOffset + gridWidth - gridLineThickness * 0.5f
 		&& (float)mouseY > yOffset + gridLineThickness * 0.5f && (float)mouseY < yOffset + gridHeight - gridLineThickness * 0.5f){
 		if(isLMB){
-			//Entity* const& entity = objPool->RetrieveInactiveObj();
-			//entity->RetrieveType() = EntityType::Block;
-			//entity->RetrievePos() = glm::vec3(xTranslate, yTranslate, 0.0f);
+			grid.SetData(true, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
 		} else if(isRMB){
-			//grid.SetData(EntityType::Null, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
+			grid.SetData(false, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
 		}
 	}
 }
@@ -242,6 +241,36 @@ void SceneMovement::RenderGridBG(){
 	);
 	RenderMesh(meshList[(int)GeoType::GridBG], false);
 	modelStack.PopMatrix();
+}
+
+void SceneMovement::RenderGridData(){
+	const float gridWidth = grid.CalcWidth();
+	const float gridHeight = grid.CalcHeight();
+
+	const float xOffset = ((float)winWidth - gridWidth) * 0.5f + gridLineThickness + gridCellWidth * 0.5f;
+	const float yOffset = ((float)winHeight - gridHeight) * 0.5f + gridLineThickness + gridCellHeight * 0.5f;
+
+	const std::vector<std::vector<bool>>& gridData = grid.GetData();
+
+	for(int i = 0; i < gridRows; ++i){
+		for(int j = 0; j < gridCols; ++j){
+			if(gridData[i][j]){
+				modelStack.PushMatrix();
+				modelStack.Translate(
+					xOffset + (gridLineThickness + gridCellWidth) * (float)j,
+					yOffset + (gridLineThickness + gridCellHeight) * (float)i,
+					0.1f
+				);
+				modelStack.Scale(
+					gridCellWidth,
+					gridCellHeight,
+					1.0f
+				);
+				RenderMesh(meshList[(int)GeoType::Block], false);
+				modelStack.PopMatrix();
+			}
+		}
+	}
 }
 
 void SceneMovement::RenderEntities(){

@@ -33,6 +33,7 @@ protected:
 
 	void RenderGrid();
 	void RenderGridBG();
+	void RenderGridData();
 	void RenderEntities();
 	void RenderTranslucentBlock();
 	void RenderBG();
