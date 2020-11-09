@@ -199,6 +199,10 @@ void SceneBase::Update(double dt){
 
 	static_cast<SpriteAni*>(meshList[(int)GeoType::DayBG])->Update((float)dt);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::NightBG])->Update((float)dt);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->Update((float)dt);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile])->Update((float)dt);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Boy])->Update((float)dt);
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Orc])->Update((float)dt);
 }
 
 void SceneBase::RenderText(Mesh* mesh, std::string text, Color color, TextAlignment alignment){

@@ -274,6 +274,20 @@ void SceneMovement::RenderGridData(){
 }
 
 void SceneMovement::RenderEntities(){
+	modelStack.PushMatrix();
+	modelStack.Translate(
+		(float)winWidth * 0.5f,
+		(float)winHeight * 0.5f,
+		0.1f
+	);
+	modelStack.Scale(
+		gridCellWidth,
+		gridCellHeight,
+		1.0f
+	);
+	SkeleMove("SkeleMoveUp");
+	RenderMesh(meshList[(int)GeoType::Skele], false);
+	modelStack.PopMatrix();
 }
 
 void SceneMovement::RenderTranslucentBlock(){
