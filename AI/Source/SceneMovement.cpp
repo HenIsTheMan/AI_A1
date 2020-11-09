@@ -293,6 +293,22 @@ void SceneMovement::RenderEntities(){
 
 	modelStack.PushMatrix();
 	modelStack.Translate(
+		(float)winWidth * 0.5f,
+		(float)winHeight * 0.5f,
+		0.1f
+	);
+	modelStack.Scale(
+		gridCellWidth,
+		gridCellHeight,
+		1.0f
+	);
+
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->ActivateAni("SkeleFacePlant", 0.1f);
+	RenderMesh(meshList[(int)GeoType::Skele], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(
 		(float)winWidth * 0.5f + gridCellWidth + gridLineThickness,
 		(float)winHeight * 0.5f,
 		0.1f

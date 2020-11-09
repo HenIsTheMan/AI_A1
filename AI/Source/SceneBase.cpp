@@ -82,10 +82,10 @@ SceneBase::SceneBase():
 	skeleSpriteAni->AddAni("SkeleStaticDown", 6 * 13, 6 * 13 + 1);
 	skeleSpriteAni->AddAni("SkeleStaticLeft", 5 * 13, 5 * 13 + 1);
 	skeleSpriteAni->AddAni("SkeleStaticRight", 7 * 13, 7 * 13 + 1);
-	skeleSpriteAni->AddAni("SkeleMoveUp", 8 * 13, 8 * 13 + 9);
-	skeleSpriteAni->AddAni("SkeleMoveDown", 10 * 13, 10 * 13 + 9);
-	skeleSpriteAni->AddAni("SkeleMoveLeft", 9 * 13, 9 * 13 + 9);
-	skeleSpriteAni->AddAni("SkeleMoveRight", 11 * 13, 11 * 13 + 9);
+	skeleSpriteAni->AddAni("SkeleMoveUp", 8 * 13 + 1, 8 * 13 + 1 + 8);
+	skeleSpriteAni->AddAni("SkeleMoveDown", 10 * 13 + 1, 10 * 13 + 1 + 8);
+	skeleSpriteAni->AddAni("SkeleMoveLeft", 9 * 13 + 1, 9 * 13 + 1 + 8);
+	skeleSpriteAni->AddAni("SkeleMoveRight", 11 * 13 + 1, 11 * 13 + 1 + 8);
 	skeleSpriteAni->AddAni("SkeleThrustUp", 4 * 13, 4 * 13 + 8);
 	skeleSpriteAni->AddAni("SkeleThrustDown", 6 * 13, 6 * 13 + 8);
 	skeleSpriteAni->AddAni("SkeleThrustLeft", 5 * 13, 5 * 13 + 8);
