@@ -90,7 +90,7 @@ SceneBase::SceneBase():
 	skeleSpriteAni->AddAni("SkeleThrustDown", 6 * 13 + 2, 6 * 13 + 2 + 6);
 	skeleSpriteAni->AddAni("SkeleThrustLeft", 5 * 13 + 2, 5 * 13 + 2 + 6);
 	skeleSpriteAni->AddAni("SkeleThrustRight", 7 * 13 + 2, 7 * 13 + 2 + 6);
-	skeleSpriteAni->AddAni("SkeleHibernate", 20 * 13, 20 * 13 + 1);
+	skeleSpriteAni->AddAni("SkeleHibernate", 20 * 13 + 4, 20 * 13 + 4 + 1);
 	skeleSpriteAni->AddAni("SkeleFacePlant", 20 * 13 + 5, 20 * 13 + 5 + 1);
 
 	SpriteAni* const reptileSpriteAni = static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile]);
@@ -106,7 +106,7 @@ SceneBase::SceneBase():
 	reptileSpriteAni->AddAni("ReptileShootDown", 18 * 13, 18 * 13 + 10);
 	reptileSpriteAni->AddAni("ReptileShootLeft", 17 * 13, 17 * 13 + 10);
 	reptileSpriteAni->AddAni("ReptileShootRight", 19 * 13, 19 * 13 + 10);
-	reptileSpriteAni->AddAni("ReptileProcreate", 20 * 13, 20 * 13 + 1);
+	reptileSpriteAni->AddAni("ReptileProcreate", 20 * 13 + 3, 20 * 13 + 3 + 1);
 	reptileSpriteAni->AddAni("ReptileFacePlant", 20 * 13 + 5, 20 * 13 + 5 + 1);
 
 	SpriteAni* const boySpriteAni = static_cast<SpriteAni*>(meshList[(int)GeoType::Boy]);
@@ -126,20 +126,20 @@ SceneBase::SceneBase():
 	boySpriteAni->AddAni("BoyFacePlant", 20 * 13 + 5, 20 * 13 + 5 + 1);
 
 	SpriteAni* const orcSpriteAni = static_cast<SpriteAni*>(meshList[(int)GeoType::Orc]);
-	orcSpriteAni->AddAni("OrcStaticUp", 0, 4);
-	orcSpriteAni->AddAni("OrcStaticDown", 0, 4);
-	orcSpriteAni->AddAni("OrcStaticLeft", 0, 4);
-	orcSpriteAni->AddAni("OrcStaticRight", 0, 4);
-	orcSpriteAni->AddAni("OrcMoveUp", 0, 4);
-	orcSpriteAni->AddAni("OrcMoveDown", 0, 4);
-	orcSpriteAni->AddAni("OrcMoveLeft", 0, 4);
-	orcSpriteAni->AddAni("OrcMoveRight", 0, 4);
-	orcSpriteAni->AddAni("OrcSmackUp", 0, 4);
-	orcSpriteAni->AddAni("OrcSmackDown", 0, 4);
-	orcSpriteAni->AddAni("OrcSmackLeft", 0, 4);
-	orcSpriteAni->AddAni("OrcSmackRight", 0, 4);
-	orcSpriteAni->AddAni("OrcShield", 0, 4);
-	orcSpriteAni->AddAni("OrcFacePlant", 0, 4);
+	orcSpriteAni->AddAni("OrcStaticUp", 4 * 13, 4 * 13 + 1);
+	orcSpriteAni->AddAni("OrcStaticDown", 6 * 13, 6 * 13 + 1);
+	orcSpriteAni->AddAni("OrcStaticLeft", 5 * 13, 5 * 13 + 1);
+	orcSpriteAni->AddAni("OrcStaticRight", 7 * 13, 7 * 13 + 1);
+	orcSpriteAni->AddAni("OrcMoveUp", 8 * 13 + 1, 8 * 13 + 1 + 8);
+	orcSpriteAni->AddAni("OrcMoveDown", 10 * 13 + 1, 10 * 13 + 1 + 8);
+	orcSpriteAni->AddAni("OrcMoveLeft", 9 * 13 + 1, 9 * 13 + 1 + 8);
+	orcSpriteAni->AddAni("OrcMoveRight", 11 * 13 + 1, 11 * 13 + 1 + 8);
+	orcSpriteAni->AddAni("OrcSmackUp", 12 * 13, 12 * 13 + 6);
+	orcSpriteAni->AddAni("OrcSmackDown", 14 * 13, 14 * 13 + 6);
+	orcSpriteAni->AddAni("OrcSmackLeft", 13 * 13, 13 * 13 + 6);
+	orcSpriteAni->AddAni("OrcSmackRight", 15 * 13, 15 * 13 + 6);
+	orcSpriteAni->AddAni("OrcImmune", 6 * 13, 6 * 13 + 1);
+	orcSpriteAni->AddAni("OrcFacePlant", 20 * 13 + 5, 20 * 13 + 5 + 1);
 }
 
 SceneBase::~SceneBase(){
