@@ -286,8 +286,8 @@ void SceneMovement::RenderEntities(){
 		gridCellHeight,
 		1.0f
 	);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->Pause();
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->Play("SkeleStaticUp", -1, 2.0f);
+
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->ActivateAni("SkeleMoveDown", 0.1f);
 	RenderMesh(meshList[(int)GeoType::Skele], false);
 	modelStack.PopMatrix();
 
@@ -302,8 +302,8 @@ void SceneMovement::RenderEntities(){
 		gridCellHeight,
 		1.0f
 	);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->Pause();
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->Play("SkeleThrustDown", -1, 2.0f);
+
+	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->ActivateAni("SkeleThrustDown", 0.1f);
 	RenderMesh(meshList[(int)GeoType::Skele], false);
 	modelStack.PopMatrix();
 }

@@ -44,14 +44,19 @@ void SpriteAni::AddAni(const std::string& name, const int& start, const int& end
 }
 
 void SpriteAni::Update(float elapsedTime){
-	if(currAni){
-		if(currAni->BT <= elapsedTime){
-			if(currAni->currFrameIndex < 0 || currAni->currFrameIndex == currAni->frames.back()){
-				currAni->currFrameIndex = 0;
-			} else{
-				++currAni->currFrameIndex;
+	for(auto& element: allAnis){
+		Ani* const& ani = element.second;
+		if(ani){
+			if(ani->currFrameIndex < 0){
+				ani->currFrameIndex = 0;
+			} else if(ani->BT <= elapsedTime){
+				if(ani->currFrameIndex == ani->frames.size() - 1){
+					ani->currFrameIndex = 0;
+				} else{
+					++ani->currFrameIndex;
+				}
+				ani->BT = elapsedTime + ani->delay;
 			}
-			currAni->BT = elapsedTime + currAni->delay;
 		}
 	}
 }
