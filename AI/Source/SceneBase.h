@@ -37,6 +37,9 @@ public:
 		Text,
 		DayBG,
 		NightBG,
+		Block,
+		GridBG,
+		GridLine,
 		Amt
 	};
 

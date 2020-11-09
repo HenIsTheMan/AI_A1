@@ -191,22 +191,126 @@ void SceneMovement::UpdateEntities(){
 }
 
 void SceneMovement::RenderGrid(){
+	const float gridWidth = grid.CalcWidth();
+	const float gridHeight = grid.CalcHeight();
+
+	const float xOffset = ((float)winWidth - gridWidth) * 0.5f + gridLineThickness * 0.5f;
+	const float yOffset = ((float)winHeight - gridHeight) * 0.5f + gridLineThickness * 0.5f;
+
+	const int amtOfVertLines = grid.CalcAmtOfVertLines();
+	for(int i = 0; i < amtOfVertLines; ++i){
+		modelStack.PushMatrix();
+		modelStack.Translate(
+			xOffset + (gridCellWidth + gridLineThickness) * (float)i,
+			(float)winHeight * 0.5f,
+			0.0f
+		);
+		modelStack.Scale(
+			gridLineThickness,
+			gridHeight,
+			1.0f
+		);
+		RenderMesh(meshList[(int)GeoType::GridLine], false);
+		modelStack.PopMatrix();
+	}
+
+	const int amtOfHorizLines = grid.CalcAmtOfHorizLines();
+	for(int i = 0; i < amtOfHorizLines; ++i){
+		modelStack.PushMatrix();
+		modelStack.Translate(
+			(float)winWidth * 0.5f,
+			yOffset + (gridCellHeight + gridLineThickness) * (float)i,
+			0.0f
+		);
+		modelStack.Scale(
+			gridWidth,
+			gridLineThickness,
+			1.0f
+		);
+		RenderMesh(meshList[(int)GeoType::GridLine], false);
+		modelStack.PopMatrix();
+	}
 }
 
 void SceneMovement::RenderGridBG(){
+	modelStack.PushMatrix();
+	modelStack.Translate(
+		(float)winWidth * 0.5f,
+		(float)winHeight * 0.5f,
+		0.0f
+	);
+	modelStack.Scale(
+		grid.CalcWidth(),
+		grid.CalcHeight(),
+		1.0f
+	);
+	RenderMesh(meshList[(int)GeoType::GridBG], false);
+	modelStack.PopMatrix();
 }
 
 void SceneMovement::RenderEntities(){
 }
 
 void SceneMovement::RenderTranslucentBlock(){
+	double mouseX;
+	double mouseY;
+	App::GetCursorPos(&mouseX, &mouseY);
+
+	const float gridWidth = grid.CalcWidth();
+	const float gridHeight = grid.CalcHeight();
+
+	const float xOffset = ((float)winWidth - gridWidth) * 0.5f;
+	const float yOffset = ((float)winHeight - gridHeight) * 0.5f;
+
+	if((float)mouseX > xOffset + gridLineThickness * 0.5f && (float)mouseX < xOffset + gridWidth - gridLineThickness * 0.5f
+		&& (float)mouseY > yOffset + gridLineThickness * 0.5f && (float)mouseY < yOffset + gridHeight - gridLineThickness * 0.5f){
+		const float unitX = gridCellWidth + gridLineThickness;
+		const float unitY = gridCellHeight + gridLineThickness;
+
+		const float mouseRow = std::floor(((float)winHeight - (float)mouseY - yOffset - gridLineThickness * 0.5f) / unitY);
+		const float mouseCol = std::floor(((float)mouseX - xOffset - gridLineThickness * 0.5f) / unitX);
+		const float xTranslate = mouseCol * unitX
+			+ xOffset
+			+ gridCellWidth * 0.5f
+			+ gridLineThickness;
+		const float yTranslate = mouseRow * unitY
+			+ yOffset
+			+ gridCellHeight * 0.5f
+			+ gridLineThickness;
+
+		modelStack.PushMatrix();
+			modelStack.Translate(
+				xTranslate,
+				yTranslate,
+				0.1f
+			);
+			modelStack.Scale(
+				gridCellWidth,
+				gridCellHeight,
+				1.0f
+			);
+			RenderMesh(meshList[(int)GeoType::Block], false);
+		modelStack.PopMatrix();
+	}
 }
 
 void SceneMovement::RenderBG(){
 	modelStack.PushMatrix();
-		modelStack.Translate(im_Cam.pos.x + (float)winWidth * 0.5f, im_Cam.pos.y + (float)winHeight * 0.5f, 0.0f);
-		modelStack.Scale((float)winWidth, (float)winHeight, 1.0f);
-		RenderMesh(meshList[(int)GeoType::DayBG], false);
+		modelStack.Translate(
+			im_Cam.pos.x + (float)winWidth * 0.5f,
+			im_Cam.pos.y + (float)winHeight * 0.5f,
+			0.0f
+		);
+		modelStack.Scale(
+			(float)winWidth,
+			(float)winHeight,
+			1.0f
+		);
+		if(isDay){
+			RenderMesh(meshList[(int)GeoType::DayBG], false);
+		} else{
+			RenderMesh(meshList[(int)GeoType::NightBG], false);
+		}
 	modelStack.PopMatrix();
 }
 

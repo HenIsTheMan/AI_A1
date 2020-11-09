@@ -64,6 +64,11 @@ SceneBase::SceneBase():
 	static_cast<SpriteAni*>(meshList[(int)GeoType::DayBG])->Play("DayBG", -1, 1.0f);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::NightBG])->AddAni("NightBG", 0, 4);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::NightBG])->Play("NightBG", -1, 0.33f);
+
+	meshList[(int)GeoType::Block] = MeshBuilder::GenerateQuad("Block", Color(), 1.0f);
+	meshList[(int)GeoType::Block]->textureID = LoadImg("Imgs//Block.png");
+	meshList[(int)GeoType::GridBG] = MeshBuilder::GenerateQuad("GridBG", Color(0.2f, 0.2f, 0.2f), 1.0f);
+	meshList[(int)GeoType::GridLine] = MeshBuilder::GenerateQuad("GridLine", Color(0.6f, 0.6f, 0.6f), 1.0f);
 }
 
 SceneBase::~SceneBase(){
