@@ -2,6 +2,7 @@
 #define SCENE_BASE_H
 
 #include <assert.h>
+#include <functional>
 #include <vector>
 
 #include "Scene.h"
@@ -37,6 +38,10 @@ public:
 		Block,
 		GridBG,
 		GridLine,
+		Skele,
+		Reptile,
+		Boy,
+		Orc,
 		Amt
 	};
 
@@ -63,6 +68,15 @@ protected:
 	bool bLightEnabled;
 	float elapsedTime;
 	float FPS;
+
+	std::function<void(const std::string& aniName)> SkeleMove;
+	std::function<void(const std::string& aniName)> SkeleThrust;
+	std::function<void(const std::string& aniName)> ReptileMove;
+	std::function<void(const std::string& aniName)> ReptileShoot;
+	std::function<void(const std::string& aniName)> BoyMove;
+	std::function<void(const std::string& aniName)> BoySlash;
+	std::function<void(const std::string& aniName)> OrcMove;
+	std::function<void(const std::string& aniName)> OrcSmack;
 
 	SceneBase();
 };
