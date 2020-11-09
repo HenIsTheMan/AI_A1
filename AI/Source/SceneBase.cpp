@@ -21,7 +21,8 @@ SceneBase::SceneBase():
 	viewStack(MS()),
 	projectionStack(MS()),
 	bLightEnabled(false),
-	fps(0.0f)
+	elapsedTime(0.0f),
+	FPS(0.0f)
 {
 	glClearColor(1.f, 0.82f, 0.86f, 1.f);
 	glEnable(GL_DEPTH_TEST);
@@ -55,23 +56,6 @@ SceneBase::SceneBase():
 	meshList[(int)GeoType::TEXT]->textureID = LoadImg("Imgs//calibri.png");
 	meshList[(int)GeoType::TEXT]->material.kAmbient.Set(1, 0, 0);
 
-	meshList[(int)GeoType::FISHTOOFULL] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
-	meshList[(int)GeoType::FISHTOOFULL]->textureID = LoadImg("Imgs//toofull.tga");
-	meshList[(int)GeoType::FISHFULL] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
-	meshList[(int)GeoType::FISHFULL]->textureID = LoadImg("Imgs//full.tga");
-	meshList[(int)GeoType::FISHHUNGRY] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
-	meshList[(int)GeoType::FISHHUNGRY]->textureID = LoadImg("Imgs//hungry.tga");
-	meshList[(int)GeoType::FISHDEAD] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
-	meshList[(int)GeoType::FISHDEAD]->textureID = LoadImg("Imgs//dead.tga");
-	meshList[(int)GeoType::SHARKCRAZY] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
-	meshList[(int)GeoType::SHARKCRAZY]->textureID = LoadImg("Imgs//crazy.tga");
-	meshList[(int)GeoType::SHARKNAUGHTY] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
-	meshList[(int)GeoType::SHARKNAUGHTY]->textureID = LoadImg("Imgs//shark.tga");
-	meshList[(int)GeoType::SHARKHAPPY] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
-	meshList[(int)GeoType::SHARKHAPPY]->textureID = LoadImg("Imgs//happy.tga");
-	meshList[(int)GeoType::FISHFOOD] = MeshBuilder::GenerateQuad("noNeed", Color(1, 1, 1));
-	meshList[(int)GeoType::FISHFOOD]->textureID = LoadImg("Imgs//fishfood.tga");
-
 	meshList[(int)GeoType::DAY_BG] = MeshBuilder::GenerateSpriteAni("DayBG", 3, 5);
 	meshList[(int)GeoType::DAY_BG]->textureID = LoadImg("Imgs//DayBG.png");
 	meshList[(int)GeoType::NIGHT_BG] = MeshBuilder::GenerateSpriteAni("NightBG", 1, 5);
@@ -95,6 +79,9 @@ SceneBase::~SceneBase(){
 }
 
 void SceneBase::Update(double dt){
+	elapsedTime += (float)dt;
+	FPS = (float)(1.f / dt);
+
 	im_Cam.Update(dt);
 
 	static int polyMode = GL_FILL;
@@ -110,8 +97,6 @@ void SceneBase::Update(double dt){
 
 	static_cast<SpriteAni*>(meshList[(int)GeoType::DAY_BG])->Update((float)dt);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::NIGHT_BG])->Update((float)dt);
-	
-	fps = (float)(1.f / dt);
 }
 
 void SceneBase::RenderText(Mesh* mesh, std::string text, Color color, TextAlignment alignment){
@@ -239,4 +224,17 @@ void SceneBase::RenderMesh(Mesh *mesh, bool enableLight){
 
 void SceneBase::Render(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	modelStack.LoadIdentity();
+
+	viewStack.LoadIdentity();
+	viewStack.LookAt(
+		im_Cam.pos.x, im_Cam.pos.y, im_Cam.pos.z,
+		im_Cam.target.x, im_Cam.target.y, im_Cam.target.z,
+		im_Cam.up.x, im_Cam.up.y, im_Cam.up.z
+	);
+
+	Mtx44 projection;
+	projection.SetToOrtho(0.0f, (float)winWidth, 0.0f, (float)winHeight, -10.0f, 10.0f);
+	projectionStack.LoadMatrix(projection);
 }

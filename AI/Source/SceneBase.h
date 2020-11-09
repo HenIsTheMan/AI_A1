@@ -5,12 +5,10 @@
 #include <vector>
 
 #include "Scene.h"
-#include "Mtx44.h"
 #include "Cam.h"
 #include "Mesh.h"
 #include "MatrixStack.h"
 #include "Vertex.h"
-#include "GameObject.h"
 
 enum struct TextAlignment: int{
 	Left,
@@ -37,14 +35,6 @@ public:
 	};
 	enum struct GeoType: int{
 		TEXT,
-		FISHTOOFULL,
-		FISHFULL,
-		FISHHUNGRY,
-		FISHDEAD,
-		SHARKCRAZY,
-		SHARKNAUGHTY,
-		SHARKHAPPY,
-		FISHFOOD,
 		DAY_BG,
 		NIGHT_BG,
 		Amt
@@ -71,7 +61,8 @@ protected:
 	MS projectionStack;
 
 	bool bLightEnabled;
-	float fps;
+	float elapsedTime;
+	float FPS;
 
 	SceneBase();
 };

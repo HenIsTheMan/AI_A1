@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\App.cpp">
       <Filter>Others\App</Filter>
     </ClCompile>
@@ -23,18 +22,6 @@
     <ClCompile Include="Source\shader.cpp">
       <Filter>Others\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\State.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\StateMachine.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\StatesFish.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\StatesShark.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
     <ClCompile Include="Source\LoadImg.cpp">
       <Filter>Others\Graphics</Filter>
     </ClCompile>
@@ -47,7 +34,6 @@
     <ClCompile Include="Source\Entity.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\App.h">
       <Filter>Others\App</Filter>
     </ClInclude>
@@ -74,18 +60,6 @@
     </ClInclude>
     <ClInclude Include="Source\Material.h">
       <Filter>Others\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\State.h">
-      <Filter>State</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StateMachine.h">
-      <Filter>State</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StatesFish.h">
-      <Filter>State</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StatesShark.h">
-      <Filter>State</Filter>
     </ClInclude>
     <ClInclude Include="Source\Vertex.h">
       <Filter>Others\Geo</Filter>
