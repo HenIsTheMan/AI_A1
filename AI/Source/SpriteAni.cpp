@@ -122,7 +122,7 @@ void SpriteAni::ManualRender(const std::string& name, const float time, const fl
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 
 		int myAmtOfFrames = (int)myCurrAni->frames.size();
-		int myFrameIndex = std::max(0, (int(time / delay) + 1) % myAmtOfFrames - 1);
+		int myFrameIndex = int(time / delay) % myAmtOfFrames;
 		if(mode == DRAW_MODE::DRAW_LINES){
 			glDrawElements(GL_LINES, 6, GL_UNSIGNED_INT, (void*)(myCurrAni->frames[myFrameIndex] * 6 * sizeof(GLuint)));
 		} else if(mode == DRAW_MODE::DRAW_TRIANGLE_STRIP){
