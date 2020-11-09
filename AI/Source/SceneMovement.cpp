@@ -295,8 +295,7 @@ void SceneMovement::RenderEntities(){
 		gridCellHeight,
 		1.0f
 	);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Orc])->ActivateAni("OrcMoveDown", 0.1f);
-	RenderMesh(meshList[(int)GeoType::Orc], false);
+	ManualRenderMesh("OrcMoveDown", elapsedTime, 0.1f, meshList[(int)GeoType::Orc], false);
 
 	modelStack.PopMatrix();
 
@@ -307,8 +306,7 @@ void SceneMovement::RenderEntities(){
 		gridCellHeight,
 		1.0f
 	);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Orc])->ActivateAni("OrcImmune", 0.1f);
-	RenderMesh(meshList[(int)GeoType::Orc], true, Color(0.3f, 0.3f, 1.0f), 1.0f);
+	ManualRenderMesh("OrcImmune", elapsedTime, 0.1f, meshList[(int)GeoType::Orc], true, Color(0.3f, 0.3f, 1.0f), 1.0f);
 
 	modelStack.PopMatrix();
 
@@ -324,8 +322,7 @@ void SceneMovement::RenderEntities(){
 		gridCellHeight,
 		1.0f
 	);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Orc])->ActivateAni("OrcSmackDown", 0.1f);
-	RenderMesh(meshList[(int)GeoType::Orc], false);
+	ManualRenderMesh("OrcSmackDown", elapsedTime, 0.1f, meshList[(int)GeoType::Orc], false);
 
 	modelStack.PopMatrix();
 
@@ -451,6 +448,14 @@ void SceneMovement::RenderSceneText(){
 		textSize,
 		0.0f,
 		textSize * 4.0f
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"WASD: Move cam",
+		textColor,
+		textSize,
+		0.0f,
+		textSize * 5.0f
 	);
 	//RenderTextOnScreen(
 	//	textMesh,

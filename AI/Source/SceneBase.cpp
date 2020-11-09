@@ -173,10 +173,6 @@ void SceneBase::Update(double dt){
 
 	static_cast<SpriteAni*>(meshList[(int)GeoType::DayBG])->Update(elapsedTime);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::NightBG])->Update(elapsedTime);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Skele])->Update(elapsedTime);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Reptile])->Update(elapsedTime);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Boy])->Update(elapsedTime);
-	static_cast<SpriteAni*>(meshList[(int)GeoType::Orc])->Update(elapsedTime);
 }
 
 void SceneBase::RenderText(Mesh* mesh, std::string text, Color color, TextAlignment alignment){
@@ -304,6 +300,29 @@ void SceneBase::RenderMesh(const Mesh* const& mesh, const bool& useCustom, const
 	}
 
 	mesh->Render();
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glUniform1i(im_parameters[(int)UniType::UseTex], 0);
+	glUniform1i(im_parameters[(int)UniType::UseCustom], 0);
+}
+
+void SceneBase::ManualRenderMesh(const std::string& name, const float time, const float delay, Mesh* const& mesh, const bool& useCustom, const Color& colour, const float& alpha){
+	Mtx44 MVP, modelView, modelView_inverse_transpose;
+	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
+
+	glUniformMatrix4fv(im_parameters[(int)UniType::MVP], 1, GL_FALSE, &MVP.a[0]);
+	glUniform1i(im_parameters[(int)UniType::UseCustom], useCustom);
+	glUniform3fv(im_parameters[(int)UniType::MyColour], 1, &colour.r);
+	glUniform1f(im_parameters[(int)UniType::MyAlpha], alpha);
+
+	if(mesh->textureID){
+		glUniform1i(im_parameters[(int)UniType::UseTex], 1);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
+		glUniform1i(im_parameters[(int)UniType::Tex], 0);
+	}
+
+	static_cast<SpriteAni*>(mesh)->ManualRender(name, time, delay);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glUniform1i(im_parameters[(int)UniType::UseTex], 0);

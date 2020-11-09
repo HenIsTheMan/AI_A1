@@ -13,26 +13,30 @@ void Cam::Reset(){
 }
 
 void Cam::Update(double dt){
-	const float camSpd = 50.0f;
+	const float camSpd = 400.0f;
 
 	if(App::Key('R')){
 		return Reset();
 	}
 
+	Vector3 temp(0.0f);
 	if(App::Key('W')){
-		pos.y += camSpd * (float)dt;
-		target.y += camSpd * (float)dt;
+		temp.y += 1.0f;
 	}
 	if(App::Key('S')){
-		pos.y -= camSpd * (float)dt;
-		target.y -= camSpd * (float)dt;
+		temp.y -= 1.0f;
 	}
 	if(App::Key('D')){
-		pos.x += camSpd * (float)dt;
-		target.x += camSpd * (float)dt;
+		temp.x += 1.0f;
 	}
 	if(App::Key('A')){
-		pos.x -= camSpd * (float)dt;
-		target.x -= camSpd * (float)dt;
+		temp.x -= 1.0f;
+	}
+
+	const float dist = temp.Length();
+	if(dist > Math::EPSILON || -dist > Math::EPSILON){
+		const Vector3 tempNormalized = temp.Normalized();
+		pos += tempNormalized * camSpd * (float)dt;
+		target += tempNormalized * camSpd * (float)dt;
 	}
 }

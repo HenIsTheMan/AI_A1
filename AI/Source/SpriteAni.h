@@ -32,6 +32,7 @@ public:
 	void AddAni(const std::string& name, const int& start, const int& end);
 	void Update(float elapsedTime);
 	void Render() const override;
+	void ManualRender(const std::string& name, const float time, const float delay) const;
 private:
 	int rows;
 	int cols;

@@ -82,7 +82,6 @@ void SpriteAni::Render() const{
 			glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(Position) + sizeof(Color) + sizeof(Vector3)));
 		}
 
-		//glDrawArrays(GL_TRIANGLES, 0, 3);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 
 		if(mode == DRAW_MODE::DRAW_LINES){
@@ -91,6 +90,45 @@ void SpriteAni::Render() const{
 			glDrawElements(GL_TRIANGLE_STRIP, 6, GL_UNSIGNED_INT, (void*)(currAni->frames[currAni->currFrameIndex] * 6 * sizeof(GLuint)));
 		} else{
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)(currAni->frames[currAni->currFrameIndex] * 6 * sizeof(GLuint)));
+		}
+
+		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
+		glDisableVertexAttribArray(2);
+
+		if(textureID > 0){
+			glDisableVertexAttribArray(3);
+		}
+	}
+}
+
+void SpriteAni::ManualRender(const std::string& name, const float time, const float delay) const{
+	if(allAnis.find(name) != allAnis.end()){
+		Ani* const& myCurrAni = allAnis.at(name);
+
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+		glEnableVertexAttribArray(2);
+
+		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)sizeof(Position));
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(Position) + sizeof(Color)));
+		if(textureID > 0){
+			glEnableVertexAttribArray(3);
+			glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(Position) + sizeof(Color) + sizeof(Vector3)));
+		}
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+
+		int myAmtOfFrames = (int)myCurrAni->frames.size();
+		int myFrameIndex = std::max(0, (int(time / delay) + 1) % myAmtOfFrames - 1);
+		if(mode == DRAW_MODE::DRAW_LINES){
+			glDrawElements(GL_LINES, 6, GL_UNSIGNED_INT, (void*)(myCurrAni->frames[myFrameIndex] * 6 * sizeof(GLuint)));
+		} else if(mode == DRAW_MODE::DRAW_TRIANGLE_STRIP){
+			glDrawElements(GL_TRIANGLE_STRIP, 6, GL_UNSIGNED_INT, (void*)(myCurrAni->frames[myFrameIndex] * 6 * sizeof(GLuint)));
+		} else{
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)(myCurrAni->frames[myFrameIndex] * 6 * sizeof(GLuint)));
 		}
 
 		glDisableVertexAttribArray(0);
