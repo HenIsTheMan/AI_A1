@@ -120,6 +120,20 @@ void Scene::UpdateGridProperties(){
 	if(!isKeyDown8 && App::Key('8')){
 		if(gridRows > gridMinRows){
 			--gridRows;
+
+			///??
+			std::vector<std::pair<bool, Entity*>>& entityPool = objPool->RetrievePool();
+			const size_t& entityPoolSize = entityPool.size();
+
+			for(size_t i = 0; i < entityPoolSize; ++i){
+				std::pair<bool, Entity*>& element = entityPool[i];
+
+				if(element.first){
+					if(element.second->GetLocalPos().y >= gridRows){
+						element.first = false;
+					}
+				}
+			}
 		}
 		isKeyDown8 = true;
 	} else if(isKeyDown8 && !App::Key('8')){
@@ -136,6 +150,20 @@ void Scene::UpdateGridProperties(){
 	if(!isKeyDown0 && App::Key('0')){
 		if(gridCols > gridMinCols){
 			--gridCols;
+
+			///??
+			std::vector<std::pair<bool, Entity*>>& entityPool = objPool->RetrievePool();
+			const size_t& entityPoolSize = entityPool.size();
+
+			for(size_t i = 0; i < entityPoolSize; ++i){
+				std::pair<bool, Entity*>& element = entityPool[i];
+
+				if(element.first){
+					if(element.second->GetLocalPos().x >= gridCols){
+						element.first = false;
+					}
+				}
+			}
 		}
 		isKeyDown0 = true;
 	} else if(isKeyDown0 && !App::Key('0')){
@@ -206,6 +234,15 @@ void Scene::UpdateEntities(){
 		orc->SetLocalPos(2.0f, 1.0f, 0.0f);
 		orc->SetLocalScale(1.0f, 1.0f, 1.0f);
 		++control;
+	}
+
+	std::vector<std::pair<bool, Entity*>>& entityPool = objPool->RetrievePool();
+	const size_t& entityPoolSize = entityPool.size();
+
+	for(size_t i = 0; i < entityPoolSize; ++i){
+		if(entityPool[i].first){
+			const Entity* const& entity = entityPool[i].second;
+		}
 	}
 }
 
@@ -298,7 +335,7 @@ void Scene::RenderGridData(){
 }
 
 void Scene::RenderEntities(){
-	const std::vector<std::pair<bool, Entity*>>& entityPool = objPool->GetObjPool();
+	const std::vector<std::pair<bool, Entity*>>& entityPool = objPool->GetPool();
 	const size_t& entityPoolSize = entityPool.size();
 
 	const float gridWidth = grid.CalcWidth();

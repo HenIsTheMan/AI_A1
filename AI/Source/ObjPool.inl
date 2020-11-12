@@ -17,11 +17,6 @@ ObjPool<T>::~ObjPool(){
 }
 
 template <class T>
-const std::vector<std::pair<bool, T*>>& ObjPool<T>::GetObjPool() const{
-	return im_ObjPool;
-}
-
-template <class T>
 T* ObjPool<T>::RetrieveInactiveObj(){
 	const size_t poolSize = im_ObjPool.size();
 	for(size_t i = 0; i < poolSize; ++i){
@@ -43,4 +38,14 @@ void ObjPool<T>::CreateObjs(int amt){
 	for(int i = 0; i < amt; ++i){
 		im_ObjPool[i] = std::make_pair(false, new T());
 	}
+}
+
+template <class T>
+std::vector<std::pair<bool, T*>>& ObjPool<T>::RetrievePool(){
+	return im_ObjPool;
+}
+
+template <class T>
+const std::vector<std::pair<bool, T*>>& ObjPool<T>::GetPool() const{
+	return im_ObjPool;
 }
