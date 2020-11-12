@@ -11,11 +11,15 @@ extern int winHeight;
 using Entity = Obj::Entity<Vector3>;
 
 Scene::Scene():
-	gridCellWidth(80.0f),
-	gridCellHeight(80.0f),
-	gridLineThickness(10.0f),
-	gridRows(5),
-	gridCols(5),
+	gridCellWidth(40.0f),
+	gridCellHeight(40.0f),
+	gridLineThickness(3.0f),
+	gridRows(20),
+	gridCols(20),
+	gridMinRows(1),
+	gridMinCols(1),
+	gridMaxRows(30),
+	gridMaxCols(30),
 	grid(Grid<float>(0.0f, 0.0f, 0.0f, 0, 0)),
 	isDay(false),
 	dayNightBT(0.0f),
@@ -106,25 +110,33 @@ void Scene::UpdateGridProperties(){
 		isKeyDown6 = false;
 	}
 	if(!isKeyDown7 && App::Key('7')){
-		++gridRows;
+		if(gridRows < gridMaxRows){
+			++gridRows;
+		}
 		isKeyDown7 = true;
 	} else if(isKeyDown7 && !App::Key('7')){
 		isKeyDown7 = false;
 	}
 	if(!isKeyDown8 && App::Key('8')){
-		--gridRows;
+		if(gridRows > gridMinRows){
+			--gridRows;
+		}
 		isKeyDown8 = true;
 	} else if(isKeyDown8 && !App::Key('8')){
 		isKeyDown8 = false;
 	}
 	if(!isKeyDown9 && App::Key('9')){
-		++gridCols;
+		if(gridCols < gridMaxCols){
+			++gridCols;
+		}
 		isKeyDown9 = true;
 	} else if(isKeyDown9 && !App::Key('9')){
 		isKeyDown9 = false;
 	}
 	if(!isKeyDown0 && App::Key('0')){
-		--gridCols;
+		if(gridCols > gridMinCols){
+			--gridCols;
+		}
 		isKeyDown0 = true;
 	} else if(isKeyDown0 && !App::Key('0')){
 		isKeyDown0 = false;

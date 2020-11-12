@@ -25,6 +25,10 @@ protected:
 	float gridLineThickness;
 	int gridRows;
 	int gridCols;
+	int gridMinRows;
+	int gridMinCols;
+	int gridMaxRows;
+	int gridMaxCols;
 	Grid<float> grid;
 
 	bool isDay;
