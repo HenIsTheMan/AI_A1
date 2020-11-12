@@ -138,9 +138,9 @@
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\PostOffice.cpp" />
-    <ClCompile Include="Source\SceneBase.cpp" />
+    <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\SceneData.cpp" />
-    <ClCompile Include="Source\SceneMovement.cpp" />
+    <ClCompile Include="Source\SceneSupport.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\SpriteAni.cpp" />
     <ClCompile Include="Source\State.cpp" />
@@ -169,9 +169,9 @@
     <ClInclude Include="Source\PostOffice.h" />
     <ClInclude Include="Source\Publisher.h" />
     <ClInclude Include="Source\IScene.hpp" />
-    <ClInclude Include="Source\SceneBase.h" />
+    <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneData.h" />
-    <ClInclude Include="Source\SceneMovement.h" />
+    <ClInclude Include="Source\SceneSupport.h" />
     <ClInclude Include="Source\shader.h" />
     <ClInclude Include="Source\SpriteAni.h" />
     <ClInclude Include="Source\State.h" />

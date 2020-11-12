@@ -1,4 +1,4 @@
-#include "SceneBase.h"
+#include "SceneSupport.h"
 #include "GL\glew.h"
 
 #include "shader.h"
@@ -11,7 +11,7 @@ extern int winHeight;
 
 static const int fontWidth[] = { 0,26,26,26,26,26,26,26,26,26,26,26,26,0,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,12,17,21,26,26,37,35,11,16,16,26,26,13,16,13,20,26,26,26,26,26,26,26,26,26,26,14,14,26,26,26,24,46,30,28,28,32,25,24,33,32,13,17,27,22,44,34,34,27,35,28,24,25,33,30,46,27,25,24,16,20,16,26,26,15,25,27,22,27,26,16,24,27,12,12,24,12,42,27,27,27,27,18,20,17,27,23,37,23,24,21,16,24,16,26,26,26,26,13,16,22,36,26,26,21,54,24,18,45,26,24,26,26,13,13,22,22,26,26,47,23,37,20,18,44,26,21,25,12,17,26,26,26,26,26,26,20,43,21,27,26,16,26,20,18,26,17,17,15,29,30,13,16,13,22,27,33,35,35,24,30,30,30,30,30,30,40,28,25,25,25,25,13,13,13,13,32,34,34,34,34,34,34,26,35,33,33,33,33,25,27,27,25,25,25,25,25,25,40,22,26,26,26,26,12,12,12,12,27,27,27,27,27,27,27,26,28,27,27,27,27,24,27,24 };
 
-SceneBase::SceneBase():
+SceneSupport::SceneSupport():
 	im_parameters(),
 	meshList(),
 	im_vertexArrayID(0),
@@ -142,7 +142,7 @@ SceneBase::SceneBase():
 	orcSpriteAni->AddAni("OrcFacePlant", 20 * 13 + 5, 20 * 13 + 5 + 1);
 }
 
-SceneBase::~SceneBase(){
+SceneSupport::~SceneSupport(){
 	for(int i = 0; i < (int)GeoType::Amt; ++i){
 		if(meshList[i]){
 			delete meshList[i];
@@ -154,7 +154,7 @@ SceneBase::~SceneBase(){
 	glDeleteVertexArrays(1, &im_vertexArrayID);
 }
 
-void SceneBase::Update(double dt){
+void SceneSupport::Update(double dt){
 	elapsedTime += (float)dt;
 	FPS = (float)(1.f / dt);
 
@@ -175,7 +175,7 @@ void SceneBase::Update(double dt){
 	static_cast<SpriteAni*>(meshList[(int)GeoType::NightBG])->Update(elapsedTime);
 }
 
-void SceneBase::RenderText(Mesh* mesh, std::string text, Color color, TextAlignment alignment){
+void SceneSupport::RenderText(Mesh* mesh, std::string text, Color color, TextAlignment alignment){
 	if(!mesh || mesh->textureID <= 0){
 		return;
 	}
@@ -221,7 +221,7 @@ void SceneBase::RenderText(Mesh* mesh, std::string text, Color color, TextAlignm
 	glEnable(GL_DEPTH_TEST);
 }
 
-void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y, TextAlignment alignment){
+void SceneSupport::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y, TextAlignment alignment){
 	if(!mesh || mesh->textureID <= 0){
 		return;
 	}
@@ -283,7 +283,7 @@ void SceneBase::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, fl
 	glEnable(GL_DEPTH_TEST);
 }
 
-void SceneBase::RenderMesh(const Mesh* const& mesh, const bool& useCustom, const Color& colour, const float& alpha){
+void SceneSupport::RenderMesh(const Mesh* const& mesh, const bool& useCustom, const Color& colour, const float& alpha){
 	Mtx44 MVP, modelView, modelView_inverse_transpose;
 	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
 
@@ -306,7 +306,7 @@ void SceneBase::RenderMesh(const Mesh* const& mesh, const bool& useCustom, const
 	glUniform1i(im_parameters[(int)UniType::UseCustom], 0);
 }
 
-void SceneBase::ManualRenderMesh(const std::string& name, const float time, const float delay, Mesh* const& mesh, const bool& useCustom, const Color& colour, const float& alpha){
+void SceneSupport::ManualRenderMesh(const std::string& name, const float time, const float delay, Mesh* const& mesh, const bool& useCustom, const Color& colour, const float& alpha){
 	Mtx44 MVP, modelView, modelView_inverse_transpose;
 	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
 
@@ -329,7 +329,7 @@ void SceneBase::ManualRenderMesh(const std::string& name, const float time, cons
 	glUniform1i(im_parameters[(int)UniType::UseCustom], 0);
 }
 
-void SceneBase::Render(){
+void SceneSupport::Render(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	modelStack.LoadIdentity();

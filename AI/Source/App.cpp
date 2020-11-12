@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "SceneMovement.h"
+#include "Scene.h"
 
 GLFWwindow* im_window;
 const unsigned char FPS = 60; // FPS of this game
@@ -89,7 +89,7 @@ void App::Init(){
 }
 
 void App::Run(){
-	IScene* scene = new SceneMovement();
+	IScene* scene = new Scene();
 
 	static bool isTab = false;
 	static bool isF1 = false;

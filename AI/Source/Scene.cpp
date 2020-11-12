@@ -1,6 +1,6 @@
 #include <map>
 
-#include "SceneMovement.h"
+#include "Scene.h"
 #include "GL\glew.h"
 #include "App.h"
 #include "SpriteAni.h"
@@ -10,7 +10,7 @@ extern int winHeight;
 
 using Entity = Obj::Entity<Vector3>;
 
-SceneMovement::SceneMovement():
+Scene::Scene():
 	gridCellWidth(80.0f),
 	gridCellHeight(80.0f),
 	gridLineThickness(10.0f),
@@ -26,15 +26,15 @@ SceneMovement::SceneMovement():
 	objPool->CreateObjs(10000);
 }
 
-SceneMovement::~SceneMovement(){
+Scene::~Scene(){
 	if(objPool){
 		delete objPool;
 		objPool = nullptr;
 	}
 }
 
-void SceneMovement::Update(double dt){
-	SceneBase::Update(dt);
+void Scene::Update(double dt){
+	SceneSupport::Update(dt);
 
 	if(dayNightBT <= elapsedTime){
 		isDay = !isDay;
@@ -46,8 +46,8 @@ void SceneMovement::Update(double dt){
 	UpdateEntities();
 }
 
-void SceneMovement::Render(){
-	SceneBase::Render();
+void Scene::Render(){
+	SceneSupport::Render();
 
 	RenderGrid();
 	RenderGridBG();
@@ -58,7 +58,7 @@ void SceneMovement::Render(){
 	RenderSceneText();
 }
 
-void SceneMovement::UpdateGridProperties(){
+void Scene::UpdateGridProperties(){
 	static bool isKeyDown1 = false;
 	static bool isKeyDown2 = false;
 	static bool isKeyDown3 = false;
@@ -137,7 +137,7 @@ void SceneMovement::UpdateGridProperties(){
 	grid.SetCols(gridCols);
 }
 
-void SceneMovement::UpdateGridData(){
+void Scene::UpdateGridData(){
 	static bool isLMB = false;
 	if(!isLMB && App::IsMousePressed(0)){
 		isLMB = true;
@@ -185,7 +185,7 @@ void SceneMovement::UpdateGridData(){
 	}
 }
 
-void SceneMovement::UpdateEntities(){
+void Scene::UpdateEntities(){
 	static int control = 0;
 
 	if(control != 1){
@@ -197,7 +197,7 @@ void SceneMovement::UpdateEntities(){
 	}
 }
 
-void SceneMovement::RenderGrid(){
+void Scene::RenderGrid(){
 	const float gridWidth = grid.CalcWidth();
 	const float gridHeight = grid.CalcHeight();
 
@@ -239,7 +239,7 @@ void SceneMovement::RenderGrid(){
 	}
 }
 
-void SceneMovement::RenderGridBG(){
+void Scene::RenderGridBG(){
 	modelStack.PushMatrix();
 	modelStack.Translate(
 		(float)winWidth * 0.5f,
@@ -255,7 +255,7 @@ void SceneMovement::RenderGridBG(){
 	modelStack.PopMatrix();
 }
 
-void SceneMovement::RenderGridData(){
+void Scene::RenderGridData(){
 	const float gridWidth = grid.CalcWidth();
 	const float gridHeight = grid.CalcHeight();
 
@@ -285,7 +285,7 @@ void SceneMovement::RenderGridData(){
 	}
 }
 
-void SceneMovement::RenderEntities(){
+void Scene::RenderEntities(){
 	const std::vector<std::pair<bool, Entity*>>& entityPool = objPool->GetObjPool();
 	const size_t& entityPoolSize = entityPool.size();
 
@@ -334,7 +334,7 @@ void SceneMovement::RenderEntities(){
 	}
 }
 
-void SceneMovement::RenderTranslucentBlock(){
+void Scene::RenderTranslucentBlock(){
 	double mouseX;
 	double mouseY;
 	App::GetCursorPos(&mouseX, &mouseY);
@@ -377,7 +377,7 @@ void SceneMovement::RenderTranslucentBlock(){
 	}
 }
 
-void SceneMovement::RenderBG(){
+void Scene::RenderBG(){
 	modelStack.PushMatrix();
 		modelStack.Translate(
 			im_Cam.pos.x + (float)winWidth * 0.5f,
@@ -397,7 +397,7 @@ void SceneMovement::RenderBG(){
 	modelStack.PopMatrix();
 }
 
-void SceneMovement::RenderSceneText(){
+void Scene::RenderSceneText(){
 	static Mesh* textMesh = meshList[(int)GeoType::Text];
 	static Color textColor = Color();
 	static float textSize = 0.0f;

@@ -7,12 +7,6 @@
     <ClCompile Include="Source\Cam.cpp">
       <Filter>Others\Cam</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SceneBase.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SceneMovement.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Mesh.cpp">
       <Filter>Others\Geo</Filter>
     </ClCompile>
@@ -52,6 +46,12 @@
     <ClCompile Include="Source\StatesShark.cpp">
       <Filter>State</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneSupport.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -59,12 +59,6 @@
     </ClInclude>
     <ClInclude Include="Source\Cam.h">
       <Filter>Others\Cam</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SceneBase.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SceneMovement.h">
-      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Source\Mesh.h">
       <Filter>Others\Geo</Filter>
@@ -142,6 +136,12 @@
       <Filter>State</Filter>
     </ClInclude>
     <ClInclude Include="Source\IScene.hpp">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneSupport.h">
       <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>

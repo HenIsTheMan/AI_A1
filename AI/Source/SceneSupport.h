@@ -1,6 +1,4 @@
-#ifndef SCENE_BASE_H
-#define SCENE_BASE_H
-
+#pragma once
 #include <assert.h>
 #include <vector>
 
@@ -17,7 +15,7 @@ enum struct TextAlignment: int{
 	Amt
 };
 
-class SceneBase: public IScene{ //Abstract class
+class SceneSupport: public IScene{ //Abstract class
 public:
 	enum struct UniType: int{
 		MVP,
@@ -44,7 +42,7 @@ public:
 		Amt
 	};
 
-	virtual ~SceneBase();
+	virtual ~SceneSupport();
 
 	virtual void Update(double dt) override;
 	virtual void Render() override;
@@ -70,7 +68,5 @@ protected:
 	float elapsedTime;
 	float FPS;
 
-	SceneBase();
+	SceneSupport();
 };
-
-#endif

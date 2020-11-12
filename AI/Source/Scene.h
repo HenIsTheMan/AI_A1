@@ -1,5 +1,4 @@
-#ifndef SCENE_MOVEMENT_H
-#define SCENE_MOVEMENT_H
+#pragma once
 
 #include <vector>
 
@@ -8,15 +7,15 @@
 	#define ENTITY_T_IS_VEC3
 #endif
 
-#include "SceneBase.h"
+#include "SceneSupport.h"
 #include "Entity.h"
 #include "Grid.h"
 #include "ObjPool.h"
 
-class SceneMovement final: public SceneBase{
+class Scene final: public SceneSupport{
 public:
-	SceneMovement();
-	~SceneMovement();
+	Scene();
+	~Scene();
 
 	void Update(double dt) override;
 	void Render() override;
@@ -44,5 +43,3 @@ protected:
 	void RenderBG();
 	void RenderSceneText();
 };
-
-#endif
