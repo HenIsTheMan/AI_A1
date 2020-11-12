@@ -4,8 +4,14 @@
 
 #include "EntityType.hpp"
 
-struct EntityAttribs final{
-	EntityType im_Type = EntityType::Null;
-	Vector3 im_LocalPos = Vector3();
-	Vector3 im_LocalScale = Vector3();
-};
+namespace Obj{
+	template <class T>
+	struct EntityAttribs final{
+		EntityAttribs<T>() = default;
+		~EntityAttribs<T>() = default;
+
+		EntityType im_Type = EntityType::Null;
+		T im_LocalPos = T();
+		T im_LocalScale = T();
+	};
+}

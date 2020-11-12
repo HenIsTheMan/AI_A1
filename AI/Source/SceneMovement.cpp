@@ -8,6 +8,8 @@
 extern int winWidth;
 extern int winHeight;
 
+using Entity = Obj::Entity<Vector3>;
+
 SceneMovement::SceneMovement():
 	gridCellWidth(80.0f),
 	gridCellHeight(80.0f),
@@ -17,7 +19,7 @@ SceneMovement::SceneMovement():
 	grid(Grid<float>(0.0f, 0.0f, 0.0f, 0, 0)),
 	isDay(false),
 	dayNightBT(0.0f),
-	objPool(new ObjPool<Entity>())
+	objPool(new ObjPool<::Entity>())
 {
 	Math::InitRNG();
 
@@ -187,8 +189,8 @@ void SceneMovement::UpdateEntities(){
 	static int control = 0;
 
 	if(control != 1){
-		Entity* orc = objPool->RetrieveInactiveObj();
-		orc->SetType(EntityType::Orc);
+		::Entity* orc = objPool->RetrieveInactiveObj();
+		orc->SetType(Obj::EntityType::Orc);
 		orc->SetLocalPos(2.0f, 1.0f, 0.0f);
 		orc->SetLocalScale(1.0f, 1.0f, 1.0f);
 		++control;
@@ -284,7 +286,7 @@ void SceneMovement::RenderGridData(){
 }
 
 void SceneMovement::RenderEntities(){
-	const std::vector<std::pair<bool, Entity*>>& entityPool = objPool->GetObjPool();
+	const std::vector<std::pair<bool, ::Entity*>>& entityPool = objPool->GetObjPool();
 	const size_t& entityPoolSize = entityPool.size();
 
 	const float gridWidth = grid.CalcWidth();
@@ -295,7 +297,7 @@ void SceneMovement::RenderEntities(){
 
 	for(size_t i = 0; i < entityPoolSize; ++i){
 		if(entityPool[i].first){
-			const Entity* const& entity = entityPool[i].second;
+			const ::Entity* const& entity = entityPool[i].second;
 
 			const Vector3& entityLocalPos = entity->GetLocalPos();
 			const Vector3& entityLocalScale = entity->GetLocalScale();

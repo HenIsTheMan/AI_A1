@@ -2,26 +2,34 @@
 
 #include "EntityAttribs.hpp"
 
-class Entity final{
-public:
-	Entity();
-	Entity(const EntityAttribs& attribs);
-	~Entity() = default;
+namespace Obj{
+	template <class T>
+	class Entity final{
+	public:
+		Entity<T>();
+		Entity<T>(const EntityAttribs<T>& attribs);
+		~Entity<T>() = default;
 
-	Vector3& RetrieveLocalPos();
-	Vector3& RetrieveLocalScale();
+		T& RetrieveLocalPos();
+		T& RetrieveLocalScale();
 
-	///Getters
-	const EntityType& GetType() const;
-	const Vector3& GetLocalPos() const;
-	const Vector3& GetLocalScale() const;
+		///Getters
+		const EntityType& GetType() const;
+		const T& GetLocalPos() const;
+		const T& GetLocalScale() const;
 
-	///Setters
-	void SetType(const EntityType type);
-	void SetLocalPos(const Vector3& pos);
-	void SetLocalPos(const float x, const float y, const float z);
-	void SetLocalScale(const Vector3& scale);
-	void SetLocalScale(const float x, const float y, const float z);
-private:
-	EntityAttribs im_Attribs;
-};
+		///Setters
+		void SetType(const EntityType type);
+		void SetLocalPos(const T& localPos);
+		void SetLocalScale(const T& localScale);
+
+		#if defined ENTITY_T_IS_VEC3
+		void SetLocalPos(const float x, const float y, const float z);
+		void SetLocalScale(const float x, const float y, const float z);
+		#endif
+	private:
+		EntityAttribs<T> im_Attribs;
+	};
+}
+
+#include "Entity.inl"

@@ -3,6 +3,11 @@
 
 #include <vector>
 
+///Shld be done in client's PCH
+#ifndef ENTITY_T_IS_VEC3
+	#define ENTITY_T_IS_VEC3
+#endif
+
 #include "SceneBase.h"
 #include "Entity.h"
 #include "Grid.h"
@@ -25,7 +30,7 @@ protected:
 
 	bool isDay;
 	float dayNightBT;
-	ObjPool<Entity>* objPool;
+	ObjPool<Obj::Entity<Vector3>>* objPool;
 
 	void UpdateGridData();
 	void UpdateGridProperties();
