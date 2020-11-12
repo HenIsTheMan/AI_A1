@@ -137,28 +137,48 @@
     <ClCompile Include="Source\EntryPt.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
+    <ClCompile Include="Source\PostOffice.cpp" />
     <ClCompile Include="Source\SceneBase.cpp" />
+    <ClCompile Include="Source\SceneData.cpp" />
     <ClCompile Include="Source\SceneMovement.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\SpriteAni.cpp" />
+    <ClCompile Include="Source\State.cpp" />
+    <ClCompile Include="Source\StateMachine.cpp" />
+    <ClCompile Include="Source\StatesFish.cpp" />
+    <ClCompile Include="Source\StatesFishFood.cpp" />
+    <ClCompile Include="Source\StatesShark.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
     <ClInclude Include="Source\Cam.h" />
+    <ClInclude Include="Source\ConcreteMessages.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityAttribs.hpp" />
     <ClInclude Include="Source\EntityType.hpp" />
     <ClInclude Include="Source\Grid.h" />
+    <ClInclude Include="Source\IEvent.hpp" />
+    <ClInclude Include="Source\IListener.hpp" />
     <ClInclude Include="Source\LoadImg.h" />
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
+    <ClInclude Include="Source\Message.h" />
+    <ClInclude Include="Source\ObjectBase.h" />
     <ClInclude Include="Source\ObjPool.h" />
+    <ClInclude Include="Source\PostOffice.h" />
+    <ClInclude Include="Source\Publisher.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneBase.h" />
+    <ClInclude Include="Source\SceneData.h" />
     <ClInclude Include="Source\SceneMovement.h" />
     <ClInclude Include="Source\shader.h" />
     <ClInclude Include="Source\SpriteAni.h" />
+    <ClInclude Include="Source\State.h" />
+    <ClInclude Include="Source\StateMachine.h" />
+    <ClInclude Include="Source\StatesFish.h" />
+    <ClInclude Include="Source\StatesFishFood.h" />
+    <ClInclude Include="Source\StatesShark.h" />
     <ClInclude Include="Source\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +192,7 @@
     <None Include="Source\Entity.inl" />
     <None Include="Source\Grid.inl" />
     <None Include="Source\ObjPool.inl" />
+    <None Include="Source\Publisher.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

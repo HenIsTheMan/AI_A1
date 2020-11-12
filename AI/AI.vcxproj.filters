@@ -31,6 +31,27 @@
     <ClCompile Include="Source\SpriteAni.cpp">
       <Filter>Others\Geo</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PostOffice.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SceneData.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\State.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StateMachine.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StatesFish.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StatesFishFood.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StatesShark.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -84,6 +105,45 @@
     <ClInclude Include="Source\Entity.h">
       <Filter>Obj</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ConcreteMessages.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IEvent.hpp">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IListener.hpp">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Message.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ObjectBase.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Publisher.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PostOffice.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneData.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\State.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateMachine.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StatesFish.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StatesFishFood.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StatesShark.h">
+      <Filter>State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -116,6 +176,9 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{66b8b471-8130-446e-a930-3e71384e6365}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{daa924bf-3cb9-4670-bc73-a5c16acb65f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Grid.inl">
@@ -132,6 +195,9 @@
     </None>
     <None Include="Source\Entity.inl">
       <Filter>Obj</Filter>
+    </None>
+    <None Include="Source\Publisher.inl">
+      <Filter>Event</Filter>
     </None>
   </ItemGroup>
 </Project>
