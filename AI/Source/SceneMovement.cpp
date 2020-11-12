@@ -189,7 +189,7 @@ void SceneMovement::UpdateEntities(){
 	if(control != 1){
 		Entity* orc = objPool->RetrieveInactiveObj();
 		orc->SetType(EntityType::Orc);
-		orc->SetLocalPos(0.0f, 0.0f, 0.0f);
+		orc->SetLocalPos(2.0f, 1.0f, 0.0f);
 		orc->SetLocalScale(1.0f, 1.0f, 1.0f);
 		++control;
 	}
@@ -286,6 +286,11 @@ void SceneMovement::RenderGridData(){
 void SceneMovement::RenderEntities(){
 	const std::vector<std::pair<bool, Entity*>>& entityPool = objPool->GetObjPool();
 	const size_t& entityPoolSize = entityPool.size();
+	const Vector3 posOffset = Vector3(
+		(float)winWidth * 0.5f - 2.0f * (gridCellWidth + gridLineThickness),
+		(float)winHeight * 0.5f - 2.0f * (gridCellHeight + gridLineThickness),
+		0.0f
+	);
 
 	for(size_t i = 0; i < entityPoolSize; ++i){
 		if(entityPool[i].first){
@@ -294,15 +299,23 @@ void SceneMovement::RenderEntities(){
 			const Vector3& entityLocalPos = entity->GetLocalPos();
 			const Vector3& entityLocalScale = entity->GetLocalScale();
 
-			const Vector3& entityWorldPos = Vector3(entityLocalPos.x, entityLocalPos.y, 0.0f);
-			const Vector3& entityWorldScale = Vector3(entityLocalScale.x * gridCellWidth, entityLocalScale.y * gridCellHeight, 1.0f);
+			const Vector3& entityWorldPos = Vector3(
+				posOffset.x + entityLocalPos.x * (gridCellWidth + gridLineThickness),
+				posOffset.y + entityLocalPos.y * (gridCellHeight + gridLineThickness),
+				0.1f
+			);
+			const Vector3& entityWorldScale = Vector3(
+				entityLocalScale.x * gridCellWidth,
+				entityLocalScale.y * gridCellHeight,
+				1.0f
+			);
 
 			modelStack.PushMatrix();
 
 			modelStack.Translate(
-				(float)winWidth * 0.5f,
-				(float)winHeight * 0.5f,
-				0.1f
+				entityWorldPos.x,
+				entityWorldPos.y,
+				entityWorldPos.z
 			);
 
 			modelStack.Scale(
@@ -316,28 +329,6 @@ void SceneMovement::RenderEntities(){
 			modelStack.PopMatrix();
 		}
 	}
-
-	//modelStack.PushMatrix();
-
-	//modelStack.Translate(
-	//	(float)winWidth * 0.5f,
-	//	(float)winHeight * 0.5f,
-	//	0.1f
-	//);
-
-	//modelStack.PushMatrix();
-
-	//modelStack.Translate(
-	//	0.0f - gridCellWidth - gridLineThickness,
-	//	0.0f,
-	//	0.0f
-	//);
-	//modelStack.Scale(
-	//	gridCellWidth,
-	//	gridCellHeight,
-	//	1.0f
-	//);
-	//ManualRenderMesh("OrcMoveDown", elapsedTime, 0.1f, meshList[(int)GeoType::Orc], false);
 }
 
 void SceneMovement::RenderTranslucentBlock(){
