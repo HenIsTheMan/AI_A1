@@ -184,6 +184,10 @@ void SceneMovement::UpdateGridData(){
 }
 
 void SceneMovement::UpdateEntities(){
+	Entity* orc = objPool->RetrieveInactiveObj();
+	orc->SetType(EntityType::Orc);
+	orc->SetPos(0.0f, 0.0f, 0.0f);
+	orc->SetScale(gridCellWidth, gridCellHeight, 1.0f);
 }
 
 void SceneMovement::RenderGrid(){
@@ -275,6 +279,13 @@ void SceneMovement::RenderGridData(){
 }
 
 void SceneMovement::RenderEntities(){
+	const std::vector<std::pair<bool, Entity*>>& entityPool = objPool->GetObjPool();
+	const size_t& entityPoolSize = entityPool.size();
+
+	for(size_t i = 0; i < entityPoolSize; ++i){
+		const Entity* const& entity = entityPool[i].second;
+	}
+
 	modelStack.PushMatrix();
 
 	modelStack.Translate(
