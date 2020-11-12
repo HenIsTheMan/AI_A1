@@ -286,11 +286,12 @@ void SceneMovement::RenderGridData(){
 void SceneMovement::RenderEntities(){
 	const std::vector<std::pair<bool, Entity*>>& entityPool = objPool->GetObjPool();
 	const size_t& entityPoolSize = entityPool.size();
-	const Vector3 posOffset = Vector3(
-		(float)winWidth * 0.5f - 2.0f * (gridCellWidth + gridLineThickness),
-		(float)winHeight * 0.5f - 2.0f * (gridCellHeight + gridLineThickness),
-		0.0f
-	);
+
+	const float gridWidth = grid.CalcWidth();
+	const float gridHeight = grid.CalcHeight();
+
+	const float xPosOffset = ((float)winWidth - gridWidth) * 0.5f + gridCellWidth * 0.5f + gridLineThickness;
+	const float yPosOffset = ((float)winHeight - gridHeight) * 0.5f + gridCellHeight * 0.5f + gridLineThickness;
 
 	for(size_t i = 0; i < entityPoolSize; ++i){
 		if(entityPool[i].first){
@@ -300,8 +301,8 @@ void SceneMovement::RenderEntities(){
 			const Vector3& entityLocalScale = entity->GetLocalScale();
 
 			const Vector3& entityWorldPos = Vector3(
-				posOffset.x + entityLocalPos.x * (gridCellWidth + gridLineThickness),
-				posOffset.y + entityLocalPos.y * (gridCellHeight + gridLineThickness),
+				xPosOffset + entityLocalPos.x * (gridCellWidth + gridLineThickness),
+				yPosOffset + entityLocalPos.y * (gridCellHeight + gridLineThickness),
 				0.1f
 			);
 			const Vector3& entityWorldScale = Vector3(
