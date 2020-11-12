@@ -13,5 +13,9 @@
     <ClInclude Include="Source\timer.h" />
     <ClInclude Include="Source\Vector3.h" />
     <ClInclude Include="Source\stb_image.h" />
+    <ClInclude Include="Source\Singleton.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\Singleton.inl" />
   </ItemGroup>
 </Project>
