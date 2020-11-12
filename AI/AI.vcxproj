@@ -139,7 +139,6 @@
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\PostOffice.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
-    <ClCompile Include="Source\SceneData.cpp" />
     <ClCompile Include="Source\SceneSupport.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\SpriteAni.cpp" />
@@ -170,7 +169,6 @@
     <ClInclude Include="Source\Publisher.h" />
     <ClInclude Include="Source\IScene.hpp" />
     <ClInclude Include="Source\Scene.h" />
-    <ClInclude Include="Source\SceneData.h" />
     <ClInclude Include="Source\SceneSupport.h" />
     <ClInclude Include="Source\shader.h" />
     <ClInclude Include="Source\SpriteAni.h" />

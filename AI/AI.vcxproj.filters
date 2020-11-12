@@ -28,9 +28,6 @@
     <ClCompile Include="Source\PostOffice.cpp">
       <Filter>Event</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SceneData.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Source\State.cpp">
       <Filter>State</Filter>
     </ClCompile>
@@ -116,9 +113,6 @@
     </ClInclude>
     <ClInclude Include="Source\PostOffice.h">
       <Filter>Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SceneData.h">
-      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Source\State.h">
       <Filter>State</Filter>
