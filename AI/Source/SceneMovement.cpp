@@ -184,10 +184,15 @@ void SceneMovement::UpdateGridData(){
 }
 
 void SceneMovement::UpdateEntities(){
-	Entity* orc = objPool->RetrieveInactiveObj();
-	orc->SetType(EntityType::Orc);
-	orc->SetPos(0.0f, 0.0f, 0.0f);
-	orc->SetScale(gridCellWidth, gridCellHeight, 1.0f);
+	static int control = 0;
+
+	if(control != 1){
+		Entity* orc = objPool->RetrieveInactiveObj();
+		orc->SetType(EntityType::Orc);
+		orc->SetLocalPos(0.0f, 0.0f, 0.0f);
+		orc->SetLocalScale(1.0f, 1.0f, 1.0f);
+		++control;
+	}
 }
 
 void SceneMovement::RenderGrid(){
@@ -283,61 +288,56 @@ void SceneMovement::RenderEntities(){
 	const size_t& entityPoolSize = entityPool.size();
 
 	for(size_t i = 0; i < entityPoolSize; ++i){
-		const Entity* const& entity = entityPool[i].second;
+		if(entityPool[i].first){
+			const Entity* const& entity = entityPool[i].second;
+
+			const Vector3& entityLocalPos = entity->GetLocalPos();
+			const Vector3& entityLocalScale = entity->GetLocalScale();
+
+			const Vector3& entityWorldPos = Vector3(entityLocalPos.x, entityLocalPos.y, 0.0f);
+			const Vector3& entityWorldScale = Vector3(entityLocalScale.x * gridCellWidth, entityLocalScale.y * gridCellHeight, 1.0f);
+
+			modelStack.PushMatrix();
+
+			modelStack.Translate(
+				(float)winWidth * 0.5f,
+				(float)winHeight * 0.5f,
+				0.1f
+			);
+
+			modelStack.Scale(
+				entityWorldScale.x,
+				entityWorldScale.y,
+				entityWorldScale.z
+			);
+
+			ManualRenderMesh("OrcMoveDown", elapsedTime, 0.1f, meshList[(int)GeoType::Orc], false);
+
+			modelStack.PopMatrix();
+		}
 	}
 
-	modelStack.PushMatrix();
+	//modelStack.PushMatrix();
 
-	modelStack.Translate(
-		(float)winWidth * 0.5f,
-		(float)winHeight * 0.5f,
-		0.1f
-	);
+	//modelStack.Translate(
+	//	(float)winWidth * 0.5f,
+	//	(float)winHeight * 0.5f,
+	//	0.1f
+	//);
 
-	modelStack.PushMatrix();
+	//modelStack.PushMatrix();
 
-	modelStack.Translate(
-		0.0f - gridCellWidth - gridLineThickness,
-		0.0f,
-		0.0f
-	);
-	modelStack.Scale(
-		gridCellWidth,
-		gridCellHeight,
-		1.0f
-	);
-	ManualRenderMesh("OrcMoveDown", elapsedTime, 0.1f, meshList[(int)GeoType::Orc], false);
-
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-
-	modelStack.Scale(
-		gridCellWidth,
-		gridCellHeight,
-		1.0f
-	);
-	ManualRenderMesh("OrcImmune", elapsedTime, 0.1f, meshList[(int)GeoType::Orc], true, Color(0.3f, 0.3f, 1.0f), 1.0f);
-
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-
-	modelStack.Translate(
-		0.0f + gridCellWidth + gridLineThickness,
-		0.0f,
-		0.0f
-	);
-	modelStack.Scale(
-		gridCellWidth,
-		gridCellHeight,
-		1.0f
-	);
-	ManualRenderMesh("OrcSmackDown", elapsedTime, 0.1f, meshList[(int)GeoType::Orc], false);
-
-	modelStack.PopMatrix();
-
-	modelStack.PopMatrix();
+	//modelStack.Translate(
+	//	0.0f - gridCellWidth - gridLineThickness,
+	//	0.0f,
+	//	0.0f
+	//);
+	//modelStack.Scale(
+	//	gridCellWidth,
+	//	gridCellHeight,
+	//	1.0f
+	//);
+	//ManualRenderMesh("OrcMoveDown", elapsedTime, 0.1f, meshList[(int)GeoType::Orc], false);
 }
 
 void SceneMovement::RenderTranslucentBlock(){
