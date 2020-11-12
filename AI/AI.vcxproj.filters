@@ -60,9 +60,6 @@
     <ClInclude Include="Source\Cam.h">
       <Filter>Others\Cam</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Scene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Source\SceneBase.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -143,6 +140,9 @@
     </ClInclude>
     <ClInclude Include="Source\StatesShark.h">
       <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IScene.hpp">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

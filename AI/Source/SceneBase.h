@@ -4,7 +4,7 @@
 #include <assert.h>
 #include <vector>
 
-#include "Scene.h"
+#include "IScene.hpp"
 #include "Cam.h"
 #include "Mesh.h"
 #include "MatrixStack.h"
@@ -17,7 +17,7 @@ enum struct TextAlignment: int{
 	Amt
 };
 
-class SceneBase: public Scene{ //Abstract class
+class SceneBase: public IScene{ //Abstract class
 public:
 	enum struct UniType: int{
 		MVP,

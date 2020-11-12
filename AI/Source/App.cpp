@@ -89,7 +89,7 @@ void App::Init(){
 }
 
 void App::Run(){
-	Scene* scene = new SceneMovement();
+	IScene* scene = new SceneMovement();
 
 	static bool isTab = false;
 	static bool isF1 = false;
