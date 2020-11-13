@@ -196,6 +196,9 @@ void Scene::UpdateGridData(){
 	double mouseY;
 	App::GetCursorPos(&mouseX, &mouseY);
 
+	const float trueMouseX = (float)mouseX + im_Cam.pos.x;
+	const float trueMouseY = (float)mouseY - im_Cam.pos.y;
+
 	const float gridWidth = grid.CalcWidth();
 	const float gridHeight = grid.CalcHeight();
 
@@ -204,8 +207,8 @@ void Scene::UpdateGridData(){
 	const float unitX = gridCellWidth + gridLineThickness;
 	const float unitY = gridCellHeight + gridLineThickness;
 
-	const float mouseRow = std::floor(((float)winHeight - (float)mouseY - yOffset - gridLineThickness * 0.5f) / unitY);
-	const float mouseCol = std::floor(((float)mouseX - xOffset - gridLineThickness * 0.5f) / unitX);
+	const float mouseRow = std::floor(((float)winHeight - trueMouseY - yOffset - gridLineThickness * 0.5f) / unitY);
+	const float mouseCol = std::floor((trueMouseX - xOffset - gridLineThickness * 0.5f) / unitX);
 	const float xTranslate = mouseCol * unitX
 		+ xOffset
 		+ gridCellWidth * 0.5f
@@ -215,8 +218,8 @@ void Scene::UpdateGridData(){
 		+ gridCellHeight * 0.5f
 		+ gridLineThickness;
 
-	if((float)mouseX > xOffset + gridLineThickness * 0.5f && (float)mouseX < xOffset + gridWidth - gridLineThickness * 0.5f
-		&& (float)mouseY > yOffset + gridLineThickness * 0.5f && (float)mouseY < yOffset + gridHeight - gridLineThickness * 0.5f){
+	if(trueMouseX > xOffset + gridLineThickness * 0.5f && trueMouseX < xOffset + gridWidth - gridLineThickness * 0.5f
+		&& trueMouseY > yOffset + gridLineThickness * 0.5f && trueMouseY < yOffset + gridHeight - gridLineThickness * 0.5f){
 		if(isLMB){
 			grid.SetData(true, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
 		} else if(isRMB){
@@ -388,19 +391,22 @@ void Scene::RenderTranslucentBlock(){
 	double mouseY;
 	App::GetCursorPos(&mouseX, &mouseY);
 
+	const float trueMouseX = (float)mouseX + im_Cam.pos.x;
+	const float trueMouseY = (float)mouseY - im_Cam.pos.y;
+
 	const float gridWidth = grid.CalcWidth();
 	const float gridHeight = grid.CalcHeight();
 
 	const float xOffset = ((float)winWidth - gridWidth) * 0.5f;
 	const float yOffset = ((float)winHeight - gridHeight) * 0.5f;
 
-	if((float)mouseX > xOffset + gridLineThickness * 0.5f && (float)mouseX < xOffset + gridWidth - gridLineThickness * 0.5f
-		&& (float)mouseY > yOffset + gridLineThickness * 0.5f && (float)mouseY < yOffset + gridHeight - gridLineThickness * 0.5f){
+	if(trueMouseX > xOffset + gridLineThickness * 0.5f && trueMouseX < xOffset + gridWidth - gridLineThickness * 0.5f
+		&& trueMouseY > yOffset + gridLineThickness * 0.5f && trueMouseY < yOffset + gridHeight - gridLineThickness * 0.5f){
 		const float unitX = gridCellWidth + gridLineThickness;
 		const float unitY = gridCellHeight + gridLineThickness;
 
-		const float mouseRow = std::floor(((float)winHeight - (float)mouseY - yOffset - gridLineThickness * 0.5f) / unitY);
-		const float mouseCol = std::floor(((float)mouseX - xOffset - gridLineThickness * 0.5f) / unitX);
+		const float mouseRow = std::floor(((float)winHeight - trueMouseY - yOffset - gridLineThickness * 0.5f) / unitY);
+		const float mouseCol = std::floor((trueMouseX - xOffset - gridLineThickness * 0.5f) / unitX);
 		const float xTranslate = mouseCol * unitX
 			+ xOffset
 			+ gridCellWidth * 0.5f
