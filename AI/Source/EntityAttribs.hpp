@@ -14,5 +14,22 @@ namespace Obj{
 		EntityType im_Type = EntityType::Null;
 		T im_LocalPos = T();
 		T im_LocalScale = T();
+
+		StateMachine* im_StateMachine = nullptr;
+		State* im_CurrState = nullptr;
+		State* im_NextState = nullptr;
+
+
+		float energy;
+		float moveSpeed;
+		float countDown;
+
+		Vector3 vel;
+		float mass;
+		Vector3 target;
+		int id;
+		int steps;
+
+		GameObject* nearest;
 	};
 }

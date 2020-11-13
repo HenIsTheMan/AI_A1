@@ -9,10 +9,11 @@ public:
 	~StateMachine<T, Type>() = default;
 
 	void AddState(const T& stateID, State* const state);
+	void ChangeCurrState(Type* const entity);
+	void UpdateCurrState(Type* const entity, const double dt);
 
+	///Getter
 	const State* GetState(const T& stateID) const;
-
-	void Update(Type* const entity, const double dt);
 private:
 	std::unordered_map<T, State*> im_States;
 };
