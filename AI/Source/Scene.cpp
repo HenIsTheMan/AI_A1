@@ -205,8 +205,15 @@ void Scene::UpdateGridData(){
 	double mouseY;
 	App::GetCursorPos(&mouseX, &mouseY);
 
-	const float trueMouseX = (float)mouseX + im_Cam.pos.x;
-	const float trueMouseY = (float)mouseY - im_Cam.pos.y;
+	const float horizSize = (float)winWidth * (float)orthoProjectionScaleFactor;
+	const float vertSize = (float)winHeight * (float)orthoProjectionScaleFactor;
+	const float leftVal = ((float)winWidth - horizSize) * 0.5f;
+	const float rightVal = leftVal + horizSize;
+	const float bottomVal = ((float)winHeight - vertSize) * 0.5f;
+	const float topVal = bottomVal + vertSize;
+
+	const float trueMouseX = (float)mouseX * ((rightVal - leftVal) / (float)winWidth) + leftVal + im_Cam.pos.x;
+	const float trueMouseY = (float)mouseY * ((topVal - bottomVal) / (float)winHeight) + bottomVal - im_Cam.pos.y;
 
 	const float gridWidth = grid.CalcWidth();
 	const float gridHeight = grid.CalcHeight();
@@ -400,8 +407,15 @@ void Scene::RenderTranslucentBlock(){
 	double mouseY;
 	App::GetCursorPos(&mouseX, &mouseY);
 
-	const float trueMouseX = (float)mouseX + im_Cam.pos.x;
-	const float trueMouseY = (float)mouseY - im_Cam.pos.y;
+	const float horizSize = (float)winWidth * (float)orthoProjectionScaleFactor;
+	const float vertSize = (float)winHeight * (float)orthoProjectionScaleFactor;
+	const float leftVal = ((float)winWidth - horizSize) * 0.5f;
+	const float rightVal = leftVal + horizSize;
+	const float bottomVal = ((float)winHeight - vertSize) * 0.5f;
+	const float topVal = bottomVal + vertSize;
+
+	const float trueMouseX = (float)mouseX * ((rightVal - leftVal) / (float)winWidth) + leftVal + im_Cam.pos.x;
+	const float trueMouseY = (float)mouseY * ((topVal - bottomVal) / (float)winHeight) + bottomVal - im_Cam.pos.y;
 
 	const float gridWidth = grid.CalcWidth();
 	const float gridHeight = grid.CalcHeight();
