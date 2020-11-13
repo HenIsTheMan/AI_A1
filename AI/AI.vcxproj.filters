@@ -37,6 +37,18 @@
     <ClCompile Include="Source\State.cpp">
       <Filter>State</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EventBoyAttacked.cpp">
+      <Filter>Event\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EventOrcAttacked.cpp">
+      <Filter>Event\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EventReptileAttacked.cpp">
+      <Filter>Event\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EventSkeleAttacked.cpp">
+      <Filter>Event\Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -80,9 +92,6 @@
     </ClInclude>
     <ClInclude Include="Source\Entity.h">
       <Filter>Obj</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ConcreteMessages.h">
-      <Filter>Event</Filter>
     </ClInclude>
     <ClInclude Include="Source\IListener.hpp">
       <Filter>Event</Filter>
@@ -141,6 +150,18 @@
     <ClInclude Include="Source\IEvent.hpp">
       <Filter>Event</Filter>
     </ClInclude>
+    <ClInclude Include="Source\EventBoyAttacked.h">
+      <Filter>Event\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventOrcAttacked.h">
+      <Filter>Event\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventReptileAttacked.h">
+      <Filter>Event\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventSkeleAttacked.h">
+      <Filter>Event\Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -178,6 +199,9 @@
     </Filter>
     <Filter Include="State\States">
       <UniqueIdentifier>{f2c770d8-f746-4383-8240-f1aacabe0c3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event\Events">
+      <UniqueIdentifier>{db84da28-fefe-4ffd-9e86-ceec7c0d7544}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
