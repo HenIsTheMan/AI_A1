@@ -143,9 +143,6 @@
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\SpriteAni.cpp" />
     <ClCompile Include="Source\State.cpp" />
-    <ClCompile Include="Source\StatesFish.cpp" />
-    <ClCompile Include="Source\StatesFishFood.cpp" />
-    <ClCompile Include="Source\StatesShark.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -172,11 +169,15 @@
     <ClInclude Include="Source\shader.h" />
     <ClInclude Include="Source\SpriteAni.h" />
     <ClInclude Include="Source\State.h" />
+    <ClInclude Include="Source\StateAttack.h" />
+    <ClInclude Include="Source\StateDead.h" />
+    <ClInclude Include="Source\StateHeal.h" />
     <ClInclude Include="Source\StateID.hpp" />
+    <ClInclude Include="Source\StateIdle.h" />
+    <ClInclude Include="Source\StateImmune.h" />
     <ClInclude Include="Source\StateMachine.h" />
-    <ClInclude Include="Source\StatesFish.h" />
-    <ClInclude Include="Source\StatesFishFood.h" />
-    <ClInclude Include="Source\StatesShark.h" />
+    <ClInclude Include="Source\StateMultiply.h" />
+    <ClInclude Include="Source\StateRevive.h" />
     <ClInclude Include="Source\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
@@ -191,7 +192,14 @@
     <None Include="Source\Grid.inl" />
     <None Include="Source\ObjPool.inl" />
     <None Include="Source\Publisher.inl" />
+    <None Include="Source\StateAttack.inl" />
+    <None Include="Source\StateDead.inl" />
+    <None Include="Source\StateHeal.inl" />
+    <None Include="Source\StateIdle.inl" />
+    <None Include="Source\StateImmune.inl" />
     <None Include="Source\StateMachine.inl" />
+    <None Include="Source\StateMultiply.inl" />
+    <None Include="Source\StateRevive.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

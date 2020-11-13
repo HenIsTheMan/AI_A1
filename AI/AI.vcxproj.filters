@@ -28,15 +28,6 @@
     <ClCompile Include="Source\PostOffice.cpp">
       <Filter>Event</Filter>
     </ClCompile>
-    <ClCompile Include="Source\StatesFish.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\StatesFishFood.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\StatesShark.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Scene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -114,15 +105,6 @@
     <ClInclude Include="Source\StateMachine.h">
       <Filter>State</Filter>
     </ClInclude>
-    <ClInclude Include="Source\StatesFish.h">
-      <Filter>State</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StatesFishFood.h">
-      <Filter>State</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StatesShark.h">
-      <Filter>State</Filter>
-    </ClInclude>
     <ClInclude Include="Source\IScene.hpp">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -137,6 +119,27 @@
     </ClInclude>
     <ClInclude Include="Source\StateID.hpp">
       <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateDead.h">
+      <Filter>State\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateHeal.h">
+      <Filter>State\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateMultiply.h">
+      <Filter>State\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateRevive.h">
+      <Filter>State\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateImmune.h">
+      <Filter>State\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateAttack.h">
+      <Filter>State\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateIdle.h">
+      <Filter>State\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +176,9 @@
     <Filter Include="Event">
       <UniqueIdentifier>{daa924bf-3cb9-4670-bc73-a5c16acb65f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="State\States">
+      <UniqueIdentifier>{f2c770d8-f746-4383-8240-f1aacabe0c3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Grid.inl">
@@ -195,6 +201,27 @@
     </None>
     <None Include="Source\StateMachine.inl">
       <Filter>State</Filter>
+    </None>
+    <None Include="Source\StateDead.inl">
+      <Filter>State\States</Filter>
+    </None>
+    <None Include="Source\StateHeal.inl">
+      <Filter>State\States</Filter>
+    </None>
+    <None Include="Source\StateMultiply.inl">
+      <Filter>State\States</Filter>
+    </None>
+    <None Include="Source\StateRevive.inl">
+      <Filter>State\States</Filter>
+    </None>
+    <None Include="Source\StateImmune.inl">
+      <Filter>State\States</Filter>
+    </None>
+    <None Include="Source\StateIdle.inl">
+      <Filter>State\States</Filter>
+    </None>
+    <None Include="Source\StateAttack.inl">
+      <Filter>State\States</Filter>
     </None>
   </ItemGroup>
 </Project>
