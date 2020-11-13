@@ -1,6 +1,6 @@
 #pragma once
 
-class State{
+class State final{
 public:
 	State();
 	~State() = default;

@@ -87,9 +87,6 @@
     <ClInclude Include="Source\IListener.hpp">
       <Filter>Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Message.h">
-      <Filter>Event</Filter>
-    </ClInclude>
     <ClInclude Include="Source\ObjectBase.h">
       <Filter>Event</Filter>
     </ClInclude>
@@ -141,7 +138,7 @@
     <ClInclude Include="Source\EventID.hpp">
       <Filter>Event</Filter>
     </ClInclude>
-    <ClInclude Include="Event.h">
+    <ClInclude Include="Source\IEvent.hpp">
       <Filter>Event</Filter>
     </ClInclude>
   </ItemGroup>
@@ -225,9 +222,6 @@
     </None>
     <None Include="Source\StateHeal.inl">
       <Filter>State\States</Filter>
-    </None>
-    <None Include="Event.inl">
-      <Filter>Event</Filter>
     </None>
   </ItemGroup>
 </Project>

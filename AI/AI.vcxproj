@@ -156,7 +156,7 @@
     <ClCompile Include="Source\State.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Event.h" />
+    <ClInclude Include="Source\IEvent.hpp" />
     <ClInclude Include="Source\App.h" />
     <ClInclude Include="Source\Cam.h" />
     <ClInclude Include="Source\ConcreteMessages.h" />
@@ -170,7 +170,6 @@
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
-    <ClInclude Include="Source\Message.h" />
     <ClInclude Include="Source\ObjectBase.h" />
     <ClInclude Include="Source\ObjPool.h" />
     <ClInclude Include="Source\PostOffice.h" />
@@ -198,7 +197,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Event.inl" />
     <None Include="Shaders\AI.fs" />
     <None Include="Shaders\AI.vs" />
     <None Include="Source\Entity.inl" />
