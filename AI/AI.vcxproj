@@ -143,7 +143,6 @@
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\SpriteAni.cpp" />
     <ClCompile Include="Source\State.cpp" />
-    <ClCompile Include="Source\StateMachine.cpp" />
     <ClCompile Include="Source\StatesFish.cpp" />
     <ClCompile Include="Source\StatesFishFood.cpp" />
     <ClCompile Include="Source\StatesShark.cpp" />
@@ -173,6 +172,7 @@
     <ClInclude Include="Source\shader.h" />
     <ClInclude Include="Source\SpriteAni.h" />
     <ClInclude Include="Source\State.h" />
+    <ClInclude Include="Source\StateID.hpp" />
     <ClInclude Include="Source\StateMachine.h" />
     <ClInclude Include="Source\StatesFish.h" />
     <ClInclude Include="Source\StatesFishFood.h" />
@@ -191,6 +191,7 @@
     <None Include="Source\Grid.inl" />
     <None Include="Source\ObjPool.inl" />
     <None Include="Source\Publisher.inl" />
+    <None Include="Source\StateMachine.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

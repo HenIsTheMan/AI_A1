@@ -28,12 +28,6 @@
     <ClCompile Include="Source\PostOffice.cpp">
       <Filter>Event</Filter>
     </ClCompile>
-    <ClCompile Include="Source\State.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\StateMachine.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
     <ClCompile Include="Source\StatesFish.cpp">
       <Filter>State</Filter>
     </ClCompile>
@@ -48,6 +42,9 @@
     </ClCompile>
     <ClCompile Include="Source\SceneSupport.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\State.cpp">
+      <Filter>State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -114,9 +111,6 @@
     <ClInclude Include="Source\PostOffice.h">
       <Filter>Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\State.h">
-      <Filter>State</Filter>
-    </ClInclude>
     <ClInclude Include="Source\StateMachine.h">
       <Filter>State</Filter>
     </ClInclude>
@@ -137,6 +131,12 @@
     </ClInclude>
     <ClInclude Include="Source\SceneSupport.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\State.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateID.hpp">
+      <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +192,9 @@
     </None>
     <None Include="Source\Publisher.inl">
       <Filter>Event</Filter>
+    </None>
+    <None Include="Source\StateMachine.inl">
+      <Filter>State</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -1,21 +1,20 @@
-//#ifndef STATEMACHINE_H
-//#define STATEMACHINE_H
-//
-//#include <string>
-//#include <map>
-//
-//#include "GameObject.h"
-//
-//class StateMachine final{
-//public:
-//	StateMachine();
-//	~StateMachine();
-//
-//	void AddState(State* const& newState);
-//	State* const& GetState(const std::string& stateID) const;
-//	void Update(GameObject *go, double dt);
-//private:
-//	std::map<std::string, State*> m_stateMap;
-//};
-//
-//#endif
+#pragma once
+
+#include <unordered_map>
+
+template <class T, typename Type>
+class StateMachine final{
+public:
+	StateMachine<T, Type>();
+	~StateMachine<T, Type>() = default;
+
+	void AddState(const T& stateID, State* const state);
+
+	const State* GetState(const T& stateID) const;
+
+	void Update(Type* const entity, const double dt);
+private:
+	std::unordered_map<T, State*> im_States;
+};
+
+#include "StateMachine.inl"

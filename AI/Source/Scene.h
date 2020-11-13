@@ -8,9 +8,13 @@
 #endif
 
 #include "SceneSupport.h"
-#include "Entity.h"
 #include "Grid.h"
 #include "ObjPool.h"
+
+///In this order
+#include "Entity.h"
+#include "StateID.hpp"
+#include "StateMachine.h"
 
 class Scene final: public SceneSupport{
 public:

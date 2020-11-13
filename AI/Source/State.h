@@ -1,22 +1,20 @@
-//#ifndef STATE_H
-//#define STATE_H
-//
-//#include <string>
-//
-//struct GameObject;
-//
-//class State
-//{
-//	const std::string m_stateID;
-//protected:
-//	State(const std::string& stateID);
-//public:
-//	virtual ~State() = default;
-//	const std::string& GetStateID() const;
-//
-//	virtual void Enter(GameObject* go) = 0;
-//	virtual void Update(GameObject* go, double dt) = 0;
-//	virtual void Exit() = 0;
-//};
-//
-//#endif
+#pragma once
+
+class State{
+public:
+	State();
+	~State() = default;
+
+	///Setters
+	void SetEnter(void (* const enter)());
+	void SetUpdate(void (* const update)(const double dt));
+	void SetExit(void (* const exit)());
+private:
+	void (*im_Enter)();
+	void (*im_Update)(const double dt);
+	void (*im_Exit)();
+
+	void Enter();
+	void Update(const double dt);
+	void Exit();
+};
