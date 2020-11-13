@@ -56,6 +56,13 @@ void Scene::Update(double dt){
 void Scene::Render(){
 	SceneSupport::Render();
 
+	modelStack.PushMatrix();
+	modelStack.Translate(
+		-(float)winWidth * 0.5f,
+		-(float)winHeight * 0.5f,
+		0.0f
+	);
+
 	RenderGrid();
 	RenderGridBG();
 	RenderGridData();
@@ -63,6 +70,8 @@ void Scene::Render(){
 	RenderTranslucentBlock();
 	RenderBG();
 	RenderSceneText();
+
+	modelStack.PopMatrix();
 }
 
 void Scene::UpdateGridProperties(){
