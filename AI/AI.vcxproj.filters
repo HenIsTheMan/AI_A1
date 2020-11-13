@@ -25,9 +25,6 @@
     <ClCompile Include="Source\SpriteAni.cpp">
       <Filter>Others\Geo</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PostOffice.cpp">
-      <Filter>Event</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Scene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -90,9 +87,6 @@
     <ClInclude Include="Source\Publisher.h">
       <Filter>Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PostOffice.h">
-      <Filter>Event</Filter>
-    </ClInclude>
     <ClInclude Include="Source\StateMachine.h">
       <Filter>State</Filter>
     </ClInclude>
@@ -142,6 +136,12 @@
       <Filter>Event\Events</Filter>
     </ClInclude>
     <ClInclude Include="Source\Listener.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ListenerID.hpp">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ListenerCategory.hpp">
       <Filter>Event</Filter>
     </ClInclude>
   </ItemGroup>
@@ -202,9 +202,6 @@
     <None Include="Source\Entity.inl">
       <Filter>Obj</Filter>
     </None>
-    <None Include="Source\Publisher.inl">
-      <Filter>Event</Filter>
-    </None>
     <None Include="Source\StateMachine.inl">
       <Filter>State</Filter>
     </None>
@@ -228,6 +225,9 @@
     </None>
     <None Include="Source\StateHeal.inl">
       <Filter>State\States</Filter>
+    </None>
+    <None Include="Source\Publisher.cpp">
+      <Filter>Event</Filter>
     </None>
   </ItemGroup>
 </Project>

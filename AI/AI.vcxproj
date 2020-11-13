@@ -154,7 +154,6 @@
     <ClCompile Include="Source\EntryPt.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
-    <ClCompile Include="Source\PostOffice.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\SceneSupport.cpp" />
     <ClCompile Include="Source\shader.cpp" />
@@ -172,12 +171,13 @@
     <ClInclude Include="Source\EventID.hpp" />
     <ClInclude Include="Source\Grid.h" />
     <ClInclude Include="Source\Listener.h" />
+    <ClInclude Include="Source\ListenerCategory.hpp" />
+    <ClInclude Include="Source\ListenerID.hpp" />
     <ClInclude Include="Source\LoadImg.h" />
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
     <ClInclude Include="Source\ObjPool.h" />
-    <ClInclude Include="Source\PostOffice.h" />
     <ClInclude Include="Source\Publisher.h" />
     <ClInclude Include="Source\IScene.hpp" />
     <ClInclude Include="Source\Scene.h" />
@@ -207,7 +207,7 @@
     <None Include="Source\Entity.inl" />
     <None Include="Source\Grid.inl" />
     <None Include="Source\ObjPool.inl" />
-    <None Include="Source\Publisher.inl" />
+    <None Include="Source\Publisher.cpp" />
     <None Include="Source\StateAttack.inl" />
     <None Include="Source\StateDead.inl" />
     <None Include="Source\StateHeal.inl" />
