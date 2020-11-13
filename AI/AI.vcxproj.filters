@@ -40,6 +40,9 @@
     <ClCompile Include="Source\EventAttacked.cpp">
       <Filter>Event\Events</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Listener.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -83,12 +86,6 @@
     </ClInclude>
     <ClInclude Include="Source\Entity.h">
       <Filter>Obj</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\IListener.hpp">
-      <Filter>Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ObjectBase.h">
-      <Filter>Event</Filter>
     </ClInclude>
     <ClInclude Include="Source\Publisher.h">
       <Filter>Event</Filter>
@@ -143,6 +140,9 @@
     </ClInclude>
     <ClInclude Include="Source\EventAttacked.h">
       <Filter>Event\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Listener.h">
+      <Filter>Event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

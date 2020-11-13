@@ -145,6 +145,7 @@
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Cam.cpp" />
     <ClCompile Include="Source\EventAttacked.cpp" />
+    <ClCompile Include="Source\Listener.cpp" />
     <ClCompile Include="Source\LoadImg.cpp" />
     <ClCompile Include="Source\EntryPt.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
@@ -166,12 +167,11 @@
     <ClInclude Include="Source\EntityType.hpp" />
     <ClInclude Include="Source\EventID.hpp" />
     <ClInclude Include="Source\Grid.h" />
-    <ClInclude Include="Source\IListener.hpp" />
+    <ClInclude Include="Source\Listener.h" />
     <ClInclude Include="Source\LoadImg.h" />
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
-    <ClInclude Include="Source\ObjectBase.h" />
     <ClInclude Include="Source\ObjPool.h" />
     <ClInclude Include="Source\PostOffice.h" />
     <ClInclude Include="Source\Publisher.h" />
