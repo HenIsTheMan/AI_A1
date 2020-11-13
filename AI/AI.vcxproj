@@ -69,7 +69,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <SourcePath>$(SolutionDir)$(ProjectName)\Source\</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <SourcePath>$(SolutionDir)$(ProjectName)\Source\</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <SourcePath>$(SolutionDir)$(ProjectName)\Source\</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <SourcePath>$(SolutionDir)$(ProjectName)\Source\</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -145,14 +156,15 @@
     <ClCompile Include="Source\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Event.h" />
     <ClInclude Include="Source\App.h" />
     <ClInclude Include="Source\Cam.h" />
     <ClInclude Include="Source\ConcreteMessages.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityAttribs.hpp" />
     <ClInclude Include="Source\EntityType.hpp" />
+    <ClInclude Include="Source\EventID.hpp" />
     <ClInclude Include="Source\Grid.h" />
-    <ClInclude Include="Source\IEvent.hpp" />
     <ClInclude Include="Source\IListener.hpp" />
     <ClInclude Include="Source\LoadImg.h" />
     <ClInclude Include="Source\Material.h" />
@@ -186,6 +198,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Event.inl" />
     <None Include="Shaders\AI.fs" />
     <None Include="Shaders\AI.vs" />
     <None Include="Source\Entity.inl" />
