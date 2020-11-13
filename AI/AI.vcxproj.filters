@@ -202,9 +202,6 @@
     <None Include="Source\StateMachine.inl">
       <Filter>State</Filter>
     </None>
-    <None Include="Source\StateDead.inl">
-      <Filter>State\States</Filter>
-    </None>
     <None Include="Source\StateHeal.inl">
       <Filter>State\States</Filter>
     </None>
@@ -221,6 +218,9 @@
       <Filter>State\States</Filter>
     </None>
     <None Include="Source\StateAttack.inl">
+      <Filter>State\States</Filter>
+    </None>
+    <None Include="Source\StateDead.inl">
       <Filter>State\States</Filter>
     </None>
   </ItemGroup>
