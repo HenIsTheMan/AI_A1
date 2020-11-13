@@ -22,7 +22,8 @@ SceneSupport::SceneSupport():
 	projectionStack(MS()),
 	bLightEnabled(false),
 	elapsedTime(0.0f),
-	FPS(0.0f)
+	FPS(0.0f),
+	orthoProjectionScaleFactor(1.0)
 {
 	glClearColor(1.f, 0.82f, 0.86f, 1.f);
 	glEnable(GL_DEPTH_TEST);
@@ -170,6 +171,14 @@ void SceneSupport::Update(double dt){
 	} else if(isF2 && !App::Key(VK_F2)){
 		isF2 = false;
 	}
+
+	if(App::Key('Q')){
+		orthoProjectionScaleFactor -= dt;
+	}
+	if(App::Key('E')){
+		orthoProjectionScaleFactor += dt;
+	}
+	orthoProjectionScaleFactor = Math::Clamp(orthoProjectionScaleFactor, 0.3, 1.0);
 
 	static_cast<SpriteAni*>(meshList[(int)GeoType::DayBG])->Update(elapsedTime);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::NightBG])->Update(elapsedTime);
@@ -342,6 +351,13 @@ void SceneSupport::Render(){
 	);
 
 	Mtx44 projection;
-	projection.SetToOrtho(0.0f, (float)winWidth, 0.0f, (float)winHeight, -10.0f, 10.0f);
+	projection.SetToOrtho(
+		-(double)winWidth * 0.5 * orthoProjectionScaleFactor,
+		(double)winWidth * 0.5 * orthoProjectionScaleFactor,
+		-(double)winHeight * 0.5 * orthoProjectionScaleFactor,
+		(double)winHeight * 0.5 * orthoProjectionScaleFactor,
+		-10.0,
+		10.0
+	);
 	projectionStack.LoadMatrix(projection);
 }

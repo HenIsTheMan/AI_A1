@@ -68,5 +68,7 @@ protected:
 	float elapsedTime;
 	float FPS;
 
+	double orthoProjectionScaleFactor;
+
 	SceneSupport();
 };

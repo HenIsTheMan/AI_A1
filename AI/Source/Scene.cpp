@@ -8,6 +8,9 @@
 extern int winWidth;
 extern int winHeight;
 
+static float s_PosOffsetX;
+static float s_PosOffsetY;
+
 using Entity = Obj::Entity<Vector3, float>;
 
 Scene::Scene():
