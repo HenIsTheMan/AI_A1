@@ -144,10 +144,7 @@
   <ItemGroup>
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Cam.cpp" />
-    <ClCompile Include="Source\EventBoyAttacked.cpp" />
-    <ClCompile Include="Source\EventOrcAttacked.cpp" />
-    <ClCompile Include="Source\EventReptileAttacked.cpp" />
-    <ClCompile Include="Source\EventSkeleAttacked.cpp" />
+    <ClCompile Include="Source\EventAttacked.cpp" />
     <ClCompile Include="Source\LoadImg.cpp" />
     <ClCompile Include="Source\EntryPt.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
@@ -160,10 +157,7 @@
     <ClCompile Include="Source\State.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\EventBoyAttacked.h" />
-    <ClInclude Include="Source\EventOrcAttacked.h" />
-    <ClInclude Include="Source\EventReptileAttacked.h" />
-    <ClInclude Include="Source\EventSkeleAttacked.h" />
+    <ClInclude Include="Source\EventAttacked.h" />
     <ClInclude Include="Source\IEvent.hpp" />
     <ClInclude Include="Source\App.h" />
     <ClInclude Include="Source\Cam.h" />

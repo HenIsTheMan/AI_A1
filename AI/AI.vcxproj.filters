@@ -37,16 +37,7 @@
     <ClCompile Include="Source\State.cpp">
       <Filter>State</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EventBoyAttacked.cpp">
-      <Filter>Event\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EventOrcAttacked.cpp">
-      <Filter>Event\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EventReptileAttacked.cpp">
-      <Filter>Event\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EventSkeleAttacked.cpp">
+    <ClCompile Include="Source\EventAttacked.cpp">
       <Filter>Event\Events</Filter>
     </ClCompile>
   </ItemGroup>
@@ -150,16 +141,7 @@
     <ClInclude Include="Source\IEvent.hpp">
       <Filter>Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EventBoyAttacked.h">
-      <Filter>Event\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EventOrcAttacked.h">
-      <Filter>Event\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EventReptileAttacked.h">
-      <Filter>Event\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EventSkeleAttacked.h">
+    <ClInclude Include="Source\EventAttacked.h">
       <Filter>Event\Events</Filter>
     </ClInclude>
   </ItemGroup>
