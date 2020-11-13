@@ -3,12 +3,12 @@
 #include "EntityAttribs.hpp"
 
 namespace Obj{
-	template <class T>
+	template <class T, typename Type>
 	class Entity final{
 	public:
-		Entity<T>();
-		Entity<T>(const EntityAttribs<T>& attribs);
-		~Entity<T>() = default;
+		Entity<T, Type>();
+		Entity<T, Type>(const EntityAttribs<T, Type>& attribs);
+		~Entity<T, Type>() = default;
 
 		T& RetrieveLocalPos();
 		T& RetrieveLocalScale();
@@ -24,11 +24,11 @@ namespace Obj{
 		void SetLocalScale(const T& localScale);
 
 		#if defined ENTITY_T_IS_VEC3
-		void SetLocalPos(const float x, const float y, const float z);
-		void SetLocalScale(const float x, const float y, const float z);
+		void SetLocalPos(const Type& x, const Type& y, const Type& z);
+		void SetLocalScale(const Type& x, const Type& y, const Type& z);
 		#endif
 	private:
-		EntityAttribs<T> im_Attribs;
+		EntityAttribs<T, Type> im_Attribs;
 	};
 }
 

@@ -8,7 +8,7 @@
 extern int winWidth;
 extern int winHeight;
 
-using Entity = Obj::Entity<Vector3>;
+using Entity = Obj::Entity<Vector3, float>;
 
 Scene::Scene():
 	gridCellWidth(40.0f),

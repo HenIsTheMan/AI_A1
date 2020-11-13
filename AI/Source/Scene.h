@@ -37,7 +37,7 @@ protected:
 
 	bool isDay;
 	float dayNightBT;
-	ObjPool<Obj::Entity<Vector3>>* objPool;
+	ObjPool<Obj::Entity<Vector3, float>>* objPool;
 
 	void UpdateGridData();
 	void UpdateGridProperties();

@@ -1,64 +1,64 @@
 namespace Obj{
-	template <class T>
-	Entity<T>::Entity():
-		Entity(EntityAttribs<T>())
+	template <class T, typename Type>
+	Entity<T, Type>::Entity():
+		Entity(EntityAttribs<T, Type>())
 	{
 	}
 
-	template <class T>
-	Entity<T>::Entity(const EntityAttribs<T>& attribs):
+	template <class T, typename Type>
+	Entity<T, Type>::Entity(const EntityAttribs<T, Type>& attribs):
 		im_Attribs(attribs)
 	{
 	}
 
-	template <class T>
-	T& Entity<T>::RetrieveLocalPos(){
+	template <class T, typename Type>
+	T& Entity<T, Type>::RetrieveLocalPos(){
 		return im_Attribs.im_LocalPos;
 	}
 
-	template <class T>
-	T& Entity<T>::RetrieveLocalScale(){
+	template <class T, typename Type>
+	T& Entity<T, Type>::RetrieveLocalScale(){
 		return im_Attribs.im_LocalScale;
 	}
 
-	template <class T>
-	const EntityType& Entity<T>::GetType() const{
+	template <class T, typename Type>
+	const EntityType& Entity<T, Type>::GetType() const{
 		return im_Attribs.im_Type;
 	}
 
-	template <class T>
-	const T& Entity<T>::GetLocalPos() const{
+	template <class T, typename Type>
+	const T& Entity<T, Type>::GetLocalPos() const{
 		return im_Attribs.im_LocalPos;
 	}
 
-	template <class T>
-	const T& Entity<T>::GetLocalScale() const{
+	template <class T, typename Type>
+	const T& Entity<T, Type>::GetLocalScale() const{
 		return im_Attribs.im_LocalScale;
 	}
 
-	template <class T>
-	void Entity<T>::SetType(const EntityType type){
+	template <class T, typename Type>
+	void Entity<T, Type>::SetType(const EntityType type){
 		im_Attribs.im_Type = type;
 	}
 
-	template <class T>
-	void Entity<T>::SetLocalPos(const T& localPos){
+	template <class T, typename Type>
+	void Entity<T, Type>::SetLocalPos(const T& localPos){
 		im_Attribs.im_LocalPos = localPos;
 	}
 
-	template <class T>
-	void Entity<T>::SetLocalScale(const T& localScale){
+	template <class T, typename Type>
+	void Entity<T, Type>::SetLocalScale(const T& localScale){
 		im_Attribs.im_LocalScale = localScale;
 	}
 
 	#if defined ENTITY_T_IS_VEC3
-	template <class T>
-	void Entity<T>::SetLocalPos(const float x, const float y, const float z){
+	template <class T, typename Type>
+	void Entity<T, Type>::SetLocalPos(const Type& x, const Type& y, const Type& z){
 		im_Attribs.im_LocalPos = T(x, y, z);
 	}
 
-	template <class T>
-	void Entity<T>::SetLocalScale(const float x, const float y, const float z){
+	template <class T, typename Type>
+	void Entity<T, Type>::SetLocalScale(const Type& x, const Type& y, const Type& z){
 		im_Attribs.im_LocalScale = T(x, y, z);
 	}
 	#endif
