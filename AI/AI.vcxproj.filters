@@ -34,11 +34,14 @@
     <ClCompile Include="Source\State.cpp">
       <Filter>State</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EventAttacked.cpp">
-      <Filter>Event\Events</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Listener.cpp">
       <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EventAttacked.cpp">
+      <Filter>Event\Events\Post-events</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EventApproaching.cpp">
+      <Filter>Event\Events\Pre-events</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,9 +135,6 @@
     <ClInclude Include="Source\IEvent.hpp">
       <Filter>Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EventAttacked.h">
-      <Filter>Event\Events</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Listener.h">
       <Filter>Event</Filter>
     </ClInclude>
@@ -143,6 +143,12 @@
     </ClInclude>
     <ClInclude Include="Source\ListenerCategory.hpp">
       <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventAttacked.h">
+      <Filter>Event\Events\Post-events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventApproaching.h">
+      <Filter>Event\Events\Pre-events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +190,12 @@
     </Filter>
     <Filter Include="Event\Events">
       <UniqueIdentifier>{db84da28-fefe-4ffd-9e86-ceec7c0d7544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event\Events\Post-events">
+      <UniqueIdentifier>{9fab4848-b73a-421b-b464-a8d212706871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event\Events\Pre-events">
+      <UniqueIdentifier>{9e8aa6a4-dd6d-49e2-b73b-c16162b7b821}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Cam.cpp" />
+    <ClCompile Include="Source\EventApproaching.cpp" />
     <ClCompile Include="Source\EventAttacked.cpp" />
     <ClCompile Include="Source\Listener.cpp" />
     <ClCompile Include="Source\LoadImg.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="Source\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\EventApproaching.h" />
     <ClInclude Include="Source\EventAttacked.h" />
     <ClInclude Include="Source\IEvent.hpp" />
     <ClInclude Include="Source\App.h" />
