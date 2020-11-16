@@ -12,17 +12,7 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
-	T& Entity<T, Type>::RetrieveLocalPos(){
-		return im_Attribs.im_LocalPos;
-	}
-
-	template <class T, typename Type>
-	T& Entity<T, Type>::RetrieveLocalScale(){
-		return im_Attribs.im_LocalScale;
-	}
-
-	template <class T, typename Type>
-	const EntityType& Entity<T, Type>::GetType() const{
+	EntityType Entity<T, Type>::GetType() const{
 		return im_Attribs.im_Type;
 	}
 
@@ -34,6 +24,51 @@ namespace Obj{
 	template <class T, typename Type>
 	const T& Entity<T, Type>::GetLocalScale() const{
 		return im_Attribs.im_LocalScale;
+	}
+
+	template <class T, typename Type>
+	const T& Entity<T, Type>::GetDir() const{
+		return im_Attribs.im_Dir;
+	}
+
+	template <class T, typename Type>
+	const Type& Entity<T, Type>::GetSpd() const{
+		return im_Attribs.im_Spd;
+	}
+
+	template <class T, typename Type>
+	int Entity<T, Type>::GetStepsLeft() const{
+		return im_Attribs.im_StepsLeft;
+	}
+
+	template <class T, typename Type>
+	const Type& Entity<T, Type>::GetHealth() const{
+		return im_Attribs.im_Health;
+	}
+
+	template <class T, typename Type>
+	const Type& Entity<T, Type>::GetTimeLeft() const{
+		return im_Attribs.im_TimeLeft;
+	}
+
+	template <class T, typename Type>
+	const Entity<T, Type>* Entity<T, Type>::GetTarget() const{
+		return im_Attribs.im_Target;
+	}
+
+	template <class T, typename Type>
+	const StateMachine<StateID, Entity<T, Type>>* Entity<T, Type>::GetStateMachine() const{
+		return im_Attribs.im_StateMachine;
+	}
+
+	template <class T, typename Type>
+	const State* Entity<T, Type>::GetCurrState() const{
+		return im_Attribs.im_CurrState;
+	}
+
+	template <class T, typename Type>
+	const State* Entity<T, Type>::GetNextState() const{
+		return im_Attribs.im_NextState;
 	}
 
 	template <class T, typename Type>
@@ -49,6 +84,51 @@ namespace Obj{
 	template <class T, typename Type>
 	void Entity<T, Type>::SetLocalScale(const T& localScale){
 		im_Attribs.im_LocalScale = localScale;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetDir(const T& dir){
+		im_Attribs.im_Dir = dir;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetSpd(const Type& spd){
+		im_Attribs.im_Spd = spd;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetStepsLeft(const int stepsLeft){
+		im_Attribs.im_StepsLeft = stepsLeft;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetHealth(const Type& health){
+		im_Attribs.im_Health = health;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetTimeLeft(const Type& timeLeft){
+		im_Attribs.im_TimeLeft = timeLeft;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetTarget(const Entity<T, Type>* const target){
+		im_Attribs.im_Target = target;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetStateMachine(const StateMachine<StateID, Entity<T, Type>>* const stateMachine){
+		im_Attribs.im_StateMachine = stateMachine;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetCurrState(const State* const currState){
+		im_Attribs.im_CurrState = currState;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetNextState(const State* const nextState){
+		im_Attribs.im_NextState = nextState;
 	}
 
 	#if defined ENTITY_T_IS_VEC3
