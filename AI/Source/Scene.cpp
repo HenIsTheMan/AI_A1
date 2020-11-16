@@ -10,6 +10,11 @@
 #include "StateSkeleDead.h"
 #include "StateSkeleRevive.h"
 
+#include "StateReptileIdle.h"
+#include "StateReptileAttack.h"
+#include "StateReptileDead.h"
+#include "StateReptileMultiply.h"
+
 extern int winWidth;
 extern int winHeight;
 
@@ -40,6 +45,11 @@ Scene::Scene():
 	skeleSM->AddState(StateID::StateSkeleAttack, new State(StateSkeleAttack::Enter, StateSkeleAttack::Update, StateSkeleAttack::Exit));
 	skeleSM->AddState(StateID::StateSkeleDead, new State(StateSkeleDead::Enter, StateSkeleDead::Update, StateSkeleDead::Exit));
 	skeleSM->AddState(StateID::StateSkeleRevive, new State(StateSkeleRevive::Enter, StateSkeleRevive::Update, StateSkeleRevive::Exit));
+
+	reptileSM->AddState(StateID::StateReptileIdle, new State(StateReptileIdle::Enter, StateReptileIdle::Update, StateReptileIdle::Exit));
+	reptileSM->AddState(StateID::StateReptileAttack, new State(StateReptileAttack::Enter, StateReptileAttack::Update, StateReptileAttack::Exit));
+	reptileSM->AddState(StateID::StateReptileDead, new State(StateReptileDead::Enter, StateReptileDead::Update, StateReptileDead::Exit));
+	reptileSM->AddState(StateID::StateReptileMultiply, new State(StateReptileMultiply::Enter, StateReptileMultiply::Update, StateReptileMultiply::Exit));
 }
 
 Scene::~Scene(){

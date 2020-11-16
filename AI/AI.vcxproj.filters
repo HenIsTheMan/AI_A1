@@ -171,6 +171,18 @@
     <ClInclude Include="Source\StateSkeleRevive.h">
       <Filter>State\States\SkeleStates</Filter>
     </ClInclude>
+    <ClInclude Include="Source\StateReptileAttack.h">
+      <Filter>State\States\ReptileStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateReptileDead.h">
+      <Filter>State\States\ReptileStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateReptileIdle.h">
+      <Filter>State\States\ReptileStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateReptileMultiply.h">
+      <Filter>State\States\ReptileStates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -264,6 +276,18 @@
     </None>
     <None Include="Source\StateSkeleRevive.inl">
       <Filter>State\States\SkeleStates</Filter>
+    </None>
+    <None Include="Source\StateReptileAttack.inl">
+      <Filter>State\States\ReptileStates</Filter>
+    </None>
+    <None Include="Source\StateReptileDead.inl">
+      <Filter>State\States\ReptileStates</Filter>
+    </None>
+    <None Include="Source\StateReptileIdle.inl">
+      <Filter>State\States\ReptileStates</Filter>
+    </None>
+    <None Include="Source\StateReptileMultiply.inl">
+      <Filter>State\States\ReptileStates</Filter>
     </None>
   </ItemGroup>
 </Project>

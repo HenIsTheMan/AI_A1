@@ -199,6 +199,10 @@
     <ClInclude Include="Source\State.h" />
     <ClInclude Include="Source\StateID.hpp" />
     <ClInclude Include="Source\StateMachine.h" />
+    <ClInclude Include="Source\StateReptileAttack.h" />
+    <ClInclude Include="Source\StateReptileDead.h" />
+    <ClInclude Include="Source\StateReptileIdle.h" />
+    <ClInclude Include="Source\StateReptileMultiply.h" />
     <ClInclude Include="Source\StateSkeleAttack.h" />
     <ClInclude Include="Source\StateSkeleDead.h" />
     <ClInclude Include="Source\StateSkeleIdle.h" />
@@ -218,6 +222,10 @@
     <None Include="Source\ObjPool.inl" />
     <None Include="Source\Publisher.cpp" />
     <None Include="Source\StateMachine.inl" />
+    <None Include="Source\StateReptileAttack.inl" />
+    <None Include="Source\StateReptileDead.inl" />
+    <None Include="Source\StateReptileIdle.inl" />
+    <None Include="Source\StateReptileMultiply.inl" />
     <None Include="Source\StateSkeleAttack.inl" />
     <None Include="Source\StateSkeleDead.inl" />
     <None Include="Source\StateSkeleIdle.inl" />
