@@ -307,7 +307,18 @@ void Scene::UpdateEntities(){
 	static int control = 0;
 
 	if(control != 1){
-		Entity* orc = CreateOrc();
+		Entity* skele = CreateSkele({
+			Vector3(2.0f, 3.0f, 0.0f)
+		});
+		Entity* reptile = CreateReptile({
+			Vector3(5.0f, 5.0f, 0.0f)
+		});
+		Entity* boy = CreateBoy({
+			Vector3(0.0f, 0.0f, 0.0f)
+		});
+		Entity* orc = CreateOrc({
+			Vector3(3.0f, 1.0f, 0.0f)
+		});
 		++control;
 	}
 
@@ -702,40 +713,97 @@ void Scene::RenderSceneText(){
 	//);
 }
 
-Entity* Scene::CreateSkele() const{
+Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
 	Entity* entity = objPool->RetrieveInactiveObj();
+
+	entity->SetType(Obj::EntityType::Skele);
+	entity->SetLocalPos(params.im_LocalPos);
+	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
+
+	entity->SetDmg(22.0f);
+	entity->SetRange(1.2f);
+	entity->SetHealth(45.0f);
+	entity->SetSpd(1.4f);
+
+	entity->SetTarget(nullptr);
+	entity->SetStepsLeft(0);
+	entity->SetTimeLeft(0.0f);
+	entity->SetDir(1.0f, 0.0f, 0.0f);
+
+	entity->SetStateMachine(skeleSM);
+	entity->SetCurrState(skeleSM->GetState(StateID::StateSkeleIdle));
+	entity->SetNextState(skeleSM->GetState(StateID::StateSkeleIdle));
+	entity->SetSpriteAniMiddleName("Static");
 
 	return entity;
 }
 
-Entity* Scene::CreateReptile() const{
+Entity* Scene::CreateReptile(const CreateEntityParams& params) const{
 	Entity* entity = objPool->RetrieveInactiveObj();
+
+	entity->SetType(Obj::EntityType::Reptile);
+	entity->SetLocalPos(params.im_LocalPos);
+	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
+
+	entity->SetDmg(3.0f);
+	entity->SetRange(2.1f);
+	entity->SetHealth(240.0f);
+	entity->SetSpd(1.8f);
+
+	entity->SetTarget(nullptr);
+	entity->SetStepsLeft(0);
+	entity->SetTimeLeft(0.0f);
+	entity->SetDir(1.0f, 0.0f, 0.0f);
+
+	entity->SetStateMachine(reptileSM);
+	entity->SetCurrState(reptileSM->GetState(StateID::StateReptileIdle));
+	entity->SetNextState(reptileSM->GetState(StateID::StateReptileIdle));
+	entity->SetSpriteAniMiddleName("Static");
 
 	return entity;
 }
 
-Entity* Scene::CreateBoy() const{
+Entity* Scene::CreateBoy(const CreateEntityParams& params) const{
 	Entity* entity = objPool->RetrieveInactiveObj();
+
+	entity->SetType(Obj::EntityType::Boy);
+	entity->SetLocalPos(params.im_LocalPos);
+	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
+
+	entity->SetDmg(10.0f);
+	entity->SetRange(1.3f);
+	entity->SetHealth(85.0f);
+	entity->SetSpd(1.2f);
+
+	entity->SetTarget(nullptr);
+	entity->SetStepsLeft(0);
+	entity->SetTimeLeft(0.0f);
+	entity->SetDir(1.0f, 0.0f, 0.0f);
+
+	entity->SetStateMachine(boySM);
+	entity->SetCurrState(boySM->GetState(StateID::StateBoyIdle));
+	entity->SetNextState(boySM->GetState(StateID::StateBoyIdle));
+	entity->SetSpriteAniMiddleName("Static");
 
 	return entity;
 }
 
-Entity* Scene::CreateOrc() const{
+Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 	Entity* entity = objPool->RetrieveInactiveObj();
 
 	entity->SetType(Obj::EntityType::Orc);
-	entity->SetLocalPos(2.0f, 1.0f, 0.0f);
+	entity->SetLocalPos(params.im_LocalPos);
 	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
 
-	entity->SetDir(1.0f, 0.0f, 0.0f);
-	entity->SetSpd(50.0f);
-	entity->SetStepsLeft(0);
+	entity->SetDmg(15.0f);
+	entity->SetRange(0.7f);
+	entity->SetHealth(150.0f);
+	entity->SetSpd(0.8f);
 
-	entity->SetDmg(10.0f);
-	entity->SetRange(1.0f);
-	entity->SetHealth(100.0f);
-	entity->SetTimeLeft(0.0f);
 	entity->SetTarget(nullptr);
+	entity->SetStepsLeft(0);
+	entity->SetTimeLeft(0.0f);
+	entity->SetDir(1.0f, 0.0f, 0.0f);
 
 	entity->SetStateMachine(orcSM);
 	entity->SetCurrState(orcSM->GetState(StateID::StateOrcIdle));

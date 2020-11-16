@@ -23,15 +23,15 @@ namespace Obj{
 		T im_LocalPos = T();
 		T im_LocalScale = T();
 
-		T im_Dir = T();
-		Type im_Spd = Type();
-		int im_StepsLeft = 0;
-
 		Type im_Dmg = Type();
 		Type im_Range = Type();
 		Type im_Health = Type();
-		Type im_TimeLeft = Type();
+		Type im_Spd = Type();
+
 		Entity<T, Type>* im_Target = nullptr;
+		int im_StepsLeft = 0;
+		Type im_TimeLeft = Type();
+		T im_Dir = T();
 
 		StateMachine<StateID, Entity<T, Type>>* im_StateMachine = nullptr;
 		State* im_CurrState = nullptr;

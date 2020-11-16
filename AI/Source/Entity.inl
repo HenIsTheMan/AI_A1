@@ -27,21 +27,6 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
-	const T& Entity<T, Type>::GetDir() const{
-		return im_Attribs.im_Dir;
-	}
-
-	template <class T, typename Type>
-	const Type& Entity<T, Type>::GetSpd() const{
-		return im_Attribs.im_Spd;
-	}
-
-	template <class T, typename Type>
-	int Entity<T, Type>::GetStepsLeft() const{
-		return im_Attribs.im_StepsLeft;
-	}
-
-	template <class T, typename Type>
 	const Type& Entity<T, Type>::GetDmg() const{
 		return im_Attribs.im_Dmg;
 	}
@@ -57,13 +42,28 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
-	const Type& Entity<T, Type>::GetTimeLeft() const{
-		return im_Attribs.im_TimeLeft;
+	const Type& Entity<T, Type>::GetSpd() const{
+		return im_Attribs.im_Spd;
 	}
 
 	template <class T, typename Type>
 	const Entity<T, Type>* Entity<T, Type>::GetTarget() const{
 		return im_Attribs.im_Target;
+	}
+
+	template <class T, typename Type>
+	int Entity<T, Type>::GetStepsLeft() const{
+		return im_Attribs.im_StepsLeft;
+	}
+
+	template <class T, typename Type>
+	const Type& Entity<T, Type>::GetTimeLeft() const{
+		return im_Attribs.im_TimeLeft;
+	}
+
+	template <class T, typename Type>
+	const T& Entity<T, Type>::GetDir() const{
+		return im_Attribs.im_Dir;
 	}
 
 	template <class T, typename Type>
@@ -102,21 +102,6 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
-	void Entity<T, Type>::SetDir(const T& dir){
-		im_Attribs.im_Dir = dir;
-	}
-
-	template <class T, typename Type>
-	void Entity<T, Type>::SetSpd(const Type& spd){
-		im_Attribs.im_Spd = spd;
-	}
-
-	template <class T, typename Type>
-	void Entity<T, Type>::SetStepsLeft(const int stepsLeft){
-		im_Attribs.im_StepsLeft = stepsLeft;
-	}
-
-	template <class T, typename Type>
 	void Entity<T, Type>::SetDmg(const Type& dmg){
 		im_Attribs.im_Dmg = dmg;
 	}
@@ -132,13 +117,28 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
-	void Entity<T, Type>::SetTimeLeft(const Type& timeLeft){
-		im_Attribs.im_TimeLeft = timeLeft;
+	void Entity<T, Type>::SetSpd(const Type& spd){
+		im_Attribs.im_Spd = spd;
 	}
 
 	template <class T, typename Type>
 	void Entity<T, Type>::SetTarget(Entity<T, Type>* const target){
 		im_Attribs.im_Target = target;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetStepsLeft(const int stepsLeft){
+		im_Attribs.im_StepsLeft = stepsLeft;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetTimeLeft(const Type& timeLeft){
+		im_Attribs.im_TimeLeft = timeLeft;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetDir(const T& dir){
+		im_Attribs.im_Dir = dir;
 	}
 
 	template <class T, typename Type>

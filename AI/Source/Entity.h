@@ -15,15 +15,15 @@ namespace Obj{
 		const T& GetLocalPos() const;
 		const T& GetLocalScale() const;
 
-		const T& GetDir() const;
-		const Type& GetSpd() const;
-		int GetStepsLeft() const;
-
 		const Type& GetDmg() const;
 		const Type& GetRange() const;
 		const Type& GetHealth() const;
-		const Type& GetTimeLeft() const;
+		const Type& GetSpd() const;
+
 		const Entity<T, Type>* GetTarget() const;
+		int GetStepsLeft() const;
+		const Type& GetTimeLeft() const;
+		const T& GetDir() const;
 
 		const StateMachine<StateID, Entity<T, Type>>* GetStateMachine() const;
 		const State* GetCurrState() const;
@@ -36,15 +36,15 @@ namespace Obj{
 		void SetLocalPos(const T& localPos);
 		void SetLocalScale(const T& localScale);
 
-		void SetDir(const T& dir);
-		void SetSpd(const Type& spd);
-		void SetStepsLeft(const int stepsLeft);
-
 		void SetDmg(const Type& dmg);
 		void SetRange(const Type& range);
 		void SetHealth(const Type& health);
-		void SetTimeLeft(const Type& timeLeft);
+		void SetSpd(const Type& spd);
+
 		void SetTarget(Entity<T, Type>* const target);
+		void SetStepsLeft(const int stepsLeft);
+		void SetTimeLeft(const Type& timeLeft);
+		void SetDir(const T& dir);
 
 		void SetStateMachine(StateMachine<StateID, Entity<T, Type>>* const stateMachine);
 		void SetCurrState(const State* const currState);
