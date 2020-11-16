@@ -106,7 +106,7 @@ void Scene::Update(double dt){
 
 	UpdateGridProperties();
 	UpdateGridData();
-	UpdateEntities();
+	UpdateEntities(dt);
 }
 
 void Scene::Render(){
@@ -303,7 +303,7 @@ void Scene::UpdateGridData(){
 	}
 }
 
-void Scene::UpdateEntities(){
+void Scene::UpdateEntities(const double dt){
 	static int control = 0;
 
 	if(control != 1){
@@ -327,7 +327,28 @@ void Scene::UpdateEntities(){
 
 	for(size_t i = 0; i < entityPoolSize; ++i){
 		if(entityPool[i].first){
-			const Entity* const& entity = entityPool[i].second;
+			Entity* const entity = entityPool[i].second;
+
+			switch(entity->GetType()){
+				using namespace Obj;
+
+				case EntityType::Skele:
+					skeleSM->ChangeCurrState(entity);
+					skeleSM->UpdateCurrState(entity, dt);
+					break;
+				case EntityType::Reptile:
+					reptileSM->ChangeCurrState(entity);
+					reptileSM->UpdateCurrState(entity, dt);
+					break;
+				case EntityType::Boy:
+					boySM->ChangeCurrState(entity);
+					boySM->UpdateCurrState(entity, dt);
+					break;
+				case EntityType::Orc:
+					orcSM->ChangeCurrState(entity);
+					orcSM->UpdateCurrState(entity, dt);
+					break;
+			}
 		}
 	}
 }

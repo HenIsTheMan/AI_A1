@@ -8,6 +8,10 @@ public:
 	State(const StateID ID, void (* const enter)(), void (* const update)(const double dt), void (* const exit)());
 	~State() = default;
 
+	void Enter() const;
+	void Update(const double dt) const;
+	void Exit() const;
+
 	///Getter
 	StateID GetID() const;
 
@@ -22,8 +26,4 @@ private:
 	void (*im_Enter)();
 	void (*im_Update)(const double dt);
 	void (*im_Exit)();
-
-	void Enter();
-	void Update(const double dt);
-	void Exit();
 };

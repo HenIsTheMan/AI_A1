@@ -33,19 +33,19 @@ void State::SetExit(void (* const exit)()){
 	im_Exit = exit;
 }
 
-void State::Enter(){
+void State::Enter() const{
 	if(im_Enter){
 		im_Enter();
 	}
 }
 
-void State::Update(const double dt){
+void State::Update(const double dt) const{
 	if(im_Update){
 		im_Update(dt);
 	}
 }
 
-void State::Exit(){
+void State::Exit() const{
 	if(im_Exit){
 		im_Exit();
 	}

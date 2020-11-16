@@ -63,7 +63,7 @@ protected:
 
 	void UpdateGridData();
 	void UpdateGridProperties();
-	void UpdateEntities();
+	void UpdateEntities(const double dt);
 
 	void RenderGrid();
 	void RenderGridBG();

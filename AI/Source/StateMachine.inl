@@ -22,15 +22,15 @@ void StateMachine<T, Type>::AddState(State* const state){
 template <class T, typename Type>
 void StateMachine<T, Type>::ChangeCurrState(Type* const entity){
 	assert(entity && "entity must be initialized!");
-	assert(entity->im_NextState && "entity->im_NextState must be initialized!");
+	assert(entity->GetNextState() && "entity->GetNextState() must be initialized!");
 
-	if(entity->im_CurrState != entity->im_NextState){
-		if(entity->im_CurrState){
-			entity->im_CurrState->Exit();
-			entity->im_CurrState = entity->im_NextState;
-			entity->im_CurrState->Enter();
+	if(entity->GetCurrState() != entity->GetNextState()){
+		if(entity->GetCurrState()){
+			entity->GetCurrState()->Exit();
+			entity->SetCurrState(entity->GetNextState());
+			entity->GetCurrState()->Enter();
 		} else{
-			entity->im_CurrState = entity->im_NextState;
+			entity->SetCurrState(entity->GetNextState());
 		}
 	}
 }
@@ -38,9 +38,9 @@ void StateMachine<T, Type>::ChangeCurrState(Type* const entity){
 template <class T, typename Type>
 void StateMachine<T, Type>::UpdateCurrState(Type* const entity, const double dt){
 	assert(entity && "entity must be initialized!");
-	assert(entity->im_CurrState && "entity->im_CurrState must be initialized!");
+	assert(entity->GetCurrState() && "entity->GetCurrState() must be initialized!");
 
-	entity->im_CurrState->Update(dt);
+	entity->GetCurrState()->Update(dt);
 }
 
 template <class T, typename Type>
