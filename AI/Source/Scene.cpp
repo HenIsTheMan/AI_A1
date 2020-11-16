@@ -5,13 +5,10 @@
 #include "App.h"
 #include "SpriteAni.h"
 
-#include "StateAttack.h"
-#include "StateDead.h"
-#include "StateHeal.h"
-#include "StateIdle.h"
-#include "StateImmune.h"
-#include "StateMultiply.h"
-#include "StateRevive.h"
+#include "StateSkeleIdle.h"
+#include "StateSkeleAttack.h"
+#include "StateSkeleDead.h"
+#include "StateSkeleRevive.h"
 
 extern int winWidth;
 extern int winHeight;
@@ -39,9 +36,9 @@ Scene::Scene():
 
 	objPool->CreateObjs(10000);
 
-	skeleSM->AddState(StateID::StateIdle, new State(StateIdle::Enter, StateIdle::Update, StateIdle::Exit));
-	skeleSM->AddState(StateID::StateAttack, new State(StateAttack::Enter, StateAttack::Update, StateAttack::Exit));
-	skeleSM->AddState(StateID::StateDead, new State(StateDead::Enter, StateDead::Update, StateDead::Exit));
+	skeleSM->AddState(StateID::StateSkeleIdle, new State(StateSkeleIdle::Enter, StateSkeleIdle::Update, StateSkeleIdle::Exit));
+	skeleSM->AddState(StateID::StateSkeleAttack, new State(StateSkeleAttack::Enter, StateSkeleAttack::Update, StateSkeleAttack::Exit));
+	skeleSM->AddState(StateID::StateSkeleDead, new State(StateSkeleDead::Enter, StateSkeleDead::Update, StateSkeleDead::Exit));
 }
 
 Scene::~Scene(){
@@ -590,12 +587,21 @@ void Scene::RenderSceneText(){
 }
 
 Entity* Scene::CreateSkele() const{
+	Entity* entity = objPool->RetrieveInactiveObj();
+
+	return entity;
 }
 
 Entity* Scene::CreateReptile() const{
+	Entity* entity = objPool->RetrieveInactiveObj();
+
+	return entity;
 }
 
 Entity* Scene::CreateBoy() const{
+	Entity* entity = objPool->RetrieveInactiveObj();
+
+	return entity;
 }
 
 Entity* Scene::CreateOrc() const{
@@ -616,6 +622,8 @@ Entity* Scene::CreateOrc() const{
 	entity->SetTarget(nullptr);
 
 	entity->SetStateMachine(orcSM);
-	entity->SetCurrState();
-	entity->SetNextState(const State* const nextState);
+	//entity->SetCurrState(orcSM->GetState(StateID::StateOrcIdle));
+	//entity->SetNextState(orcSM->GetState(StateID::StateOrcIdle));
+
+	return entity;
 }

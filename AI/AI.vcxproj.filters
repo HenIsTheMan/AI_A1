@@ -123,27 +123,6 @@
     <ClInclude Include="Source\StateID.hpp">
       <Filter>State</Filter>
     </ClInclude>
-    <ClInclude Include="Source\StateDead.h">
-      <Filter>State\States</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StateHeal.h">
-      <Filter>State\States</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StateMultiply.h">
-      <Filter>State\States</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StateRevive.h">
-      <Filter>State\States</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StateImmune.h">
-      <Filter>State\States</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StateAttack.h">
-      <Filter>State\States</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StateIdle.h">
-      <Filter>State\States</Filter>
-    </ClInclude>
     <ClInclude Include="Source\EventID.hpp">
       <Filter>Event</Filter>
     </ClInclude>
@@ -179,6 +158,18 @@
     </ClInclude>
     <ClInclude Include="Source\EventLeaving.h">
       <Filter>Event\Events\Pre-events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateSkeleAttack.h">
+      <Filter>State\States\SkeleStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateSkeleDead.h">
+      <Filter>State\States\SkeleStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateSkeleIdle.h">
+      <Filter>State\States\SkeleStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateSkeleRevive.h">
+      <Filter>State\States\SkeleStates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +218,18 @@
     <Filter Include="Event\Events\Pre-events">
       <UniqueIdentifier>{9e8aa6a4-dd6d-49e2-b73b-c16162b7b821}</UniqueIdentifier>
     </Filter>
+    <Filter Include="State\States\SkeleStates">
+      <UniqueIdentifier>{7821e776-cfe6-464c-8598-4ca860602e67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State\States\ReptileStates">
+      <UniqueIdentifier>{c72cc829-8126-47ca-8d7a-655a2138fa1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State\States\BoyStates">
+      <UniqueIdentifier>{42f8ee01-1aef-4c1e-b772-44d649e964e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="State\States\OrcStates">
+      <UniqueIdentifier>{b82bba0b-9b28-4c9a-9b91-83e5d6b421d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Grid.inl">
@@ -247,29 +250,20 @@
     <None Include="Source\StateMachine.inl">
       <Filter>State</Filter>
     </None>
-    <None Include="Source\StateMultiply.inl">
-      <Filter>State\States</Filter>
-    </None>
-    <None Include="Source\StateRevive.inl">
-      <Filter>State\States</Filter>
-    </None>
-    <None Include="Source\StateImmune.inl">
-      <Filter>State\States</Filter>
-    </None>
-    <None Include="Source\StateIdle.inl">
-      <Filter>State\States</Filter>
-    </None>
-    <None Include="Source\StateAttack.inl">
-      <Filter>State\States</Filter>
-    </None>
-    <None Include="Source\StateDead.inl">
-      <Filter>State\States</Filter>
-    </None>
-    <None Include="Source\StateHeal.inl">
-      <Filter>State\States</Filter>
-    </None>
     <None Include="Source\Publisher.cpp">
       <Filter>Event</Filter>
+    </None>
+    <None Include="Source\StateSkeleAttack.inl">
+      <Filter>State\States\SkeleStates</Filter>
+    </None>
+    <None Include="Source\StateSkeleDead.inl">
+      <Filter>State\States\SkeleStates</Filter>
+    </None>
+    <None Include="Source\StateSkeleIdle.inl">
+      <Filter>State\States\SkeleStates</Filter>
+    </None>
+    <None Include="Source\StateSkeleRevive.inl">
+      <Filter>State\States\SkeleStates</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -132,23 +132,23 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
-	void Entity<T, Type>::SetTarget(const Entity<T, Type>* const target){
+	void Entity<T, Type>::SetTarget(Entity<T, Type>* const target){
 		im_Attribs.im_Target = target;
 	}
 
 	template <class T, typename Type>
-	void Entity<T, Type>::SetStateMachine(const StateMachine<StateID, Entity<T, Type>>* const stateMachine){
+	void Entity<T, Type>::SetStateMachine(StateMachine<StateID, Entity<T, Type>>* const stateMachine){
 		im_Attribs.im_StateMachine = stateMachine;
 	}
 
 	template <class T, typename Type>
 	void Entity<T, Type>::SetCurrState(const State* const currState){
-		im_Attribs.im_CurrState = currState;
+		im_Attribs.im_CurrState = const_cast<State* const>(currState);
 	}
 
 	template <class T, typename Type>
 	void Entity<T, Type>::SetNextState(const State* const nextState){
-		im_Attribs.im_NextState = nextState;
+		im_Attribs.im_NextState = const_cast<State* const>(nextState);
 	}
 
 	#if defined ENTITY_T_IS_VEC3

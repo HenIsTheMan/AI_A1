@@ -43,9 +43,9 @@ namespace Obj{
 		void SetRange(const Type& range);
 		void SetHealth(const Type& health);
 		void SetTimeLeft(const Type& timeLeft);
-		void SetTarget(const Entity<T, Type>* const target);
+		void SetTarget(Entity<T, Type>* const target);
 
-		void SetStateMachine(const StateMachine<StateID, Entity<T, Type>>* const stateMachine);
+		void SetStateMachine(StateMachine<StateID, Entity<T, Type>>* const stateMachine);
 		void SetCurrState(const State* const currState);
 		void SetNextState(const State* const nextState);
 

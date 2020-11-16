@@ -8,7 +8,7 @@ template <class T, typename Type>
 void StateMachine<T, Type>::AddState(const T& stateID, State* const state){
 	assert(state && "Var 'state' must be initialized!");
 
-	im_States.emplace({stateID, state});
+	im_States.insert({stateID, state});
 }
 
 template <class T, typename Type>
