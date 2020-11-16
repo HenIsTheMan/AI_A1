@@ -3,6 +3,7 @@
 class State final{
 public:
 	State();
+	State(void (* const enter)(), void (* const update)(const double dt), void (* const exit)());
 	~State() = default;
 
 	///Setters

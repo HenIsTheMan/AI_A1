@@ -1,9 +1,14 @@
 #include "State.h"
 
 State::State():
-	im_Enter(nullptr),
-	im_Update(nullptr),
-	im_Exit(nullptr)
+	State(nullptr, nullptr, nullptr)
+{
+}
+
+State::State(void (* const enter)(), void (* const update)(const double dt), void (* const exit)()):
+	im_Enter(enter),
+	im_Update(update),
+	im_Exit(exit)
 {
 }
 

@@ -16,6 +16,9 @@
 #include "StateID.hpp"
 #include "StateMachine.h"
 
+using Entity = Obj::Entity<Vector3, float>; //Can because Entity<Vector3, float> is in another namespace
+using SM = StateMachine<StateID, Entity>;
+
 class Scene final: public SceneSupport{
 public:
 	Scene();
@@ -37,7 +40,19 @@ protected:
 
 	bool isDay;
 	float dayNightBT;
-	ObjPool<Obj::Entity<Vector3, float>>* objPool;
+	ObjPool<Entity>* objPool;
+
+	//* Shared SMs
+	SM* skeleSM;
+	SM* reptileSM;
+	SM* boySM;
+	SM* orcSM;
+	//*/
+
+	Entity* CreateSkele() const;
+	Entity* CreateReptile() const;
+	Entity* CreateBoy() const;
+	Entity* CreateOrc() const;
 
 	void UpdateGridData();
 	void UpdateGridProperties();

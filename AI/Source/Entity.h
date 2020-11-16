@@ -19,6 +19,8 @@ namespace Obj{
 		const Type& GetSpd() const;
 		int GetStepsLeft() const;
 
+		const Type& GetDmg() const;
+		const Type& GetRange() const;
 		const Type& GetHealth() const;
 		const Type& GetTimeLeft() const;
 		const Entity<T, Type>* GetTarget() const;
@@ -37,6 +39,8 @@ namespace Obj{
 		void SetSpd(const Type& spd);
 		void SetStepsLeft(const int stepsLeft);
 
+		void SetDmg(const Type& dmg);
+		void SetRange(const Type& range);
 		void SetHealth(const Type& health);
 		void SetTimeLeft(const Type& timeLeft);
 		void SetTarget(const Entity<T, Type>* const target);
@@ -48,6 +52,7 @@ namespace Obj{
 		#if defined ENTITY_T_IS_VEC3
 		void SetLocalPos(const Type& x, const Type& y, const Type& z);
 		void SetLocalScale(const Type& x, const Type& y, const Type& z);
+		void SetDir(const Type& x, const Type& y, const Type& z);
 		#endif
 		//*/
 	private:

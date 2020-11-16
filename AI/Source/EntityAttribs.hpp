@@ -27,6 +27,8 @@ namespace Obj{
 		Type im_Spd = Type();
 		int im_StepsLeft = 0;
 
+		Type im_Dmg = Type();
+		Type im_Range = Type();
 		Type im_Health = Type();
 		Type im_TimeLeft = Type();
 		Entity<T, Type>* im_Target = nullptr;

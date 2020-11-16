@@ -42,6 +42,16 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
+	const Type& Entity<T, Type>::GetDmg() const{
+		return im_Attribs.im_Dmg;
+	}
+
+	template <class T, typename Type>
+	const Type& Entity<T, Type>::GetRange() const{
+		return im_Attribs.im_Range;
+	}
+
+	template <class T, typename Type>
 	const Type& Entity<T, Type>::GetHealth() const{
 		return im_Attribs.im_Health;
 	}
@@ -102,6 +112,16 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
+	void Entity<T, Type>::SetDmg(const Type& dmg){
+		im_Attribs.im_Dmg = dmg;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetRange(const Type& range){
+		im_Attribs.im_Range = range;
+	}
+
+	template <class T, typename Type>
 	void Entity<T, Type>::SetHealth(const Type& health){
 		im_Attribs.im_Health = health;
 	}
@@ -140,6 +160,11 @@ namespace Obj{
 	template <class T, typename Type>
 	void Entity<T, Type>::SetLocalScale(const Type& x, const Type& y, const Type& z){
 		im_Attribs.im_LocalScale = T(x, y, z);
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetDir(const Type& x, const Type& y, const Type& z){
+		im_Attribs.im_Dir = T(x, y, z);
 	}
 	#endif
 }

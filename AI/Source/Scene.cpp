@@ -5,10 +5,16 @@
 #include "App.h"
 #include "SpriteAni.h"
 
+#include "StateAttack.h"
+#include "StateDead.h"
+#include "StateHeal.h"
+#include "StateIdle.h"
+#include "StateImmune.h"
+#include "StateMultiply.h"
+#include "StateRevive.h"
+
 extern int winWidth;
 extern int winHeight;
-
-using Entity = Obj::Entity<Vector3, float>;
 
 Scene::Scene():
 	gridCellWidth(40.0f),
@@ -23,17 +29,42 @@ Scene::Scene():
 	grid(Grid<float>(0.0f, 0.0f, 0.0f, 0, 0)),
 	isDay(false),
 	dayNightBT(0.0f),
-	objPool(new ObjPool<Entity>())
+	objPool(new ObjPool<Entity>()),
+	skeleSM(new SM()),
+	reptileSM(new SM()),
+	boySM(new SM()),
+	orcSM(new SM())
 {
 	Math::InitRNG();
 
 	objPool->CreateObjs(10000);
+
+	skeleSM->AddState(StateID::StateIdle, new State(StateIdle::Enter, StateIdle::Update, StateIdle::Exit));
+	skeleSM->AddState(StateID::StateAttack, new State(StateAttack::Enter, StateAttack::Update, StateAttack::Exit));
+	skeleSM->AddState(StateID::StateDead, new State(StateDead::Enter, StateDead::Update, StateDead::Exit));
 }
 
 Scene::~Scene(){
 	if(objPool){
 		delete objPool;
 		objPool = nullptr;
+	}
+
+	if(skeleSM){
+		delete skeleSM;
+		skeleSM = nullptr;
+	}
+	if(reptileSM){
+		delete reptileSM;
+		reptileSM = nullptr;
+	}
+	if(boySM){
+		delete boySM;
+		boySM = nullptr;
+	}
+	if(orcSM){
+		delete orcSM;
+		orcSM = nullptr;
 	}
 }
 
@@ -248,10 +279,7 @@ void Scene::UpdateEntities(){
 	static int control = 0;
 
 	if(control != 1){
-		Entity* orc = objPool->RetrieveInactiveObj();
-		orc->SetType(Obj::EntityType::Orc);
-		orc->SetLocalPos(2.0f, 1.0f, 0.0f);
-		orc->SetLocalScale(1.0f, 1.0f, 1.0f);
+		Entity* orc = CreateOrc();
 		++control;
 	}
 
@@ -559,4 +587,35 @@ void Scene::RenderSceneText(){
 	//	textSize * 0.0f,
 	//	TextAlignment::Right
 	//);
+}
+
+Entity* Scene::CreateSkele() const{
+}
+
+Entity* Scene::CreateReptile() const{
+}
+
+Entity* Scene::CreateBoy() const{
+}
+
+Entity* Scene::CreateOrc() const{
+	Entity* entity = objPool->RetrieveInactiveObj();
+
+	entity->SetType(Obj::EntityType::Orc);
+	entity->SetLocalPos(2.0f, 1.0f, 0.0f);
+	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
+
+	entity->SetDir(1.0f, 0.0f, 0.0f);
+	entity->SetSpd(50.0f);
+	entity->SetStepsLeft(0);
+
+	entity->SetDmg(10.0f);
+	entity->SetRange(1.0f);
+	entity->SetHealth(100.0f);
+	entity->SetTimeLeft(0.0f);
+	entity->SetTarget(nullptr);
+
+	entity->SetStateMachine(orcSM);
+	entity->SetCurrState();
+	entity->SetNextState(const State* const nextState);
 }
