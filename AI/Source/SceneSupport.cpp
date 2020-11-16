@@ -6,6 +6,7 @@
 #include "App.h"
 #include "LoadImg.h"
 
+extern double mouseScrollWheelYOffset;
 extern int winWidth;
 extern int winHeight;
 
@@ -172,13 +173,9 @@ void SceneSupport::Update(double dt){
 		isF2 = false;
 	}
 
-	if(App::Key('Q')){
-		orthoProjectionScaleFactor -= dt;
-	}
-	if(App::Key('E')){
-		orthoProjectionScaleFactor += dt;
-	}
+	orthoProjectionScaleFactor -= dt * mouseScrollWheelYOffset * 5.0;
 	orthoProjectionScaleFactor = Math::Clamp(orthoProjectionScaleFactor, 0.3, 1.0);
+	mouseScrollWheelYOffset = 0.0;
 
 	static_cast<SpriteAni*>(meshList[(int)GeoType::DayBG])->Update(elapsedTime);
 	static_cast<SpriteAni*>(meshList[(int)GeoType::NightBG])->Update(elapsedTime);

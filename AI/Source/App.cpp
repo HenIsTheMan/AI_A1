@@ -16,6 +16,8 @@ GLFWwindow* im_window;
 const unsigned char FPS = 60; // FPS of this game
 const unsigned int frameTime = 1000 / FPS; // time for each frame
 
+///Shld be members of App instead
+double mouseScrollWheelYOffset;
 int winWidth;
 int winHeight;
 
@@ -44,6 +46,10 @@ bool App::IsMousePressed(unsigned short key) //0 - Left, 1 - Right, 2 - Middle
 void App::GetCursorPos(double* xpos, double* ypos)
 {
 	glfwGetCursorPos(im_window, xpos, ypos);
+}
+
+static void ScrollCallback(GLFWwindow*, double xOffset, double yOffset){
+	mouseScrollWheelYOffset += yOffset;
 }
 
 void App::Init(){
@@ -75,6 +81,7 @@ void App::Init(){
 	glfwMakeContextCurrent(im_window);
 
 	glfwSetWindowSizeCallback(im_window, resize_callback);
+	glfwSetScrollCallback(im_window, ScrollCallback);
 
 	glewExperimental = true; // Needed for core profile
 	//Initialize GLEW
