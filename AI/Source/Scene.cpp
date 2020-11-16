@@ -51,25 +51,25 @@ Scene::Scene():
 
 	objPool->CreateObjs(10000);
 
-	skeleSM->AddState(StateID::StateSkeleIdle, new State(StateSkeleIdle::Enter, StateSkeleIdle::Update, StateSkeleIdle::Exit));
-	skeleSM->AddState(StateID::StateSkeleAttack, new State(StateSkeleAttack::Enter, StateSkeleAttack::Update, StateSkeleAttack::Exit));
-	skeleSM->AddState(StateID::StateSkeleDead, new State(StateSkeleDead::Enter, StateSkeleDead::Update, StateSkeleDead::Exit));
-	skeleSM->AddState(StateID::StateSkeleRevive, new State(StateSkeleRevive::Enter, StateSkeleRevive::Update, StateSkeleRevive::Exit));
+	skeleSM->AddState(new State(StateID::StateSkeleIdle, StateSkeleIdle::Enter, StateSkeleIdle::Update, StateSkeleIdle::Exit));
+	skeleSM->AddState(new State(StateID::StateSkeleAttack, StateSkeleAttack::Enter, StateSkeleAttack::Update, StateSkeleAttack::Exit));
+	skeleSM->AddState(new State(StateID::StateSkeleDead, StateSkeleDead::Enter, StateSkeleDead::Update, StateSkeleDead::Exit));
+	skeleSM->AddState(new State(StateID::StateSkeleRevive, StateSkeleRevive::Enter, StateSkeleRevive::Update, StateSkeleRevive::Exit));
 
-	reptileSM->AddState(StateID::StateReptileIdle, new State(StateReptileIdle::Enter, StateReptileIdle::Update, StateReptileIdle::Exit));
-	reptileSM->AddState(StateID::StateReptileAttack, new State(StateReptileAttack::Enter, StateReptileAttack::Update, StateReptileAttack::Exit));
-	reptileSM->AddState(StateID::StateReptileDead, new State(StateReptileDead::Enter, StateReptileDead::Update, StateReptileDead::Exit));
-	reptileSM->AddState(StateID::StateReptileMultiply, new State(StateReptileMultiply::Enter, StateReptileMultiply::Update, StateReptileMultiply::Exit));
+	reptileSM->AddState(new State(StateID::StateReptileIdle, StateReptileIdle::Enter, StateReptileIdle::Update, StateReptileIdle::Exit));
+	reptileSM->AddState(new State(StateID::StateReptileAttack, StateReptileAttack::Enter, StateReptileAttack::Update, StateReptileAttack::Exit));
+	reptileSM->AddState(new State(StateID::StateReptileDead, StateReptileDead::Enter, StateReptileDead::Update, StateReptileDead::Exit));
+	reptileSM->AddState(new State(StateID::StateReptileMultiply, StateReptileMultiply::Enter, StateReptileMultiply::Update, StateReptileMultiply::Exit));
 
-	boySM->AddState(StateID::StateBoyIdle, new State(StateBoyIdle::Enter, StateBoyIdle::Update, StateBoyIdle::Exit));
-	boySM->AddState(StateID::StateBoyAttack, new State(StateBoyAttack::Enter, StateBoyAttack::Update, StateBoyAttack::Exit));
-	boySM->AddState(StateID::StateBoyDead, new State(StateBoyDead::Enter, StateBoyDead::Update, StateBoyDead::Exit));
-	boySM->AddState(StateID::StateBoyHeal, new State(StateBoyHeal::Enter, StateBoyHeal::Update, StateBoyHeal::Exit));
+	boySM->AddState(new State(StateID::StateBoyIdle, StateBoyIdle::Enter, StateBoyIdle::Update, StateBoyIdle::Exit));
+	boySM->AddState(new State(StateID::StateBoyAttack, StateBoyAttack::Enter, StateBoyAttack::Update, StateBoyAttack::Exit));
+	boySM->AddState(new State(StateID::StateBoyDead, StateBoyDead::Enter, StateBoyDead::Update, StateBoyDead::Exit));
+	boySM->AddState(new State(StateID::StateBoyHeal, StateBoyHeal::Enter, StateBoyHeal::Update, StateBoyHeal::Exit));
 
-	orcSM->AddState(StateID::StateOrcIdle, new State(StateOrcIdle::Enter, StateOrcIdle::Update, StateOrcIdle::Exit));
-	orcSM->AddState(StateID::StateOrcAttack, new State(StateOrcAttack::Enter, StateOrcAttack::Update, StateOrcAttack::Exit));
-	orcSM->AddState(StateID::StateOrcDead, new State(StateOrcDead::Enter, StateOrcDead::Update, StateOrcDead::Exit));
-	orcSM->AddState(StateID::StateOrcImmune, new State(StateOrcImmune::Enter, StateOrcImmune::Update, StateOrcImmune::Exit));
+	orcSM->AddState(new State(StateID::StateOrcIdle, StateOrcIdle::Enter, StateOrcIdle::Update, StateOrcIdle::Exit));
+	orcSM->AddState(new State(StateID::StateOrcAttack, StateOrcAttack::Enter, StateOrcAttack::Update, StateOrcAttack::Exit));
+	orcSM->AddState(new State(StateID::StateOrcDead, StateOrcDead::Enter, StateOrcDead::Update, StateOrcDead::Exit));
+	orcSM->AddState(new State(StateID::StateOrcImmune, StateOrcImmune::Enter, StateOrcImmune::Update, StateOrcImmune::Exit));
 }
 
 Scene::~Scene(){
@@ -451,7 +451,60 @@ void Scene::RenderEntities(){
 				entityWorldScale.z
 			);
 
-			ManualRenderMesh("OrcMoveDown", elapsedTime, 0.1f, meshList[(int)GeoType::Orc], false);
+			const State* entityCurrState = entity->GetCurrState();
+			switch(entity->GetType()){
+				using namespace Obj;
+
+				case EntityType::Skele:
+					switch(entityCurrState->GetID()){
+						case StateID::StateSkeleIdle:
+							break;
+						case StateID::StateSkeleAttack:
+							break;
+						case StateID::StateSkeleDead:
+							break;
+						case StateID::StateSkeleRevive:
+							break;
+					}
+					break;
+				case EntityType::Reptile:
+					switch(entityCurrState->GetID()){
+						case StateID::StateReptileIdle:
+							break;
+						case StateID::StateReptileAttack:
+							break;
+						case StateID::StateReptileDead:
+							break;
+						case StateID::StateReptileMultiply:
+							break;
+					}
+					break;
+				case EntityType::Boy:
+					switch(entityCurrState->GetID()){
+						case StateID::StateBoyIdle:
+							break;
+						case StateID::StateBoyAttack:
+							break;
+						case StateID::StateBoyDead:
+							break;
+						case StateID::StateBoyHeal:
+							break;
+					}
+					break;
+				case EntityType::Orc:
+					switch(entityCurrState->GetID()){
+						case StateID::StateOrcIdle:
+							ManualRenderMesh("OrcMoveDown", elapsedTime, 0.1f, meshList[(int)GeoType::Orc], false);
+							break;
+						case StateID::StateOrcAttack:
+							break;
+						case StateID::StateOrcDead:
+							break;
+						case StateID::StateOrcImmune:
+							break;
+					}
+					break;
+			}
 
 			modelStack.PopMatrix();
 		}

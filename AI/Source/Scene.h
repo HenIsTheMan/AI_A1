@@ -12,8 +12,8 @@
 #include "ObjPool.h"
 
 ///In this order
+//#include "StateID.hpp" //Shld be here instead
 #include "Entity.h"
-#include "StateID.hpp"
 #include "StateMachine.h"
 
 using Entity = Obj::Entity<Vector3, float>; //Can because Entity<Vector3, float> is in another namespace

@@ -1,15 +1,24 @@
 #include "State.h"
 
 State::State():
-	State(nullptr, nullptr, nullptr)
+	State(StateID::Amt, nullptr, nullptr, nullptr)
 {
 }
 
-State::State(void (* const enter)(), void (* const update)(const double dt), void (* const exit)()):
+State::State(const StateID ID, void (* const enter)(), void (* const update)(const double dt), void (* const exit)()):
+	im_ID(ID),
 	im_Enter(enter),
 	im_Update(update),
 	im_Exit(exit)
 {
+}
+
+StateID State::GetID() const{
+	return im_ID;
+}
+
+void State::SetID(const StateID ID){
+	im_ID = ID;
 }
 
 void State::SetEnter(void (* const enter)()){

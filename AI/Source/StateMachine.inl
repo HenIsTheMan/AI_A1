@@ -13,10 +13,10 @@ StateMachine<T, Type>::~StateMachine<T, Type>(){
 }
 
 template <class T, typename Type>
-void StateMachine<T, Type>::AddState(const T& stateID, State* const state){
+void StateMachine<T, Type>::AddState(State* const state){
 	assert(state && "Var 'state' must be initialized!");
 
-	im_States.insert({stateID, state});
+	im_States.insert({state->GetID(), state});
 }
 
 template <class T, typename Type>

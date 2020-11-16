@@ -8,7 +8,7 @@ public:
 	StateMachine<T, Type>();
 	~StateMachine<T, Type>();
 
-	void AddState(const T& stateID, State* const state);
+	void AddState(State* const state);
 	void ChangeCurrState(Type* const entity);
 	void UpdateCurrState(Type* const entity, const double dt);
 
