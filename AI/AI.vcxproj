@@ -203,6 +203,10 @@
     <ClInclude Include="Source\StateBoyIdle.h" />
     <ClInclude Include="Source\StateID.hpp" />
     <ClInclude Include="Source\StateMachine.h" />
+    <ClInclude Include="Source\StateOrcAttack.h" />
+    <ClInclude Include="Source\StateOrcDead.h" />
+    <ClInclude Include="Source\StateOrcIdle.h" />
+    <ClInclude Include="Source\StateOrcImmune.h" />
     <ClInclude Include="Source\StateReptileAttack.h" />
     <ClInclude Include="Source\StateReptileDead.h" />
     <ClInclude Include="Source\StateReptileIdle.h" />
@@ -230,6 +234,10 @@
     <None Include="Source\StateBoyHeal.inl" />
     <None Include="Source\StateBoyIdle.inl" />
     <None Include="Source\StateMachine.inl" />
+    <None Include="Source\StateOrcAttack.inl" />
+    <None Include="Source\StateOrcDead.inl" />
+    <None Include="Source\StateOrcIdle.inl" />
+    <None Include="Source\StateOrcImmune.inl" />
     <None Include="Source\StateReptileAttack.inl" />
     <None Include="Source\StateReptileDead.inl" />
     <None Include="Source\StateReptileIdle.inl" />
