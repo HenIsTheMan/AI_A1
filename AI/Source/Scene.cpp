@@ -39,6 +39,7 @@ Scene::Scene():
 	skeleSM->AddState(StateID::StateSkeleIdle, new State(StateSkeleIdle::Enter, StateSkeleIdle::Update, StateSkeleIdle::Exit));
 	skeleSM->AddState(StateID::StateSkeleAttack, new State(StateSkeleAttack::Enter, StateSkeleAttack::Update, StateSkeleAttack::Exit));
 	skeleSM->AddState(StateID::StateSkeleDead, new State(StateSkeleDead::Enter, StateSkeleDead::Update, StateSkeleDead::Exit));
+	skeleSM->AddState(StateID::StateSkeleRevive, new State(StateSkeleRevive::Enter, StateSkeleRevive::Update, StateSkeleRevive::Exit));
 }
 
 Scene::~Scene(){

@@ -6,7 +6,7 @@ template <class T, typename Type>
 class StateMachine final{
 public:
 	StateMachine<T, Type>();
-	~StateMachine<T, Type>() = default;
+	~StateMachine<T, Type>();
 
 	void AddState(const T& stateID, State* const state);
 	void ChangeCurrState(Type* const entity);

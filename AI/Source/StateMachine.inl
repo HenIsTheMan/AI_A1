@@ -5,6 +5,14 @@ StateMachine<T, Type>::StateMachine():
 }
 
 template <class T, typename Type>
+StateMachine<T, Type>::~StateMachine<T, Type>(){
+	for(std::pair<T, State*> element: im_States){
+		delete element.second;
+		element.second = nullptr;
+	}
+}
+
+template <class T, typename Type>
 void StateMachine<T, Type>::AddState(const T& stateID, State* const state){
 	assert(state && "Var 'state' must be initialized!");
 

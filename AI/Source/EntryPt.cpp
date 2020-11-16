@@ -30,7 +30,7 @@ void MainProcess(){
 }
 
 int main(const int&, const char* const* const&){
-	(void)_CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF);
+	(void)_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	(void)SetWindowPos(
 		GetConsoleWindow(),
 		0,
