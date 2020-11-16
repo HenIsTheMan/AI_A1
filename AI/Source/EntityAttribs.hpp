@@ -36,5 +36,6 @@ namespace Obj{
 		StateMachine<StateID, Entity<T, Type>>* im_StateMachine = nullptr;
 		State* im_CurrState = nullptr;
 		State* im_NextState = nullptr;
+		std::string im_SpriteAniMiddleName = "";
 	};
 }

@@ -28,6 +28,7 @@ namespace Obj{
 		const StateMachine<StateID, Entity<T, Type>>* GetStateMachine() const;
 		const State* GetCurrState() const;
 		const State* GetNextState() const;
+		const std::string& GetSpriteAniMiddleName() const;
 		//*/
 
 		//* Setters
@@ -48,6 +49,7 @@ namespace Obj{
 		void SetStateMachine(StateMachine<StateID, Entity<T, Type>>* const stateMachine);
 		void SetCurrState(const State* const currState);
 		void SetNextState(const State* const nextState);
+		void SetSpriteAniMiddleName(const std::string& spriteAniMiddleName);
 
 		#if defined ENTITY_T_IS_VEC3
 		void SetLocalPos(const Type& x, const Type& y, const Type& z);

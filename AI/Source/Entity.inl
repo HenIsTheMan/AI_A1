@@ -82,6 +82,11 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
+	const std::string& Entity<T, Type>::GetSpriteAniMiddleName() const{
+		return im_Attribs.im_SpriteAniMiddleName;
+	}
+
+	template <class T, typename Type>
 	void Entity<T, Type>::SetType(const EntityType type){
 		im_Attribs.im_Type = type;
 	}
@@ -149,6 +154,11 @@ namespace Obj{
 	template <class T, typename Type>
 	void Entity<T, Type>::SetNextState(const State* const nextState){
 		im_Attribs.im_NextState = const_cast<State* const>(nextState);
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetSpriteAniMiddleName(const std::string& spriteAniMiddleName){
+		im_Attribs.im_SpriteAniMiddleName = spriteAniMiddleName;
 	}
 
 	#if defined ENTITY_T_IS_VEC3

@@ -511,6 +511,17 @@ void Scene::RenderAnimatedEntities(const Entity* const entity){
 			break;
 	}
 
+	const std::string& entitySpriteAniMiddleName = entity->GetSpriteAniMiddleName();
+	assert(entitySpriteAniMiddleName != "");
+
+	spriteAniName += entitySpriteAniMiddleName;
+	if(entitySpriteAniMiddleName == "Static"){
+		spriteAniDelay = 1.0f;
+	} else if(entitySpriteAniMiddleName == "Move"){
+		spriteAniDelay = 0.1f;
+	} else if(entitySpriteAniMiddleName == "Attack"){
+		spriteAniDelay = 0.3f;
+	}
 
 	assert(spriteAniDelay != 0.0f);
 	assert(spriteAniMesh != nullptr);
@@ -729,6 +740,7 @@ Entity* Scene::CreateOrc() const{
 	entity->SetStateMachine(orcSM);
 	entity->SetCurrState(orcSM->GetState(StateID::StateOrcIdle));
 	entity->SetNextState(orcSM->GetState(StateID::StateOrcIdle));
+	entity->SetSpriteAniMiddleName("Static");
 
 	return entity;
 }
