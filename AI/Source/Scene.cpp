@@ -20,6 +20,11 @@
 #include "StateBoyDead.h"
 #include "StateBoyHeal.h"
 
+#include "StateOrcIdle.h"
+#include "StateOrcAttack.h"
+#include "StateOrcDead.h"
+#include "StateOrcImmune.h"
+
 extern int winWidth;
 extern int winHeight;
 
@@ -60,6 +65,11 @@ Scene::Scene():
 	boySM->AddState(StateID::StateBoyAttack, new State(StateBoyAttack::Enter, StateBoyAttack::Update, StateBoyAttack::Exit));
 	boySM->AddState(StateID::StateBoyDead, new State(StateBoyDead::Enter, StateBoyDead::Update, StateBoyDead::Exit));
 	boySM->AddState(StateID::StateBoyHeal, new State(StateBoyHeal::Enter, StateBoyHeal::Update, StateBoyHeal::Exit));
+
+	orcSM->AddState(StateID::StateOrcIdle, new State(StateOrcIdle::Enter, StateOrcIdle::Update, StateOrcIdle::Exit));
+	orcSM->AddState(StateID::StateOrcAttack, new State(StateOrcAttack::Enter, StateOrcAttack::Update, StateOrcAttack::Exit));
+	orcSM->AddState(StateID::StateOrcDead, new State(StateOrcDead::Enter, StateOrcDead::Update, StateOrcDead::Exit));
+	orcSM->AddState(StateID::StateOrcImmune, new State(StateOrcImmune::Enter, StateOrcImmune::Update, StateOrcImmune::Exit));
 }
 
 Scene::~Scene(){
@@ -643,8 +653,8 @@ Entity* Scene::CreateOrc() const{
 	entity->SetTarget(nullptr);
 
 	entity->SetStateMachine(orcSM);
-	//entity->SetCurrState(orcSM->GetState(StateID::StateOrcIdle));
-	//entity->SetNextState(orcSM->GetState(StateID::StateOrcIdle));
+	entity->SetCurrState(orcSM->GetState(StateID::StateOrcIdle));
+	entity->SetNextState(orcSM->GetState(StateID::StateOrcIdle));
 
 	return entity;
 }
