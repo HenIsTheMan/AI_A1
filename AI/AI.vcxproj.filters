@@ -183,6 +183,18 @@
     <ClInclude Include="Source\StateReptileMultiply.h">
       <Filter>State\States\ReptileStates</Filter>
     </ClInclude>
+    <ClInclude Include="Source\StateBoyAttack.h">
+      <Filter>State\States\OrcStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateBoyDead.h">
+      <Filter>State\States\OrcStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateBoyHeal.h">
+      <Filter>State\States\OrcStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateBoyIdle.h">
+      <Filter>State\States\OrcStates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -288,6 +300,18 @@
     </None>
     <None Include="Source\StateReptileMultiply.inl">
       <Filter>State\States\ReptileStates</Filter>
+    </None>
+    <None Include="Source\StateBoyAttack.inl">
+      <Filter>State\States\OrcStates</Filter>
+    </None>
+    <None Include="Source\StateBoyDead.inl">
+      <Filter>State\States\OrcStates</Filter>
+    </None>
+    <None Include="Source\StateBoyHeal.inl">
+      <Filter>State\States\OrcStates</Filter>
+    </None>
+    <None Include="Source\StateBoyIdle.inl">
+      <Filter>State\States\OrcStates</Filter>
     </None>
   </ItemGroup>
 </Project>

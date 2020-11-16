@@ -15,6 +15,11 @@
 #include "StateReptileDead.h"
 #include "StateReptileMultiply.h"
 
+#include "StateBoyIdle.h"
+#include "StateBoyAttack.h"
+#include "StateBoyDead.h"
+#include "StateBoyHeal.h"
+
 extern int winWidth;
 extern int winHeight;
 
@@ -50,6 +55,11 @@ Scene::Scene():
 	reptileSM->AddState(StateID::StateReptileAttack, new State(StateReptileAttack::Enter, StateReptileAttack::Update, StateReptileAttack::Exit));
 	reptileSM->AddState(StateID::StateReptileDead, new State(StateReptileDead::Enter, StateReptileDead::Update, StateReptileDead::Exit));
 	reptileSM->AddState(StateID::StateReptileMultiply, new State(StateReptileMultiply::Enter, StateReptileMultiply::Update, StateReptileMultiply::Exit));
+
+	boySM->AddState(StateID::StateBoyIdle, new State(StateBoyIdle::Enter, StateBoyIdle::Update, StateBoyIdle::Exit));
+	boySM->AddState(StateID::StateBoyAttack, new State(StateBoyAttack::Enter, StateBoyAttack::Update, StateBoyAttack::Exit));
+	boySM->AddState(StateID::StateBoyDead, new State(StateBoyDead::Enter, StateBoyDead::Update, StateBoyDead::Exit));
+	boySM->AddState(StateID::StateBoyHeal, new State(StateBoyHeal::Enter, StateBoyHeal::Update, StateBoyHeal::Exit));
 }
 
 Scene::~Scene(){

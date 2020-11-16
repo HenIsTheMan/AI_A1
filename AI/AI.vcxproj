@@ -197,6 +197,10 @@
     <ClInclude Include="Source\shader.h" />
     <ClInclude Include="Source\SpriteAni.h" />
     <ClInclude Include="Source\State.h" />
+    <ClInclude Include="Source\StateBoyAttack.h" />
+    <ClInclude Include="Source\StateBoyDead.h" />
+    <ClInclude Include="Source\StateBoyHeal.h" />
+    <ClInclude Include="Source\StateBoyIdle.h" />
     <ClInclude Include="Source\StateID.hpp" />
     <ClInclude Include="Source\StateMachine.h" />
     <ClInclude Include="Source\StateReptileAttack.h" />
@@ -221,6 +225,10 @@
     <None Include="Source\Grid.inl" />
     <None Include="Source\ObjPool.inl" />
     <None Include="Source\Publisher.cpp" />
+    <None Include="Source\StateBoyAttack.inl" />
+    <None Include="Source\StateBoyDead.inl" />
+    <None Include="Source\StateBoyHeal.inl" />
+    <None Include="Source\StateBoyIdle.inl" />
     <None Include="Source\StateMachine.inl" />
     <None Include="Source\StateReptileAttack.inl" />
     <None Include="Source\StateReptileDead.inl" />
