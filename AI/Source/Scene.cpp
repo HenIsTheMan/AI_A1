@@ -421,7 +421,7 @@ void Scene::RenderEntities(){
 
 	for(size_t i = 0; i < entityPoolSize; ++i){
 		if(entityPool[i].first){
-			const Entity* const& entity = entityPool[i].second;
+			const Entity* const entity = entityPool[i].second;
 
 			const Vector3& entityLocalPos = entity->GetLocalPos();
 			const Vector3& entityLocalScale = entity->GetLocalScale();
@@ -451,64 +451,85 @@ void Scene::RenderEntities(){
 				entityWorldScale.z
 			);
 
-			const State* entityCurrState = entity->GetCurrState();
-			switch(entity->GetType()){
-				using namespace Obj;
-
-				case EntityType::Skele:
-					switch(entityCurrState->GetID()){
-						case StateID::StateSkeleIdle:
-							break;
-						case StateID::StateSkeleAttack:
-							break;
-						case StateID::StateSkeleDead:
-							break;
-						case StateID::StateSkeleRevive:
-							break;
-					}
+			switch(entity->GetCurrState()->GetID()){
+				case StateID::StateSkeleRevive:
+					ManualRenderMesh("SkeleHibernate", 1.0f, 1.0f, meshList[(int)GeoType::Skele], true, Color(1.0f, 0.0f, 0.0f), 0.8f);
 					break;
-				case EntityType::Reptile:
-					switch(entityCurrState->GetID()){
-						case StateID::StateReptileIdle:
-							break;
-						case StateID::StateReptileAttack:
-							break;
-						case StateID::StateReptileDead:
-							break;
-						case StateID::StateReptileMultiply:
-							break;
-					}
+				case StateID::StateReptileMultiply:
+					ManualRenderMesh("ReptileProcreate", 1.0f, 1.0f, meshList[(int)GeoType::Reptile], true, Color(1.0f, 1.0f, 0.0f), 0.8f);
 					break;
-				case EntityType::Boy:
-					switch(entityCurrState->GetID()){
-						case StateID::StateBoyIdle:
-							break;
-						case StateID::StateBoyAttack:
-							break;
-						case StateID::StateBoyDead:
-							break;
-						case StateID::StateBoyHeal:
-							break;
-					}
+				case StateID::StateBoyHeal:
+					ManualRenderMesh("BoyHeal", 1.0f, 1.0f, meshList[(int)GeoType::Boy], true, Color(0.0f, 1.0f, 0.0f), 0.8f);
 					break;
-				case EntityType::Orc:
-					switch(entityCurrState->GetID()){
-						case StateID::StateOrcIdle:
-							ManualRenderMesh("OrcMoveDown", elapsedTime, 0.1f, meshList[(int)GeoType::Orc], false);
-							break;
-						case StateID::StateOrcAttack:
-							break;
-						case StateID::StateOrcDead:
-							break;
-						case StateID::StateOrcImmune:
-							break;
-					}
+				case StateID::StateOrcImmune:
+					ManualRenderMesh("OrcImmune", 1.0f, 1.0f, meshList[(int)GeoType::Orc], true, Color(0.0f, 0.0f, 1.0f), 0.8f);
 					break;
+				case StateID::StateSkeleDead:
+					ManualRenderMesh("SkeleFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Skele], false);
+					break;
+				case StateID::StateReptileDead:
+					ManualRenderMesh("ReptileFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Reptile], false);
+					break;
+				case StateID::StateBoyDead:
+					ManualRenderMesh("BoyFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Boy], false);
+					break;
+				case StateID::StateOrcDead:
+					ManualRenderMesh("OrcFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Orc], false);
+					break;
+				default:
+					RenderAnimatedEntities(entity);
 			}
 
 			modelStack.PopMatrix();
 		}
 	}
+}
+
+void Scene::RenderAnimatedEntities(const Entity* const entity){
+	float spriteAniDelay = 0.0f;
+	Mesh* spriteAniMesh = nullptr;
+	std::string spriteAniName;
+
+	switch(entity->GetType()){
+		using namespace Obj;
+
+		case EntityType::Skele:
+			spriteAniMesh = meshList[(int)GeoType::Skele];
+			spriteAniName += "Skele";
+			break;
+		case EntityType::Reptile:
+			spriteAniMesh = meshList[(int)GeoType::Reptile];
+			spriteAniName += "Reptile";
+			break;
+		case EntityType::Boy:
+			spriteAniMesh = meshList[(int)GeoType::Boy];
+			spriteAniName += "Boy";
+			break;
+		case EntityType::Orc:
+			spriteAniMesh = meshList[(int)GeoType::Orc];
+			spriteAniName += "Orc";
+			break;
+	}
+
+
+	assert(spriteAniDelay != 0.0f);
+	assert(spriteAniMesh != nullptr);
+	assert(spriteAniName != "");
+
+	const Vector3& dir = entity->GetDir();
+	if(dir == Vector3(1.0f, 0.0f, 0.0f)){
+		spriteAniName += (std::string)"Right";
+	} else if(dir == Vector3(-1.0f, 0.0f, 0.0f)){
+		spriteAniName += (std::string)"Left";
+	} else if(dir == Vector3(0.0f, 1.0f, 0.0f)){
+		spriteAniName += (std::string)"Up";
+	} else if(dir == Vector3(0.0f, -1.0f, 0.0f)){
+		spriteAniName += (std::string)"Down";
+	} else{
+		assert(false && "Entity has invalid dir!");
+	}
+
+	ManualRenderMesh(spriteAniName, elapsedTime, spriteAniDelay, spriteAniMesh, false);
 }
 
 void Scene::RenderTranslucentBlock(){
