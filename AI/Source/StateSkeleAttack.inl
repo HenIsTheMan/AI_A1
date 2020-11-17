@@ -1,8 +1,8 @@
-void StateSkeleAttack::Enter(){
+void StateSkeleAttack::Enter(Entity* const entity){
 }
 
-void StateSkeleAttack::Update(const double dt){
+void StateSkeleAttack::Update(Entity* const entity, const double dt){
 }
 
-void StateSkeleAttack::Exit(){
+void StateSkeleAttack::Exit(Entity* const entity){
 }

@@ -1,8 +1,8 @@
-void StateReptileIdle::Enter(){
+void StateReptileIdle::Enter(Entity* const entity){
 }
 
-void StateReptileIdle::Update(const double dt){
+void StateReptileIdle::Update(Entity* const entity, const double dt){
 }
 
-void StateReptileIdle::Exit(){
+void StateReptileIdle::Exit(Entity* const entity){
 }

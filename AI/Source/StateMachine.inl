@@ -26,9 +26,9 @@ void StateMachine<T, Type>::ChangeCurrState(Type* const entity){
 
 	if(entity->GetCurrState() != entity->GetNextState()){
 		if(entity->GetCurrState()){
-			entity->GetCurrState()->Exit();
+			entity->GetCurrState()->Exit(entity);
 			entity->SetCurrState(entity->GetNextState());
-			entity->GetCurrState()->Enter();
+			entity->GetCurrState()->Enter(entity);
 		} else{
 			entity->SetCurrState(entity->GetNextState());
 		}
@@ -40,7 +40,7 @@ void StateMachine<T, Type>::UpdateCurrState(Type* const entity, const double dt)
 	assert(entity && "entity must be initialized!");
 	assert(entity->GetCurrState() && "entity->GetCurrState() must be initialized!");
 
-	entity->GetCurrState()->Update(dt);
+	entity->GetCurrState()->Update(entity, dt);
 }
 
 template <class T, typename Type>

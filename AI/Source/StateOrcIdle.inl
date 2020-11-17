@@ -1,8 +1,8 @@
-void StateOrcIdle::Enter(){
+void StateOrcIdle::Enter(Entity* const entity){
 }
 
-void StateOrcIdle::Update(const double dt){
+void StateOrcIdle::Update(Entity* const entity, const double dt){
 }
 
-void StateOrcIdle::Exit(){
+void StateOrcIdle::Exit(Entity* const entity){
 }

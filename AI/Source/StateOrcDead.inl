@@ -1,8 +1,8 @@
-void StateOrcDead::Enter(){
+void StateOrcDead::Enter(Entity* const entity){
 }
 
-void StateOrcDead::Update(const double dt){
+void StateOrcDead::Update(Entity* const entity, const double dt){
 }
 
-void StateOrcDead::Exit(){
+void StateOrcDead::Exit(Entity* const entity){
 }

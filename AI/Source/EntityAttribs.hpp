@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Vector3.h"
-
 #include "EntityType.hpp"
 #include "State.h"
 

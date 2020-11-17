@@ -1,8 +1,8 @@
-void StateOrcImmune::Enter(){
+void StateOrcImmune::Enter(Entity* const entity){
 }
 
-void StateOrcImmune::Update(const double dt){
+void StateOrcImmune::Update(Entity* const entity, const double dt){
 }
 
-void StateOrcImmune::Exit(){
+void StateOrcImmune::Exit(Entity* const entity){
 }

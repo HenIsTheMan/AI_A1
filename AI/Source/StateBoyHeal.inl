@@ -1,8 +1,8 @@
-void StateBoyHeal::Enter(){
+void StateBoyHeal::Enter(Entity* const entity){
 }
 
-void StateBoyHeal::Update(const double dt){
+void StateBoyHeal::Update(Entity* const entity, const double dt){
 }
 
-void StateBoyHeal::Exit(){
+void StateBoyHeal::Exit(Entity* const entity){
 }

@@ -1,8 +1,8 @@
-void StateSkeleRevive::Enter(){
+void StateSkeleRevive::Enter(Entity* const entity){
 }
 
-void StateSkeleRevive::Update(const double dt){
+void StateSkeleRevive::Update(Entity* const entity, const double dt){
 }
 
-void StateSkeleRevive::Exit(){
+void StateSkeleRevive::Exit(Entity* const entity){
 }

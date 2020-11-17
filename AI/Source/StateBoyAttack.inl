@@ -1,8 +1,8 @@
-void StateBoyAttack::Enter(){
+void StateBoyAttack::Enter(Entity* const entity){
 }
 
-void StateBoyAttack::Update(const double dt){
+void StateBoyAttack::Update(Entity* const entity, const double dt){
 }
 
-void StateBoyAttack::Exit(){
+void StateBoyAttack::Exit(Entity* const entity){
 }

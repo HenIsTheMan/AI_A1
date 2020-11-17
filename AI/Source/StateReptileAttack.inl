@@ -1,8 +1,8 @@
-void StateReptileAttack::Enter(){
+void StateReptileAttack::Enter(Entity* const entity){
 }
 
-void StateReptileAttack::Update(const double dt){
+void StateReptileAttack::Update(Entity* const entity, const double dt){
 }
 
-void StateReptileAttack::Exit(){
+void StateReptileAttack::Exit(Entity* const entity){
 }

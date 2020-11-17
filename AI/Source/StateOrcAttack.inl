@@ -1,8 +1,8 @@
-void StateOrcAttack::Enter(){
+void StateOrcAttack::Enter(Entity* const entity){
 }
 
-void StateOrcAttack::Update(const double dt){
+void StateOrcAttack::Update(Entity* const entity, const double dt){
 }
 
-void StateOrcAttack::Exit(){
+void StateOrcAttack::Exit(Entity* const entity){
 }

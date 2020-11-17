@@ -1,8 +1,8 @@
-void StateReptileDead::Enter(){
+void StateReptileDead::Enter(Entity* const entity){
 }
 
-void StateReptileDead::Update(const double dt){
+void StateReptileDead::Update(Entity* const entity, const double dt){
 }
 
-void StateReptileDead::Exit(){
+void StateReptileDead::Exit(Entity* const entity){
 }
