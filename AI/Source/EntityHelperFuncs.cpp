@@ -61,7 +61,7 @@ void ChooseBetween2Dirs(Entity* const entity, const Grid<float>* const grid, con
 	NotMovingInEitherDirs(entity, commonDirs);
 }
 
-void ChooseRandPairOfParallelDirs(Vector3 (&commonDirs)[2]){
+void ChooseRandPairOfPerpendicularDirs(Vector3 (&commonDirs)[2]){
 	switch(Math::RandIntMinMax(0, 3)){
 		case 0:
 			commonDirs[0] = Vector3(0.0f, 1.0f, 0.0f);

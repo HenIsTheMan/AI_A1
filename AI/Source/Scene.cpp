@@ -334,7 +334,7 @@ void Scene::UpdateStates(){
 
 	static float updateCommonDirBT = 0.0f;
 	if(updateCommonDirBT <= elapsedTime){
-		ChooseRandPairOfParallelDirs(stateReptileIdle->im_CommonDirs);
+		ChooseRandPairOfPerpendicularDirs(stateReptileIdle->im_CommonDirs);
 		updateCommonDirBT = elapsedTime + 1.0f;
 	}
 
