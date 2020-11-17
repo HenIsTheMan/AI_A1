@@ -35,6 +35,7 @@ public:
 		Block,
 		GridBG,
 		GridLine,
+		HealthBar,
 		Skele,
 		Reptile,
 		Boy,

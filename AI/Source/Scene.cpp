@@ -499,7 +499,6 @@ void Scene::RenderEntities(){
 				entityWorldPos.y,
 				entityWorldPos.z
 			);
-
 			modelStack.Scale(
 				entityWorldScale.x,
 				entityWorldScale.y,
@@ -534,6 +533,43 @@ void Scene::RenderEntities(){
 				default:
 					RenderEntitiesPart2(entity);
 			}
+
+			///Render health bar
+			const float ratio = (float)entity->GetCurrHealth() / (float)entity->GetMaxHealth();
+
+			modelStack.PushMatrix();
+
+			modelStack.Translate(
+				0.0f,
+				0.4f,
+				0.2f + individualDepthOffset
+			);
+			modelStack.Scale(
+				0.9f,
+				0.1f,
+				1.0f
+			);
+
+			modelStack.PushMatrix();
+
+			modelStack.Translate(
+				-(1.f - ratio) * 0.5f,
+				0.0f,
+				0.0f
+			);
+			modelStack.Scale(
+				ratio,
+				1.0f,
+				1.0f
+			);
+
+			RenderMesh(meshList[(int)GeoType::HealthBar], true, Color(0.0f, 1.0f, 0.0f), 0.5f);
+
+			modelStack.PopMatrix();
+
+			RenderMesh(meshList[(int)GeoType::HealthBar], true, Color(1.0f, 0.0f, 0.0f), 0.5f);
+
+			modelStack.PopMatrix();
 
 			modelStack.PopMatrix();
 
