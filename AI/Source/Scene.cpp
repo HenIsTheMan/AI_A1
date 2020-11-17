@@ -454,6 +454,8 @@ void Scene::RenderEntities(){
 	const float xPosOffset = ((float)winWidth - gridWidth) * 0.5f + gridCellWidth * 0.5f + gridLineThickness;
 	const float yPosOffset = ((float)winHeight - gridHeight) * 0.5f + gridCellHeight * 0.5f + gridLineThickness;
 
+	static float individualDepthOffset = 0.0f;
+
 	for(size_t i = 0; i < entityPoolSize; ++i){
 		if(entityPool[i].first){
 			const Entity* const entity = entityPool[i].second;
@@ -464,7 +466,7 @@ void Scene::RenderEntities(){
 			const Vector3& entityWorldPos = Vector3(
 				xPosOffset + entityLocalPos.x * (gridCellWidth + gridLineThickness),
 				yPosOffset + entityLocalPos.y * (gridCellHeight + gridLineThickness),
-				0.1f
+				0.1f + individualDepthOffset
 			);
 			const Vector3& entityWorldScale = Vector3(
 				entityLocalScale.x * gridCellWidth,
@@ -516,8 +518,12 @@ void Scene::RenderEntities(){
 			}
 
 			modelStack.PopMatrix();
+
+			individualDepthOffset += 0.01f;
 		}
 	}
+
+	individualDepthOffset = 0.0f;
 }
 
 void Scene::RenderEntitiesPart2(const Entity* const entity){

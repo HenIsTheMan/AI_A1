@@ -353,8 +353,8 @@ void SceneSupport::Render(){
 		(double)winWidth * 0.5 * orthoProjectionScaleFactor,
 		-(double)winHeight * 0.5 * orthoProjectionScaleFactor,
 		(double)winHeight * 0.5 * orthoProjectionScaleFactor,
-		-10.0,
-		10.0
+		-9999.0,
+		9999.0
 	);
 	projectionStack.LoadMatrix(projection);
 }
