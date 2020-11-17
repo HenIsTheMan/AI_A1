@@ -12,6 +12,11 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
+	int& Entity<T, Type>::RetrieveStepsLeft(){
+		return im_Attribs.im_StepsLeft;
+	}
+
+	template <class T, typename Type>
 	EntityType Entity<T, Type>::GetType() const{
 		return im_Attribs.im_Type;
 	}
