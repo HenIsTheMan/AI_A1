@@ -342,6 +342,11 @@ void Scene::UpdateStates(){
 	stateBoyIdle->im_Grid = &grid;
 	stateBoyIdle->im_GridRows = gridRows;
 	stateBoyIdle->im_GridCols = gridCols;
+
+	StateOrcIdle* const stateOrcIdle = ((StateOrcIdle*)orcSM->GetState(StateID::StateOrcIdle));
+	stateOrcIdle->im_Grid = &grid;
+	stateOrcIdle->im_GridRows = gridRows;
+	stateOrcIdle->im_GridCols = gridCols;
 }
 
 void Scene::UpdateEntities(const double dt){
