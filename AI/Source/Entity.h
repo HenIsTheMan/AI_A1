@@ -10,8 +10,6 @@ namespace Obj{
 		Entity<T, Type>(const EntityAttribs<T, Type>& attribs);
 		~Entity<T, Type>() = default;
 
-		T& RetrieveGridTargetLocalPos();
-
 		//* Getters
 		EntityType GetType() const;
 		const T& GetLocalPos() const;

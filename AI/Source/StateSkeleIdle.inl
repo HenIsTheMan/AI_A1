@@ -26,7 +26,11 @@ void StateSkeleIdle::Update(Entity* const entity, const double dt){
 		}
 	} else{
 		entity->SetSpriteAniMiddleName("Static");
-		entity->SetTimeLeft(entity->GetTimeLeft() - (float)dt);
+
+		if(entity->GetTimeLeft() < 999.0f){
+			entity->SetTimeLeft(entity->GetTimeLeft() - (float)dt);
+		}
+
 		if(Math::RandIntMinMax(1, 500) == 1){
 			ChooseRandDir(entity, im_Grid, im_GridRows, im_GridCols);
 		}

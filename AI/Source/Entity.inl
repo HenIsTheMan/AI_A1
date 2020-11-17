@@ -12,11 +12,6 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
-	T& Entity<T, Type>::RetrieveGridTargetLocalPos(){
-		return im_Attribs.im_GridTargetLocalPos;
-	}
-
-	template <class T, typename Type>
 	EntityType Entity<T, Type>::GetType() const{
 		return im_Attribs.im_Type;
 	}
