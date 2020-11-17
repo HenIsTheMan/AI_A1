@@ -17,7 +17,8 @@ namespace Obj{
 
 		const Type& GetDmg() const;
 		const Type& GetRange() const;
-		const Type& GetHealth() const;
+		const Type& GetCurrHealth() const;
+		const Type& GetMaxHealth() const;
 		const Type& GetSpd() const;
 
 		const Entity<T, Type>* GetTarget() const;
@@ -37,7 +38,8 @@ namespace Obj{
 
 		void SetDmg(const Type& dmg);
 		void SetRange(const Type& range);
-		void SetHealth(const Type& health);
+		void SetCurrHealth(const Type& currHealth);
+		void SetMaxHealth(const Type& maxHealth);
 		void SetSpd(const Type& spd);
 
 		void SetTarget(Entity<T, Type>* const target);

@@ -23,7 +23,8 @@ namespace Obj{
 
 		Type im_Dmg = Type();
 		Type im_Range = Type();
-		Type im_Health = Type();
+		Type im_CurrHealth = Type();
+		Type im_MaxHealth = Type();
 		Type im_Spd = Type();
 
 		Entity<T, Type>* im_Target = nullptr;

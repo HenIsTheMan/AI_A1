@@ -37,8 +37,13 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
-	const Type& Entity<T, Type>::GetHealth() const{
-		return im_Attribs.im_Health;
+	const Type& Entity<T, Type>::GetCurrHealth() const{
+		return im_Attribs.im_CurrHealth;
+	}
+
+	template <class T, typename Type>
+	const Type& Entity<T, Type>::GetMaxHealth() const{
+		return im_Attribs.im_MaxHealth;
 	}
 
 	template <class T, typename Type>
@@ -107,8 +112,13 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
-	void Entity<T, Type>::SetHealth(const Type& health){
-		im_Attribs.im_Health = health;
+	void Entity<T, Type>::SetCurrHealth(const Type& currHealth){
+		im_Attribs.im_CurrHealth = currHealth;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetMaxHealth(const Type& maxHealth){
+		im_Attribs.im_MaxHealth = maxHealth;
 	}
 
 	template <class T, typename Type>
