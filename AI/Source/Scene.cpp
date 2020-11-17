@@ -70,6 +70,10 @@ Scene::Scene():
 	orcSM->AddState(new State(StateID::StateOrcAttack, StateOrcAttack::Enter, StateOrcAttack::Update, StateOrcAttack::Exit));
 	orcSM->AddState(new State(StateID::StateOrcDead, StateOrcDead::Enter, StateOrcDead::Update, StateOrcDead::Exit));
 	orcSM->AddState(new State(StateID::StateOrcImmune, StateOrcImmune::Enter, StateOrcImmune::Update, StateOrcImmune::Exit));
+
+	((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_Grid = &grid;
+	((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_GridRows = gridRows;
+	((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_GridCols = gridCols;
 }
 
 Scene::~Scene(){
@@ -307,10 +311,6 @@ void Scene::UpdateEntities(const double dt){
 	static int control = 0;
 
 	if(control != 10){
-		((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_Grid = &grid;
-		((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_GridRows = gridRows;
-		((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_GridCols = gridCols;
-
 		Entity* skele = CreateSkele({
 			Vector3(2.0f, 3.0f, 0.0f)
 		});
