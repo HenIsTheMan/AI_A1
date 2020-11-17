@@ -41,6 +41,7 @@ Scene::Scene():
 	grid(Grid<float>(0.0f, 0.0f, 0.0f, 0, 0)),
 	isDay(false),
 	dayNightBT(0.0f),
+	gameSpd(1.0f),
 	objPool(new ObjPool<Entity>()),
 	skeleSM(new SM()),
 	reptileSM(new SM()),
@@ -108,9 +109,25 @@ void Scene::Update(double dt){
 		dayNightBT = elapsedTime + 7.0f;
 	}
 
+	static bool isKeyDownZ = false;
+	static bool isKeyDownX = false;
+	if(!isKeyDownZ && App::Key('Z')){
+		gameSpd += 0.1f;
+		isKeyDownZ = true;
+	} else if(isKeyDownZ && !App::Key('Z')){
+		isKeyDownZ = false;
+	}
+	if(!isKeyDownX && App::Key('X')){
+		gameSpd -= 0.1f;
+		isKeyDownX = true;
+	} else if(isKeyDownX && !App::Key('X')){
+		isKeyDownX = false;
+	}
+	gameSpd = Math::Clamp(gameSpd, 0.2f, 4.0f);
+
 	UpdateGridProperties();
 	UpdateGridData();
-	UpdateEntities(dt);
+	UpdateEntities(dt * gameSpd);
 }
 
 void Scene::Render(){
@@ -660,15 +677,17 @@ void Scene::RenderBG(){
 
 void Scene::RenderSceneText(){
 	static Mesh* textMesh = meshList[(int)GeoType::Text];
-	static Color textColor = Color();
 	static float textSize = 0.0f;
 	textSize = winHeight * 0.05f;
+
+	static Color debugInfoTextColor = Color();
+	static Color controlsTextColor = Color(1.0f, 0.0f, 1.0f);
 
 	///Debug info
 	RenderTextOnScreen(
 		textMesh,
 		"Elapsed time: " + std::to_string(elapsedTime).substr(0, std::to_string((int)elapsedTime).length() + 3),
-		textColor,
+		debugInfoTextColor,
 		textSize,
 		0.0f,
 		textSize * 0.0f
@@ -676,63 +695,63 @@ void Scene::RenderSceneText(){
 	RenderTextOnScreen(
 		textMesh,
 		"FPS: " + std::to_string(FPS).substr(0, std::to_string((int)FPS).length() + 3),
-		textColor,
+		debugInfoTextColor,
 		textSize,
 		0.0f,
 		textSize * 1.0f
 	);
-	//RenderTextOnScreen(
-	//	textMesh,
-	//	"Obj count: " + std::to_string(im_objectCount),
-	//	textColor,
-	//	textSize,
-	//	0.0f,
-	//	textSize * 1.0f
-	//);
-
-	///Controls
 	RenderTextOnScreen(
 		textMesh,
-		"Tab: ...",
-		textColor,
+		"Game Spd: " + std::to_string(gameSpd).substr(0, 3),
+		debugInfoTextColor,
 		textSize,
 		0.0f,
 		textSize * 2.0f
 	);
-	RenderTextOnScreen(
+	RenderTextOnScreen( //??
 		textMesh,
-		"F1: Toggle fullscreen",
-		textColor,
+		"Obj count: ",
+		debugInfoTextColor,
 		textSize,
 		0.0f,
 		textSize * 3.0f
 	);
+
+	///Controls
+	RenderTextOnScreen(
+		textMesh,
+		"F1: Toggle fullscreen",
+		controlsTextColor,
+		textSize,
+		0.0f,
+		textSize * 19.0f
+	);
 	RenderTextOnScreen(
 		textMesh,
 		"F2: Change polygon mode",
-		textColor,
+		controlsTextColor,
 		textSize,
 		0.0f,
-		textSize * 4.0f
+		textSize * 18.0f
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Tab: ...",
+		controlsTextColor,
+		textSize,
+		0.0f,
+		textSize * 17.0f
 	);
 	RenderTextOnScreen(
 		textMesh,
 		"WASD: Move cam",
-		textColor,
+		controlsTextColor,
 		textSize,
 		0.0f,
-		textSize * 5.0f
+		textSize * 16.0f
 	);
-	//RenderTextOnScreen(
-	//	textMesh,
-	//	"Game Spd: " + std::to_string(im_speed).substr(0, std::to_string((int)im_speed).length() + 2),
-	//	textColor,
-	//	textSize,
-	//	0.0f,
-	//	textSize * 5.0f
-	//);
 
-	///Others
+	///??
 	//RenderTextOnScreen(
 	//	textMesh,
 	//	"DiedByHunger count: " + std::to_string(im_DiedByHunger),

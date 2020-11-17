@@ -40,6 +40,7 @@ protected:
 
 	bool isDay;
 	float dayNightBT;
+	float gameSpd;
 	ObjPool<Entity>* objPool;
 
 	//* Shared SMs
