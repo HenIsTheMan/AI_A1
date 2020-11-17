@@ -13,7 +13,7 @@ void StateBoyIdle::Update(Entity* const entity, const double dt){
 		if((entityGridTargetLocalPos - entity->GetLocalPos()).Length() < entity->GetSpd() * (float)dt){
 			entity->SetLocalPos(entityGridTargetLocalPos); //Snap entity's local pos
 
-			if(Math::RandIntMinMax(1, 100) <= 50){
+			if(entity->GetSpriteAniMiddleName() == "Move"){
 				entity->SetSpriteAniMiddleName("Static");
 				entity->SetTimeLeft((float)Math::RandIntMinMax(2, 5));
 			} else{
