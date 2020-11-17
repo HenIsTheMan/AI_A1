@@ -10,6 +10,9 @@ class StateSkeleIdle final{ //Static class
 	StateSkeleIdle& operator=(const StateSkeleIdle&) = delete;
 	StateSkeleIdle& operator=(StateSkeleIdle&&) noexcept = delete;
 public:
+	static int im_GridRows;
+	static int im_GridCols;
+
 	static void Enter(Entity* const entity);
 	static void Update(Entity* const entity, const double dt);
 	static void Exit(Entity* const entity);

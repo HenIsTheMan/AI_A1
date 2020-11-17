@@ -306,7 +306,10 @@ void Scene::UpdateGridData(){
 void Scene::UpdateEntities(const double dt){
 	static int control = 0;
 
-	if(control != 1){
+	if(control != 10){
+		((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_GridRows = gridRows;
+		((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_GridCols = gridCols;
+
 		Entity* skele = CreateSkele({
 			Vector3(2.0f, 3.0f, 0.0f)
 		});
@@ -509,7 +512,7 @@ void Scene::RenderEntities(){
 					ManualRenderMesh("OrcFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Orc], false);
 					break;
 				default:
-					RenderAnimatedEntities(entity);
+					RenderEntitiesPart2(entity);
 			}
 
 			modelStack.PopMatrix();
@@ -517,7 +520,7 @@ void Scene::RenderEntities(){
 	}
 }
 
-void Scene::RenderAnimatedEntities(const Entity* const entity){
+void Scene::RenderEntitiesPart2(const Entity* const entity){
 	float spriteAniDelay = 0.0f;
 	Mesh* spriteAniMesh = nullptr;
 	std::string spriteAniName;
@@ -751,7 +754,7 @@ Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
 	entity->SetSpd(1.4f);
 
 	entity->SetTarget(nullptr);
-	ChooseRandDir(entity);
+	ChooseRandDir(entity, gridRows, gridCols);
 	entity->SetTimeLeft(0.0f);
 
 	entity->SetStateMachine(skeleSM);
@@ -775,7 +778,7 @@ Entity* Scene::CreateReptile(const CreateEntityParams& params) const{
 	entity->SetSpd(1.8f);
 
 	entity->SetTarget(nullptr);
-	ChooseRandDir(entity);
+	ChooseRandDir(entity, gridRows, gridCols);
 	entity->SetTimeLeft(0.0f);
 
 	entity->SetStateMachine(reptileSM);
@@ -799,7 +802,7 @@ Entity* Scene::CreateBoy(const CreateEntityParams& params) const{
 	entity->SetSpd(1.2f);
 
 	entity->SetTarget(nullptr);
-	ChooseRandDir(entity);
+	ChooseRandDir(entity, gridRows, gridCols);
 	entity->SetTimeLeft(0.0f);
 
 	entity->SetStateMachine(boySM);
@@ -823,7 +826,7 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 	entity->SetSpd(0.8f);
 
 	entity->SetTarget(nullptr);
-	ChooseRandDir(entity);
+	ChooseRandDir(entity, gridRows, gridCols);
 	entity->SetTimeLeft(0.0f);
 
 	entity->SetStateMachine(orcSM);

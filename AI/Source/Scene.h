@@ -69,7 +69,7 @@ protected:
 	void RenderGridBG();
 	void RenderGridData();
 	void RenderEntities();
-	void RenderAnimatedEntities(const Entity* const entity);
+	void RenderEntitiesPart2(const Entity* const entity);
 	void RenderTranslucentBlock();
 	void RenderBG();
 	void RenderSceneText();
