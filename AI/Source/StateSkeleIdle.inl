@@ -1,3 +1,4 @@
+Grid<float>* StateSkeleIdle::im_Grid = nullptr;
 int StateSkeleIdle::im_GridRows = 0;
 int StateSkeleIdle::im_GridCols = 0;
 
@@ -17,7 +18,7 @@ void StateSkeleIdle::Update(Entity* const entity, const double dt){
 				entity->SetTimeLeft((float)Math::RandIntMinMax(2, 5));
 			} else{
 				entity->SetSpriteAniMiddleName("Move");
-				ChooseRandDir(entity, im_GridRows, im_GridCols);
+				ChooseRandDir(entity, im_Grid, im_GridRows, im_GridCols);
 			}
 		} else{
 			entity->SetSpriteAniMiddleName("Move");
@@ -27,7 +28,7 @@ void StateSkeleIdle::Update(Entity* const entity, const double dt){
 		entity->SetSpriteAniMiddleName("Static");
 		entity->SetTimeLeft(entity->GetTimeLeft() - (float)dt);
 		if(Math::RandIntMinMax(1, 500) == 1){
-			ChooseRandDir(entity, im_GridRows, im_GridCols);
+			ChooseRandDir(entity, im_Grid, im_GridRows, im_GridCols);
 		}
 	}
 }

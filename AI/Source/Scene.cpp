@@ -307,6 +307,7 @@ void Scene::UpdateEntities(const double dt){
 	static int control = 0;
 
 	if(control != 10){
+		((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_Grid = &grid;
 		((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_GridRows = gridRows;
 		((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_GridCols = gridCols;
 
@@ -756,7 +757,7 @@ Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
 	entity->SetSpd(1.4f);
 
 	entity->SetTarget(nullptr);
-	ChooseRandDir(entity, gridRows, gridCols);
+	ChooseRandDir(entity, &grid, gridRows, gridCols);
 	entity->SetTimeLeft(0.0f);
 
 	entity->SetStateMachine(skeleSM);
@@ -780,7 +781,7 @@ Entity* Scene::CreateReptile(const CreateEntityParams& params) const{
 	entity->SetSpd(1.8f);
 
 	entity->SetTarget(nullptr);
-	ChooseRandDir(entity, gridRows, gridCols);
+	ChooseRandDir(entity, &grid, gridRows, gridCols);
 	entity->SetTimeLeft(0.0f);
 
 	entity->SetStateMachine(reptileSM);
@@ -804,7 +805,7 @@ Entity* Scene::CreateBoy(const CreateEntityParams& params) const{
 	entity->SetSpd(1.2f);
 
 	entity->SetTarget(nullptr);
-	ChooseRandDir(entity, gridRows, gridCols);
+	ChooseRandDir(entity, &grid, gridRows, gridCols);
 	entity->SetTimeLeft(0.0f);
 
 	entity->SetStateMachine(boySM);
@@ -828,7 +829,7 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 	entity->SetSpd(0.8f);
 
 	entity->SetTarget(nullptr);
-	ChooseRandDir(entity, gridRows, gridCols);
+	ChooseRandDir(entity, &grid, gridRows, gridCols);
 	entity->SetTimeLeft(0.0f);
 
 	entity->SetStateMachine(orcSM);

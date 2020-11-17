@@ -1,6 +1,6 @@
 #include "EntityHelperFuncs.h"
 
-void ChooseRandDir(Entity* const entity, const int gridRows, const int gridCols){
+void ChooseRandDir(Entity* const entity, const Grid<float>* const grid, const int gridRows, const int gridCols){
 	Vector3& gridTargetLocalPos = entity->RetrieveGridTargetLocalPos();
 
 	do{
