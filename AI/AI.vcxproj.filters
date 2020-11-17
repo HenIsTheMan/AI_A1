@@ -184,28 +184,28 @@
       <Filter>State\States\ReptileStates</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateBoyAttack.h">
-      <Filter>State\States\OrcStates</Filter>
+      <Filter>State\States\BoyStates</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateBoyDead.h">
-      <Filter>State\States\OrcStates</Filter>
+      <Filter>State\States\BoyStates</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateBoyHeal.h">
-      <Filter>State\States\OrcStates</Filter>
+      <Filter>State\States\BoyStates</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateBoyIdle.h">
-      <Filter>State\States\OrcStates</Filter>
+      <Filter>State\States\BoyStates</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateOrcAttack.h">
-      <Filter>State\States\BoyStates</Filter>
+      <Filter>State\States\OrcStates</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateOrcDead.h">
-      <Filter>State\States\BoyStates</Filter>
+      <Filter>State\States\OrcStates</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateOrcIdle.h">
-      <Filter>State\States\BoyStates</Filter>
+      <Filter>State\States\OrcStates</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateOrcImmune.h">
-      <Filter>State\States\BoyStates</Filter>
+      <Filter>State\States\OrcStates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -314,28 +314,28 @@
       <Filter>State\States\ReptileStates</Filter>
     </None>
     <None Include="Source\StateBoyAttack.inl">
-      <Filter>State\States\OrcStates</Filter>
+      <Filter>State\States\BoyStates</Filter>
     </None>
     <None Include="Source\StateBoyDead.inl">
-      <Filter>State\States\OrcStates</Filter>
+      <Filter>State\States\BoyStates</Filter>
     </None>
     <None Include="Source\StateBoyHeal.inl">
-      <Filter>State\States\OrcStates</Filter>
+      <Filter>State\States\BoyStates</Filter>
     </None>
     <None Include="Source\StateBoyIdle.inl">
-      <Filter>State\States\OrcStates</Filter>
+      <Filter>State\States\BoyStates</Filter>
     </None>
     <None Include="Source\StateOrcAttack.inl">
-      <Filter>State\States\BoyStates</Filter>
+      <Filter>State\States\OrcStates</Filter>
     </None>
     <None Include="Source\StateOrcDead.inl">
-      <Filter>State\States\BoyStates</Filter>
+      <Filter>State\States\OrcStates</Filter>
     </None>
     <None Include="Source\StateOrcIdle.inl">
-      <Filter>State\States\BoyStates</Filter>
+      <Filter>State\States\OrcStates</Filter>
     </None>
     <None Include="Source\StateOrcImmune.inl">
-      <Filter>State\States\BoyStates</Filter>
+      <Filter>State\States\OrcStates</Filter>
     </None>
   </ItemGroup>
 </Project>
