@@ -20,7 +20,7 @@ void StateMachine<T, Type>::AddState(State* const state){
 }
 
 template <class T, typename Type>
-void StateMachine<T, Type>::ChangeCurrState(Type* const entity){
+void StateMachine<T, Type>::CheckStateTransition(Type* const entity){
 	assert(entity && "entity must be initialized!");
 	assert(entity->GetNextState() && "entity->GetNextState() must be initialized!");
 

@@ -9,7 +9,7 @@ public:
 	~StateMachine<T, Type>();
 
 	void AddState(State* const state);
-	void ChangeCurrState(Type* const entity);
+	void CheckStateTransition(Type* const entity);
 	void UpdateCurrState(Type* const entity, const double dt);
 
 	///Getter
