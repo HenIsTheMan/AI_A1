@@ -12,9 +12,9 @@ void StateSkeleIdle::Update(Entity* const entity, const double dt){
 
 		ChooseRandDir(entity, im_GridRows, im_GridCols);
 	} else{
-		MoveInDir(entity, dt);
-
 		entity->SetSpriteAniMiddleName("Move");
+
+		MoveInDir(entity, dt);
 	}
 }
 

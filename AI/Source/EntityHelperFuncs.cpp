@@ -23,10 +23,6 @@ void ChooseRandDir(Entity* const entity, const int gridRows, const int gridCols)
 }
 
 void MoveInDir(Entity* const entity, const double dt){
-	try{
-		entity->SetLocalPos(entity->GetLocalPos()
-			+ entity->GetSpd() * (entity->GetGridTargetLocalPos() - entity->GetLocalPos()).Normalized() * (float)dt);
-	} catch(const DivideByZero&){
-		//Do nth
-	}
+	entity->SetLocalPos(entity->GetLocalPos()
+		+ entity->GetSpd() * (entity->GetGridTargetLocalPos() - entity->GetLocalPos()).Normalized() * (float)dt);
 }
