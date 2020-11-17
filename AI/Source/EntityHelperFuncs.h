@@ -1,6 +1,9 @@
 #pragma once
 
+#include <vector>
+
 #include "Entity.h" //In case not included before
+#include "Grid.h" //In case not included before
 
 using Entity = Obj::Entity<Vector3, float>;
 
