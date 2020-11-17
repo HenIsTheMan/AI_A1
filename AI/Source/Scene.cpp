@@ -267,6 +267,10 @@ void Scene::UpdateStates(){
 	((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_Grid = &grid;
 	((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_GridRows = gridRows;
 	((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_GridCols = gridCols;
+
+	((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle))->im_Grid = &grid;
+	((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle))->im_GridRows = gridRows;
+	((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle))->im_GridCols = gridCols;
 }
 
 void Scene::UpdateGridData(){
@@ -788,6 +792,30 @@ void Scene::RenderSceneText(){
 		textSize,
 		0.0f,
 		textSize * 16.0f
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"R: Reset cam",
+		controlsTextColor,
+		textSize,
+		0.0f,
+		textSize * 15.0f
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Z: Increase game spd",
+		controlsTextColor,
+		textSize,
+		0.0f,
+		textSize * 14.0f
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"X: Decrease game spd",
+		controlsTextColor,
+		textSize,
+		0.0f,
+		textSize * 13.0f
 	);
 
 	///??
