@@ -275,8 +275,6 @@ void Scene::UpdateStates(){
 	static float updateCommonDirBT = 0.0f;
 	if(updateCommonDirBT <= elapsedTime){
 		ChooseRandPairOfParallelDirs(((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle))->im_CommonDirs);
-		std::cout << ((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle))->im_CommonDirs[0] << '\n';
-		std::cout << ((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle))->im_CommonDirs[1] << "\n\n";
 		updateCommonDirBT = elapsedTime + 1.0f;
 	}
 }
@@ -578,11 +576,11 @@ void Scene::RenderEntities(){
 				1.0f
 			);
 
-			RenderMesh(meshList[(int)GeoType::HealthBar], true, Color(0.0f, 1.0f, 0.0f), 0.5f);
+			RenderMesh(meshList[(int)GeoType::HealthBar], true, Color(0.0f, 1.0f, 0.0f), 1.0f);
 
 			modelStack.PopMatrix();
 
-			RenderMesh(meshList[(int)GeoType::HealthBar], true, Color(1.0f, 0.0f, 0.0f), 0.5f);
+			RenderMesh(meshList[(int)GeoType::HealthBar], true, Color(1.0f, 0.0f, 0.0f), 1.0f);
 
 			modelStack.PopMatrix();
 
