@@ -263,22 +263,6 @@ void Scene::UpdateGridProperties(){
 	grid.SetCols(gridCols);
 }
 
-void Scene::UpdateStates(){
-	((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_Grid = &grid;
-	((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_GridRows = gridRows;
-	((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_GridCols = gridCols;
-
-	((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle))->im_Grid = &grid;
-	((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle))->im_GridRows = gridRows;
-	((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle))->im_GridCols = gridCols;
-
-	static float updateCommonDirBT = 0.0f;
-	if(updateCommonDirBT <= elapsedTime){
-		ChooseRandPairOfParallelDirs(((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle))->im_CommonDirs);
-		updateCommonDirBT = elapsedTime + 1.0f;
-	}
-}
-
 void Scene::UpdateGridData(){
 	static bool isLMB = false;
 	if(!isLMB && App::IsMousePressed(0)){
@@ -337,10 +321,33 @@ void Scene::UpdateGridData(){
 	}
 }
 
+void Scene::UpdateStates(){
+	StateSkeleIdle* const stateSkeleIdle = ((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle));
+	stateSkeleIdle->im_Grid = &grid;
+	stateSkeleIdle->im_GridRows = gridRows;
+	stateSkeleIdle->im_GridCols = gridCols;
+
+	StateReptileIdle* const stateReptileIdle = ((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle));
+	stateReptileIdle->im_Grid = &grid;
+	stateReptileIdle->im_GridRows = gridRows;
+	stateReptileIdle->im_GridCols = gridCols;
+
+	static float updateCommonDirBT = 0.0f;
+	if(updateCommonDirBT <= elapsedTime){
+		ChooseRandPairOfParallelDirs(stateReptileIdle->im_CommonDirs);
+		updateCommonDirBT = elapsedTime + 1.0f;
+	}
+
+	StateBoyIdle* const stateBoyIdle = ((StateBoyIdle*)boySM->GetState(StateID::StateBoyIdle));
+	stateBoyIdle->im_Grid = &grid;
+	stateBoyIdle->im_GridRows = gridRows;
+	stateBoyIdle->im_GridCols = gridCols;
+}
+
 void Scene::UpdateEntities(const double dt){
 	static int control = 0;
 
-	if(control != 10){
+	if(control != 20){
 		Entity* skele = CreateSkele({
 			Vector3(5.0f, 15.0f, 0.0f)
 		});
@@ -348,10 +355,10 @@ void Scene::UpdateEntities(const double dt){
 			Vector3(15.0f, 12.0f, 0.0f)
 		});
 		Entity* boy = CreateBoy({
-			Vector3(0.0f, 0.0f, 0.0f)
+			Vector3(5.0f, 4.0f, 0.0f)
 		});
 		Entity* orc = CreateOrc({
-			Vector3(3.0f, 1.0f, 0.0f)
+			Vector3(10.0f, 3.0f, 0.0f)
 		});
 		++control;
 	}
