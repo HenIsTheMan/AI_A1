@@ -271,6 +271,14 @@ void Scene::UpdateStates(){
 	((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle))->im_Grid = &grid;
 	((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle))->im_GridRows = gridRows;
 	((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle))->im_GridCols = gridCols;
+
+	static float updateCommonDirBT = 0.0f;
+	if(updateCommonDirBT <= elapsedTime){
+		ChooseRandPairOfParallelDirs(((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle))->im_CommonDirs);
+		std::cout << ((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle))->im_CommonDirs[0] << '\n';
+		std::cout << ((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle))->im_CommonDirs[1] << "\n\n";
+		updateCommonDirBT = elapsedTime + 1.0f;
+	}
 }
 
 void Scene::UpdateGridData(){
@@ -336,10 +344,10 @@ void Scene::UpdateEntities(const double dt){
 
 	if(control != 10){
 		Entity* skele = CreateSkele({
-			Vector3(2.0f, 3.0f, 0.0f)
+			Vector3(5.0f, 15.0f, 0.0f)
 		});
 		Entity* reptile = CreateReptile({
-			Vector3(5.0f, 5.0f, 0.0f)
+			Vector3(15.0f, 12.0f, 0.0f)
 		});
 		Entity* boy = CreateBoy({
 			Vector3(0.0f, 0.0f, 0.0f)
