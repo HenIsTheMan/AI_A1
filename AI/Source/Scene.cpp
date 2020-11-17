@@ -34,8 +34,8 @@ Scene::Scene():
 	gridLineThickness(3.0f),
 	gridRows(20),
 	gridCols(20),
-	gridMinRows(1),
-	gridMinCols(1),
+	gridMinRows(4),
+	gridMinCols(4),
 	gridMaxRows(30),
 	gridMaxCols(30),
 	grid(Grid<float>(0.0f, 0.0f, 0.0f, 0, 0)),
@@ -71,10 +71,6 @@ Scene::Scene():
 	orcSM->AddState(new State(StateID::StateOrcAttack, StateOrcAttack::Enter, StateOrcAttack::Update, StateOrcAttack::Exit));
 	orcSM->AddState(new State(StateID::StateOrcDead, StateOrcDead::Enter, StateOrcDead::Update, StateOrcDead::Exit));
 	orcSM->AddState(new State(StateID::StateOrcImmune, StateOrcImmune::Enter, StateOrcImmune::Update, StateOrcImmune::Exit));
-
-	((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_Grid = &grid;
-	((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_GridRows = gridRows;
-	((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_GridCols = gridCols;
 }
 
 Scene::~Scene(){
@@ -127,6 +123,7 @@ void Scene::Update(double dt){
 
 	UpdateGridProperties();
 	UpdateGridData();
+	UpdateStates();
 	UpdateEntities(dt * gameSpd);
 }
 
@@ -264,6 +261,12 @@ void Scene::UpdateGridProperties(){
 	grid.SetLineThickness(gridLineThickness);
 	grid.SetRows(gridRows);
 	grid.SetCols(gridCols);
+}
+
+void Scene::UpdateStates(){
+	((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_Grid = &grid;
+	((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_GridRows = gridRows;
+	((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle))->im_GridCols = gridCols;
 }
 
 void Scene::UpdateGridData(){
