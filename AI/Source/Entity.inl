@@ -12,11 +12,6 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
-	int& Entity<T, Type>::RetrieveStepsLeft(){
-		return im_Attribs.im_StepsLeft;
-	}
-
-	template <class T, typename Type>
 	EntityType Entity<T, Type>::GetType() const{
 		return im_Attribs.im_Type;
 	}
@@ -57,18 +52,13 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
-	int Entity<T, Type>::GetStepsLeft() const{
-		return im_Attribs.im_StepsLeft;
+	const T& Entity<T, Type>::GetGridTargetLocalPos() const{
+		return im_Attribs.im_GridTargetLocalPos;
 	}
 
 	template <class T, typename Type>
 	const Type& Entity<T, Type>::GetTimeLeft() const{
 		return im_Attribs.im_TimeLeft;
-	}
-
-	template <class T, typename Type>
-	const T& Entity<T, Type>::GetDir() const{
-		return im_Attribs.im_Dir;
 	}
 
 	template <class T, typename Type>
@@ -132,18 +122,13 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
-	void Entity<T, Type>::SetStepsLeft(const int stepsLeft){
-		im_Attribs.im_StepsLeft = stepsLeft;
+	void Entity<T, Type>::SetGridTargetLocalPos(const T& gridTargetLocalPos){
+		im_Attribs.im_GridTargetLocalPos = gridTargetLocalPos;
 	}
 
 	template <class T, typename Type>
 	void Entity<T, Type>::SetTimeLeft(const Type& timeLeft){
 		im_Attribs.im_TimeLeft = timeLeft;
-	}
-
-	template <class T, typename Type>
-	void Entity<T, Type>::SetDir(const T& dir){
-		im_Attribs.im_Dir = dir;
 	}
 
 	template <class T, typename Type>
@@ -178,8 +163,8 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
-	void Entity<T, Type>::SetDir(const Type& x, const Type& y, const Type& z){
-		im_Attribs.im_Dir = T(x, y, z);
+	void Entity<T, Type>::SetGridTargetLocalPos(const Type& x, const Type& y, const Type& z){
+		im_Attribs.im_GridTargetLocalPos = T(x, y, z);
 	}
 	#endif
 }

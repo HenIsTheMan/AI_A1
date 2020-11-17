@@ -2,27 +2,16 @@ void StateSkeleIdle::Enter(Entity* const entity){
 }
 
 void StateSkeleIdle::Update(Entity* const entity, const double dt){
-	int& entityStepsLeft = entity->RetrieveStepsLeft();
+	const Vector3 entityGridTargetLocalPos = entity->GetGridTargetLocalPos();
 
-	if(!entityStepsLeft){
-		switch(Math::RandIntMinMax(0, 3)){
-			case 0:
-				entity->SetDir(Vector3(1.0f, 0.0f, 0.0f));
-				break;
-			case 1:
-				entity->SetDir(Vector3(-1.0f, 0.0f, 0.0f));
-				break;
-			case 2:
-				entity->SetDir(Vector3(0.0f, 1.0f, 0.0f));
-				break;
-			case 3:
-				entity->SetDir(Vector3(0.0f, -1.0f, 0.0f));
-				break;
-		}
+	if((entityGridTargetLocalPos - entity->GetLocalPos()).Length() < entity->GetSpd() * (float)dt){
+		entity->SetLocalPos(entityGridTargetLocalPos); //Snap entity's local pos
 
-		entityStepsLeft = 60;
+		ChooseRandDir(entity);
 	} else{
-		--entityStepsLeft;
+		MoveInDir(entity, dt);
+
+		entity->SetSpriteAniMiddleName("Move");
 	}
 }
 

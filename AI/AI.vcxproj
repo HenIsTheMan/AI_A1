@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Cam.cpp" />
+    <ClCompile Include="Source\EntityHelperFuncs.cpp" />
     <ClCompile Include="Source\EventApproaching.cpp" />
     <ClCompile Include="Source\EventAttacked.cpp" />
     <ClCompile Include="Source\EventGridDataChanged.cpp" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Source\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\EntityHelperFuncs.h" />
     <ClInclude Include="Source\EventApproaching.h" />
     <ClInclude Include="Source\EventAttacked.h" />
     <ClInclude Include="Source\EventGridDataChanged.h" />

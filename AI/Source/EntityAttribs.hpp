@@ -27,9 +27,8 @@ namespace Obj{
 		Type im_Spd = Type();
 
 		Entity<T, Type>* im_Target = nullptr;
-		int im_StepsLeft = 0;
+		T im_GridTargetLocalPos = T();
 		Type im_TimeLeft = Type();
-		T im_Dir = T();
 
 		StateMachine<StateID, Entity<T, Type>>* im_StateMachine = nullptr;
 		State* im_CurrState = nullptr;

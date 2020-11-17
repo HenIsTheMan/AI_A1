@@ -58,6 +58,9 @@
     <ClCompile Include="Source\EventLeaving.cpp">
       <Filter>Event\Events\Pre-events</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EntityHelperFuncs.cpp">
+      <Filter>Obj</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -206,6 +209,9 @@
     </ClInclude>
     <ClInclude Include="Source\StateOrcImmune.h">
       <Filter>State\States\OrcStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityHelperFuncs.h">
+      <Filter>Obj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

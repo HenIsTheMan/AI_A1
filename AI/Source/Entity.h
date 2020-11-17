@@ -10,8 +10,6 @@ namespace Obj{
 		Entity<T, Type>(const EntityAttribs<T, Type>& attribs);
 		~Entity<T, Type>() = default;
 
-		int& RetrieveStepsLeft();
-
 		//* Getters
 		EntityType GetType() const;
 		const T& GetLocalPos() const;
@@ -23,9 +21,8 @@ namespace Obj{
 		const Type& GetSpd() const;
 
 		const Entity<T, Type>* GetTarget() const;
-		int GetStepsLeft() const;
+		const T& GetGridTargetLocalPos() const;
 		const Type& GetTimeLeft() const;
-		const T& GetDir() const;
 
 		const StateMachine<StateID, Entity<T, Type>>* GetStateMachine() const;
 		const State* GetCurrState() const;
@@ -44,9 +41,8 @@ namespace Obj{
 		void SetSpd(const Type& spd);
 
 		void SetTarget(Entity<T, Type>* const target);
-		void SetStepsLeft(const int stepsLeft);
+		void SetGridTargetLocalPos(const T& gridTargetLocalPos);
 		void SetTimeLeft(const Type& timeLeft);
-		void SetDir(const T& dir);
 
 		void SetStateMachine(StateMachine<StateID, Entity<T, Type>>* const stateMachine);
 		void SetCurrState(const State* const currState);
@@ -56,7 +52,7 @@ namespace Obj{
 		#if defined ENTITY_T_IS_VEC3
 		void SetLocalPos(const Type& x, const Type& y, const Type& z);
 		void SetLocalScale(const Type& x, const Type& y, const Type& z);
-		void SetDir(const Type& x, const Type& y, const Type& z);
+		void SetGridTargetLocalPos(const Type& x, const Type& y, const Type& z);
 		#endif
 		//*/
 	private:

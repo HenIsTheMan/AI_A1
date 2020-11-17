@@ -559,17 +559,21 @@ void Scene::RenderAnimatedEntities(const Entity* const entity){
 	assert(spriteAniMesh != nullptr);
 	assert(spriteAniName != "");
 
-	const Vector3& dir = entity->GetDir();
-	if(dir == Vector3(1.0f, 0.0f, 0.0f)){
+	try{
+		const Vector3 dir = (entity->GetGridTargetLocalPos() - entity->GetLocalPos()).Normalized();
+		if(dir == Vector3(1.0f, 0.0f, 0.0f)){
+			spriteAniName += (std::string)"Right";
+		} else if(dir == Vector3(-1.0f, 0.0f, 0.0f)){
+			spriteAniName += (std::string)"Left";
+		} else if(dir == Vector3(0.0f, 1.0f, 0.0f)){
+			spriteAniName += (std::string)"Up";
+		} else if(dir == Vector3(0.0f, -1.0f, 0.0f)){
+			spriteAniName += (std::string)"Down";
+		} else{
+			assert(false && "Entity has invalid dir!");
+		}
+	} catch(const DivideByZero&){
 		spriteAniName += (std::string)"Right";
-	} else if(dir == Vector3(-1.0f, 0.0f, 0.0f)){
-		spriteAniName += (std::string)"Left";
-	} else if(dir == Vector3(0.0f, 1.0f, 0.0f)){
-		spriteAniName += (std::string)"Up";
-	} else if(dir == Vector3(0.0f, -1.0f, 0.0f)){
-		spriteAniName += (std::string)"Down";
-	} else{
-		assert(false && "Entity has invalid dir!");
 	}
 
 	ManualRenderMesh(spriteAniName, elapsedTime, spriteAniDelay, spriteAniMesh, false);
@@ -747,9 +751,8 @@ Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
 	entity->SetSpd(1.4f);
 
 	entity->SetTarget(nullptr);
-	entity->SetStepsLeft(0);
+	ChooseRandDir(entity);
 	entity->SetTimeLeft(0.0f);
-	entity->SetDir(1.0f, 0.0f, 0.0f);
 
 	entity->SetStateMachine(skeleSM);
 	entity->SetCurrState(skeleSM->GetState(StateID::StateSkeleIdle));
@@ -772,9 +775,8 @@ Entity* Scene::CreateReptile(const CreateEntityParams& params) const{
 	entity->SetSpd(1.8f);
 
 	entity->SetTarget(nullptr);
-	entity->SetStepsLeft(0);
+	ChooseRandDir(entity);
 	entity->SetTimeLeft(0.0f);
-	entity->SetDir(1.0f, 0.0f, 0.0f);
 
 	entity->SetStateMachine(reptileSM);
 	entity->SetCurrState(reptileSM->GetState(StateID::StateReptileIdle));
@@ -797,9 +799,8 @@ Entity* Scene::CreateBoy(const CreateEntityParams& params) const{
 	entity->SetSpd(1.2f);
 
 	entity->SetTarget(nullptr);
-	entity->SetStepsLeft(0);
+	ChooseRandDir(entity);
 	entity->SetTimeLeft(0.0f);
-	entity->SetDir(1.0f, 0.0f, 0.0f);
 
 	entity->SetStateMachine(boySM);
 	entity->SetCurrState(boySM->GetState(StateID::StateBoyIdle));
@@ -822,9 +823,8 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 	entity->SetSpd(0.8f);
 
 	entity->SetTarget(nullptr);
-	entity->SetStepsLeft(0);
+	ChooseRandDir(entity);
 	entity->SetTimeLeft(0.0f);
-	entity->SetDir(1.0f, 0.0f, 0.0f);
 
 	entity->SetStateMachine(orcSM);
 	entity->SetCurrState(orcSM->GetState(StateID::StateOrcIdle));
