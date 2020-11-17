@@ -126,8 +126,8 @@ void Scene::Render(){
 	RenderGrid();
 	RenderGridBG();
 	RenderGridData();
-	RenderEntities();
 	RenderTranslucentBlock();
+	RenderEntities();
 	RenderBG();
 	RenderSceneText();
 
@@ -467,7 +467,7 @@ void Scene::RenderEntities(){
 			const Vector3& entityWorldPos = Vector3(
 				xPosOffset + entityLocalPos.x * (gridCellWidth + gridLineThickness),
 				yPosOffset + entityLocalPos.y * (gridCellHeight + gridLineThickness),
-				0.1f + individualDepthOffset
+				0.2f + individualDepthOffset
 			);
 			const Vector3& entityWorldScale = Vector3(
 				entityLocalScale.x * gridCellWidth,
