@@ -20,9 +20,11 @@ void StateSkeleIdle::Update(Entity* const entity, const double dt){
 				ChooseRandDir(entity, im_GridRows, im_GridCols);
 			}
 		} else{
+			entity->SetSpriteAniMiddleName("Move");
 			MoveInDir(entity, dt);
 		}
 	} else{
+		entity->SetSpriteAniMiddleName("Static");
 		entity->SetTimeLeft(entity->GetTimeLeft() - (float)dt);
 		if(Math::RandIntMinMax(1, 500) == 1){
 			ChooseRandDir(entity, im_GridRows, im_GridCols);
