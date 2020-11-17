@@ -568,20 +568,16 @@ void Scene::RenderEntitiesPart2(const Entity* const entity){
 	assert(spriteAniMesh != nullptr);
 	assert(spriteAniName != "");
 
-	try{
-		const Vector3 dir = (entity->GetGridTargetLocalPos() - entity->GetLocalPos()).Normalized();
-		if(dir == Vector3(1.0f, 0.0f, 0.0f)){
-			spriteAniName += (std::string)"Right";
-		} else if(dir == Vector3(-1.0f, 0.0f, 0.0f)){
-			spriteAniName += (std::string)"Left";
-		} else if(dir == Vector3(0.0f, 1.0f, 0.0f)){
-			spriteAniName += (std::string)"Up";
-		} else if(dir == Vector3(0.0f, -1.0f, 0.0f)){
-			spriteAniName += (std::string)"Down";
-		} else{
-			assert(false && "Entity has invalid dir!");
-		}
-	} catch(const DivideByZero&){
+	const Vector3 vec = entity->GetGridTargetLocalPos() - entity->GetLocalPos();
+	if(vec.x > 0.0f){
+		spriteAniName += (std::string)"Right";
+	} else if(vec.x < 0.0f){
+		spriteAniName += (std::string)"Left";
+	} else if(vec.y > 0.0f){
+		spriteAniName += (std::string)"Up";
+	} else if(vec.y < 0.0f){
+		spriteAniName += (std::string)"Down";
+	} else{
 		spriteAniName += (std::string)"Right";
 	}
 
