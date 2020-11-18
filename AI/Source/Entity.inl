@@ -1,3 +1,5 @@
+#include "EventGridDataChanged.h"
+
 namespace Obj{
 	template <class T, typename Type>
 	Entity<T, Type>::Entity():
@@ -9,6 +11,35 @@ namespace Obj{
 	Entity<T, Type>::Entity(const EntityAttribs<T, Type>& attribs):
 		im_Attribs(attribs)
 	{
+	}
+
+	template <class T, typename Type>
+	int Entity<T, Type>::OnEvent(const Event* myEvent, const bool destroyEvent){
+		if(!myEvent){
+			return -1;
+		}
+
+		switch(myEvent->GetID()){
+			case EventID::EventGridDataChanged: {
+				const EventGridDataChanged* const eventGridDataChanged = dynamic_cast<const EventGridDataChanged*>(myEvent);
+				assert(eventGridDataChanged && "Val of eventGridDataChanged is nullptr!");
+
+				const float blockRow = (float)eventGridDataChanged->GetBlockRow();
+				const float blockCol = (float)eventGridDataChanged->GetBlockCol();
+
+				if(im_Attribs.im_LocalPos.x > blockCol - 1.0f || im_Attribs.im_LocalPos.x < blockCol + 1.0f
+					|| im_Attribs.im_LocalPos.y > blockRow - 1.0f || im_Attribs.im_LocalPos.y < blockRow + 1.0f){
+					//eventGridDataChanged->im_ObjPool->DeactivateObj(this);
+				}
+				break;
+			}
+		}
+
+		if(destroyEvent && myEvent){
+			delete myEvent;
+			myEvent = nullptr;
+		}
+		return -1;
 	}
 
 	template <class T, typename Type>

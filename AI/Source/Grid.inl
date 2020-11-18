@@ -74,7 +74,7 @@ int Grid<T>::GetCols() const{
 }
 
 template <class T>
-void Grid<T>::SetData(const bool data, const ptrdiff_t row, const ptrdiff_t col){
+void Grid<T>::SetData(const bool data, const ptrdiff_t& row, const ptrdiff_t& col){
 	im_Data[row][col] = data;
 }
 

@@ -3,7 +3,15 @@
 #include "Event.h"
 
 class EventGridDataChanged final: public Event{
+	EventGridDataChanged() = delete;
 public:
-	EventGridDataChanged();
+	EventGridDataChanged(const int blockRow, const int blockCol);
 	~EventGridDataChanged() = default;
+
+	///Getters
+	int GetBlockRow() const;
+	int GetBlockCol() const;
+private:
+	int im_BlockRow;
+	int im_BlockCol;
 };

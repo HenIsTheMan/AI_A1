@@ -18,7 +18,9 @@ ObjPool<T>::~ObjPool(){
 
 template <class T>
 int ObjPool<T>::OnEvent(const Event* myEvent, const bool destroyEvent){
-	std::cout << "Here\n";
+	if(!myEvent){
+		return -1;
+	}
 
 	switch(myEvent->GetID()){
 		case EventID::EventCalcActiveObjs: {

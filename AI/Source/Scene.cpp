@@ -451,10 +451,10 @@ void Scene::UpdateGridData(){
 		&& trueMouseY > yOffset + gridLineThickness * 0.5f && trueMouseY < yOffset + gridHeight - gridLineThickness * 0.5f){
 		if(isLMB){
 			grid.SetData(true, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
-			publisher->Broadcast(new EventGridDataChanged(), true);
+			publisher->GrpSend(ListenerCategory::Entity, new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
 		} else if(isRMB){
 			grid.SetData(false, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
-			publisher->Broadcast(new EventGridDataChanged(), true);
+			publisher->GrpSend(ListenerCategory::Entity, new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
 		}
 	}
 }
@@ -519,17 +519,24 @@ void Scene::UpdateEntities(const double dt){
 		Entity* skele = CreateSkele({
 			Vector3(5.0f, 15.0f, 0.0f)
 		});
+		publisher->AddListener(ListenerID::Skele, ListenerCategory::Entity, skele);
+
 		Entity* reptile = CreateReptile({
 			Vector3(15.0f, 12.0f, 0.0f)
 		});
+		publisher->AddListener(ListenerID::Reptile, ListenerCategory::Entity, reptile);
+
 		Entity* boy = CreateBoy({
 			Vector3(5.0f, 4.0f, 0.0f)
 		});
+		publisher->AddListener(ListenerID::Boy, ListenerCategory::Entity, boy);
+
 		Entity* orc = CreateOrc({
 			Vector3(18.5f, 3.0f, 0.0f)
 		});
-
+		publisher->AddListener(ListenerID::Orc, ListenerCategory::Entity, orc);
 		orc->SetCurrHealth(0.0f);
+
 		++control;
 	}
 
@@ -540,6 +547,7 @@ void Scene::UpdateEntities(const double dt){
 		if(entityPool[i].first){
 			Entity* const entity = entityPool[i].second;
 
+			(void)entity->OnEvent(entity->FetchEvent(), false);
 			switch(entity->GetType()){
 				using namespace Obj;
 
@@ -950,7 +958,7 @@ void Scene::RenderDebugInfoText(Mesh* const textMesh, const Color& textColor, co
 		0.0f,
 		textSize * 3.0f
 	);
-	RenderTextOnScreen( //??
+	RenderTextOnScreen(
 		textMesh,
 		"Active objs: " + std::to_string(publisher->Send(ListenerID::ObjPool, new EventCalcActiveObjs(), false)),
 		textColor,

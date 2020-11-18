@@ -1,14 +1,20 @@
 #pragma once
 
+#include <cassert>
+
 #include "EntityAttribs.hpp"
+
+#include "Listener.h"
 
 namespace Obj{
 	template <class T, typename Type>
-	class Entity final{
+	class Entity final: public Listener{
 	public:
 		Entity<T, Type>();
 		Entity<T, Type>(const EntityAttribs<T, Type>& attribs);
 		~Entity<T, Type>() = default;
+
+		int OnEvent(const Event* myEvent, const bool destroyEvent = false) override;
 
 		//* Getters
 		EntityType GetType() const;

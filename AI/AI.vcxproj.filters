@@ -304,9 +304,6 @@
     <None Include="Shaders\AI.vs">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Source\Entity.inl">
-      <Filter>Obj</Filter>
-    </None>
     <None Include="Source\StateMachine.inl">
       <Filter>State</Filter>
     </None>
@@ -357,6 +354,9 @@
     </None>
     <None Include="Source\StateOrcImmune.inl">
       <Filter>State\States\OrcStates</Filter>
+    </None>
+    <None Include="Source\Entity.inl">
+      <Filter>Obj</Filter>
     </None>
   </ItemGroup>
 </Project>

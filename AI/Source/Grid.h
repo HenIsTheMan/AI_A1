@@ -21,7 +21,7 @@ public:
 	int GetCols() const;
 
 	///Setters
-	void SetData(const bool data, const ptrdiff_t row, const ptrdiff_t col);
+	void SetData(const bool data, const ptrdiff_t& row, const ptrdiff_t& col);
 	void SetCellWidth(T cellWidth);
 	void SetCellHeight(T cellHeight);
 	void SetLineThickness(T lineThickness);

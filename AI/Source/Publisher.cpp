@@ -10,10 +10,11 @@ Publisher::Publisher():
 
 void Publisher::AddListener(const ListenerID ID, const ListenerCategory category, Listener* const listener){
 	assert(listener && "Var 'listener' must be initialized!");
-	assert(im_ListenersByID.find(ID) == im_ListenersByID.end() && "Val stored in var 'ID' is not unique!");
 
-	im_ListenersByID.insert(std::pair<ListenerID, Listener*>(ID, listener));
-	im_ListenersByCategory.insert(std::pair<ListenerCategory, Listener*>(category, listener));
+	if(im_ListenersByID.find(ID) == im_ListenersByID.end()){
+		im_ListenersByID.insert(std::pair<ListenerID, Listener*>(ID, listener));
+		im_ListenersByCategory.insert(std::pair<ListenerCategory, Listener*>(category, listener));
+	}
 }
 
 int Publisher::Send(const ListenerID ID, Event* myEvent, const bool async){
