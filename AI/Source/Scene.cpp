@@ -5,6 +5,7 @@
 
 #include "EventCalcActiveObjs.h"
 #include "EventCalcInactiveObjs.h"
+#include "EventGridDataChanged.h"
 
 #include "StateSkeleIdle.h"
 #include "StateSkeleAttack.h"
@@ -450,8 +451,10 @@ void Scene::UpdateGridData(){
 		&& trueMouseY > yOffset + gridLineThickness * 0.5f && trueMouseY < yOffset + gridHeight - gridLineThickness * 0.5f){
 		if(isLMB){
 			grid.SetData(true, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
+			publisher->Broadcast(new EventGridDataChanged(), true);
 		} else if(isRMB){
 			grid.SetData(false, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
+			publisher->Broadcast(new EventGridDataChanged(), true);
 		}
 	}
 }
