@@ -18,6 +18,8 @@ ObjPool<T>::~ObjPool(){
 
 template <class T>
 int ObjPool<T>::OnEvent(const Event* myEvent, const bool destroyEvent){
+	std::cout << "Here\n";
+
 	switch(myEvent->GetID()){
 		case EventID::EventCalcActiveObjs: {
 			int count = 0;
@@ -25,11 +27,14 @@ int ObjPool<T>::OnEvent(const Event* myEvent, const bool destroyEvent){
 
 			for(size_t i = 0; i < poolSize; ++i){
 				if(im_ObjPool[i].first){
-					break;
+					++count;
 				}
-				++count;
 			}
 
+			if(destroyEvent && myEvent){
+				delete myEvent;
+				myEvent = nullptr;
+			}
 			return count;
 		}
 		case EventID::EventCalcInactiveObjs: {
@@ -37,12 +42,15 @@ int ObjPool<T>::OnEvent(const Event* myEvent, const bool destroyEvent){
 			const size_t poolSize = im_ObjPool.size();
 
 			for(size_t i = 0; i < poolSize; ++i){
-				if(!im_ObjPool[poolSize - 1 - i].first){
-					break;
+				if(!im_ObjPool[i].first){
+					++count;
 				}
-				++count;
 			}
 
+			if(destroyEvent && myEvent){
+				delete myEvent;
+				myEvent = nullptr;
+			}
 			return count;
 		}
 	}

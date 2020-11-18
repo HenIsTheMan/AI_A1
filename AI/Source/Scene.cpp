@@ -3,6 +3,9 @@
 #include "App.h"
 #include "SpriteAni.h"
 
+#include "EventCalcActiveObjs.h"
+#include "EventCalcInactiveObjs.h"
+
 #include "StateSkeleIdle.h"
 #include "StateSkeleAttack.h"
 #include "StateSkeleDead.h"
@@ -657,10 +660,12 @@ void Scene::RenderEntities(){
 	const float yPosOffset = ((float)winHeight - gridHeight) * 0.5f + gridCellHeight * 0.5f + gridLineThickness;
 
 	static float individualDepthOffset = 0.0f;
-	float opacity = 1.0f;
+	float opacity;
 
 	for(size_t i = 0; i < entityPoolSize; ++i){
 		if(entityPool[i].first){
+			opacity = 1.0f;
+
 			const Entity* const entity = entityPool[i].second;
 
 			const Vector3& entityLocalPos = entity->GetLocalPos();
@@ -936,7 +941,7 @@ void Scene::RenderDebugInfoText(Mesh* const textMesh, const Color& textColor, co
 	);
 	RenderTextOnScreen(
 		textMesh,
-		"Inactive objs: " + std::to_string(objPool->GetPool().size()),
+		"Inactive objs: " + std::to_string(publisher->Send(ListenerID::ObjPool, new EventCalcInactiveObjs(), false)),
 		textColor,
 		textSize,
 		0.0f,
@@ -944,7 +949,7 @@ void Scene::RenderDebugInfoText(Mesh* const textMesh, const Color& textColor, co
 	);
 	RenderTextOnScreen( //??
 		textMesh,
-		"Active objs: ",
+		"Active objs: " + std::to_string(publisher->Send(ListenerID::ObjPool, new EventCalcActiveObjs(), false)),
 		textColor,
 		textSize,
 		0.0f,
