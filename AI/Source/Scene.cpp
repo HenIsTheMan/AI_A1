@@ -129,6 +129,42 @@ void Scene::Update(double dt){
 
 	UpdateGridAttribs();
 	UpdateGridData();
+
+	///??
+	std::vector<std::pair<bool, Entity*>>& entityPool = objPool->RetrievePool();
+	const size_t& entityPoolSize = entityPool.size();
+
+	for(size_t i = 0; i < entityPoolSize; ++i){
+		if(entityPool[i].first){
+			Entity* const entity = entityPool[i].second;
+
+			const Vector3& entityLocalPos = entity->GetLocalPos();
+			if(entityLocalPos.y >= (float)gridRows - 1.0f){
+				if(!(int)gridRows){
+					entityPool[i].first = false;
+					continue;
+				}
+				entity->SetLocalPos(entityLocalPos.x, float(gridRows - 1), entityLocalPos.z);
+			}
+			if(entity->GetGridTargetLocalPos().y >= (float)gridRows - 1.0f){
+				entity->SetGridTargetLocalPos(entityLocalPos.x, float(gridRows - 1), entityLocalPos.z);
+				//entityPool[i].first = false;
+			}
+
+			if(entity->GetLocalPos().x >= (float)gridCols - 1.0f){
+				if(!(int)gridCols){
+					entityPool[i].first = false;
+					continue;
+				}
+				entity->SetLocalPos(float(gridCols - 1), entityLocalPos.y, entityLocalPos.z);
+			}
+			if(entity->GetGridTargetLocalPos().x >= (float)gridCols - 1.0f){
+				entity->SetGridTargetLocalPos(float(gridCols - 1), entityLocalPos.y, entityLocalPos.z);
+				//entityPool[i].first = false;
+			}
+		}
+	}
+
 	UpdateStates();
 	UpdateEntities(dt * gameSpd);
 }
@@ -224,28 +260,6 @@ void Scene::UpdateGridAttribs(){
 	if(!isKeyDown8 && App::Key('8')){
 		if(gridRows > gridMinRows){
 			--gridRows;
-
-			///??
-			std::vector<std::pair<bool, Entity*>>& entityPool = objPool->RetrievePool();
-			const size_t& entityPoolSize = entityPool.size();
-
-			for(size_t i = 0; i < entityPoolSize; ++i){
-				std::pair<bool, Entity*>& element = entityPool[i];
-
-				if(element.first){
-					const Vector3& entityLocalPos = element.second->GetLocalPos();
-					if(entityLocalPos.y >= (float)gridRows - 1.0f){
-						if(!(int)gridRows){
-							element.first = false;
-							continue;
-						}
-						element.second->SetLocalPos(entityLocalPos.x, float(gridRows - 1), entityLocalPos.z);
-					}
-					if(element.second->GetGridTargetLocalPos().y >= (float)gridRows - 1.0f){
-						element.second->SetGridTargetLocalPos(entityLocalPos.x, float(gridRows - 1), entityLocalPos.z);
-					}
-				}
-			}
 		}
 		isKeyDown8 = true;
 	} else if(isKeyDown8 && !App::Key('8')){
@@ -262,28 +276,6 @@ void Scene::UpdateGridAttribs(){
 	if(!isKeyDown0 && App::Key('0')){
 		if(gridCols > gridMinCols){
 			--gridCols;
-
-			///??
-			std::vector<std::pair<bool, Entity*>>& entityPool = objPool->RetrievePool();
-			const size_t& entityPoolSize = entityPool.size();
-
-			for(size_t i = 0; i < entityPoolSize; ++i){
-				std::pair<bool, Entity*>& element = entityPool[i];
-
-				if(element.first){
-					const Vector3& entityLocalPos = element.second->GetLocalPos();
-					if(element.second->GetLocalPos().x >= (float)gridCols - 1.0f){
-						if(!(int)gridCols){
-							element.first = false;
-							continue;
-						}
-						element.second->SetLocalPos(float(gridCols - 1), entityLocalPos.y, entityLocalPos.z);
-					}
-					if(element.second->GetGridTargetLocalPos().x >= (float)gridCols - 1.0f){
-						element.second->SetGridTargetLocalPos(float(gridCols - 1), entityLocalPos.y, entityLocalPos.z);
-					}
-				}
-			}
 		}
 		isKeyDown0 = true;
 	} else if(isKeyDown0 && !App::Key('0')){
