@@ -1,3 +1,5 @@
+ObjPool<Entity>* StateReptileDead::im_ObjPool = nullptr;
+
 void StateReptileDead::Enter(Entity* const entity){
 	entity->SetTimeLeft(0.0f); //Just in case
 }
@@ -5,7 +7,7 @@ void StateReptileDead::Enter(Entity* const entity){
 void StateReptileDead::Update(Entity* const entity, const double dt){
 	entity->SetTimeLeft(entity->GetTimeLeft() - (float)dt);
 	if(entity->GetTimeLeft() <= 0.0f){
-
+		im_ObjPool->DeactivateObj(entity);
 	}
 }
 

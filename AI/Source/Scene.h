@@ -73,6 +73,10 @@ private:
 	void UpdateGridData();
 	void UpdateGridAttribs();
 	void UpdateStates();
+	void UpdateSkeleStates();
+	void UpdateReptileStates();
+	void UpdateBoyStates();
+	void UpdateOrcStates();
 	void UpdateEntities(const double dt);
 
 	void RenderGrid();

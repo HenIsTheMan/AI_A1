@@ -10,6 +10,8 @@ class StateReptileDead final{ //Static class
 	StateReptileDead& operator=(const StateReptileDead&) = delete;
 	StateReptileDead& operator=(StateReptileDead&&) noexcept = delete;
 public:
+	static ObjPool<Entity>* im_ObjPool;
+
 	static void Enter(Entity* const entity);
 	static void Update(Entity* const entity, const double dt);
 	static void Exit(Entity* const entity);
