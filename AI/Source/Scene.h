@@ -26,7 +26,7 @@ public:
 
 	void Update(double dt) override;
 	void Render() override;
-protected:
+private:
 	float gridCellWidth;
 	float gridCellHeight;
 	float gridLineThickness;
@@ -74,5 +74,9 @@ protected:
 	void RenderEntitiesPart2(const Entity* const entity);
 	void RenderTranslucentBlock();
 	void RenderBG();
+
 	void RenderSceneText();
+	void RenderDebugInfoText(Mesh* const textMesh, const Color& textColor, const float textSize);
+	void RenderControlsText(Mesh* const textMesh, const Color& textColor, const float textSize);
+	void RenderGridAttribsText(Mesh* const textMesh, const Color& textColor, const float textSize);
 };

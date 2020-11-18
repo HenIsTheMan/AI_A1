@@ -755,18 +755,16 @@ void Scene::RenderBG(){
 }
 
 void Scene::RenderSceneText(){
-	static Mesh* textMesh = meshList[(int)GeoType::Text];
-	static float textSize = 0.0f;
-	textSize = winHeight * 0.05f;
+	RenderDebugInfoText(meshList[(int)GeoType::Text], Color(), winHeight * 0.05f);
+	RenderControlsText(meshList[(int)GeoType::Text], Color(1.0f, 0.0f, 1.0f), winHeight * 0.05f);
+	RenderGridAttribsText(meshList[(int)GeoType::Text], Color(1.0f, 1.0f, 0.0f), winHeight * 0.05f);
+}
 
-	static Color debugInfoTextColor = Color();
-	static Color controlsTextColor = Color(1.0f, 0.0f, 1.0f);
-
-	///Debug info
+void Scene::RenderDebugInfoText(Mesh* const textMesh, const Color& textColor, const float textSize){
 	RenderTextOnScreen(
 		textMesh,
 		"Elapsed time: " + std::to_string(elapsedTime).substr(0, std::to_string((int)elapsedTime).length() + 3),
-		debugInfoTextColor,
+		textColor,
 		textSize,
 		0.0f,
 		textSize * 0.0f
@@ -774,15 +772,15 @@ void Scene::RenderSceneText(){
 	RenderTextOnScreen(
 		textMesh,
 		"FPS: " + std::to_string(FPS).substr(0, std::to_string((int)FPS).length() + 3),
-		debugInfoTextColor,
+		textColor,
 		textSize,
 		0.0f,
 		textSize * 1.0f
 	);
 	RenderTextOnScreen(
 		textMesh,
-		"Game Spd: " + std::to_string(gameSpd).substr(0, 3),
-		debugInfoTextColor,
+		"Game Spd: " + std::to_string(gameSpd).substr(0, std::to_string((int)gameSpd).length() + 2),
+		textColor,
 		textSize,
 		0.0f,
 		textSize * 2.0f
@@ -790,17 +788,18 @@ void Scene::RenderSceneText(){
 	RenderTextOnScreen( //??
 		textMesh,
 		"Obj count: ",
-		debugInfoTextColor,
+		textColor,
 		textSize,
 		0.0f,
 		textSize * 3.0f
 	);
+}
 
-	///Controls
+void Scene::RenderControlsText(Mesh* const textMesh, const Color& textColor, const float textSize){
 	RenderTextOnScreen(
 		textMesh,
 		"F1: Toggle fullscreen",
-		controlsTextColor,
+		textColor,
 		textSize,
 		0.0f,
 		textSize * 19.0f
@@ -808,7 +807,7 @@ void Scene::RenderSceneText(){
 	RenderTextOnScreen(
 		textMesh,
 		"F2: Change polygon mode",
-		controlsTextColor,
+		textColor,
 		textSize,
 		0.0f,
 		textSize * 18.0f
@@ -816,7 +815,7 @@ void Scene::RenderSceneText(){
 	RenderTextOnScreen(
 		textMesh,
 		"Tab: ...",
-		controlsTextColor,
+		textColor,
 		textSize,
 		0.0f,
 		textSize * 17.0f
@@ -824,7 +823,7 @@ void Scene::RenderSceneText(){
 	RenderTextOnScreen(
 		textMesh,
 		"WASD: Move cam",
-		controlsTextColor,
+		textColor,
 		textSize,
 		0.0f,
 		textSize * 16.0f
@@ -832,7 +831,7 @@ void Scene::RenderSceneText(){
 	RenderTextOnScreen(
 		textMesh,
 		"R: Reset cam",
-		controlsTextColor,
+		textColor,
 		textSize,
 		0.0f,
 		textSize * 15.0f
@@ -840,7 +839,7 @@ void Scene::RenderSceneText(){
 	RenderTextOnScreen(
 		textMesh,
 		"Z: Increase game spd",
-		controlsTextColor,
+		textColor,
 		textSize,
 		0.0f,
 		textSize * 14.0f
@@ -848,13 +847,59 @@ void Scene::RenderSceneText(){
 	RenderTextOnScreen(
 		textMesh,
 		"X: Decrease game spd",
-		controlsTextColor,
+		textColor,
 		textSize,
 		0.0f,
 		textSize * 13.0f
 	);
+}
 
-	///Grid attribs
+void Scene::RenderGridAttribsText(Mesh* const textMesh, const Color& textColor, const float textSize){
+	RenderTextOnScreen(
+		textMesh,
+		"Grid cell width: " + std::to_string(gridCellWidth).substr(0, std::to_string((int)gridCellWidth).length() + 2),
+		textColor,
+		textSize,
+		(float)winWidth,
+		textSize * 0.0f,
+		TextAlignment::Right
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Grid cell height: " + std::to_string(gridCellHeight).substr(0, std::to_string((int)gridCellHeight).length() + 2),
+		textColor,
+		textSize,
+		(float)winWidth,
+		textSize * 1.0f,
+		TextAlignment::Right
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Grid line thickness: " + std::to_string(gridLineThickness).substr(0, std::to_string((int)gridLineThickness).length() + 2),
+		textColor,
+		textSize,
+		(float)winWidth,
+		textSize * 2.0f,
+		TextAlignment::Right
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Grid rows: " + std::to_string(gridRows),
+		textColor,
+		textSize,
+		(float)winWidth,
+		textSize * 3.0f,
+		TextAlignment::Right
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Grid cols: " + std::to_string(gridCols),
+		textColor,
+		textSize,
+		(float)winWidth,
+		textSize * 4.0f,
+		TextAlignment::Right
+	);
 }
 
 Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
