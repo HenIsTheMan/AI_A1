@@ -32,10 +32,18 @@ private:
 	float gridLineThickness;
 	int gridRows;
 	int gridCols;
+
+	float gridMinCellWidth;
+	float gridMaxCellWidth;
+	float gridMinCellHeight;
+	float gridMaxCellHeight;
+	float gridMinLineThickness;
+	float gridMaxLineThickness;
 	int gridMinRows;
 	int gridMinCols;
 	int gridMaxRows;
 	int gridMaxCols;
+
 	Grid<float> grid;
 
 	bool isDay;

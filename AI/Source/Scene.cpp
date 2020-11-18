@@ -31,9 +31,15 @@ extern int winHeight;
 Scene::Scene():
 	gridCellWidth(40.0f),
 	gridCellHeight(40.0f),
-	gridLineThickness(3.0f),
+	gridLineThickness(2.5f),
 	gridRows(20),
 	gridCols(20),
+	gridMinCellWidth(20.0f),
+	gridMaxCellWidth(60.0f),
+	gridMinCellHeight(20.0f),
+	gridMaxCellHeight(60.0f),
+	gridMinLineThickness(0.5f),
+	gridMaxLineThickness(4.0f),
 	gridMinRows(0),
 	gridMinCols(0),
 	gridMaxRows(30),
@@ -160,37 +166,49 @@ void Scene::UpdateGridAttribs(){
 	static bool isKeyDown9 = false;
 	static bool isKeyDown0 = false;
 	if(!isKeyDown1 && App::Key('1')){
-		++gridCellWidth;
+		if(gridCellWidth < gridMaxCellWidth){
+			++gridCellWidth;
+		}
 		isKeyDown1 = true;
 	} else if(isKeyDown1 && !App::Key('1')){
 		isKeyDown1 = false;
 	}
 	if(!isKeyDown2 && App::Key('2')){
-		--gridCellWidth;
+		if(gridCellWidth > gridMinCellWidth){
+			--gridCellWidth;
+		}
 		isKeyDown2 = true;
 	} else if(isKeyDown2 && !App::Key('2')){
 		isKeyDown2 = false;
 	}
 	if(!isKeyDown3 && App::Key('3')){
-		++gridCellHeight;
+		if(gridCellHeight < gridMaxCellHeight){
+			++gridCellHeight;
+		}
 		isKeyDown3 = true;
 	} else if(isKeyDown3 && !App::Key('3')){
 		isKeyDown3 = false;
 	}
 	if(!isKeyDown4 && App::Key('4')){
-		--gridCellHeight;
+		if(gridCellHeight > gridMinCellHeight){
+			--gridCellHeight;
+		}
 		isKeyDown4 = true;
 	} else if(isKeyDown4 && !App::Key('4')){
 		isKeyDown4 = false;
 	}
 	if(!isKeyDown5 && App::Key('5')){
-		++gridLineThickness;
+		if(gridLineThickness < gridMaxLineThickness){
+			gridLineThickness += 0.1f;
+		}
 		isKeyDown5 = true;
 	} else if(isKeyDown5 && !App::Key('5')){
 		isKeyDown5 = false;
 	}
 	if(!isKeyDown6 && App::Key('6')){
-		--gridLineThickness;
+		if(gridLineThickness > gridMinLineThickness){
+			gridLineThickness -= 0.1f;
+		}
 		isKeyDown6 = true;
 	} else if(isKeyDown6 && !App::Key('6')){
 		isKeyDown6 = false;
