@@ -63,7 +63,7 @@ protected:
 	Entity* CreateOrc(const CreateEntityParams& params) const; //High dmg, high health, low range, low spd
 
 	void UpdateGridData();
-	void UpdateGridProperties();
+	void UpdateGridAttribs();
 	void UpdateStates();
 	void UpdateEntities(const double dt);
 

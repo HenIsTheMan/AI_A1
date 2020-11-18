@@ -121,7 +121,7 @@ void Scene::Update(double dt){
 	}
 	gameSpd = Math::Clamp(gameSpd, 0.2f, 4.0f);
 
-	UpdateGridProperties();
+	UpdateGridAttribs();
 	UpdateGridData();
 	UpdateStates();
 	UpdateEntities(dt * gameSpd);
@@ -148,7 +148,7 @@ void Scene::Render(){
 	modelStack.PopMatrix();
 }
 
-void Scene::UpdateGridProperties(){
+void Scene::UpdateGridAttribs(){
 	static bool isKeyDown1 = false;
 	static bool isKeyDown2 = false;
 	static bool isKeyDown3 = false;
@@ -853,6 +853,8 @@ void Scene::RenderSceneText(){
 		0.0f,
 		textSize * 13.0f
 	);
+
+	///Grid attribs
 }
 
 Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
