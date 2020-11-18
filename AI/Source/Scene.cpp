@@ -215,8 +215,12 @@ void Scene::UpdateGridProperties(){
 				std::pair<bool, Entity*>& element = entityPool[i];
 
 				if(element.first){
-					if(element.second->GetLocalPos().y >= gridRows){
-						element.first = false;
+					const Vector3& entityLocalPos = element.second->GetLocalPos();
+					if(entityLocalPos.y >= (float)gridRows - 1.0f){
+						element.second->SetLocalPos(entityLocalPos.x, float(gridRows - 1), entityLocalPos.z);
+					}
+					if(element.second->GetGridTargetLocalPos().y >= (float)gridRows - 1.0f){
+						element.second->SetGridTargetLocalPos(entityLocalPos.x, float(gridRows - 1), entityLocalPos.z);
 					}
 				}
 			}
@@ -245,8 +249,12 @@ void Scene::UpdateGridProperties(){
 				std::pair<bool, Entity*>& element = entityPool[i];
 
 				if(element.first){
-					if(element.second->GetLocalPos().x >= gridCols){
-						element.first = false;
+					const Vector3& entityLocalPos = element.second->GetLocalPos();
+					if(element.second->GetLocalPos().x >= (float)gridCols - 1.0f){
+						element.second->SetLocalPos(float(gridCols - 1), entityLocalPos.y, entityLocalPos.z);
+					}
+					if(element.second->GetGridTargetLocalPos().x >= (float)gridCols - 1.0f){
+						element.second->SetGridTargetLocalPos(float(gridCols - 1), entityLocalPos.y, entityLocalPos.z);
 					}
 				}
 			}
@@ -363,8 +371,10 @@ void Scene::UpdateEntities(const double dt){
 			Vector3(5.0f, 4.0f, 0.0f)
 		});
 		Entity* orc = CreateOrc({
-			Vector3(10.0f, 3.0f, 0.0f)
+			Vector3(18.5f, 3.0f, 0.0f)
 		});
+
+		orc->SetCurrHealth(0.0f);
 		++control;
 	}
 
