@@ -19,7 +19,7 @@ void StateBoyIdle::Update(Entity* const entity, const double dt){
 
 	if(entity->GetTimeLeft() <= 0.0f){
 		if((entityGridTargetLocalPos - entity->GetLocalPos()).Length() < entity->GetSpd() * (float)dt){
-			entity->SetLocalPos(entityGridTargetLocalPos); //Snap entity's local pos
+			entity->SetLocalPos(roundf(entityGridTargetLocalPos.x), roundf(entityGridTargetLocalPos.y), roundf(entityGridTargetLocalPos.z)); //Snap entity's local pos
 
 			if(entity->GetSpriteAniMiddleName() == "Move"){
 				entity->SetSpriteAniMiddleName("Static");
