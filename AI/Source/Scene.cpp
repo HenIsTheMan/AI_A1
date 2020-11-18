@@ -188,6 +188,106 @@ void Scene::Render(){
 	modelStack.PopMatrix();
 }
 
+Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
+	Entity* entity = objPool->RetrieveActivatedObj();
+
+	entity->SetType(Obj::EntityType::Skele);
+	entity->SetLocalPos(params.im_LocalPos);
+	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
+
+	entity->SetDmg(22.0f);
+	entity->SetRange(1.2f);
+	entity->SetMaxHealth(45.0f);
+	entity->SetCurrHealth(entity->GetMaxHealth());
+	entity->SetSpd(1.4f);
+
+	entity->SetTarget(nullptr);
+	ChooseRandDir(entity, &grid, gridRows, gridCols);
+	entity->SetTimeLeft(0.0f);
+
+	entity->SetStateMachine(skeleSM);
+	entity->SetCurrState(skeleSM->GetState(StateID::StateSkeleIdle));
+	entity->SetNextState(skeleSM->GetState(StateID::StateSkeleIdle));
+	entity->SetSpriteAniMiddleName("Static");
+
+	return entity;
+}
+
+Entity* Scene::CreateReptile(const CreateEntityParams& params) const{
+	Entity* entity = objPool->RetrieveActivatedObj();
+
+	entity->SetType(Obj::EntityType::Reptile);
+	entity->SetLocalPos(params.im_LocalPos);
+	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
+
+	entity->SetDmg(3.0f);
+	entity->SetRange(2.1f);
+	entity->SetMaxHealth(240.0f);
+	entity->SetCurrHealth(entity->GetMaxHealth());
+	entity->SetSpd(1.8f);
+
+	entity->SetTarget(nullptr);
+	ChooseRandDir(entity, &grid, gridRows, gridCols);
+	entity->SetTimeLeft(0.0f);
+
+	entity->SetStateMachine(reptileSM);
+	entity->SetCurrState(reptileSM->GetState(StateID::StateReptileIdle));
+	entity->SetNextState(reptileSM->GetState(StateID::StateReptileIdle));
+	entity->SetSpriteAniMiddleName("Static");
+
+	return entity;
+}
+
+Entity* Scene::CreateBoy(const CreateEntityParams& params) const{
+	Entity* entity = objPool->RetrieveActivatedObj();
+
+	entity->SetType(Obj::EntityType::Boy);
+	entity->SetLocalPos(params.im_LocalPos);
+	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
+
+	entity->SetDmg(10.0f);
+	entity->SetRange(1.3f);
+	entity->SetMaxHealth(85.0f);
+	entity->SetCurrHealth(entity->GetMaxHealth());
+	entity->SetSpd(1.2f);
+
+	entity->SetTarget(nullptr);
+	ChooseRandDir(entity, &grid, gridRows, gridCols);
+	entity->SetTimeLeft(0.0f);
+
+	entity->SetStateMachine(boySM);
+	entity->SetCurrState(boySM->GetState(StateID::StateBoyIdle));
+	entity->SetNextState(boySM->GetState(StateID::StateBoyIdle));
+	entity->SetSpriteAniMiddleName("Static");
+
+	return entity;
+}
+
+Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
+	Entity* entity = objPool->RetrieveActivatedObj();
+
+	entity->SetType(Obj::EntityType::Orc);
+	entity->SetLocalPos(params.im_LocalPos);
+	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
+
+	entity->SetDmg(15.0f);
+	entity->SetRange(0.7f);
+	entity->SetMaxHealth(150.0f);
+	entity->SetCurrHealth(entity->GetMaxHealth());
+	entity->SetSpd(0.8f);
+
+	entity->SetTarget(nullptr);
+	ChooseRandDir(entity, &grid, gridRows, gridCols);
+	entity->SetTimeLeft(0.0f);
+
+	entity->SetStateMachine(orcSM);
+	entity->SetCurrState(orcSM->GetState(StateID::StateOrcIdle));
+	entity->SetNextState(orcSM->GetState(StateID::StateOrcIdle));
+	entity->SetSpriteAniMiddleName("Static");
+
+	return entity;
+}
+
 void Scene::UpdateGridAttribs(){
 	static bool isKeyDown1 = false;
 	static bool isKeyDown2 = false;
@@ -949,104 +1049,4 @@ void Scene::RenderGridAttribsText(Mesh* const textMesh, const Color& textColor, 
 		textSize * 4.0f,
 		TextAlignment::Right
 	);
-}
-
-Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
-	Entity* entity = objPool->RetrieveActivatedObj();
-
-	entity->SetType(Obj::EntityType::Skele);
-	entity->SetLocalPos(params.im_LocalPos);
-	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
-
-	entity->SetDmg(22.0f);
-	entity->SetRange(1.2f);
-	entity->SetMaxHealth(45.0f);
-	entity->SetCurrHealth(entity->GetMaxHealth());
-	entity->SetSpd(1.4f);
-
-	entity->SetTarget(nullptr);
-	ChooseRandDir(entity, &grid, gridRows, gridCols);
-	entity->SetTimeLeft(0.0f);
-
-	entity->SetStateMachine(skeleSM);
-	entity->SetCurrState(skeleSM->GetState(StateID::StateSkeleIdle));
-	entity->SetNextState(skeleSM->GetState(StateID::StateSkeleIdle));
-	entity->SetSpriteAniMiddleName("Static");
-
-	return entity;
-}
-
-Entity* Scene::CreateReptile(const CreateEntityParams& params) const{
-	Entity* entity = objPool->RetrieveActivatedObj();
-
-	entity->SetType(Obj::EntityType::Reptile);
-	entity->SetLocalPos(params.im_LocalPos);
-	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
-
-	entity->SetDmg(3.0f);
-	entity->SetRange(2.1f);
-	entity->SetMaxHealth(240.0f);
-	entity->SetCurrHealth(entity->GetMaxHealth());
-	entity->SetSpd(1.8f);
-
-	entity->SetTarget(nullptr);
-	ChooseRandDir(entity, &grid, gridRows, gridCols);
-	entity->SetTimeLeft(0.0f);
-
-	entity->SetStateMachine(reptileSM);
-	entity->SetCurrState(reptileSM->GetState(StateID::StateReptileIdle));
-	entity->SetNextState(reptileSM->GetState(StateID::StateReptileIdle));
-	entity->SetSpriteAniMiddleName("Static");
-
-	return entity;
-}
-
-Entity* Scene::CreateBoy(const CreateEntityParams& params) const{
-	Entity* entity = objPool->RetrieveActivatedObj();
-
-	entity->SetType(Obj::EntityType::Boy);
-	entity->SetLocalPos(params.im_LocalPos);
-	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
-
-	entity->SetDmg(10.0f);
-	entity->SetRange(1.3f);
-	entity->SetMaxHealth(85.0f);
-	entity->SetCurrHealth(entity->GetMaxHealth());
-	entity->SetSpd(1.2f);
-
-	entity->SetTarget(nullptr);
-	ChooseRandDir(entity, &grid, gridRows, gridCols);
-	entity->SetTimeLeft(0.0f);
-
-	entity->SetStateMachine(boySM);
-	entity->SetCurrState(boySM->GetState(StateID::StateBoyIdle));
-	entity->SetNextState(boySM->GetState(StateID::StateBoyIdle));
-	entity->SetSpriteAniMiddleName("Static");
-
-	return entity;
-}
-
-Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
-	Entity* entity = objPool->RetrieveActivatedObj();
-
-	entity->SetType(Obj::EntityType::Orc);
-	entity->SetLocalPos(params.im_LocalPos);
-	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
-
-	entity->SetDmg(15.0f);
-	entity->SetRange(0.7f);
-	entity->SetMaxHealth(150.0f);
-	entity->SetCurrHealth(entity->GetMaxHealth());
-	entity->SetSpd(0.8f);
-
-	entity->SetTarget(nullptr);
-	ChooseRandDir(entity, &grid, gridRows, gridCols);
-	entity->SetTimeLeft(0.0f);
-
-	entity->SetStateMachine(orcSM);
-	entity->SetCurrState(orcSM->GetState(StateID::StateOrcIdle));
-	entity->SetNextState(orcSM->GetState(StateID::StateOrcIdle));
-	entity->SetSpriteAniMiddleName("Static");
-
-	return entity;
 }

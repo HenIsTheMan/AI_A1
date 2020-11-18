@@ -70,8 +70,8 @@ private:
 	Entity* CreateBoy(const CreateEntityParams& params) const; //Moderate dmg, moderate health, moderate range, moderate spd
 	Entity* CreateOrc(const CreateEntityParams& params) const; //High dmg, high health, low range, low spd
 
-	void UpdateGridData();
 	void UpdateGridAttribs();
+	void UpdateGridData();
 	void UpdateStates();
 	void UpdateSkeleStates();
 	void UpdateReptileStates();
