@@ -34,8 +34,8 @@ Scene::Scene():
 	gridLineThickness(3.0f),
 	gridRows(20),
 	gridCols(20),
-	gridMinRows(4),
-	gridMinCols(4),
+	gridMinRows(0),
+	gridMinCols(0),
 	gridMaxRows(30),
 	gridMaxCols(30),
 	grid(Grid<float>(0.0f, 0.0f, 0.0f, 0, 0)),
@@ -217,6 +217,10 @@ void Scene::UpdateGridProperties(){
 				if(element.first){
 					const Vector3& entityLocalPos = element.second->GetLocalPos();
 					if(entityLocalPos.y >= (float)gridRows - 1.0f){
+						if(!(int)gridRows){
+							element.first = false;
+							continue;
+						}
 						element.second->SetLocalPos(entityLocalPos.x, float(gridRows - 1), entityLocalPos.z);
 					}
 					if(element.second->GetGridTargetLocalPos().y >= (float)gridRows - 1.0f){
@@ -251,6 +255,10 @@ void Scene::UpdateGridProperties(){
 				if(element.first){
 					const Vector3& entityLocalPos = element.second->GetLocalPos();
 					if(element.second->GetLocalPos().x >= (float)gridCols - 1.0f){
+						if(!(int)gridCols){
+							element.first = false;
+							continue;
+						}
 						element.second->SetLocalPos(float(gridCols - 1), entityLocalPos.y, entityLocalPos.z);
 					}
 					if(element.second->GetGridTargetLocalPos().x >= (float)gridCols - 1.0f){
@@ -845,17 +853,6 @@ void Scene::RenderSceneText(){
 		0.0f,
 		textSize * 13.0f
 	);
-
-	///??
-	//RenderTextOnScreen(
-	//	textMesh,
-	//	"DiedByHunger count: " + std::to_string(im_DiedByHunger),
-	//	textColor,
-	//	textSize,
-	//	(float)winWidth,
-	//	textSize * 0.0f,
-	//	TextAlignment::Right
-	//);
 }
 
 Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
