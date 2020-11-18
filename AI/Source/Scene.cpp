@@ -823,13 +823,21 @@ void Scene::RenderDebugInfoText(Mesh* const textMesh, const Color& textColor, co
 		0.0f,
 		textSize * 2.0f
 	);
-	RenderTextOnScreen( //??
+	RenderTextOnScreen(
 		textMesh,
-		"Obj count: ",
+		"Inactive objs: " + std::to_string(objPool->GetPool().size()),
 		textColor,
 		textSize,
 		0.0f,
 		textSize * 3.0f
+	);
+	RenderTextOnScreen( //??
+		textMesh,
+		"Active objs: ",
+		textColor,
+		textSize,
+		0.0f,
+		textSize * 4.0f
 	);
 }
 
