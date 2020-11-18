@@ -164,6 +164,7 @@
     <ClCompile Include="Source\EntryPt.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
+    <ClCompile Include="Source\Publisher.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\SceneSupport.cpp" />
     <ClCompile Include="Source\shader.cpp" />
@@ -197,8 +198,8 @@
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
     <ClInclude Include="Source\ObjPool.h" />
-    <ClInclude Include="Source\Publisher.h" />
     <ClInclude Include="Source\IScene.hpp" />
+    <ClInclude Include="Source\Publisher.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneSupport.h" />
     <ClInclude Include="Source\shader.h" />
@@ -235,7 +236,6 @@
     <None Include="Source\Entity.inl" />
     <None Include="Source\Grid.inl" />
     <None Include="Source\ObjPool.inl" />
-    <None Include="Source\Publisher.cpp" />
     <None Include="Source\StateBoyAttack.inl" />
     <None Include="Source\StateBoyDead.inl" />
     <None Include="Source\StateBoyHeal.inl" />

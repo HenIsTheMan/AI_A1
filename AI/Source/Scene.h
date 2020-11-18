@@ -10,6 +10,7 @@
 #include "SceneSupport.h"
 #include "Grid.h"
 #include "ObjPool.h"
+#include "Publisher.h"
 
 ///In this order
 //#include "StateID.hpp" //Shld be here instead
@@ -50,6 +51,7 @@ private:
 	float dayNightBT;
 	float gameSpd;
 	ObjPool<Entity>* objPool;
+	Publisher* publisher;
 
 	//* Shared SMs
 	SM* skeleSM;

@@ -47,6 +47,7 @@ Scene::Scene():
 	dayNightBT(0.0f),
 	gameSpd(1.0f),
 	objPool(new ObjPool<Entity>()),
+	publisher(Publisher::RetrieveGlobalObjPtr()),
 	skeleSM(new SM()),
 	reptileSM(new SM()),
 	boySM(new SM()),
@@ -75,12 +76,19 @@ Scene::Scene():
 	orcSM->AddState(new State(StateID::StateOrcAttack, StateOrcAttack::Enter, StateOrcAttack::Update, StateOrcAttack::Exit));
 	orcSM->AddState(new State(StateID::StateOrcDead, StateOrcDead::Enter, StateOrcDead::Update, StateOrcDead::Exit));
 	orcSM->AddState(new State(StateID::StateOrcImmune, StateOrcImmune::Enter, StateOrcImmune::Update, StateOrcImmune::Exit));
+
+	publisher->AddListener(ListenerID::ObjPool, ListenerCategory::ObjPool, objPool);
 }
 
 Scene::~Scene(){
 	if(objPool){
 		delete objPool;
 		objPool = nullptr;
+	}
+
+	if(publisher){
+		publisher->Destroy();
+		publisher = nullptr;
 	}
 
 	if(skeleSM){

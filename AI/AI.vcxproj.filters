@@ -70,6 +70,9 @@
     <ClCompile Include="Source\EventCalcInactiveObjs.cpp">
       <Filter>Event\Events</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Publisher.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -113,9 +116,6 @@
     </ClInclude>
     <ClInclude Include="Source\Entity.h">
       <Filter>Obj</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Publisher.h">
-      <Filter>Event</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateMachine.h">
       <Filter>State</Filter>
@@ -228,6 +228,9 @@
     <ClInclude Include="Source\Event.h">
       <Filter>Event</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Publisher.h">
+      <Filter>Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -306,9 +309,6 @@
     </None>
     <None Include="Source\StateMachine.inl">
       <Filter>State</Filter>
-    </None>
-    <None Include="Source\Publisher.cpp">
-      <Filter>Event</Filter>
     </None>
     <None Include="Source\StateSkeleAttack.inl">
       <Filter>State\States\SkeleStates</Filter>
