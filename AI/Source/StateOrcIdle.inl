@@ -7,6 +7,14 @@ void StateOrcIdle::Enter(Entity* const entity){
 }
 
 void StateOrcIdle::Update(Entity* const entity, const double dt){
+	//* Check for state transition
+	if(entity->GetCurrHealth() <= 0.0f){
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcDead));
+		return;
+	}
+	//*/
+
+	//* Update entity
 	const Vector3 entityGridTargetLocalPos = entity->GetGridTargetLocalPos();
 
 	if(entity->GetTimeLeft() <= 0.0f){
@@ -30,6 +38,7 @@ void StateOrcIdle::Update(Entity* const entity, const double dt){
 			ChooseRandDir(entity, im_Grid, im_GridRows, im_GridCols);
 		}
 	}
+	//*/
 }
 
 void StateOrcIdle::Exit(Entity* const entity){

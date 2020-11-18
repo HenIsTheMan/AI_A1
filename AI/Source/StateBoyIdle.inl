@@ -7,6 +7,14 @@ void StateBoyIdle::Enter(Entity* const entity){
 }
 
 void StateBoyIdle::Update(Entity* const entity, const double dt){
+	//* Check for state transition
+	if(entity->GetCurrHealth() <= 0.0f){
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyDead));
+		return;
+	}
+	//*/
+
+	//* Update entity
 	const Vector3 entityGridTargetLocalPos = entity->GetGridTargetLocalPos();
 
 	if(entity->GetTimeLeft() <= 0.0f){
@@ -35,6 +43,7 @@ void StateBoyIdle::Update(Entity* const entity, const double dt){
 			ChooseRandDir(entity, im_Grid, im_GridRows, im_GridCols);
 		}
 	}
+	//*/
 }
 
 void StateBoyIdle::Exit(Entity* const entity){

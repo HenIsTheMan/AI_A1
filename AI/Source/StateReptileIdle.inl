@@ -8,6 +8,14 @@ void StateReptileIdle::Enter(Entity* const entity){
 }
 
 void StateReptileIdle::Update(Entity* const entity, const double dt){
+	//* Check for state transition
+	if(entity->GetCurrHealth() <= 0.0f){
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateReptileDead));
+		return;
+	}
+	//*/
+
+	//* Update entity
 	const Vector3 entityGridTargetLocalPos = entity->GetGridTargetLocalPos();
 	const Vector3 entityLocalPos = entity->GetLocalPos();
 
@@ -37,6 +45,7 @@ void StateReptileIdle::Update(Entity* const entity, const double dt){
 			ChooseBetween2Dirs(entity, im_Grid, im_GridRows, im_GridCols, im_CommonDirs);
 		}
 	}
+	//*/
 }
 
 void StateReptileIdle::Exit(Entity* const entity){

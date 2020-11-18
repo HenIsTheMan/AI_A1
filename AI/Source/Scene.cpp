@@ -379,19 +379,19 @@ void Scene::UpdateEntities(const double dt){
 				using namespace Obj;
 
 				case EntityType::Skele:
-					skeleSM->CheckStateTransition(entity);
+					skeleSM->CheckForStateTransition(entity);
 					skeleSM->UpdateCurrState(entity, dt);
 					break;
 				case EntityType::Reptile:
-					reptileSM->CheckStateTransition(entity);
+					reptileSM->CheckForStateTransition(entity);
 					reptileSM->UpdateCurrState(entity, dt);
 					break;
 				case EntityType::Boy:
-					boySM->CheckStateTransition(entity);
+					boySM->CheckForStateTransition(entity);
 					boySM->UpdateCurrState(entity, dt);
 					break;
 				case EntityType::Orc:
-					orcSM->CheckStateTransition(entity);
+					orcSM->CheckForStateTransition(entity);
 					orcSM->UpdateCurrState(entity, dt);
 					break;
 			}
