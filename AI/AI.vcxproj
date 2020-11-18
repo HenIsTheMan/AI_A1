@@ -149,8 +149,11 @@
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Cam.cpp" />
     <ClCompile Include="Source\EntityHelperFuncs.cpp" />
+    <ClCompile Include="Source\Event.cpp" />
     <ClCompile Include="Source\EventApproaching.cpp" />
     <ClCompile Include="Source\EventAttacked.cpp" />
+    <ClCompile Include="Source\EventCalcActiveObjs.cpp" />
+    <ClCompile Include="Source\EventCalcInactiveObjs.cpp" />
     <ClCompile Include="Source\EventGridDataChanged.cpp" />
     <ClCompile Include="Source\EventLeaving.cpp" />
     <ClCompile Include="Source\EventPeriodChanged.cpp" />
@@ -171,12 +174,14 @@
     <ClInclude Include="Source\EntityHelperFuncs.h" />
     <ClInclude Include="Source\EventApproaching.h" />
     <ClInclude Include="Source\EventAttacked.h" />
+    <ClInclude Include="Source\EventCalcActiveObjs.h" />
+    <ClInclude Include="Source\EventCalcInactiveObjs.h" />
     <ClInclude Include="Source\EventGridDataChanged.h" />
     <ClInclude Include="Source\EventLeaving.h" />
     <ClInclude Include="Source\EventPeriodChanged.h" />
     <ClInclude Include="Source\EventSimEnded.h" />
     <ClInclude Include="Source\EventSimStarted.h" />
-    <ClInclude Include="Source\IEvent.hpp" />
+    <ClInclude Include="Source\Event.h" />
     <ClInclude Include="Source\App.h" />
     <ClInclude Include="Source\Cam.h" />
     <ClInclude Include="Source\Entity.h" />

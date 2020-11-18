@@ -2,16 +2,16 @@
 
 #include <queue>
 
-#include "IEvent.hpp"
+#include "Event.h"
 
 class Listener{ //Abstract class
 public:
-	virtual int OnEvent(const IEvent* const myEvent, const bool destroyEvent = false) = 0;
+	virtual int OnEvent(const Event* myEvent, const bool destroyEvent = false) = 0;
 
-	void AddEvent(IEvent* const myEvent);
-	const IEvent* FetchEvent();
+	void AddEvent(Event* const myEvent);
+	const Event* FetchEvent();
 protected:
-	std::queue<IEvent*> events;
+	std::queue<Event*> events;
 
 	Listener();
 	virtual ~Listener();

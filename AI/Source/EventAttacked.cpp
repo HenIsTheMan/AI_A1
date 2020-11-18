@@ -6,7 +6,7 @@ EventAttacked::EventAttacked():
 }
 
 EventAttacked::EventAttacked(Obj::Entity<Vector3, float>* const entity):
-	IEvent(),
+	Event(),
 	im_Entity(entity)
 {
 }

@@ -61,6 +61,15 @@
     <ClCompile Include="Source\EntityHelperFuncs.cpp">
       <Filter>Obj</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Event.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EventCalcActiveObjs.cpp">
+      <Filter>Event\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EventCalcInactiveObjs.cpp">
+      <Filter>Event\Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -127,9 +136,6 @@
       <Filter>State</Filter>
     </ClInclude>
     <ClInclude Include="Source\EventID.hpp">
-      <Filter>Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\IEvent.hpp">
       <Filter>Event</Filter>
     </ClInclude>
     <ClInclude Include="Source\Listener.h">
@@ -212,6 +218,15 @@
     </ClInclude>
     <ClInclude Include="Source\EntityHelperFuncs.h">
       <Filter>Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventCalcInactiveObjs.h">
+      <Filter>Event\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventCalcActiveObjs.h">
+      <Filter>Event\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Event.h">
+      <Filter>Event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

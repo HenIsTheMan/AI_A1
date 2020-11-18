@@ -2,11 +2,15 @@
 
 #include <vector>
 
+#include "Listener.h"
+
 template <class T>
-class ObjPool final{
+class ObjPool final: public Listener{
 public:
 	ObjPool<T>();
 	~ObjPool<T>();
+
+	int OnEvent(const Event* myEvent, const bool destroyEvent = false) override;
 
 	void CreateObjs(const int amt);
 	void DeactivateObj(const T* const obj);

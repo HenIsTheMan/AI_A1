@@ -17,6 +17,17 @@ ObjPool<T>::~ObjPool(){
 }
 
 template <class T>
+int ObjPool<T>::OnEvent(const Event* myEvent, const bool destroyEvent){
+
+
+	if(destroyEvent && myEvent){
+		delete myEvent;
+		myEvent = nullptr;
+	}
+	return -1;
+}
+
+template <class T>
 void ObjPool<T>::CreateObjs(int amt){
 	assert(im_ObjPool.size() == (size_t)0 && "This func shld only be called once");
 

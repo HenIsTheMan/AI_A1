@@ -16,7 +16,7 @@ void Publisher::AddListener(const ListenerID ID, const ListenerCategory category
 	im_ListenersByCategory.insert(std::pair<ListenerCategory, Listener*>(category, listener));
 }
 
-int Publisher::Send(const ListenerID ID, IEvent* myEvent, const bool async){
+int Publisher::Send(const ListenerID ID, Event* myEvent, const bool async){
 	assert(myEvent && "Var 'myEvent' must be initialized!");
 
 	const auto iter = im_ListenersByID.find(ID);
@@ -36,7 +36,7 @@ int Publisher::Send(const ListenerID ID, IEvent* myEvent, const bool async){
 	}
 }
 
-int Publisher::MultiSend(const std::initializer_list<ListenerID> IDs, IEvent* myEvent, const bool async){
+int Publisher::MultiSend(const std::initializer_list<ListenerID> IDs, Event* myEvent, const bool async){
 	assert(myEvent && "Var 'myEvent' must be initialized!");
 
 	int sum = 0;
@@ -64,7 +64,7 @@ int Publisher::MultiSend(const std::initializer_list<ListenerID> IDs, IEvent* my
 	return sum;
 }
 
-int Publisher::GrpSend(const ListenerCategory category, IEvent* myEvent, const bool async){
+int Publisher::GrpSend(const ListenerCategory category, Event* myEvent, const bool async){
 	assert(myEvent && "Var 'myEvent' must be initialized!");
 
 	if(im_ListenersByCategory.find(category) == im_ListenersByCategory.end()){
@@ -90,7 +90,7 @@ int Publisher::GrpSend(const ListenerCategory category, IEvent* myEvent, const b
 	return sum;
 }
 
-int Publisher::Broadcast(IEvent* myEvent, const bool async){
+int Publisher::Broadcast(Event* myEvent, const bool async){
 	assert(myEvent && "Var 'myEvent' must be initialized!");
 
 	int sum = 0;

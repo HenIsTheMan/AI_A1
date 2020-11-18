@@ -6,7 +6,7 @@ EventApproaching::EventApproaching():
 }
 
 EventApproaching::EventApproaching(Obj::Entity<Vector3, float>* const entity):
-	IEvent(),
+	Event(),
 	im_Entity(entity)
 {
 }

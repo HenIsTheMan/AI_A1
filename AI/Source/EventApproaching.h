@@ -1,10 +1,10 @@
 #pragma once
 
-#include "IEvent.hpp"
+#include "Event.h"
 
 #include "Entity.h"
 
-class EventApproaching final: public IEvent{
+class EventApproaching final: public Event{
 public:
 	EventApproaching();
 	EventApproaching(Obj::Entity<Vector3, float>* const entity);

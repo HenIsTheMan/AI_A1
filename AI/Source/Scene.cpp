@@ -1,5 +1,3 @@
-#include <map>
-
 #include "Scene.h"
 #include "GL\glew.h"
 #include "App.h"

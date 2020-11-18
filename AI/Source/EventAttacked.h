@@ -1,10 +1,10 @@
 #pragma once
 
-#include "IEvent.hpp"
+#include "Event.h"
 
 #include "Entity.h"
 
-class EventAttacked final: public IEvent{
+class EventAttacked final: public Event{
 public:
 	EventAttacked();
 	EventAttacked(Obj::Entity<Vector3, float>* const entity);
