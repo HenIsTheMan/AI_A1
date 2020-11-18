@@ -551,6 +551,7 @@ void Scene::RenderEntities(){
 	const float yPosOffset = ((float)winHeight - gridHeight) * 0.5f + gridCellHeight * 0.5f + gridLineThickness;
 
 	static float individualDepthOffset = 0.0f;
+	float opacity = 1.0f;
 
 	for(size_t i = 0; i < entityPoolSize; ++i){
 		if(entityPool[i].first){
@@ -597,16 +598,20 @@ void Scene::RenderEntities(){
 					ManualRenderMesh("OrcImmune", 1.0f, 1.0f, meshList[(int)GeoType::Orc], true, Color(0.0f, 0.0f, 1.0f), 0.8f);
 					break;
 				case StateID::StateSkeleDead:
-					ManualRenderMesh("SkeleFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Skele], false);
+					opacity = entity->GetTimeLeft() / 4.0f;
+					ManualRenderMesh("SkeleFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Skele], true, Color(), opacity);
 					break;
 				case StateID::StateReptileDead:
-					ManualRenderMesh("ReptileFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Reptile], false);
+					opacity = entity->GetTimeLeft() / 6.0f;
+					ManualRenderMesh("ReptileFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Reptile], true, Color(), opacity);
 					break;
 				case StateID::StateBoyDead:
-					ManualRenderMesh("BoyFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Boy], false);
+					opacity = entity->GetTimeLeft() / 5.0f;
+					ManualRenderMesh("BoyFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Boy], true, Color(), opacity);
 					break;
 				case StateID::StateOrcDead:
-					ManualRenderMesh("OrcFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Orc], false);
+					opacity = entity->GetTimeLeft() / 7.0f;
+					ManualRenderMesh("OrcFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Orc], true, Color(), opacity);
 					break;
 				default:
 					RenderEntitiesPart2(entity);
@@ -641,11 +646,11 @@ void Scene::RenderEntities(){
 				1.0f
 			);
 
-			RenderMesh(meshList[(int)GeoType::HealthBar], true, Color(0.0f, 1.0f, 0.0f), 1.0f);
+			RenderMesh(meshList[(int)GeoType::HealthBar], true, Color(0.0f, 1.0f, 0.0f), opacity);
 
 			modelStack.PopMatrix();
 
-			RenderMesh(meshList[(int)GeoType::HealthBar], true, Color(1.0f, 0.0f, 0.0f), 1.0f);
+			RenderMesh(meshList[(int)GeoType::HealthBar], true, Color(1.0f, 0.0f, 0.0f), opacity);
 
 			modelStack.PopMatrix();
 

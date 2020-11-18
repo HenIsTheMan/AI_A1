@@ -1,7 +1,7 @@
 ObjPool<Entity>* StateBoyDead::im_ObjPool = nullptr;
 
 void StateBoyDead::Enter(Entity* const entity){
-	entity->SetTimeLeft(0.0f); //Just in case
+	entity->SetTimeLeft(5.0f);
 }
 
 void StateBoyDead::Update(Entity* const entity, const double dt){
