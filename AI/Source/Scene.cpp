@@ -755,9 +755,12 @@ void Scene::RenderBG(){
 }
 
 void Scene::RenderSceneText(){
-	RenderDebugInfoText(meshList[(int)GeoType::Text], Color(), winHeight * 0.05f);
-	RenderControlsText(meshList[(int)GeoType::Text], Color(1.0f, 0.0f, 1.0f), winHeight * 0.05f);
-	RenderGridAttribsText(meshList[(int)GeoType::Text], Color(1.0f, 1.0f, 0.0f), winHeight * 0.05f);
+	Mesh* const textMesh = meshList[(int)GeoType::Text];
+	const float textSize = winHeight * 0.05f;
+
+	RenderDebugInfoText(textMesh, Color(), textSize);
+	RenderControlsText(textMesh, Color(1.0f, 0.0f, 1.0f), textSize);
+	RenderGridAttribsText(textMesh, Color(1.0f, 1.0f, 0.0f), textSize);
 }
 
 void Scene::RenderDebugInfoText(Mesh* const textMesh, const Color& textColor, const float textSize){
