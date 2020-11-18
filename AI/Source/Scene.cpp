@@ -849,7 +849,7 @@ void Scene::RenderSceneText(){
 }
 
 Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
-	Entity* entity = objPool->RetrieveInactiveObj();
+	Entity* entity = objPool->RetrieveActivatedObj();
 
 	entity->SetType(Obj::EntityType::Skele);
 	entity->SetLocalPos(params.im_LocalPos);
@@ -874,7 +874,7 @@ Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
 }
 
 Entity* Scene::CreateReptile(const CreateEntityParams& params) const{
-	Entity* entity = objPool->RetrieveInactiveObj();
+	Entity* entity = objPool->RetrieveActivatedObj();
 
 	entity->SetType(Obj::EntityType::Reptile);
 	entity->SetLocalPos(params.im_LocalPos);
@@ -899,7 +899,7 @@ Entity* Scene::CreateReptile(const CreateEntityParams& params) const{
 }
 
 Entity* Scene::CreateBoy(const CreateEntityParams& params) const{
-	Entity* entity = objPool->RetrieveInactiveObj();
+	Entity* entity = objPool->RetrieveActivatedObj();
 
 	entity->SetType(Obj::EntityType::Boy);
 	entity->SetLocalPos(params.im_LocalPos);
@@ -924,7 +924,7 @@ Entity* Scene::CreateBoy(const CreateEntityParams& params) const{
 }
 
 Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
-	Entity* entity = objPool->RetrieveInactiveObj();
+	Entity* entity = objPool->RetrieveActivatedObj();
 
 	entity->SetType(Obj::EntityType::Orc);
 	entity->SetLocalPos(params.im_LocalPos);
