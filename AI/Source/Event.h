@@ -2,9 +2,14 @@
 
 #include "EventID.hpp"
 
-class Event{
+///Better if templated
+
+class Event{ //Abstract class
 public:
 	virtual ~Event() = default;
+
+	///Getter
+	EventID GetID() const;
 protected:
 	EventID im_ID;
 

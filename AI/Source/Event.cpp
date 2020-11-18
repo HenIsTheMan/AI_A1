@@ -1,5 +1,9 @@
 #include "Event.h"
 
+EventID Event::GetID() const{
+	return im_ID;
+}
+
 Event::Event():
 	Event(EventID::Amt)
 {

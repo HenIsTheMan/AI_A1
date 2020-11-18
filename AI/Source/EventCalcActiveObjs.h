@@ -4,6 +4,6 @@
 
 class EventCalcActiveObjs final: public Event{
 public:
-	EventCalcActiveObjs() = default;
+	EventCalcActiveObjs();
 	~EventCalcActiveObjs() = default;
 };
