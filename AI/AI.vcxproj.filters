@@ -49,9 +49,6 @@
     <ClCompile Include="Source\EventPeriodChanged.cpp">
       <Filter>Event\Events\Post-events</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EventSimEnded.cpp">
-      <Filter>Event\Events\Post-events</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EventSimStarted.cpp">
       <Filter>Event\Events\Post-events</Filter>
     </ClCompile>
@@ -157,9 +154,6 @@
       <Filter>Event\Events\Post-events</Filter>
     </ClInclude>
     <ClInclude Include="Source\EventPeriodChanged.h">
-      <Filter>Event\Events\Post-events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EventSimEnded.h">
       <Filter>Event\Events\Post-events</Filter>
     </ClInclude>
     <ClInclude Include="Source\EventSimStarted.h">

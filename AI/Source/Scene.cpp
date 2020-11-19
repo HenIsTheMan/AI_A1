@@ -60,7 +60,9 @@ Scene::Scene():
 	skeleSM(new SM()),
 	reptileSM(new SM()),
 	boySM(new SM()),
-	orcSM(new SM())
+	orcSM(new SM()),
+	alphaTeamRegionCase(0),
+	omegaTeamRegionCase(0)
 {
 	Math::InitRNG();
 
@@ -121,9 +123,12 @@ Scene::~Scene(){
 void Scene::Update(double dt){
 	SceneSupport::Update(dt);
 
-	if(App::Key(VK_SPACE)){
+	if(!simStarted && App::Key(VK_SPACE)){
 		simStarted = true;
 		dayNightBT = elapsedTime + 7.0f;
+
+		alphaTeamRegionCase = Math::RandIntMinMax(1, 4);
+		omegaTeamRegionCase = Math::RandIntMinMax(1, 4);
 	}
 
 	if(simStarted){
@@ -168,11 +173,13 @@ void Scene::Render(){
 	);
 
 	RenderGrid();
-	RenderGridBG();
 	if(simStarted){
+		RenderRegions();
 		RenderGridData();
 		RenderTranslucentBlock();
 		RenderEntities();
+	} else{
+		RenderGridBG();
 	}
 	RenderBG();
 	RenderSceneText();
@@ -825,6 +832,97 @@ void Scene::RenderEntitiesPart2(const Entity* const entity){
 	}
 
 	ManualRenderMesh(spriteAniName, elapsedTime, spriteAniDelay, spriteAniMesh, false);
+}
+
+void Scene::RenderRegions(){
+	const float gridWidth = grid.CalcWidth();
+	const float gridHeight = grid.CalcHeight();
+
+	float alphaPosX = 0.0f;
+	float alphaPosY = 0.0f;
+	float alphaScaleX = 0.0f;
+	float alphaScaleY = 0.0f;
+	float omegaPosX = 0.0f;
+	float omegaPosY = 0.0f;
+	float omegaScaleX = 0.0f;
+	float omegaScaleY = 0.0f;
+
+	switch(alphaTeamRegionCase){
+		case 1:
+			alphaPosX = (float)winWidth * 0.5f - gridWidth * 0.25f;
+			alphaPosY = (float)winHeight * 0.5f;
+			alphaScaleX = gridWidth * 0.5f;
+			alphaScaleY = gridHeight;
+
+			omegaPosX = (float)winWidth * 0.5f + gridWidth * 0.25f;
+			omegaPosY = (float)winHeight * 0.5f;
+			omegaScaleX = gridWidth * 0.5f;
+			omegaScaleY = gridHeight;
+			break;
+		case 2:
+			alphaPosX = (float)winWidth * 0.5f + gridWidth * 0.25f;
+			alphaPosY = (float)winHeight * 0.5f;
+			alphaScaleX = gridWidth * 0.5f;
+			alphaScaleY = gridHeight;
+
+			omegaPosX = (float)winWidth * 0.5f - gridWidth * 0.25f;
+			omegaPosY = (float)winHeight * 0.5f;
+			omegaScaleX = gridWidth * 0.5f;
+			omegaScaleY = gridHeight;
+			break;
+		case 3:
+			alphaPosX = (float)winWidth * 0.5f;
+			alphaPosY = (float)winHeight * 0.5f - gridHeight * 0.25f;
+			alphaScaleX = gridWidth;
+			alphaScaleY = gridHeight * 0.5f;
+
+			omegaPosX = (float)winWidth * 0.5f;
+			omegaPosY = (float)winHeight * 0.5f + gridHeight * 0.25f;
+			omegaScaleX = gridWidth;
+			omegaScaleY = gridHeight * 0.5f;
+			break;
+		case 4:
+			alphaPosX = (float)winWidth * 0.5f;
+			alphaPosY = (float)winHeight * 0.5f + gridHeight * 0.25f;
+			alphaScaleX = gridWidth;
+			alphaScaleY = gridHeight * 0.5f;
+
+			omegaPosX = (float)winWidth * 0.5f;
+			omegaPosY = (float)winHeight * 0.5f - gridHeight * 0.25f;
+			omegaScaleX = gridWidth;
+			omegaScaleY = gridHeight * 0.5f;
+			break;
+		default:
+			assert(false);
+	}
+
+	modelStack.PushMatrix();
+	modelStack.Translate(
+		alphaPosX,
+		alphaPosY,
+		0.0f
+	);
+	modelStack.Scale(
+		alphaScaleX,
+		alphaScaleY,
+		1.0f
+	);
+	RenderMesh(meshList[(int)GeoType::AlphaTeamRegion], false);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(
+		omegaPosX,
+		omegaPosY,
+		0.0f
+	);
+	modelStack.Scale(
+		omegaScaleX,
+		omegaScaleY,
+		1.0f
+	);
+	RenderMesh(meshList[(int)GeoType::OmegaTeamRegion], false);
+	modelStack.PopMatrix();
 }
 
 void Scene::RenderTranslucentBlock(){

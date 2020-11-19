@@ -40,6 +40,8 @@ public:
 		Reptile,
 		Boy,
 		Orc,
+		AlphaTeamRegion,
+		OmegaTeamRegion,
 		Amt
 	};
 

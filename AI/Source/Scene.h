@@ -54,12 +54,14 @@ private:
 	ObjPool<Entity>* objPool;
 	Publisher* publisher;
 
-	//* Shared SMs
+	///Shared SMs
 	SM* skeleSM;
 	SM* reptileSM;
 	SM* boySM;
 	SM* orcSM;
-	//*/
+
+	int alphaTeamRegionCase;
+	int omegaTeamRegionCase;
 
 	struct CreateEntityParams final{
 		CreateEntityParams() = default;
@@ -87,6 +89,7 @@ private:
 	void RenderGridData();
 	void RenderEntities();
 	void RenderEntitiesPart2(const Entity* const entity);
+	void RenderRegions();
 	void RenderTranslucentBlock();
 	void RenderBG();
 

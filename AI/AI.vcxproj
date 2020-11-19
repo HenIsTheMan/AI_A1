@@ -159,7 +159,6 @@
     <ClCompile Include="Source\EventGridWidthShrinking.cpp" />
     <ClCompile Include="Source\EventLeaving.cpp" />
     <ClCompile Include="Source\EventPeriodChanged.cpp" />
-    <ClCompile Include="Source\EventSimEnded.cpp" />
     <ClCompile Include="Source\EventSimStarted.cpp" />
     <ClCompile Include="Source\Listener.cpp" />
     <ClCompile Include="Source\LoadImg.cpp" />
@@ -184,7 +183,6 @@
     <ClInclude Include="Source\EventGridWidthShrinking.h" />
     <ClInclude Include="Source\EventLeaving.h" />
     <ClInclude Include="Source\EventPeriodChanged.h" />
-    <ClInclude Include="Source\EventSimEnded.h" />
     <ClInclude Include="Source\EventSimStarted.h" />
     <ClInclude Include="Source\Event.h" />
     <ClInclude Include="Source\App.h" />
