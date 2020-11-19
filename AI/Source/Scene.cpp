@@ -51,6 +51,7 @@ Scene::Scene():
 	gridMaxRows(30),
 	gridMaxCols(30),
 	grid(Grid<float>(0.0f, 0.0f, 0.0f, 0, 0)),
+	simStarted(false),
 	isDay(false),
 	dayNightBT(0.0f),
 	gameSpd(1.0f),
@@ -120,31 +121,37 @@ Scene::~Scene(){
 void Scene::Update(double dt){
 	SceneSupport::Update(dt);
 
-	if(dayNightBT <= elapsedTime){
-		isDay = !isDay;
-		dayNightBT = elapsedTime + 7.0f;
-	}
+	if(simStarted){
+		if(dayNightBT <= elapsedTime){
+			isDay = !isDay;
+			dayNightBT = elapsedTime + 7.0f;
+		}
 
-	static bool isKeyDownZ = false;
-	static bool isKeyDownX = false;
-	if(!isKeyDownZ && App::Key('Z')){
-		gameSpd += 0.1f;
-		isKeyDownZ = true;
-	} else if(isKeyDownZ && !App::Key('Z')){
-		isKeyDownZ = false;
+		static bool isKeyDownZ = false;
+		static bool isKeyDownX = false;
+		if(!isKeyDownZ && App::Key('Z')){
+			gameSpd += 0.1f;
+			isKeyDownZ = true;
+		} else if(isKeyDownZ && !App::Key('Z')){
+			isKeyDownZ = false;
+		}
+		if(!isKeyDownX && App::Key('X')){
+			gameSpd -= 0.1f;
+			isKeyDownX = true;
+		} else if(isKeyDownX && !App::Key('X')){
+			isKeyDownX = false;
+		}
+		gameSpd = Math::Clamp(gameSpd, 0.2f, 4.0f);
+	} else if(App::Key(VK_SPACE)){
+		simStarted = true;
 	}
-	if(!isKeyDownX && App::Key('X')){
-		gameSpd -= 0.1f;
-		isKeyDownX = true;
-	} else if(isKeyDownX && !App::Key('X')){
-		isKeyDownX = false;
-	}
-	gameSpd = Math::Clamp(gameSpd, 0.2f, 4.0f);
 
 	UpdateGridAttribs();
-	UpdateGridData();
-	UpdateStates();
-	UpdateEntities(dt * gameSpd);
+	if(simStarted){
+		UpdateGridData();
+		UpdateStates();
+		UpdateEntities(dt * gameSpd);
+	}
 }
 
 void Scene::Render(){
@@ -159,9 +166,11 @@ void Scene::Render(){
 
 	RenderGrid();
 	RenderGridBG();
-	RenderGridData();
-	RenderTranslucentBlock();
-	RenderEntities();
+	if(simStarted){
+		RenderGridData();
+		RenderTranslucentBlock();
+		RenderEntities();
+	}
 	RenderBG();
 	RenderSceneText();
 
@@ -892,7 +901,28 @@ void Scene::RenderSceneText(){
 	Mesh* const textMesh = meshList[(int)GeoType::Text];
 	const float textSize = winHeight * 0.05f;
 
-	RenderDebugInfoText(textMesh, Color(), textSize);
+	if(!simStarted){
+		RenderTextOnScreen(
+			textMesh,
+			"Press Space to start!",
+			Color(0.0f, 0.0f, 0.0f),
+			((sinf(elapsedTime * 4.0f) + 1.0f) * 0.5f + 1.0f) * 0.5f * textSize,
+			(float)winWidth * 0.5f,
+			textSize * 18.75f,
+			TextAlignment::Center
+		);
+		RenderTextOnScreen(
+			textMesh,
+			"Press Space to start!",
+			Color(),
+			((cosf(elapsedTime * 4.0f) + 1.0f) * 0.5f  + 1.0f) * 0.5f * textSize,
+			(float)winWidth * 0.5f,
+			textSize * 0.25f,
+			TextAlignment::Center
+		);
+	}
+
+	RenderDebugInfoText(textMesh, Color(1.0f, 0.5f, 0.0f), textSize);
 	RenderControlsText(textMesh, Color(1.0f, 0.0f, 1.0f), textSize);
 	RenderGridAttribsText(textMesh, Color(1.0f, 1.0f, 0.0f), textSize);
 }
