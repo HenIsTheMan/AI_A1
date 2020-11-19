@@ -778,7 +778,7 @@ void Scene::RenderEntities(){
 					RenderEntitiesPart2(entity);
 			}
 
-			///Render health bar and text
+			///Render health, health bar and text
 			const float ratio = (float)entity->GetCurrHealth() / (float)entity->GetMaxHealth();
 
 			modelStack.PushMatrix();
@@ -823,15 +823,15 @@ void Scene::RenderEntities(){
 				0.0f
 			);
 			modelStack.Scale(
-				ratio,
-				1.0f,
+				ratio - 0.05f,
+				0.5f,
 				1.0f
 			);
 
-			RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.0f, 1.0f, 0.0f), opacity);
+			RenderMesh(meshList[(int)GeoType::Quad], true, Color(1.0f - ratio, ratio, 0.0f), opacity);
 			modelStack.PopMatrix();
 
-			RenderMesh(meshList[(int)GeoType::Quad], true, Color(1.0f, 0.0f, 0.0f), opacity);
+			RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.1f, 0.1f, 0.1f), opacity);
 			modelStack.PopMatrix();
 
 			modelStack.PopMatrix();
