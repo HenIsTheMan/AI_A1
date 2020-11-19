@@ -85,7 +85,7 @@ private:
 	void UpdateEntities(const double dt);
 
 	void RenderGrid();
-	void RenderGridBG();
+	void RenderMystery();
 	void RenderGridData();
 	void RenderEntities();
 	void RenderEntitiesPart2(const Entity* const entity);

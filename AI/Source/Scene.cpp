@@ -172,14 +172,14 @@ void Scene::Render(){
 		0.0f
 	);
 
-	RenderGrid();
 	if(simStarted){
+		RenderGrid();
 		RenderRegions();
 		RenderGridData();
 		RenderTranslucentBlock();
 		RenderEntities();
 	} else{
-		RenderGridBG();
+		RenderMystery();
 	}
 	RenderBG();
 	RenderSceneText();
@@ -605,7 +605,7 @@ void Scene::RenderGrid(){
 	}
 }
 
-void Scene::RenderGridBG(){
+void Scene::RenderMystery(){
 	modelStack.PushMatrix();
 	modelStack.Translate(
 		(float)winWidth * 0.5f,
@@ -617,7 +617,7 @@ void Scene::RenderGridBG(){
 		grid.CalcHeight(),
 		1.0f
 	);
-	RenderMesh(meshList[(int)GeoType::GridBG], false);
+	RenderMesh(meshList[(int)GeoType::Mystery], false);
 	modelStack.PopMatrix();
 }
 
@@ -838,14 +838,14 @@ void Scene::RenderRegions(){
 	const float gridWidth = grid.CalcWidth();
 	const float gridHeight = grid.CalcHeight();
 
-	float alphaPosX = 0.0f;
-	float alphaPosY = 0.0f;
-	float alphaScaleX = 0.0f;
-	float alphaScaleY = 0.0f;
-	float omegaPosX = 0.0f;
-	float omegaPosY = 0.0f;
-	float omegaScaleX = 0.0f;
-	float omegaScaleY = 0.0f;
+	float alphaPosX;
+	float alphaPosY;
+	float alphaScaleX;
+	float alphaScaleY;
+	float omegaPosX;
+	float omegaPosY;
+	float omegaScaleX;
+	float omegaScaleY;
 
 	switch(alphaTeamRegionCase){
 		case 1:

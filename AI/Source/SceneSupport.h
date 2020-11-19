@@ -33,7 +33,7 @@ public:
 		DayBG,
 		NightBG,
 		Block,
-		GridBG,
+		Mystery,
 		GridLine,
 		HealthBar,
 		Skele,

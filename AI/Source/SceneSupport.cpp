@@ -67,7 +67,7 @@ SceneSupport::SceneSupport():
 
 	meshList[(int)GeoType::Block] = MeshBuilder::GenerateQuad("Block", Color(), 1.0f);
 	meshList[(int)GeoType::Block]->textureID = LoadImg("Imgs//Block.png");
-	meshList[(int)GeoType::GridBG] = MeshBuilder::GenerateQuad("GridBG", Color(0.5f, 0.5f, 0.5f), 1.0f);
+	meshList[(int)GeoType::Mystery] = MeshBuilder::GenerateQuad("Mystery", Color(0.5f, 0.5f, 0.5f), 1.0f);
 	meshList[(int)GeoType::GridLine] = MeshBuilder::GenerateQuad("GridLine", Color(0.5f, 0.5f, 0.5f), 1.0f);
 	meshList[(int)GeoType::HealthBar] = MeshBuilder::GenerateQuad("HealthBar", Color(), 1.0f);
 
