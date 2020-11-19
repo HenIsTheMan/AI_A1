@@ -690,6 +690,35 @@ void Scene::RenderEntities(){
 				1.0f
 			);
 
+			glDepthFunc(GL_ALWAYS);
+			///Render entity-to-target line
+			const Entity* const entityTarget = entity->GetTarget();
+			if(entityTarget){
+				const Vector3 vec = entity->GetTarget()->GetLocalPos() - entity->GetLocalPos();
+				modelStack.PushMatrix();
+
+				modelStack.Translate(
+					entityWorldPos.x + vec.x * 0.5f * (gridCellWidth + gridLineThickness),
+					entityWorldPos.y + vec.y * 0.5f * (gridCellHeight + gridLineThickness),
+					1.0f
+				);
+				modelStack.Rotate(
+					Math::RadianToDegree(atan2(vec.y, vec.x)),
+					0.0f,
+					0.0f,
+					1.0f
+				);
+				modelStack.Scale(
+					vec.Length() * (gridCellWidth + gridLineThickness),
+					1.0f,
+					1.0f
+				);
+
+				RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.0f, 1.0f, 1.0f), 1.0f);
+				modelStack.PopMatrix();
+			}
+			glDepthFunc(GL_LESS);
+
 			modelStack.PushMatrix();
 
 			modelStack.Translate(
@@ -697,13 +726,12 @@ void Scene::RenderEntities(){
 				entityWorldPos.y,
 				entityWorldPos.z
 			);
+
 			modelStack.Scale(
 				entityWorldScale.x,
 				entityWorldScale.y,
 				entityWorldScale.z
 			);
-
-			//RenderMesh(meshList[(int)GeoType::Quad], true, Color(1.0f, 0.0f, 0.0f), 0.7f);
 
 			switch(entity->GetCurrState()->GetID()){
 				case StateID::StateSkeleRevive:
