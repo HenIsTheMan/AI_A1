@@ -1,4 +1,6 @@
 #include "EventGridDataChanged.h"
+#include "EventGridHeightShrinking.h"
+#include "EventGridWidthShrinking.h"
 
 namespace Obj{
 	template <class T, typename Type>
@@ -32,6 +34,41 @@ namespace Obj{
 				if(im_Attribs.im_LocalPos.x > blockCol - 1.0f && im_Attribs.im_LocalPos.x < blockCol + 1.0f
 					&& im_Attribs.im_LocalPos.y > blockRow - 1.0f && im_Attribs.im_LocalPos.y < blockRow + 1.0f){
 					val = -5;
+				}
+				break;
+			}
+			case EventID::EventGridHeightShrinking: {
+				const EventGridHeightShrinking* const eventGridHeightShrinking = dynamic_cast<const EventGridHeightShrinking*>(myEvent);
+				assert(eventGridHeightShrinking && "Val of eventGridHeightShrinking is nullptr!");
+				const int gridRows = eventGridHeightShrinking->GetGridRows();
+
+				if(im_Attribs.im_LocalPos.y >= (float)gridRows - 1.0f){
+					if(!gridRows){
+						val = -5;
+						break;
+					}
+					im_Attribs.im_LocalPos.y = float(gridRows - 1);
+				}
+				if(im_Attribs.im_GridTargetLocalPos.y >= (float)gridRows - 1.0f){
+					im_Attribs.im_GridTargetLocalPos.y = float(gridRows - 1);
+				}
+
+				break;
+			}
+			case EventID::EventGridWidthShrinking: {
+				const EventGridWidthShrinking* const eventGridWidthShrinking = dynamic_cast<const EventGridWidthShrinking*>(myEvent);
+				assert(eventGridWidthShrinking && "Val of eventGridWidthShrinking is nullptr!");
+				const int gridCols = eventGridWidthShrinking->GetGridCols();
+
+				if(im_Attribs.im_LocalPos.x >= (float)gridCols - 1.0f){
+					if(!gridCols){
+						val = -5;
+						break;
+					}
+					im_Attribs.im_LocalPos.x = float(gridCols - 1);
+				}
+				if(im_Attribs.im_GridTargetLocalPos.x >= (float)gridCols - 1.0f){
+					im_Attribs.im_GridTargetLocalPos.x = float(gridCols - 1);
 				}
 				break;
 			}

@@ -155,6 +155,8 @@
     <ClCompile Include="Source\EventCalcActiveObjs.cpp" />
     <ClCompile Include="Source\EventCalcInactiveObjs.cpp" />
     <ClCompile Include="Source\EventGridDataChanged.cpp" />
+    <ClCompile Include="Source\EventGridHeightShrinking.cpp" />
+    <ClCompile Include="Source\EventGridWidthShrinking.cpp" />
     <ClCompile Include="Source\EventLeaving.cpp" />
     <ClCompile Include="Source\EventPeriodChanged.cpp" />
     <ClCompile Include="Source\EventSimEnded.cpp" />
@@ -178,6 +180,8 @@
     <ClInclude Include="Source\EventCalcActiveObjs.h" />
     <ClInclude Include="Source\EventCalcInactiveObjs.h" />
     <ClInclude Include="Source\EventGridDataChanged.h" />
+    <ClInclude Include="Source\EventGridHeightShrinking.h" />
+    <ClInclude Include="Source\EventGridWidthShrinking.h" />
     <ClInclude Include="Source\EventLeaving.h" />
     <ClInclude Include="Source\EventPeriodChanged.h" />
     <ClInclude Include="Source\EventSimEnded.h" />

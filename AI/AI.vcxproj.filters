@@ -73,6 +73,12 @@
     <ClCompile Include="Source\Publisher.cpp">
       <Filter>Event</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EventGridHeightShrinking.cpp">
+      <Filter>Event\Events\Pre-events</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EventGridWidthShrinking.cpp">
+      <Filter>Event\Events\Pre-events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -227,6 +233,12 @@
     </ClInclude>
     <ClInclude Include="Source\ListenerFlags.hpp">
       <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventGridHeightShrinking.h">
+      <Filter>Event\Events\Pre-events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventGridWidthShrinking.h">
+      <Filter>Event\Events\Pre-events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
