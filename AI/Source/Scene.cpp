@@ -52,6 +52,7 @@ Scene::Scene():
 	gridMaxCols(30),
 	grid(Grid<float>(0.0f, 0.0f, 0.0f, 0, 0)),
 	simStarted(false),
+	showLines(false),
 	isDay(true),
 	dayNightBT(0.0f),
 	gameSpd(1.0f),
@@ -152,6 +153,14 @@ void Scene::Update(double dt){
 			isKeyDownX = false;
 		}
 		gameSpd = Math::Clamp(gameSpd, 0.2f, 4.0f);
+
+		static bool isKeyDownL = false;
+		if(!isKeyDownL && App::Key('L')){
+			showLines = !showLines;
+			isKeyDownL = true;
+		} else if(isKeyDownL && !App::Key('L')){
+			isKeyDownL = false;
+		}
 	}
 
 	UpdateGridAttribs();
@@ -690,34 +699,37 @@ void Scene::RenderEntities(){
 				1.0f
 			);
 
-			glDepthFunc(GL_ALWAYS);
 			///Render entity-to-target line
-			const Entity* const entityTarget = entity->GetTarget();
-			if(entityTarget){
-				const Vector3 vec = entity->GetTarget()->GetLocalPos() - entity->GetLocalPos();
-				modelStack.PushMatrix();
+			if(showLines){
+				glDepthFunc(GL_LEQUAL);
+				const Entity* const entityTarget = entity->GetTarget();
 
-				modelStack.Translate(
-					entityWorldPos.x + vec.x * 0.5f * (gridCellWidth + gridLineThickness),
-					entityWorldPos.y + vec.y * 0.5f * (gridCellHeight + gridLineThickness),
-					1.0f
-				);
-				modelStack.Rotate(
-					Math::RadianToDegree(atan2(vec.y, vec.x)),
-					0.0f,
-					0.0f,
-					1.0f
-				);
-				modelStack.Scale(
-					vec.Length() * (gridCellWidth + gridLineThickness),
-					1.0f,
-					1.0f
-				);
+				if(entityTarget){
+					const Vector3 vec = entity->GetTarget()->GetLocalPos() - entity->GetLocalPos();
+					modelStack.PushMatrix();
 
-				RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.0f, 1.0f, 1.0f), 1.0f);
-				modelStack.PopMatrix();
+					modelStack.Translate(
+						entityWorldPos.x + vec.x * 0.5f * (gridCellWidth + gridLineThickness),
+						entityWorldPos.y + vec.y * 0.5f * (gridCellHeight + gridLineThickness),
+						1.0f
+					);
+					modelStack.Rotate(
+						Math::RadianToDegree(atan2(vec.y, vec.x)),
+						0.0f,
+						0.0f,
+						1.0f
+					);
+					modelStack.Scale(
+						vec.Length() * (gridCellWidth + gridLineThickness),
+						1.0f,
+						1.0f
+					);
+
+					RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.0f, 1.0f, 1.0f), 1.0f);
+					modelStack.PopMatrix();
+				}
+				glDepthFunc(GL_LESS);
 			}
-			glDepthFunc(GL_LESS);
 
 			modelStack.PushMatrix();
 
@@ -1182,6 +1194,14 @@ void Scene::RenderControlsText(Mesh* const textMesh, const Color& textColor, con
 		textSize,
 		0.0f,
 		textSize * 13.0f
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"L: Toggle entity-to-target lines",
+		textColor,
+		textSize,
+		0.0f,
+		textSize * 12.0f
 	);
 }
 
