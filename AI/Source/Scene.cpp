@@ -517,6 +517,7 @@ void Scene::UpdateEntities(const double dt){
 			Vector3(15.0f, 12.0f, 0.0f)
 		});
 		reptile->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
+		reptile->SetTarget(skele);
 		publisher->AddListener((long int)ListenerFlags::Reptile | (long int)ListenerFlags::Entity, reptile);
 
 		Entity* boy = CreateBoy({
@@ -590,7 +591,7 @@ void Scene::RenderGrid(){
 			gridHeight,
 			1.0f
 		);
-		RenderMesh(meshList[(int)GeoType::GridLine], false);
+		RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.5f, 0.5f, 0.5f), 1.0f);
 		modelStack.PopMatrix();
 	}
 
@@ -607,7 +608,7 @@ void Scene::RenderGrid(){
 			gridLineThickness,
 			1.0f
 		);
-		RenderMesh(meshList[(int)GeoType::GridLine], false);
+		RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.5f, 0.5f, 0.5f), 1.0f);
 		modelStack.PopMatrix();
 	}
 }
@@ -624,7 +625,7 @@ void Scene::RenderMystery(){
 		grid.CalcHeight(),
 		1.0f
 	);
-	RenderMesh(meshList[(int)GeoType::Mystery], false);
+	RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.5f, 0.5f, 0.5f), 1.0f);
 	modelStack.PopMatrix();
 }
 
@@ -701,6 +702,8 @@ void Scene::RenderEntities(){
 				entityWorldScale.y,
 				entityWorldScale.z
 			);
+
+			//RenderMesh(meshList[(int)GeoType::Quad], true, Color(1.0f, 0.0f, 0.0f), 0.7f);
 
 			switch(entity->GetCurrState()->GetID()){
 				case StateID::StateSkeleRevive:
@@ -785,10 +788,10 @@ void Scene::RenderEntities(){
 				1.0f
 			);
 
-			RenderMesh(meshList[(int)GeoType::HealthBar], true, Color(0.0f, 1.0f, 0.0f), opacity);
+			RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.0f, 1.0f, 0.0f), opacity);
 			modelStack.PopMatrix();
 
-			RenderMesh(meshList[(int)GeoType::HealthBar], true, Color(1.0f, 0.0f, 0.0f), opacity);
+			RenderMesh(meshList[(int)GeoType::Quad], true, Color(1.0f, 0.0f, 0.0f), opacity);
 			modelStack.PopMatrix();
 
 			modelStack.PopMatrix();
@@ -931,7 +934,7 @@ void Scene::RenderRegions(){
 		alphaScaleY,
 		1.0f
 	);
-	RenderMesh(meshList[(int)GeoType::AlphaTeamRegion], false);
+	RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.7f, 0.7f, 0.7f), 1.0f);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
@@ -945,7 +948,7 @@ void Scene::RenderRegions(){
 		omegaScaleY,
 		1.0f
 	);
-	RenderMesh(meshList[(int)GeoType::OmegaTeamRegion], false);
+	RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.3f, 0.3f, 0.3f), 1.0f);
 	modelStack.PopMatrix();
 }
 

@@ -33,15 +33,11 @@ public:
 		DayBG,
 		NightBG,
 		Block,
-		Mystery,
-		GridLine,
-		HealthBar,
+		Quad,
 		Skele,
 		Reptile,
 		Boy,
 		Orc,
-		AlphaTeamRegion,
-		OmegaTeamRegion,
 		Circle,
 		Amt
 	};

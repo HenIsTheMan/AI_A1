@@ -67,9 +67,7 @@ SceneSupport::SceneSupport():
 
 	meshList[(int)GeoType::Block] = MeshBuilder::GenerateQuad("Block", Color(), 1.0f);
 	meshList[(int)GeoType::Block]->textureID = LoadImg("Imgs//Block.png");
-	meshList[(int)GeoType::Mystery] = MeshBuilder::GenerateQuad("Mystery", Color(0.5f, 0.5f, 0.5f), 1.0f);
-	meshList[(int)GeoType::GridLine] = MeshBuilder::GenerateQuad("GridLine", Color(0.5f, 0.5f, 0.5f), 1.0f);
-	meshList[(int)GeoType::HealthBar] = MeshBuilder::GenerateQuad("HealthBar", Color(), 1.0f);
+	meshList[(int)GeoType::Quad] = MeshBuilder::GenerateQuad("Quad", Color(), 1.0f);
 
 	meshList[(int)GeoType::Skele] = MeshBuilder::GenerateSpriteAni("Skele", 21, 13);
 	meshList[(int)GeoType::Skele]->textureID = LoadImg("Imgs//Skele.png");
@@ -79,8 +77,6 @@ SceneSupport::SceneSupport():
 	meshList[(int)GeoType::Boy]->textureID = LoadImg("Imgs//Boy.png");
 	meshList[(int)GeoType::Orc] = MeshBuilder::GenerateSpriteAni("Orc", 21, 13);
 	meshList[(int)GeoType::Orc]->textureID = LoadImg("Imgs//Orc.png");
-	meshList[(int)GeoType::AlphaTeamRegion] = MeshBuilder::GenerateQuad("AlphaTeamRegion", Color(0.7f, 0.7f, 0.7f), 1.0f);
-	meshList[(int)GeoType::OmegaTeamRegion] = MeshBuilder::GenerateQuad("OmegaTeamRegion", Color(0.3f, 0.3f, 0.3f), 1.0f);
 	meshList[(int)GeoType::Circle] = MeshBuilder::GenCircle(Color(), 30, 0.5f);
 
 	SpriteAni* const skeleSpriteAni = static_cast<SpriteAni*>(meshList[(int)GeoType::Skele]);
