@@ -234,6 +234,9 @@
     <ClInclude Include="Source\EventGridWidthShrinking.h">
       <Filter>Event\Events\Pre-events</Filter>
     </ClInclude>
+    <ClInclude Include="Source\EntityTeam.hpp">
+      <Filter>Obj</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">

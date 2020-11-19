@@ -79,8 +79,9 @@ SceneSupport::SceneSupport():
 	meshList[(int)GeoType::Boy]->textureID = LoadImg("Imgs//Boy.png");
 	meshList[(int)GeoType::Orc] = MeshBuilder::GenerateSpriteAni("Orc", 21, 13);
 	meshList[(int)GeoType::Orc]->textureID = LoadImg("Imgs//Orc.png");
-	meshList[(int)GeoType::AlphaTeamRegion] = MeshBuilder::GenerateQuad("AlphaTeamRegion", Color(0.8f, 0.8f, 0.8f), 1.0f);
-	meshList[(int)GeoType::OmegaTeamRegion] = MeshBuilder::GenerateQuad("OmegaTeamRegion", Color(0.2f, 0.2f, 0.2f), 1.0f);
+	meshList[(int)GeoType::AlphaTeamRegion] = MeshBuilder::GenerateQuad("AlphaTeamRegion", Color(0.7f, 0.7f, 0.7f), 1.0f);
+	meshList[(int)GeoType::OmegaTeamRegion] = MeshBuilder::GenerateQuad("OmegaTeamRegion", Color(0.3f, 0.3f, 0.3f), 1.0f);
+	meshList[(int)GeoType::Circle] = MeshBuilder::GenCircle(Color(), 30, 0.5f);
 
 	SpriteAni* const skeleSpriteAni = static_cast<SpriteAni*>(meshList[(int)GeoType::Skele]);
 	skeleSpriteAni->AddAni("SkeleStaticUp", 4 * 13, 4 * 13 + 1);

@@ -42,6 +42,7 @@ public:
 		Orc,
 		AlphaTeamRegion,
 		OmegaTeamRegion,
+		Circle,
 		Amt
 	};
 

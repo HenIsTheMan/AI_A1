@@ -203,6 +203,7 @@ Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
 	entity->SetTarget(nullptr);
 	ChooseRandDir(entity, &grid, gridRows, gridCols);
 	entity->SetTimeLeft(0.0f);
+	entity->SetTeam(EntityTeam::Amt);
 
 	entity->SetStateMachine(skeleSM);
 	entity->SetCurrState(skeleSM->GetState(StateID::StateSkeleIdle));
@@ -228,6 +229,7 @@ Entity* Scene::CreateReptile(const CreateEntityParams& params) const{
 	entity->SetTarget(nullptr);
 	ChooseRandDir(entity, &grid, gridRows, gridCols);
 	entity->SetTimeLeft(0.0f);
+	entity->SetTeam(EntityTeam::Amt);
 
 	entity->SetStateMachine(reptileSM);
 	entity->SetCurrState(reptileSM->GetState(StateID::StateReptileIdle));
@@ -253,6 +255,7 @@ Entity* Scene::CreateBoy(const CreateEntityParams& params) const{
 	entity->SetTarget(nullptr);
 	ChooseRandDir(entity, &grid, gridRows, gridCols);
 	entity->SetTimeLeft(0.0f);
+	entity->SetTeam(EntityTeam::Amt);
 
 	entity->SetStateMachine(boySM);
 	entity->SetCurrState(boySM->GetState(StateID::StateBoyIdle));
@@ -278,6 +281,7 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 	entity->SetTarget(nullptr);
 	ChooseRandDir(entity, &grid, gridRows, gridCols);
 	entity->SetTimeLeft(0.0f);
+	entity->SetTeam(EntityTeam::Amt);
 
 	entity->SetStateMachine(orcSM);
 	entity->SetCurrState(orcSM->GetState(StateID::StateOrcIdle));
@@ -506,23 +510,26 @@ void Scene::UpdateEntities(const double dt){
 		Entity* skele = CreateSkele({
 			Vector3(5.0f, 15.0f, 0.0f)
 		});
+		skele->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
 		publisher->AddListener((long int)ListenerFlags::Skele | (long int)ListenerFlags::Entity, skele);
 
 		Entity* reptile = CreateReptile({
 			Vector3(15.0f, 12.0f, 0.0f)
 		});
+		reptile->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
 		publisher->AddListener((long int)ListenerFlags::Reptile | (long int)ListenerFlags::Entity, reptile);
 
 		Entity* boy = CreateBoy({
 			Vector3(5.0f, 4.0f, 0.0f)
 		});
+		boy->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
 		publisher->AddListener((long int)ListenerFlags::Boy | (long int)ListenerFlags::Entity, boy);
 
 		Entity* orc = CreateOrc({
-			Vector3(18.5f, 3.0f, 0.0f)
+			Vector3(18.0f, 3.0f, 0.0f)
 		});
+		orc->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
 		publisher->AddListener((long int)ListenerFlags::Orc | (long int)ListenerFlags::Entity, orc);
-		orc->SetCurrHealth(0.0f);
 
 		++control;
 	}
@@ -667,18 +674,16 @@ void Scene::RenderEntities(){
 	for(size_t i = 0; i < entityPoolSize; ++i){
 		if(entityPool[i].first){
 			opacity = 1.0f;
-
 			const Entity* const entity = entityPool[i].second;
-
 			const Vector3& entityLocalPos = entity->GetLocalPos();
 			const Vector3& entityLocalScale = entity->GetLocalScale();
 
-			const Vector3& entityWorldPos = Vector3(
+			Vector3 entityWorldPos = Vector3(
 				xPosOffset + entityLocalPos.x * (gridCellWidth + gridLineThickness),
 				yPosOffset + entityLocalPos.y * (gridCellHeight + gridLineThickness),
 				0.2f + individualDepthOffset
 			);
-			const Vector3& entityWorldScale = Vector3(
+			const Vector3 entityWorldScale = Vector3(
 				entityLocalScale.x * gridCellWidth,
 				entityLocalScale.y * gridCellHeight,
 				1.0f
@@ -730,21 +735,42 @@ void Scene::RenderEntities(){
 					RenderEntitiesPart2(entity);
 			}
 
-			///Render health bar
+			///Render health bar and text
 			const float ratio = (float)entity->GetCurrHealth() / (float)entity->GetMaxHealth();
 
 			modelStack.PushMatrix();
 
 			modelStack.Translate(
 				0.0f,
-				0.4f,
+				0.3f,
 				0.2f + individualDepthOffset
 			);
 			modelStack.Scale(
 				0.9f,
-				0.1f,
+				0.05f,
 				1.0f
 			);
+
+			modelStack.PushMatrix();
+
+			modelStack.Translate(
+				0.0f,
+				0.4f,
+				0.0f
+			);
+			modelStack.Scale(
+				0.4f,
+				4.0f,
+				1.0f
+			);
+
+			RenderText(
+				meshList[(int)GeoType::Text],
+				entity->GetTeam() == EntityTeam::Alpha ? "Alpha" : "Omega",
+				entity->GetTeam() == EntityTeam::Alpha ? Color() : Color(0.0f, 0.0f, 0.0f),
+				TextAlignment::Center
+			);
+			modelStack.PopMatrix();
 
 			modelStack.PushMatrix();
 
@@ -760,11 +786,9 @@ void Scene::RenderEntities(){
 			);
 
 			RenderMesh(meshList[(int)GeoType::HealthBar], true, Color(0.0f, 1.0f, 0.0f), opacity);
-
 			modelStack.PopMatrix();
 
 			RenderMesh(meshList[(int)GeoType::HealthBar], true, Color(1.0f, 0.0f, 0.0f), opacity);
-
 			modelStack.PopMatrix();
 
 			modelStack.PopMatrix();

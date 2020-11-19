@@ -137,6 +137,11 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
+	const EntityTeam Entity<T, Type>::GetTeam() const{
+		return im_Attribs.im_Team;
+	}
+
+	template <class T, typename Type>
 	const StateMachine<StateID, Entity<T, Type>>* Entity<T, Type>::GetStateMachine() const{
 		return im_Attribs.im_StateMachine;
 	}
@@ -209,6 +214,11 @@ namespace Obj{
 	template <class T, typename Type>
 	void Entity<T, Type>::SetTimeLeft(const Type& timeLeft){
 		im_Attribs.im_TimeLeft = timeLeft;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetTeam(const EntityTeam team){
+		im_Attribs.im_Team = team;
 	}
 
 	template <class T, typename Type>
