@@ -515,7 +515,7 @@ void Scene::UpdateOrcStates(){
 void Scene::UpdateEntities(const double dt){
 	static int control = 0;
 
-	if(control != 1){
+	if(control != 20){
 		Entity* skele = CreateSkele({
 			Vector3(5.0f, 15.0f, 0.0f)
 		});

@@ -19,6 +19,8 @@ namespace Obj{
 			return -1;
 		}
 
+		int val = -1;
+
 		switch(myEvent->GetID()){
 			case EventID::EventGridDataChanged: {
 				const EventGridDataChanged* const eventGridDataChanged = dynamic_cast<const EventGridDataChanged*>(myEvent);
@@ -29,7 +31,7 @@ namespace Obj{
 
 				if(im_Attribs.im_LocalPos.x > blockCol - 1.0f && im_Attribs.im_LocalPos.x < blockCol + 1.0f
 					&& im_Attribs.im_LocalPos.y > blockRow - 1.0f && im_Attribs.im_LocalPos.y < blockRow + 1.0f){
-					return -5;
+					val = -5;
 				}
 				break;
 			}
@@ -39,7 +41,7 @@ namespace Obj{
 			delete myEvent;
 			myEvent = nullptr;
 		}
-		return -1;
+		return val;
 	}
 
 	template <class T, typename Type>
