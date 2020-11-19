@@ -52,7 +52,7 @@ Scene::Scene():
 	gridMaxCols(30),
 	grid(Grid<float>(0.0f, 0.0f, 0.0f, 0, 0)),
 	simStarted(false),
-	isDay(false),
+	isDay(true),
 	dayNightBT(0.0f),
 	gameSpd(1.0f),
 	objPool(new ObjPool<Entity>()),
@@ -121,6 +121,11 @@ Scene::~Scene(){
 void Scene::Update(double dt){
 	SceneSupport::Update(dt);
 
+	if(App::Key(VK_SPACE)){
+		simStarted = true;
+		dayNightBT = elapsedTime + 7.0f;
+	}
+
 	if(simStarted){
 		if(dayNightBT <= elapsedTime){
 			isDay = !isDay;
@@ -142,8 +147,6 @@ void Scene::Update(double dt){
 			isKeyDownX = false;
 		}
 		gameSpd = Math::Clamp(gameSpd, 0.2f, 4.0f);
-	} else if(App::Key(VK_SPACE)){
-		simStarted = true;
 	}
 
 	UpdateGridAttribs();
