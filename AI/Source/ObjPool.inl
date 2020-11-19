@@ -22,6 +22,8 @@ int ObjPool<T>::OnEvent(const Event* myEvent, const bool destroyEvent){
 		return -1;
 	}
 
+	int val = -1;
+
 	switch(myEvent->GetID()){
 		case EventID::EventCalcActiveObjs: {
 			int count = 0;
@@ -33,11 +35,8 @@ int ObjPool<T>::OnEvent(const Event* myEvent, const bool destroyEvent){
 				}
 			}
 
-			if(destroyEvent && myEvent){
-				delete myEvent;
-				myEvent = nullptr;
-			}
-			return count;
+			val = count;
+			break;
 		}
 		case EventID::EventCalcInactiveObjs: {
 			int count = 0;
@@ -49,11 +48,8 @@ int ObjPool<T>::OnEvent(const Event* myEvent, const bool destroyEvent){
 				}
 			}
 
-			if(destroyEvent && myEvent){
-				delete myEvent;
-				myEvent = nullptr;
-			}
-			return count;
+			val = count;
+			break;
 		}
 	}
 
@@ -61,7 +57,7 @@ int ObjPool<T>::OnEvent(const Event* myEvent, const bool destroyEvent){
 		delete myEvent;
 		myEvent = nullptr;
 	}
-	return -1;
+	return val;
 }
 
 template <class T>
