@@ -3,99 +3,39 @@
 #include <cassert>
 
 Publisher::Publisher():
-	im_ListenersByID(),
-	im_ListenersByCategory()
+	im_Listeners()
 {
 }
 
-void Publisher::AddListener(const ListenerID ID, const ListenerCategory category, Listener* const listener){
+void Publisher::AddListener(const long int& flags, Listener* const listener){
 	assert(listener && "Var 'listener' must be initialized!");
 
-	if(im_ListenersByID.find(ID) == im_ListenersByID.end()){
-		im_ListenersByID.insert(std::pair<ListenerID, Listener*>(ID, listener));
-		im_ListenersByCategory.insert(std::pair<ListenerCategory, Listener*>(category, listener));
-	}
+	im_Listeners.push_back({flags, listener});
 }
 
-int Publisher::Send(const ListenerID ID, Event* myEvent, const bool async){
+int Publisher::Send(const long int& flags, Event* myEvent, const bool async){
 	assert(myEvent && "Var 'myEvent' must be initialized!");
 
-	const auto iter = im_ListenersByID.find(ID);
-
-	if(iter == im_ListenersByID.end()){
-		delete myEvent;
-		myEvent = nullptr;
-		return -1;
-	}
-
-	Listener* const listener = iter->second;
-	if(async){
-		listener->AddEvent(myEvent);
-		return 1;
-	} else{
-		return listener->OnEvent(myEvent, true);
-	}
-}
-
-int Publisher::MultiSend(const std::initializer_list<ListenerID> IDs, Event* myEvent, const bool async){
-	assert(myEvent && "Var 'myEvent' must be initialized!");
-
-	int sum = 0;
-	for(const auto ID: IDs){
-		const auto iter = im_ListenersByID.find(ID);
-
-		if(iter == im_ListenersByID.end()){
-			delete myEvent;
-			myEvent = nullptr;
-			--sum;
-			continue;
-		}
-
-		Listener* const listener = iter->second;
-		if(async){
-			listener->AddEvent(myEvent->Clone()); //Shallow copy prevented
-			++sum;
-		} else{
-			sum += listener->OnEvent(myEvent);
+	for(const std::pair<long int, Listener*>& element: im_Listeners){
+		if((long int)element.first & (long int)flags){
+			Listener* const listener = element.second;
+			if(async){
+				listener->AddEvent(myEvent);
+				return 1;
+			} else{
+				return listener->OnEvent(myEvent, true);
+			}
 		}
 	}
 
-	delete myEvent;
-	myEvent = nullptr;
-	return sum;
-}
-
-int Publisher::GrpSend(const ListenerCategory category, Event* myEvent, const bool async){
-	assert(myEvent && "Var 'myEvent' must be initialized!");
-
-	if(im_ListenersByCategory.find(category) == im_ListenersByCategory.end()){
-		delete myEvent;
-		myEvent = nullptr;
-		return -1;
-	}
-
-	int sum = 0;
-	const auto controlIter = im_ListenersByCategory.equal_range(category);
-	for(auto iter = controlIter.first; iter != controlIter.second; ++iter){
-		Listener* const listener = iter->second;
-		if(async){
-			listener->AddEvent(myEvent->Clone()); //Shallow copy prevented
-			++sum;
-		} else{
-			sum += listener->OnEvent(myEvent);
-		}
-	}
-
-	delete myEvent;
-	myEvent = nullptr;
-	return sum;
+	return 0;
 }
 
 int Publisher::Broadcast(Event* myEvent, const bool async){
 	assert(myEvent && "Var 'myEvent' must be initialized!");
 
 	int sum = 0;
-	for(const std::pair<ListenerID, Listener*>& element: im_ListenersByID){
+	for(const std::pair<long int, Listener*>& element: im_Listeners){
 		Listener* const listener = element.second;
 		if(async){
 			listener->AddEvent(myEvent->Clone()); //Shallow copy prevented

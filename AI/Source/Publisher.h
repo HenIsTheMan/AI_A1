@@ -1,24 +1,19 @@
 #pragma once
 
-#include <unordered_map>
+#include <vector>
 
-#include "ListenerID.hpp"
-#include "ListenerCategory.hpp"
 #include "Listener.h"
 #include "Singleton.h"
 
 class Publisher final: public Singleton<Publisher>{
 	friend Singleton<Publisher>;
 public:
-	void AddListener(const ListenerID ID, const ListenerCategory category, Listener* const listener);
+	void AddListener(const long int& flags, Listener* const listener);
 
-	int Send(const ListenerID ID, Event* myEvent, const bool async = true);
-	int MultiSend(const std::initializer_list<ListenerID> IDs, Event* myEvent, const bool async = true);
-	int GrpSend(const ListenerCategory category, Event* myEvent, const bool async = true);
+	int Send(const long int& flags, Event* myEvent, const bool async = true); //Can send to >= 1
 	int Broadcast(Event* myEvent, const bool async = true);
 private:
-	std::unordered_map<ListenerID, Listener*> im_ListenersByID;
-	std::unordered_multimap<ListenerCategory, Listener*> im_ListenersByCategory;
+	std::vector<std::pair<long int, Listener*>> im_Listeners;
 
 	Publisher();
 	~Publisher() = default;

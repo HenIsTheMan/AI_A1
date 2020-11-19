@@ -191,8 +191,7 @@
     <ClInclude Include="Source\EventID.hpp" />
     <ClInclude Include="Source\Grid.h" />
     <ClInclude Include="Source\Listener.h" />
-    <ClInclude Include="Source\ListenerCategory.hpp" />
-    <ClInclude Include="Source\ListenerID.hpp" />
+    <ClInclude Include="Source\ListenerFlags.hpp" />
     <ClInclude Include="Source\LoadImg.h" />
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\Mesh.h" />

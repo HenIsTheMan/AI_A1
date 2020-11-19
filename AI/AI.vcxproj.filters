@@ -141,12 +141,6 @@
     <ClInclude Include="Source\Listener.h">
       <Filter>Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ListenerID.hpp">
-      <Filter>Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ListenerCategory.hpp">
-      <Filter>Event</Filter>
-    </ClInclude>
     <ClInclude Include="Source\EventAttacked.h">
       <Filter>Event\Events\Post-events</Filter>
     </ClInclude>
@@ -229,6 +223,9 @@
       <Filter>Event</Filter>
     </ClInclude>
     <ClInclude Include="Source\Publisher.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ListenerFlags.hpp">
       <Filter>Event</Filter>
     </ClInclude>
   </ItemGroup>

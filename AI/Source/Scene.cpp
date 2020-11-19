@@ -7,6 +7,8 @@
 #include "EventCalcInactiveObjs.h"
 #include "EventGridDataChanged.h"
 
+#include "ListenerFlags.hpp"
+
 #include "StateSkeleIdle.h"
 #include "StateSkeleAttack.h"
 #include "StateSkeleDead.h"
@@ -81,7 +83,7 @@ Scene::Scene():
 	orcSM->AddState(new State(StateID::StateOrcDead, StateOrcDead::Enter, StateOrcDead::Update, StateOrcDead::Exit));
 	orcSM->AddState(new State(StateID::StateOrcImmune, StateOrcImmune::Enter, StateOrcImmune::Update, StateOrcImmune::Exit));
 
-	publisher->AddListener(ListenerID::ObjPool, ListenerCategory::ObjPool, objPool);
+	publisher->AddListener((long int)ListenerFlags::ObjPool, objPool);
 }
 
 Scene::~Scene(){
@@ -451,10 +453,12 @@ void Scene::UpdateGridData(){
 		&& trueMouseY > yOffset + gridLineThickness * 0.5f && trueMouseY < yOffset + gridHeight - gridLineThickness * 0.5f){
 		if(isLMB){
 			grid.SetData(true, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
-			publisher->GrpSend(ListenerCategory::Entity, new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
+			//publisher->GrpSend(ListenerCategory::Entity, new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
+			publisher->Broadcast(new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
 		} else if(isRMB){
 			grid.SetData(false, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
-			publisher->GrpSend(ListenerCategory::Entity, new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
+			//publisher->GrpSend(ListenerCategory::Entity, new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
+			publisher->Broadcast(new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
 		}
 	}
 }
@@ -519,22 +523,22 @@ void Scene::UpdateEntities(const double dt){
 		Entity* skele = CreateSkele({
 			Vector3(5.0f, 15.0f, 0.0f)
 		});
-		publisher->AddListener(ListenerID::Skele, ListenerCategory::Entity, skele);
+		publisher->AddListener((long int)ListenerFlags::Skele | (long int)ListenerFlags::Entity, skele);
 
 		Entity* reptile = CreateReptile({
 			Vector3(15.0f, 12.0f, 0.0f)
 		});
-		publisher->AddListener(ListenerID::Reptile, ListenerCategory::Entity, reptile);
+		publisher->AddListener((long int)ListenerFlags::Reptile | (long int)ListenerFlags::Entity, reptile);
 
 		Entity* boy = CreateBoy({
 			Vector3(5.0f, 4.0f, 0.0f)
 		});
-		publisher->AddListener(ListenerID::Boy, ListenerCategory::Entity, boy);
+		publisher->AddListener((long int)ListenerFlags::Boy | (long int)ListenerFlags::Entity, boy);
 
 		Entity* orc = CreateOrc({
 			Vector3(18.5f, 3.0f, 0.0f)
 		});
-		publisher->AddListener(ListenerID::Orc, ListenerCategory::Entity, orc);
+		publisher->AddListener((long int)ListenerFlags::Orc | (long int)ListenerFlags::Entity, orc);
 		orc->SetCurrHealth(0.0f);
 
 		++control;
@@ -956,7 +960,7 @@ void Scene::RenderDebugInfoText(Mesh* const textMesh, const Color& textColor, co
 	);
 	RenderTextOnScreen(
 		textMesh,
-		"Inactive objs: " + std::to_string(publisher->Send(ListenerID::ObjPool, new EventCalcInactiveObjs(), false)),
+		"Inactive objs: " + std::to_string(publisher->Send((long int)ListenerFlags::ObjPool, new EventCalcInactiveObjs(), false)),
 		textColor,
 		textSize,
 		0.0f,
@@ -964,7 +968,7 @@ void Scene::RenderDebugInfoText(Mesh* const textMesh, const Color& textColor, co
 	);
 	RenderTextOnScreen(
 		textMesh,
-		"Active objs: " + std::to_string(publisher->Send(ListenerID::ObjPool, new EventCalcActiveObjs(), false)),
+		"Active objs: " + std::to_string(publisher->Send((long int)ListenerFlags::ObjPool, new EventCalcActiveObjs(), false)),
 		textColor,
 		textSize,
 		0.0f,
