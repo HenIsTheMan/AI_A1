@@ -14,4 +14,6 @@ public:
 private:
 	int im_BlockRow;
 	int im_BlockCol;
+
+	EventGridDataChanged* Clone() const override;
 };

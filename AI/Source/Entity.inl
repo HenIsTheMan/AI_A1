@@ -27,9 +27,9 @@ namespace Obj{
 				const float blockRow = (float)eventGridDataChanged->GetBlockRow();
 				const float blockCol = (float)eventGridDataChanged->GetBlockCol();
 
-				if(im_Attribs.im_LocalPos.x > blockCol - 1.0f || im_Attribs.im_LocalPos.x < blockCol + 1.0f
-					|| im_Attribs.im_LocalPos.y > blockRow - 1.0f || im_Attribs.im_LocalPos.y < blockRow + 1.0f){
-					//eventGridDataChanged->im_ObjPool->DeactivateObj(this);
+				if(im_Attribs.im_LocalPos.x > blockCol - 1.0f && im_Attribs.im_LocalPos.x < blockCol + 1.0f
+					&& im_Attribs.im_LocalPos.y > blockRow - 1.0f && im_Attribs.im_LocalPos.y < blockRow + 1.0f){
+					return -5;
 				}
 				break;
 			}

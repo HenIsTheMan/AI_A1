@@ -14,3 +14,7 @@ int EventGridDataChanged::GetBlockRow() const{
 int EventGridDataChanged::GetBlockCol() const{
 	return im_BlockCol;
 }
+
+EventGridDataChanged* EventGridDataChanged::Clone() const{
+	return new EventGridDataChanged(*this);
+}

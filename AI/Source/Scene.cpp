@@ -515,7 +515,7 @@ void Scene::UpdateOrcStates(){
 void Scene::UpdateEntities(const double dt){
 	static int control = 0;
 
-	if(control != 20){
+	if(control != 1){
 		Entity* skele = CreateSkele({
 			Vector3(5.0f, 15.0f, 0.0f)
 		});
@@ -547,7 +547,11 @@ void Scene::UpdateEntities(const double dt){
 		if(entityPool[i].first){
 			Entity* const entity = entityPool[i].second;
 
-			(void)entity->OnEvent(entity->FetchEvent(), false);
+			switch(entity->OnEvent(entity->FetchEvent(), true)){
+				case -5:
+					objPool->DeactivateObj(entity);
+					continue;
+			}
 			switch(entity->GetType()){
 				using namespace Obj;
 

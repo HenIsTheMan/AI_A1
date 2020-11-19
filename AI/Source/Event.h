@@ -8,6 +8,8 @@ class Event{ //Abstract class
 public:
 	virtual ~Event() = default;
 
+	virtual Event* Clone() const = 0;
+
 	///Getter
 	EventID GetID() const;
 protected:

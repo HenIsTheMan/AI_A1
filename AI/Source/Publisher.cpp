@@ -53,7 +53,7 @@ int Publisher::MultiSend(const std::initializer_list<ListenerID> IDs, Event* myE
 
 		Listener* const listener = iter->second;
 		if(async){
-			listener->AddEvent(myEvent);
+			listener->AddEvent(myEvent->Clone()); //Shallow copy prevented
 			++sum;
 		} else{
 			sum += listener->OnEvent(myEvent);
@@ -79,7 +79,7 @@ int Publisher::GrpSend(const ListenerCategory category, Event* myEvent, const bo
 	for(auto iter = controlIter.first; iter != controlIter.second; ++iter){
 		Listener* const listener = iter->second;
 		if(async){
-			listener->AddEvent(myEvent);
+			listener->AddEvent(myEvent->Clone()); //Shallow copy prevented
 			++sum;
 		} else{
 			sum += listener->OnEvent(myEvent);
@@ -98,7 +98,7 @@ int Publisher::Broadcast(Event* myEvent, const bool async){
 	for(const std::pair<ListenerID, Listener*>& element: im_ListenersByID){
 		Listener* const listener = element.second;
 		if(async){
-			listener->AddEvent(myEvent);
+			listener->AddEvent(myEvent->Clone()); //Shallow copy prevented
 			++sum;
 		} else{
 			sum += listener->OnEvent(myEvent);
