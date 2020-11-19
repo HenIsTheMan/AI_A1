@@ -453,12 +453,10 @@ void Scene::UpdateGridData(){
 		&& trueMouseY > yOffset + gridLineThickness * 0.5f && trueMouseY < yOffset + gridHeight - gridLineThickness * 0.5f){
 		if(isLMB){
 			grid.SetData(true, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
-			//publisher->GrpSend(ListenerCategory::Entity, new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
-			publisher->Broadcast(new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
+			publisher->Notify((long int)ListenerFlags::Entity, new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
 		} else if(isRMB){
 			grid.SetData(false, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
-			//publisher->GrpSend(ListenerCategory::Entity, new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
-			publisher->Broadcast(new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
+			publisher->Notify((long int)ListenerFlags::Entity, new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
 		}
 	}
 }
@@ -960,7 +958,7 @@ void Scene::RenderDebugInfoText(Mesh* const textMesh, const Color& textColor, co
 	);
 	RenderTextOnScreen(
 		textMesh,
-		"Inactive objs: " + std::to_string(publisher->Send((long int)ListenerFlags::ObjPool, new EventCalcInactiveObjs(), false)),
+		"Inactive objs: " + std::to_string(publisher->Notify((long int)ListenerFlags::ObjPool, new EventCalcInactiveObjs(), false)),
 		textColor,
 		textSize,
 		0.0f,
@@ -968,7 +966,7 @@ void Scene::RenderDebugInfoText(Mesh* const textMesh, const Color& textColor, co
 	);
 	RenderTextOnScreen(
 		textMesh,
-		"Active objs: " + std::to_string(publisher->Send((long int)ListenerFlags::ObjPool, new EventCalcActiveObjs(), false)),
+		"Active objs: " + std::to_string(publisher->Notify((long int)ListenerFlags::ObjPool, new EventCalcActiveObjs(), false)),
 		textColor,
 		textSize,
 		0.0f,

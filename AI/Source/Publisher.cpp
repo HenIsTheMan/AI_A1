@@ -13,22 +13,25 @@ void Publisher::AddListener(const long int& flags, Listener* const listener){
 	im_Listeners.push_back({flags, listener});
 }
 
-int Publisher::Send(const long int& flags, Event* myEvent, const bool async){
+int Publisher::Notify(const long int& flags, Event* myEvent, const bool async){
 	assert(myEvent && "Var 'myEvent' must be initialized!");
 
+	int sum = 0;
 	for(const std::pair<long int, Listener*>& element: im_Listeners){
 		if((long int)element.first & (long int)flags){
 			Listener* const listener = element.second;
 			if(async){
-				listener->AddEvent(myEvent);
-				return 1;
+				listener->AddEvent(myEvent->Clone()); //Shallow copy prevented
+				++sum;
 			} else{
-				return listener->OnEvent(myEvent, true);
+				sum += listener->OnEvent(myEvent);
 			}
 		}
 	}
 
-	return 0;
+	delete myEvent;
+	myEvent = nullptr;
+	return sum;
 }
 
 int Publisher::Broadcast(Event* myEvent, const bool async){
