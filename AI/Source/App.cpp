@@ -18,8 +18,8 @@ const unsigned int frameTime = 1000 / FPS; // time for each frame
 
 ///Shld be members of App instead
 double mouseScrollWheelYOffset;
-int winWidth;
-int winHeight;
+int windowWidth;
+int windowHeight;
 
 extern bool endLoop;
 
@@ -29,8 +29,8 @@ static void error_callback(int error, const char* description){
 }
 
 static void resize_callback(GLFWwindow* window, int w, int h){
-	winWidth = w;
-	winHeight = h;
+	windowWidth = w;
+	windowHeight = h;
 }
 
 bool App::Key(unsigned short key)
@@ -71,7 +71,7 @@ void App::Init(){
 	glfwSetWindowPos(im_window, mode->width / 4, mode->height / 4);
 	glfwMaximizeWindow(im_window);
 	glfwShowWindow(im_window);
-	glfwGetWindowSize(im_window, &winWidth, &winHeight);
+	glfwGetWindowSize(im_window, &windowWidth, &windowHeight);
 
 	if(!im_window){
 		fprintf(stderr, "Failed to open GLFW window.\n");
@@ -124,7 +124,7 @@ void App::Run(){
 		}
 
 		if(glfwGetWindowAttrib(im_window, GLFW_VISIBLE)){
-			glViewport(0, 0, winWidth, winHeight);
+			glViewport(0, 0, windowWidth, windowHeight);
 			scene->Render();
 		}
 

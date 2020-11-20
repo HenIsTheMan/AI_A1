@@ -35,8 +35,8 @@
 #include "StateOrcDead.h"
 #include "StateOrcImmune.h"
 
-extern int winWidth;
-extern int winHeight;
+extern int windowWidth;
+extern int windowHeight;
 
 Scene::Scene():
 	gridCellWidth(40.0f),
@@ -213,8 +213,8 @@ void Scene::Render(){
 
 	modelStack.PushMatrix();
 	modelStack.Translate(
-		-(float)winWidth * 0.5f,
-		-(float)winHeight * 0.5f,
+		-(float)windowWidth * 0.5f,
+		-(float)windowHeight * 0.5f,
 		0.0f
 	);
 
@@ -502,25 +502,25 @@ void Scene::UpdateGridBlockData(){
 	double mouseY;
 	App::GetCursorPos(&mouseX, &mouseY);
 
-	const float horizSize = (float)winWidth * (float)orthoProjectionScaleFactor;
-	const float vertSize = (float)winHeight * (float)orthoProjectionScaleFactor;
-	const float leftVal = ((float)winWidth - horizSize) * 0.5f;
+	const float horizSize = (float)windowWidth * (float)orthoProjectionScaleFactor;
+	const float vertSize = (float)windowHeight * (float)orthoProjectionScaleFactor;
+	const float leftVal = ((float)windowWidth - horizSize) * 0.5f;
 	const float rightVal = leftVal + horizSize;
-	const float bottomVal = ((float)winHeight - vertSize) * 0.5f;
+	const float bottomVal = ((float)windowHeight - vertSize) * 0.5f;
 	const float topVal = bottomVal + vertSize;
 
-	const float trueMouseX = (float)mouseX * ((rightVal - leftVal) / (float)winWidth) + leftVal + im_Cam.pos.x;
-	const float trueMouseY = (float)mouseY * ((topVal - bottomVal) / (float)winHeight) + bottomVal - im_Cam.pos.y;
+	const float trueMouseX = (float)mouseX * ((rightVal - leftVal) / (float)windowWidth) + leftVal + im_Cam.pos.x;
+	const float trueMouseY = (float)mouseY * ((topVal - bottomVal) / (float)windowHeight) + bottomVal - im_Cam.pos.y;
 
 	const float gridWidth = grid.CalcWidth();
 	const float gridHeight = grid.CalcHeight();
 
-	const float xOffset = ((float)winWidth - gridWidth) * 0.5f;
-	const float yOffset = ((float)winHeight - gridHeight) * 0.5f;
+	const float xOffset = ((float)windowWidth - gridWidth) * 0.5f;
+	const float yOffset = ((float)windowHeight - gridHeight) * 0.5f;
 	const float unitX = gridCellWidth + gridLineThickness;
 	const float unitY = gridCellHeight + gridLineThickness;
 
-	const float mouseRow = std::floor(((float)winHeight - trueMouseY - yOffset - gridLineThickness * 0.5f) / unitY);
+	const float mouseRow = std::floor(((float)windowHeight - trueMouseY - yOffset - gridLineThickness * 0.5f) / unitY);
 	const float mouseCol = std::floor((trueMouseX - xOffset - gridLineThickness * 0.5f) / unitX);
 	const float xTranslate = mouseCol * unitX
 		+ xOffset
@@ -771,15 +771,15 @@ void Scene::RenderGrid(){
 	const float gridWidth = grid.CalcWidth();
 	const float gridHeight = grid.CalcHeight();
 
-	const float xOffset = ((float)winWidth - gridWidth) * 0.5f + gridLineThickness * 0.5f;
-	const float yOffset = ((float)winHeight - gridHeight) * 0.5f + gridLineThickness * 0.5f;
+	const float xOffset = ((float)windowWidth - gridWidth) * 0.5f + gridLineThickness * 0.5f;
+	const float yOffset = ((float)windowHeight - gridHeight) * 0.5f + gridLineThickness * 0.5f;
 
 	const int amtOfVertLines = grid.CalcAmtOfVertLines();
 	for(int i = 0; i < amtOfVertLines; ++i){
 		modelStack.PushMatrix();
 		modelStack.Translate(
 			xOffset + (gridCellWidth + gridLineThickness) * (float)i,
-			(float)winHeight * 0.5f,
+			(float)windowHeight * 0.5f,
 			0.05f
 		);
 		modelStack.Scale(
@@ -795,7 +795,7 @@ void Scene::RenderGrid(){
 	for(int i = 0; i < amtOfHorizLines; ++i){
 		modelStack.PushMatrix();
 		modelStack.Translate(
-			(float)winWidth * 0.5f,
+			(float)windowWidth * 0.5f,
 			yOffset + (gridCellHeight + gridLineThickness) * (float)i,
 			0.05f
 		);
@@ -812,8 +812,8 @@ void Scene::RenderGrid(){
 void Scene::RenderMystery(){
 	modelStack.PushMatrix();
 	modelStack.Translate(
-		(float)winWidth * 0.5f,
-		(float)winHeight * 0.5f,
+		(float)windowWidth * 0.5f,
+		(float)windowHeight * 0.5f,
 		0.05f
 	);
 	modelStack.Scale(
@@ -829,8 +829,8 @@ void Scene::RenderGridBlockData(){
 	const float gridWidth = grid.CalcWidth();
 	const float gridHeight = grid.CalcHeight();
 
-	const float xOffset = ((float)winWidth - gridWidth) * 0.5f + gridLineThickness + gridCellWidth * 0.5f;
-	const float yOffset = ((float)winHeight - gridHeight) * 0.5f + gridLineThickness + gridCellHeight * 0.5f;
+	const float xOffset = ((float)windowWidth - gridWidth) * 0.5f + gridLineThickness + gridCellWidth * 0.5f;
+	const float yOffset = ((float)windowHeight - gridHeight) * 0.5f + gridLineThickness + gridCellHeight * 0.5f;
 
 	const std::vector<std::vector<bool>>& gridBlockData = grid.GetBlockData();
 
@@ -888,8 +888,8 @@ void Scene::RenderEntities(){
 	const float gridWidth = grid.CalcWidth();
 	const float gridHeight = grid.CalcHeight();
 
-	const float xPosOffset = ((float)winWidth - gridWidth) * 0.5f + gridCellWidth * 0.5f + gridLineThickness;
-	const float yPosOffset = ((float)winHeight - gridHeight) * 0.5f + gridCellHeight * 0.5f + gridLineThickness;
+	const float xPosOffset = ((float)windowWidth - gridWidth) * 0.5f + gridCellWidth * 0.5f + gridLineThickness;
+	const float yPosOffset = ((float)windowHeight - gridHeight) * 0.5f + gridCellHeight * 0.5f + gridLineThickness;
 
 	static float individualDepthOffset = 0.0f;
 	float opacity;
@@ -1131,13 +1131,13 @@ void Scene::RenderRegions(){
 
 	switch(teamRegionsCase){
 		case 1:
-			alphaPosX = (float)winWidth * 0.5f - gridWidth * 0.25f;
-			alphaPosY = (float)winHeight * 0.5f;
+			alphaPosX = (float)windowWidth * 0.5f - gridWidth * 0.25f;
+			alphaPosY = (float)windowHeight * 0.5f;
 			alphaScaleX = gridWidth * 0.5f;
 			alphaScaleY = gridHeight;
 
-			omegaPosX = (float)winWidth * 0.5f + gridWidth * 0.25f;
-			omegaPosY = (float)winHeight * 0.5f;
+			omegaPosX = (float)windowWidth * 0.5f + gridWidth * 0.25f;
+			omegaPosY = (float)windowHeight * 0.5f;
 			omegaScaleX = gridWidth * 0.5f;
 			omegaScaleY = gridHeight;
 
@@ -1145,13 +1145,13 @@ void Scene::RenderRegions(){
 			dividerScaleY = gridHeight;
 			break;
 		case 2:
-			alphaPosX = (float)winWidth * 0.5f + gridWidth * 0.25f;
-			alphaPosY = (float)winHeight * 0.5f;
+			alphaPosX = (float)windowWidth * 0.5f + gridWidth * 0.25f;
+			alphaPosY = (float)windowHeight * 0.5f;
 			alphaScaleX = gridWidth * 0.5f;
 			alphaScaleY = gridHeight;
 
-			omegaPosX = (float)winWidth * 0.5f - gridWidth * 0.25f;
-			omegaPosY = (float)winHeight * 0.5f;
+			omegaPosX = (float)windowWidth * 0.5f - gridWidth * 0.25f;
+			omegaPosY = (float)windowHeight * 0.5f;
 			omegaScaleX = gridWidth * 0.5f;
 			omegaScaleY = gridHeight;
 
@@ -1159,13 +1159,13 @@ void Scene::RenderRegions(){
 			dividerScaleY = gridHeight;
 			break;
 		case 3:
-			alphaPosX = (float)winWidth * 0.5f;
-			alphaPosY = (float)winHeight * 0.5f - gridHeight * 0.25f;
+			alphaPosX = (float)windowWidth * 0.5f;
+			alphaPosY = (float)windowHeight * 0.5f - gridHeight * 0.25f;
 			alphaScaleX = gridWidth;
 			alphaScaleY = gridHeight * 0.5f;
 
-			omegaPosX = (float)winWidth * 0.5f;
-			omegaPosY = (float)winHeight * 0.5f + gridHeight * 0.25f;
+			omegaPosX = (float)windowWidth * 0.5f;
+			omegaPosY = (float)windowHeight * 0.5f + gridHeight * 0.25f;
 			omegaScaleX = gridWidth;
 			omegaScaleY = gridHeight * 0.5f;
 
@@ -1173,13 +1173,13 @@ void Scene::RenderRegions(){
 			dividerScaleY = gridCellHeight;
 			break;
 		case 4:
-			alphaPosX = (float)winWidth * 0.5f;
-			alphaPosY = (float)winHeight * 0.5f + gridHeight * 0.25f;
+			alphaPosX = (float)windowWidth * 0.5f;
+			alphaPosY = (float)windowHeight * 0.5f + gridHeight * 0.25f;
 			alphaScaleX = gridWidth;
 			alphaScaleY = gridHeight * 0.5f;
 
-			omegaPosX = (float)winWidth * 0.5f;
-			omegaPosY = (float)winHeight * 0.5f - gridHeight * 0.25f;
+			omegaPosX = (float)windowWidth * 0.5f;
+			omegaPosY = (float)windowHeight * 0.5f - gridHeight * 0.25f;
 			omegaScaleX = gridWidth;
 			omegaScaleY = gridHeight * 0.5f;
 
@@ -1194,8 +1194,8 @@ void Scene::RenderRegions(){
 	if(gridRows != 0 && gridCols != 0 && (teamRegionsCase > 2 && gridRows & 1) || (teamRegionsCase < 3 && gridCols & 1)){
 		modelStack.PushMatrix();
 		modelStack.Translate(
-			(float)winWidth * 0.5f,
-			(float)winHeight * 0.5f,
+			(float)windowWidth * 0.5f,
+			(float)windowHeight * 0.5f,
 			0.05f
 		);
 		modelStack.Scale(
@@ -1241,28 +1241,28 @@ void Scene::RenderTranslucentBlock(){
 	double mouseY;
 	App::GetCursorPos(&mouseX, &mouseY);
 
-	const float horizSize = (float)winWidth * (float)orthoProjectionScaleFactor;
-	const float vertSize = (float)winHeight * (float)orthoProjectionScaleFactor;
-	const float leftVal = ((float)winWidth - horizSize) * 0.5f;
+	const float horizSize = (float)windowWidth * (float)orthoProjectionScaleFactor;
+	const float vertSize = (float)windowHeight * (float)orthoProjectionScaleFactor;
+	const float leftVal = ((float)windowWidth - horizSize) * 0.5f;
 	const float rightVal = leftVal + horizSize;
-	const float bottomVal = ((float)winHeight - vertSize) * 0.5f;
+	const float bottomVal = ((float)windowHeight - vertSize) * 0.5f;
 	const float topVal = bottomVal + vertSize;
 
-	const float trueMouseX = (float)mouseX * ((rightVal - leftVal) / (float)winWidth) + leftVal + im_Cam.pos.x;
-	const float trueMouseY = (float)mouseY * ((topVal - bottomVal) / (float)winHeight) + bottomVal - im_Cam.pos.y;
+	const float trueMouseX = (float)mouseX * ((rightVal - leftVal) / (float)windowWidth) + leftVal + im_Cam.pos.x;
+	const float trueMouseY = (float)mouseY * ((topVal - bottomVal) / (float)windowHeight) + bottomVal - im_Cam.pos.y;
 
 	const float gridWidth = grid.CalcWidth();
 	const float gridHeight = grid.CalcHeight();
 
-	const float xOffset = ((float)winWidth - gridWidth) * 0.5f;
-	const float yOffset = ((float)winHeight - gridHeight) * 0.5f;
+	const float xOffset = ((float)windowWidth - gridWidth) * 0.5f;
+	const float yOffset = ((float)windowHeight - gridHeight) * 0.5f;
 
 	if(trueMouseX > xOffset + gridLineThickness * 0.5f && trueMouseX < xOffset + gridWidth - gridLineThickness * 0.5f
 		&& trueMouseY > yOffset + gridLineThickness * 0.5f && trueMouseY < yOffset + gridHeight - gridLineThickness * 0.5f){
 		const float unitX = gridCellWidth + gridLineThickness;
 		const float unitY = gridCellHeight + gridLineThickness;
 
-		const float mouseRow = std::floor(((float)winHeight - trueMouseY - yOffset - gridLineThickness * 0.5f) / unitY);
+		const float mouseRow = std::floor(((float)windowHeight - trueMouseY - yOffset - gridLineThickness * 0.5f) / unitY);
 		const float mouseCol = std::floor((trueMouseX - xOffset - gridLineThickness * 0.5f) / unitX);
 		const float xTranslate = mouseCol * unitX
 			+ xOffset
@@ -1292,13 +1292,13 @@ void Scene::RenderTranslucentBlock(){
 void Scene::RenderBG(){
 	modelStack.PushMatrix();
 		modelStack.Translate(
-			im_Cam.pos.x + (float)winWidth * 0.5f,
-			im_Cam.pos.y + (float)winHeight * 0.5f,
+			im_Cam.pos.x + (float)windowWidth * 0.5f,
+			im_Cam.pos.y + (float)windowHeight * 0.5f,
 			0.0f
 		);
 		modelStack.Scale(
-			(float)winWidth,
-			(float)winHeight,
+			(float)windowWidth,
+			(float)windowHeight,
 			1.0f
 		);
 		if(isDay){
@@ -1311,7 +1311,7 @@ void Scene::RenderBG(){
 
 void Scene::RenderSceneText(){
 	Mesh* const textMesh = meshList[(int)GeoType::Text];
-	const float textSize = winHeight * 0.05f;
+	const float textSize = windowHeight * 0.05f;
 
 	if(!simStarted){
 		RenderTextOnScreen(
@@ -1319,7 +1319,7 @@ void Scene::RenderSceneText(){
 			"Press Space to start!",
 			Color(0.0f, 0.0f, 0.0f),
 			((sinf(elapsedTime * 4.0f) + 1.0f) * 0.5f + 1.0f) * 0.5f * textSize,
-			(float)winWidth * 0.5f,
+			(float)windowWidth * 0.5f,
 			textSize * 18.75f,
 			TextAlignment::Center
 		);
@@ -1328,7 +1328,7 @@ void Scene::RenderSceneText(){
 			"Press Space to start!",
 			Color(),
 			((cosf(elapsedTime * 4.0f) + 1.0f) * 0.5f  + 1.0f) * 0.5f * textSize,
-			(float)winWidth * 0.5f,
+			(float)windowWidth * 0.5f,
 			textSize * 0.25f,
 			TextAlignment::Center
 		);
@@ -1343,7 +1343,7 @@ void Scene::RenderSceneText(){
 		"Spawning start time: " + std::to_string(spawningStartTime).substr(0, std::to_string((int)spawningStartTime).length() + 3),
 		Color(0.0f, 1.0f, 0.0f),
 		textSize,
-		(float)winWidth,
+		(float)windowWidth,
 		textSize * 19.0f,
 		TextAlignment::Right
 	);
@@ -1352,7 +1352,7 @@ void Scene::RenderSceneText(){
 		"Spawning end time: " + std::to_string(spawningEndTime).substr(0, std::to_string((int)spawningEndTime).length() + 3),
 		Color(1.0f, 0.0f, 0.0f),
 		textSize,
-		(float)winWidth,
+		(float)windowWidth,
 		textSize * 18.0f,
 		TextAlignment::Right
 	);
@@ -1514,7 +1514,7 @@ void Scene::RenderGridAttribsText(Mesh* const textMesh, const Color& textColor, 
 		"Grid cell width: " + std::to_string(gridCellWidth).substr(0, std::to_string((int)gridCellWidth).length() + 2),
 		textColor,
 		textSize,
-		(float)winWidth,
+		(float)windowWidth,
 		textSize * 0.0f,
 		TextAlignment::Right
 	);
@@ -1523,7 +1523,7 @@ void Scene::RenderGridAttribsText(Mesh* const textMesh, const Color& textColor, 
 		"Grid cell height: " + std::to_string(gridCellHeight).substr(0, std::to_string((int)gridCellHeight).length() + 2),
 		textColor,
 		textSize,
-		(float)winWidth,
+		(float)windowWidth,
 		textSize * 1.0f,
 		TextAlignment::Right
 	);
@@ -1532,7 +1532,7 @@ void Scene::RenderGridAttribsText(Mesh* const textMesh, const Color& textColor, 
 		"Grid line thickness: " + std::to_string(gridLineThickness).substr(0, std::to_string((int)gridLineThickness).length() + 2),
 		textColor,
 		textSize,
-		(float)winWidth,
+		(float)windowWidth,
 		textSize * 2.0f,
 		TextAlignment::Right
 	);
@@ -1541,7 +1541,7 @@ void Scene::RenderGridAttribsText(Mesh* const textMesh, const Color& textColor, 
 		"Grid rows: " + std::to_string(gridRows),
 		textColor,
 		textSize,
-		(float)winWidth,
+		(float)windowWidth,
 		textSize * 3.0f,
 		TextAlignment::Right
 	);
@@ -1550,7 +1550,7 @@ void Scene::RenderGridAttribsText(Mesh* const textMesh, const Color& textColor, 
 		"Grid cols: " + std::to_string(gridCols),
 		textColor,
 		textSize,
-		(float)winWidth,
+		(float)windowWidth,
 		textSize * 4.0f,
 		TextAlignment::Right
 	);
