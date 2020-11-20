@@ -1,11 +1,11 @@
-float StateSkeleIdle::im_ElapsedTime = 0.0f;
-Grid<float>* StateSkeleIdle::im_Grid = nullptr;
+float StateSkelePatrol::im_ElapsedTime = 0.0f;
+Grid<float>* StateSkelePatrol::im_Grid = nullptr;
 
-void StateSkeleIdle::Enter(Entity* const entity){
+void StateSkelePatrol::Enter(Entity* const entity){
 	entity->SetTimeLeft(0.0f); //Just in case
 }
 
-void StateSkeleIdle::Update(Entity* const entity, const double dt){
+void StateSkelePatrol::Update(Entity* const entity, const double dt){
 	//* Check for state transition
 	if(entity->GetCurrHealth() <= 0.0f){
 		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateSkeleDead));
@@ -71,6 +71,6 @@ void StateSkeleIdle::Update(Entity* const entity, const double dt){
 	//*/
 }
 
-void StateSkeleIdle::Exit(Entity* const entity){
+void StateSkelePatrol::Exit(Entity* const entity){
 	entity->SetTimeLeft(0.0f); //Just in case
 }

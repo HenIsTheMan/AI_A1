@@ -1,15 +1,14 @@
-float StateReptileIdle::im_ElapsedTime = 0.0f;
-Grid<float>* StateReptileIdle::im_Grid = nullptr;
-Vector3 StateReptileIdle::im_CommonDirs[2]{Vector3(), Vector3()};
+float StateBoyPatrol::im_ElapsedTime = 0.0f;
+Grid<float>* StateBoyPatrol::im_Grid = nullptr;
 
-void StateReptileIdle::Enter(Entity* const entity){
+void StateBoyPatrol::Enter(Entity* const entity){
 	entity->SetTimeLeft(0.0f); //Just in case
 }
 
-void StateReptileIdle::Update(Entity* const entity, const double dt){
+void StateBoyPatrol::Update(Entity* const entity, const double dt){
 	//* Check for state transition
 	if(entity->GetCurrHealth() <= 0.0f){
-		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateReptileDead));
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyDead));
 		return;
 	}
 
@@ -32,8 +31,8 @@ void StateReptileIdle::Update(Entity* const entity, const double dt){
 		&& gridBlockData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]
 		&& gridEntityData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]))
 	){
-		std::cout << "Wow 2!\n";
-		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateReptileCannotMove));
+		std::cout << "Wow 4!\n";
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyCannotMove));
 		return;
 	}
 	//*/
@@ -53,7 +52,7 @@ void StateReptileIdle::Update(Entity* const entity, const double dt){
 				goStopBT = im_ElapsedTime + 0.5f;
 			} else{
 				entity->SetSpriteAniMiddleName("Move");
-				ChooseBetween2Dirs(entity, im_Grid, im_CommonDirs);
+				ChooseADir(entity, im_Grid);
 			}
 		} else{
 			entity->SetSpriteAniMiddleName("Move");
@@ -63,7 +62,7 @@ void StateReptileIdle::Update(Entity* const entity, const double dt){
 		entity->SetTimeLeft(entity->GetTimeLeft() - (float)dt);
 
 		if(entity->GetTimeLeft() <= 0.0f){
-			ChooseBetween2Dirs(entity, im_Grid, im_CommonDirs);
+			ChooseADir(entity, im_Grid);
 		} else if(chooseDirBT <= im_ElapsedTime){
 			ChooseRandDir(entity);
 			chooseDirBT = im_ElapsedTime + Math::RandFloatMinMax(1.2f, 2.5f);
@@ -72,6 +71,6 @@ void StateReptileIdle::Update(Entity* const entity, const double dt){
 	//*/
 }
 
-void StateReptileIdle::Exit(Entity* const entity){
+void StateBoyPatrol::Exit(Entity* const entity){
 	entity->SetTimeLeft(0.0f); //Just in case
 }

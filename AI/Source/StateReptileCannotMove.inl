@@ -26,7 +26,7 @@ void StateReptileCannotMove::Update(Entity* const entity, const double dt){
 		&& !gridBlockData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]
 		&& !gridEntityData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x])
 	){
-		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateReptileIdle));
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateReptilePatrol));
 		return;
 	}
 	//*/
@@ -39,5 +39,5 @@ void StateReptileCannotMove::Update(Entity* const entity, const double dt){
 }
 
 void StateReptileCannotMove::Exit(Entity* const entity){
-	entity->SetGridTargetLocalPos(entity->GetLocalPos()); //So will change to valid dir in idle state
+	entity->SetGridTargetLocalPos(entity->GetLocalPos());
 }

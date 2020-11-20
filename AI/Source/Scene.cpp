@@ -14,25 +14,25 @@
 #include "ListenerFlags.hpp"
 
 #include "StateSkeleCannotMove.h"
-#include "StateSkeleIdle.h"
+#include "StateSkelePatrol.h"
 #include "StateSkeleAttack.h"
 #include "StateSkeleDead.h"
 #include "StateSkeleRevive.h"
 
 #include "StateReptileCannotMove.h"
-#include "StateReptileIdle.h"
+#include "StateReptilePatrol.h"
 #include "StateReptileAttack.h"
 #include "StateReptileDead.h"
 #include "StateReptileMultiply.h"
 
 #include "StateBoyCannotMove.h"
-#include "StateBoyIdle.h"
+#include "StateBoyPatrol.h"
 #include "StateBoyAttack.h"
 #include "StateBoyDead.h"
 #include "StateBoyHeal.h"
 
 #include "StateOrcCannotMove.h"
-#include "StateOrcIdle.h"
+#include "StateOrcPatrol.h"
 #include "StateOrcAttack.h"
 #include "StateOrcDead.h"
 #include "StateOrcImmune.h"
@@ -89,25 +89,25 @@ Scene::Scene():
 	objPool->CreateObjs(10000);
 
 	skeleSM->AddState(new State(StateID::StateSkeleCannotMove, StateSkeleCannotMove::Enter, StateSkeleCannotMove::Update, StateSkeleCannotMove::Exit));
-	skeleSM->AddState(new State(StateID::StateSkeleIdle, StateSkeleIdle::Enter, StateSkeleIdle::Update, StateSkeleIdle::Exit));
+	skeleSM->AddState(new State(StateID::StateSkelePatrol, StateSkelePatrol::Enter, StateSkelePatrol::Update, StateSkelePatrol::Exit));
 	skeleSM->AddState(new State(StateID::StateSkeleAttack, StateSkeleAttack::Enter, StateSkeleAttack::Update, StateSkeleAttack::Exit));
 	skeleSM->AddState(new State(StateID::StateSkeleDead, StateSkeleDead::Enter, StateSkeleDead::Update, StateSkeleDead::Exit));
 	skeleSM->AddState(new State(StateID::StateSkeleRevive, StateSkeleRevive::Enter, StateSkeleRevive::Update, StateSkeleRevive::Exit));
 
 	reptileSM->AddState(new State(StateID::StateReptileCannotMove, StateReptileCannotMove::Enter, StateReptileCannotMove::Update, StateReptileCannotMove::Exit));
-	reptileSM->AddState(new State(StateID::StateReptileIdle, StateReptileIdle::Enter, StateReptileIdle::Update, StateReptileIdle::Exit));
+	reptileSM->AddState(new State(StateID::StateReptilePatrol, StateReptilePatrol::Enter, StateReptilePatrol::Update, StateReptilePatrol::Exit));
 	reptileSM->AddState(new State(StateID::StateReptileAttack, StateReptileAttack::Enter, StateReptileAttack::Update, StateReptileAttack::Exit));
 	reptileSM->AddState(new State(StateID::StateReptileDead, StateReptileDead::Enter, StateReptileDead::Update, StateReptileDead::Exit));
 	reptileSM->AddState(new State(StateID::StateReptileMultiply, StateReptileMultiply::Enter, StateReptileMultiply::Update, StateReptileMultiply::Exit));
 
 	boySM->AddState(new State(StateID::StateBoyCannotMove, StateBoyCannotMove::Enter, StateBoyCannotMove::Update, StateBoyCannotMove::Exit));
-	boySM->AddState(new State(StateID::StateBoyIdle, StateBoyIdle::Enter, StateBoyIdle::Update, StateBoyIdle::Exit));
+	boySM->AddState(new State(StateID::StateBoyPatrol, StateBoyPatrol::Enter, StateBoyPatrol::Update, StateBoyPatrol::Exit));
 	boySM->AddState(new State(StateID::StateBoyAttack, StateBoyAttack::Enter, StateBoyAttack::Update, StateBoyAttack::Exit));
 	boySM->AddState(new State(StateID::StateBoyDead, StateBoyDead::Enter, StateBoyDead::Update, StateBoyDead::Exit));
 	boySM->AddState(new State(StateID::StateBoyHeal, StateBoyHeal::Enter, StateBoyHeal::Update, StateBoyHeal::Exit));
 
 	orcSM->AddState(new State(StateID::StateOrcCannotMove, StateOrcCannotMove::Enter, StateOrcCannotMove::Update, StateOrcCannotMove::Exit));
-	orcSM->AddState(new State(StateID::StateOrcIdle, StateOrcIdle::Enter, StateOrcIdle::Update, StateOrcIdle::Exit));
+	orcSM->AddState(new State(StateID::StateOrcPatrol, StateOrcPatrol::Enter, StateOrcPatrol::Update, StateOrcPatrol::Exit));
 	orcSM->AddState(new State(StateID::StateOrcAttack, StateOrcAttack::Enter, StateOrcAttack::Update, StateOrcAttack::Exit));
 	orcSM->AddState(new State(StateID::StateOrcDead, StateOrcDead::Enter, StateOrcDead::Update, StateOrcDead::Exit));
 	orcSM->AddState(new State(StateID::StateOrcImmune, StateOrcImmune::Enter, StateOrcImmune::Update, StateOrcImmune::Exit));
@@ -600,9 +600,9 @@ void Scene::UpdateSkeleStates(){
 	stateSkeleCannotMove->im_ElapsedTime = elapsedTime;
 	stateSkeleCannotMove->im_Grid = &grid;
 
-	StateSkeleIdle* const stateSkeleIdle = ((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle));
-	stateSkeleIdle->im_ElapsedTime = elapsedTime;
-	stateSkeleIdle->im_Grid = &grid;
+	StateSkelePatrol* const stateSkelePatrol = ((StateSkelePatrol*)skeleSM->GetState(StateID::StateSkelePatrol));
+	stateSkelePatrol->im_ElapsedTime = elapsedTime;
+	stateSkelePatrol->im_Grid = &grid;
 
 	StateSkeleDead* const stateSkeleDead = ((StateSkeleDead*)skeleSM->GetState(StateID::StateSkeleDead));
 	stateSkeleDead->im_ObjPool = objPool;
@@ -613,13 +613,13 @@ void Scene::UpdateReptileStates(){
 	stateReptileCannotMove->im_ElapsedTime = elapsedTime;
 	stateReptileCannotMove->im_Grid = &grid;
 
-	StateReptileIdle* const stateReptileIdle = ((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle));
-	stateReptileIdle->im_ElapsedTime = elapsedTime;
-	stateReptileIdle->im_Grid = &grid;
+	StateReptilePatrol* const stateReptilePatrol = ((StateReptilePatrol*)reptileSM->GetState(StateID::StateReptilePatrol));
+	stateReptilePatrol->im_ElapsedTime = elapsedTime;
+	stateReptilePatrol->im_Grid = &grid;
 
 	static float updateCommonDirBT = 0.0f;
 	if(updateCommonDirBT <= elapsedTime){
-		ChooseRandPairOfPerpendicularDirs(stateReptileIdle->im_CommonDirs);
+		ChooseRandPairOfPerpendicularDirs(stateReptilePatrol->im_CommonDirs);
 		updateCommonDirBT = elapsedTime + 1.0f;
 	}
 
@@ -632,9 +632,9 @@ void Scene::UpdateBoyStates(){
 	stateBoyCannotMove->im_ElapsedTime = elapsedTime;
 	stateBoyCannotMove->im_Grid = &grid;
 
-	StateBoyIdle* const stateBoyIdle = ((StateBoyIdle*)boySM->GetState(StateID::StateBoyIdle));
-	stateBoyIdle->im_ElapsedTime = elapsedTime;
-	stateBoyIdle->im_Grid = &grid;
+	StateBoyPatrol* const stateBoyPatrol = ((StateBoyPatrol*)boySM->GetState(StateID::StateBoyPatrol));
+	stateBoyPatrol->im_ElapsedTime = elapsedTime;
+	stateBoyPatrol->im_Grid = &grid;
 
 	StateBoyDead* const stateBoyDead = ((StateBoyDead*)boySM->GetState(StateID::StateBoyDead));
 	stateBoyDead->im_ObjPool = objPool;
@@ -645,9 +645,9 @@ void Scene::UpdateOrcStates(){
 	stateOrcCannotMove->im_ElapsedTime = elapsedTime;
 	stateOrcCannotMove->im_Grid = &grid;
 
-	StateOrcIdle* const stateOrcIdle = ((StateOrcIdle*)orcSM->GetState(StateID::StateOrcIdle));
-	stateOrcIdle->im_ElapsedTime = elapsedTime;
-	stateOrcIdle->im_Grid = &grid;
+	StateOrcPatrol* const stateOrcPatrol = ((StateOrcPatrol*)orcSM->GetState(StateID::StateOrcPatrol));
+	stateOrcPatrol->im_ElapsedTime = elapsedTime;
+	stateOrcPatrol->im_Grid = &grid;
 
 	StateOrcDead* const stateOrcDead = ((StateOrcDead*)orcSM->GetState(StateID::StateOrcDead));
 	stateOrcDead->im_ObjPool = objPool;
@@ -886,25 +886,25 @@ void Scene::RenderGridBlockData(){
 void Scene::RenderEntities(){
 	static std::string stateTexts[(int)StateID::Amt]{
 		"StateSkeleCannotMove",
-		"StateSkeleIdle",
+		"StateSkelePatrol",
 		"StateSkeleAttack",
 		"StateSkeleDead",
 		"StateSkeleRevive",
 
 		"StateReptileCannotMove",
-		"StateReptileIdle",
+		"StateReptilePatrol",
 		"StateReptileAttack",
 		"StateReptileDead",
 		"StateReptileMultiply",
 
 		"StateBoyCannotMove",
-		"StateBoyIdle",
+		"StateBoyPatrol",
 		"StateBoyAttack",
 		"StateBoyDead",
 		"StateBoyHeal",
 
 		"StateOrcCannotMove",
-		"StateOrcIdle",
+		"StateOrcPatrol",
 		"StateOrcAttack",
 		"StateOrcDead",
 		"StateOrcImmune"

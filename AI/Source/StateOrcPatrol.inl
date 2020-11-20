@@ -1,11 +1,11 @@
-float StateOrcIdle::im_ElapsedTime = 0.0f;
-Grid<float>* StateOrcIdle::im_Grid = nullptr;
+float StateOrcPatrol::im_ElapsedTime = 0.0f;
+Grid<float>* StateOrcPatrol::im_Grid = nullptr;
 
-void StateOrcIdle::Enter(Entity* const entity){
+void StateOrcPatrol::Enter(Entity* const entity){
 	entity->SetTimeLeft(0.0f); //Just in case
 }
 
-void StateOrcIdle::Update(Entity* const entity, const double dt){
+void StateOrcPatrol::Update(Entity* const entity, const double dt){
 	//* Check for state transition
 	if(entity->GetCurrHealth() <= 0.0f){
 		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcDead));
@@ -71,6 +71,6 @@ void StateOrcIdle::Update(Entity* const entity, const double dt){
 	//*/
 }
 
-void StateOrcIdle::Exit(Entity* const entity){
+void StateOrcPatrol::Exit(Entity* const entity){
 	entity->SetTimeLeft(0.0f); //Just in case
 }

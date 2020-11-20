@@ -2,25 +2,25 @@
 
 enum struct StateID: int{
 	StateSkeleCannotMove,
-	StateSkeleIdle,
+	StateSkelePatrol,
 	StateSkeleAttack,
 	StateSkeleDead,
 	StateSkeleRevive,
 
 	StateReptileCannotMove,
-	StateReptileIdle,
+	StateReptilePatrol,
 	StateReptileAttack,
 	StateReptileDead,
 	StateReptileMultiply,
 
 	StateBoyCannotMove,
-	StateBoyIdle,
+	StateBoyPatrol,
 	StateBoyAttack,
 	StateBoyDead,
 	StateBoyHeal,
 
 	StateOrcCannotMove,
-	StateOrcIdle,
+	StateOrcPatrol,
 	StateOrcAttack,
 	StateOrcDead,
 	StateOrcImmune,

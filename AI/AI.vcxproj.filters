@@ -141,9 +141,6 @@
     <ClInclude Include="Source\StateSkeleDead.h">
       <Filter>State\States\SkeleStates</Filter>
     </ClInclude>
-    <ClInclude Include="Source\StateSkeleIdle.h">
-      <Filter>State\States\SkeleStates</Filter>
-    </ClInclude>
     <ClInclude Include="Source\StateSkeleRevive.h">
       <Filter>State\States\SkeleStates</Filter>
     </ClInclude>
@@ -151,9 +148,6 @@
       <Filter>State\States\ReptileStates</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateReptileDead.h">
-      <Filter>State\States\ReptileStates</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StateReptileIdle.h">
       <Filter>State\States\ReptileStates</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateReptileMultiply.h">
@@ -168,16 +162,10 @@
     <ClInclude Include="Source\StateBoyHeal.h">
       <Filter>State\States\BoyStates</Filter>
     </ClInclude>
-    <ClInclude Include="Source\StateBoyIdle.h">
-      <Filter>State\States\BoyStates</Filter>
-    </ClInclude>
     <ClInclude Include="Source\StateOrcAttack.h">
       <Filter>State\States\OrcStates</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateOrcDead.h">
-      <Filter>State\States\OrcStates</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StateOrcIdle.h">
       <Filter>State\States\OrcStates</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateOrcImmune.h">
@@ -230,6 +218,18 @@
     </ClInclude>
     <ClInclude Include="Source\EventCalcOmegaCount.h">
       <Filter>Event\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateBoyPatrol.h">
+      <Filter>State\States\BoyStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateOrcPatrol.h">
+      <Filter>State\States\OrcStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateReptilePatrol.h">
+      <Filter>State\States\ReptileStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateSkelePatrol.h">
+      <Filter>State\States\SkeleStates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -313,9 +313,6 @@
     <None Include="Source\StateSkeleDead.inl">
       <Filter>State\States\SkeleStates</Filter>
     </None>
-    <None Include="Source\StateSkeleIdle.inl">
-      <Filter>State\States\SkeleStates</Filter>
-    </None>
     <None Include="Source\StateSkeleRevive.inl">
       <Filter>State\States\SkeleStates</Filter>
     </None>
@@ -323,9 +320,6 @@
       <Filter>State\States\ReptileStates</Filter>
     </None>
     <None Include="Source\StateReptileDead.inl">
-      <Filter>State\States\ReptileStates</Filter>
-    </None>
-    <None Include="Source\StateReptileIdle.inl">
       <Filter>State\States\ReptileStates</Filter>
     </None>
     <None Include="Source\StateReptileMultiply.inl">
@@ -340,16 +334,10 @@
     <None Include="Source\StateBoyHeal.inl">
       <Filter>State\States\BoyStates</Filter>
     </None>
-    <None Include="Source\StateBoyIdle.inl">
-      <Filter>State\States\BoyStates</Filter>
-    </None>
     <None Include="Source\StateOrcAttack.inl">
       <Filter>State\States\OrcStates</Filter>
     </None>
     <None Include="Source\StateOrcDead.inl">
-      <Filter>State\States\OrcStates</Filter>
-    </None>
-    <None Include="Source\StateOrcIdle.inl">
       <Filter>State\States\OrcStates</Filter>
     </None>
     <None Include="Source\StateOrcImmune.inl">
@@ -368,6 +356,18 @@
       <Filter>State\States\ReptileStates</Filter>
     </None>
     <None Include="Source\StateSkeleCannotMove.inl">
+      <Filter>State\States\SkeleStates</Filter>
+    </None>
+    <None Include="Source\StateBoyPatrol.inl">
+      <Filter>State\States\BoyStates</Filter>
+    </None>
+    <None Include="Source\StateOrcPatrol.inl">
+      <Filter>State\States\OrcStates</Filter>
+    </None>
+    <None Include="Source\StateReptilePatrol.inl">
+      <Filter>State\States\ReptileStates</Filter>
+    </None>
+    <None Include="Source\StateSkelePatrol.inl">
       <Filter>State\States\SkeleStates</Filter>
     </None>
   </ItemGroup>
