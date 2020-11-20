@@ -11,10 +11,10 @@ void StateOrcCannotMove::Update(Entity* const entity, const double dt){
 	const Vector3& entityLocalPos = entity->GetLocalPos();
 	const std::vector<std::vector<bool>>& gridBlockData = im_Grid->GetBlockData();
 
-	if(!gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x + 1]
-		|| !gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x - 1]
-		|| !gridBlockData[(int)entityLocalPos.y + 1][(int)entityLocalPos.x]
-		|| !gridBlockData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]
+	if(((int)entityLocalPos.x + 1 < im_GridCols && gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x + 1])
+		|| ((int)entityLocalPos.x - 1 >= 0 && gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x - 1])
+		|| ((int)entityLocalPos.y + 1 < im_GridRows && gridBlockData[(int)entityLocalPos.y + 1][(int)entityLocalPos.x])
+		|| ((int)entityLocalPos.y - 1 >= 0 && gridBlockData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x])
 	){
 		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcIdle));
 		return;
