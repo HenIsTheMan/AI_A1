@@ -105,8 +105,18 @@ void ChooseRandPairOfPerpendicularDirs(Vector3 (&commonDirs)[2]){
 	}
 }
 
-void MoveInDir(Entity* const entity, const double dt){
+void MoveInDir(Entity* const entity, const Grid<float>* const grid, const double dt){
 	const Vector3& entityLocalPos = entity->GetLocalPos();
 	const Vector3 entityDir = (entity->GetGridTargetLocalPos() - entityLocalPos).Normalized();
-	entity->SetLocalPos(entityLocalPos + entity->GetSpd() * entityDir * (float)dt);
+
+	const std::vector<std::vector<bool>>& gridBlockData = grid->GetBlockData();
+	const std::vector<std::vector<bool>>& gridEntityData = grid->GetEntityData();
+
+	if(!gridBlockData[int(entityLocalPos.y + entityDir.y)][int(entityLocalPos.x + entityDir.x)]
+		&& !gridEntityData[int(entityLocalPos.y + entityDir.y)][int(entityLocalPos.x + entityDir.x)]
+	){ //If grid cell is empty...
+		entity->SetLocalPos(entityLocalPos + entity->GetSpd() * entityDir * (float)dt);
+	} else{
+		entity->SetGridTargetLocalPos(entity->GetLocalPos());
+	}
 }

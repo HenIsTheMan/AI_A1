@@ -63,7 +63,7 @@ void StateReptileIdle::Update(Entity* const entity, const double dt){
 			}
 		} else{
 			entity->SetSpriteAniMiddleName("Move");
-			MoveInDir(entity, dt);
+			MoveInDir(entity, im_Grid, dt);
 		}
 	} else{
 		entity->SetTimeLeft(entity->GetTimeLeft() - (float)dt);

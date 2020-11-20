@@ -371,6 +371,10 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 }
 
 void Scene::SpawnEntity(const Obj::EntityType type, const ListenerFlags& teamFlag){
+	if(gridRows < 2 || gridCols < 2){
+		return;
+	}
+
 	const bool team = teamFlag == ListenerFlags::AlphaTeam;
 	const std::vector<std::vector<bool>>& gridBlockData = grid.GetBlockData();
 	const std::vector<std::vector<bool>>& gridEntityData = grid.GetEntityData();

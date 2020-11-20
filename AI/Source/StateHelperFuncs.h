@@ -13,4 +13,4 @@ void ChooseRandDir(Entity* const entity);
 bool ChooseBetween2Dirs(Entity* const entity, const Grid<float>* const grid, const int gridRows, const int gridCols, const Vector3 (&commonDirs)[2]);
 void ChooseRandPairOfPerpendicularDirs(Vector3 (&commonDirs)[2]);
 
-void MoveInDir(Entity* const entity, const double dt);
+void MoveInDir(Entity* const entity, const Grid<float>* const grid, const double dt);
