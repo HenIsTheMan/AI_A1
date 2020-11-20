@@ -1,4 +1,4 @@
-#include "EntityHelperFuncs.h"
+#include "StateHelperFuncs.h"
 
 void ChooseRandDir(Entity* const entity, const Grid<float>* const grid, const int gridRows, const int gridCols){
 	const Vector3& entityLocalPos = entity->GetLocalPos();

@@ -548,12 +548,12 @@ void Scene::UpdateEntities(const double dt){
 
 	std::vector<std::pair<bool, Entity*>>& entityPool = objPool->RetrievePool();
 	const size_t& entityPoolSize = entityPool.size();
-	bool shldContinue = false;
 
 	for(size_t i = 0; i < entityPoolSize; ++i){
 		if(entityPool[i].first){
 			Entity* const entity = entityPool[i].second;
 
+			bool shldContinue = false;
 			const Event* myEvent = nullptr;
 			EventID ID = EventID::Amt;
 			do{

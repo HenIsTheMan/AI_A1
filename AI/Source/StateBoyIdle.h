@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EntityHelperFuncs.h"
+#include "StateHelperFuncs.h"
 
 class StateBoyIdle final{ //Static class
 	StateBoyIdle() = delete;

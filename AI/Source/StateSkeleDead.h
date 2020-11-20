@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EntityHelperFuncs.h"
+#include "StateHelperFuncs.h"
 
 class StateSkeleDead final{ //Static class
 	StateSkeleDead() = delete;

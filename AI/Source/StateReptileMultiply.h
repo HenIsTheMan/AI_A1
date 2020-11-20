@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EntityHelperFuncs.h"
+#include "StateHelperFuncs.h"
 
 class StateReptileMultiply final{ //Static class
 	StateReptileMultiply() = delete;

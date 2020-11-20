@@ -40,9 +40,6 @@
     <ClCompile Include="Source\EventGridDataChanged.cpp">
       <Filter>Event\Events\Post-events</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EntityHelperFuncs.cpp">
-      <Filter>Obj</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Event.cpp">
       <Filter>Event</Filter>
     </ClCompile>
@@ -60,6 +57,9 @@
     </ClCompile>
     <ClCompile Include="Source\EventGridWidthShrinking.cpp">
       <Filter>Event\Events\Pre-events</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StateHelperFuncs.cpp">
+      <Filter>State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -180,9 +180,6 @@
     <ClInclude Include="Source\StateOrcImmune.h">
       <Filter>State\States\OrcStates</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EntityHelperFuncs.h">
-      <Filter>Obj</Filter>
-    </ClInclude>
     <ClInclude Include="Source\EventCalcInactiveObjs.h">
       <Filter>Event\Events</Filter>
     </ClInclude>
@@ -206,6 +203,9 @@
     </ClInclude>
     <ClInclude Include="Source\EntityTeam.hpp">
       <Filter>Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateHelperFuncs.h">
+      <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
