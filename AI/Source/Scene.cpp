@@ -371,51 +371,56 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 }
 
 void Scene::SpawnEntity(const Obj::EntityType type, const ListenerFlags& teamFlag){
+	const bool team = teamFlag == ListenerFlags::AlphaTeam;
+	const std::vector<std::vector<bool>>& gridBlockData = grid.GetBlockData();
+	const std::vector<std::vector<bool>>& gridEntityData = grid.GetEntityData();
+	const Vector3 localPos = team ? Vector3(
+		(float)Math::RandIntMinMax(alphaTeamLocalXStart, alphaTeamLocalXEnd),
+		(float)Math::RandIntMinMax(alphaTeamLocalYStart, alphaTeamLocalYEnd),
+		0.0f
+	) : Vector3((float)Math::RandIntMinMax(omegaTeamLocalXStart, omegaTeamLocalXEnd), (float)Math::RandIntMinMax(omegaTeamLocalYStart, omegaTeamLocalYEnd), 0.0f);
+
+	if(gridBlockData[(int)localPos.y][(int)localPos.x] || gridEntityData[(int)localPos.y][(int)localPos.x]){ //If grid cell is not empty...
+		return;
+	}
+
 	switch(type){
 		case Obj::EntityType::Skele: {
 			Entity* const skele = CreateSkele({
-				teamFlag == ListenerFlags::AlphaTeam ?
-				Vector3((float)Math::RandIntMinMax(alphaTeamLocalXStart, alphaTeamLocalXEnd), (float)Math::RandIntMinMax(alphaTeamLocalYStart, alphaTeamLocalYEnd), 0.0f)
-				: Vector3((float)Math::RandIntMinMax(omegaTeamLocalXStart, omegaTeamLocalXEnd), (float)Math::RandIntMinMax(omegaTeamLocalYStart, omegaTeamLocalYEnd), 0.0f)
+				localPos
 			});
 
-			skele->SetTeam(teamFlag == ListenerFlags::AlphaTeam ? EntityTeam::Alpha : EntityTeam::Omega);
+			skele->SetTeam(team ? EntityTeam::Alpha : EntityTeam::Omega);
 			publisher->AddListener((long int)ListenerFlags::Skele | (long int) teamFlag | (long int)ListenerFlags::Entity, skele);
 
 			break;
 		}
 		case Obj::EntityType::Reptile: {
 			Entity* const reptile = CreateReptile({
-				teamFlag == ListenerFlags::AlphaTeam ?
-				Vector3((float)Math::RandIntMinMax(alphaTeamLocalXStart, alphaTeamLocalXEnd), (float)Math::RandIntMinMax(alphaTeamLocalYStart, alphaTeamLocalYEnd), 0.0f)
-				: Vector3((float)Math::RandIntMinMax(omegaTeamLocalXStart, omegaTeamLocalXEnd), (float)Math::RandIntMinMax(omegaTeamLocalYStart, omegaTeamLocalYEnd), 0.0f)
+				localPos
 			});
 
-			reptile->SetTeam(teamFlag == ListenerFlags::AlphaTeam ? EntityTeam::Alpha : EntityTeam::Omega);
+			reptile->SetTeam(team ? EntityTeam::Alpha : EntityTeam::Omega);
 			publisher->AddListener((long int)ListenerFlags::Reptile | (long int) teamFlag | (long int)ListenerFlags::Entity, reptile);
 
 			break;
 		}
 		case Obj::EntityType::Boy: {
 			Entity* const boy = CreateBoy({
-				teamFlag == ListenerFlags::AlphaTeam ?
-				Vector3((float)Math::RandIntMinMax(alphaTeamLocalXStart, alphaTeamLocalXEnd), (float)Math::RandIntMinMax(alphaTeamLocalYStart, alphaTeamLocalYEnd), 0.0f)
-				: Vector3((float)Math::RandIntMinMax(omegaTeamLocalXStart, omegaTeamLocalXEnd), (float)Math::RandIntMinMax(omegaTeamLocalYStart, omegaTeamLocalYEnd), 0.0f)
+				localPos
 			});
 
-			boy->SetTeam(teamFlag == ListenerFlags::AlphaTeam ? EntityTeam::Alpha : EntityTeam::Omega);
+			boy->SetTeam(team ? EntityTeam::Alpha : EntityTeam::Omega);
 			publisher->AddListener((long int)ListenerFlags::Boy | (long int) teamFlag | (long int)ListenerFlags::Entity, boy);
 
 			break;
 		}
 		case Obj::EntityType::Orc: {
 			Entity* const orc = CreateOrc({
-				teamFlag == ListenerFlags::AlphaTeam ?
-				Vector3((float)Math::RandIntMinMax(alphaTeamLocalXStart, alphaTeamLocalXEnd), (float)Math::RandIntMinMax(alphaTeamLocalYStart, alphaTeamLocalYEnd), 0.0f)
-				: Vector3((float)Math::RandIntMinMax(omegaTeamLocalXStart, omegaTeamLocalXEnd), (float)Math::RandIntMinMax(omegaTeamLocalYStart, omegaTeamLocalYEnd), 0.0f)
+				localPos
 			});
 
-			orc->SetTeam(teamFlag == ListenerFlags::AlphaTeam ? EntityTeam::Alpha : EntityTeam::Omega);
+			orc->SetTeam(team ? EntityTeam::Alpha : EntityTeam::Omega);
 			publisher->AddListener((long int)ListenerFlags::Orc | (long int) teamFlag | (long int)ListenerFlags::Entity, orc);
 
 			break;
