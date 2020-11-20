@@ -198,18 +198,6 @@
     <ClInclude Include="Source\StateHelperFuncs.h">
       <Filter>State</Filter>
     </ClInclude>
-    <ClInclude Include="Source\StateBoyCannotMove.h">
-      <Filter>State\States\BoyStates</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StateOrcCannotMove.h">
-      <Filter>State\States\OrcStates</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StateReptileCannotMove.h">
-      <Filter>State\States\ReptileStates</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StateSkeleCannotMove.h">
-      <Filter>State\States\SkeleStates</Filter>
-    </ClInclude>
     <ClInclude Include="Source\EventBlockPlaced.h">
       <Filter>Event\Events\Post-events</Filter>
     </ClInclude>
@@ -230,6 +218,18 @@
     </ClInclude>
     <ClInclude Include="Source\StateSkelePatrol.h">
       <Filter>State\States\SkeleStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateSkeleIdle.h">
+      <Filter>State\States\SkeleStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateReptileIdle.h">
+      <Filter>State\States\ReptileStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateOrcIdle.h">
+      <Filter>State\States\OrcStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateBoyIdle.h">
+      <Filter>State\States\BoyStates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -346,18 +346,6 @@
     <None Include="Source\Entity.inl">
       <Filter>Obj</Filter>
     </None>
-    <None Include="Source\StateBoyCannotMove.inl">
-      <Filter>State\States\BoyStates</Filter>
-    </None>
-    <None Include="Source\StateOrcCannotMove.inl">
-      <Filter>State\States\OrcStates</Filter>
-    </None>
-    <None Include="Source\StateReptileCannotMove.inl">
-      <Filter>State\States\ReptileStates</Filter>
-    </None>
-    <None Include="Source\StateSkeleCannotMove.inl">
-      <Filter>State\States\SkeleStates</Filter>
-    </None>
     <None Include="Source\StateBoyPatrol.inl">
       <Filter>State\States\BoyStates</Filter>
     </None>
@@ -369,6 +357,18 @@
     </None>
     <None Include="Source\StateSkelePatrol.inl">
       <Filter>State\States\SkeleStates</Filter>
+    </None>
+    <None Include="Source\StateSkeleIdle.inl">
+      <Filter>State\States\SkeleStates</Filter>
+    </None>
+    <None Include="Source\StateReptileIdle.inl">
+      <Filter>State\States\ReptileStates</Filter>
+    </None>
+    <None Include="Source\StateOrcIdle.inl">
+      <Filter>State\States\OrcStates</Filter>
+    </None>
+    <None Include="Source\StateBoyIdle.inl">
+      <Filter>State\States\BoyStates</Filter>
     </None>
   </ItemGroup>
 </Project>

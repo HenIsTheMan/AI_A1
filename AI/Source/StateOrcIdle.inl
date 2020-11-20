@@ -1,11 +1,11 @@
-float StateSkeleCannotMove::im_ElapsedTime = 0.0f;
-Grid<float>* StateSkeleCannotMove::im_Grid = nullptr;
+float StateOrcIdle::im_ElapsedTime = 0.0f;
+Grid<float>* StateOrcIdle::im_Grid = nullptr;
 
-void StateSkeleCannotMove::Enter(Entity* const entity){
+void StateOrcIdle::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Static");
 }
 
-void StateSkeleCannotMove::Update(Entity* const entity, const double dt){
+void StateOrcIdle::Update(Entity* const entity, const double dt){
 	//* Check for state transition
 	const Vector3& entityLocalPos = entity->GetLocalPos();
 	const std::vector<std::vector<bool>>& gridBlockData = im_Grid->GetBlockData();
@@ -26,7 +26,7 @@ void StateSkeleCannotMove::Update(Entity* const entity, const double dt){
 		&& !gridBlockData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]
 		&& !gridEntityData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x])
 	){
-		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateSkelePatrol));
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcPatrol));
 		return;
 	}
 	//*/
@@ -38,6 +38,6 @@ void StateSkeleCannotMove::Update(Entity* const entity, const double dt){
 	}
 }
 
-void StateSkeleCannotMove::Exit(Entity* const entity){
+void StateOrcIdle::Exit(Entity* const entity){
 	entity->SetGridTargetLocalPos(entity->GetLocalPos());
 }

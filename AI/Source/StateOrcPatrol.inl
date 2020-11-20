@@ -32,7 +32,7 @@ void StateOrcPatrol::Update(Entity* const entity, const double dt){
 		&& gridEntityData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]))
 	){
 		std::cout << "Wow 3!\n";
-		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcCannotMove));
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcIdle));
 		return;
 	}
 	//*/

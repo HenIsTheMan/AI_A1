@@ -32,7 +32,7 @@ void StateBoyPatrol::Update(Entity* const entity, const double dt){
 		&& gridEntityData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]))
 	){
 		std::cout << "Wow 4!\n";
-		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyCannotMove));
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyIdle));
 		return;
 	}
 	//*/

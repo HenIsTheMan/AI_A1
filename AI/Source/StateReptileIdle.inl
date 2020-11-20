@@ -1,11 +1,11 @@
-float StateBoyCannotMove::im_ElapsedTime = 0.0f;
-Grid<float>* StateBoyCannotMove::im_Grid = nullptr;
+float StateReptileIdle::im_ElapsedTime = 0.0f;
+Grid<float>* StateReptileIdle::im_Grid = nullptr;
 
-void StateBoyCannotMove::Enter(Entity* const entity){
+void StateReptileIdle::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Static");
 }
 
-void StateBoyCannotMove::Update(Entity* const entity, const double dt){
+void StateReptileIdle::Update(Entity* const entity, const double dt){
 	//* Check for state transition
 	const Vector3& entityLocalPos = entity->GetLocalPos();
 	const std::vector<std::vector<bool>>& gridBlockData = im_Grid->GetBlockData();
@@ -26,7 +26,7 @@ void StateBoyCannotMove::Update(Entity* const entity, const double dt){
 		&& !gridBlockData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]
 		&& !gridEntityData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x])
 	){
-		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyPatrol));
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateReptilePatrol));
 		return;
 	}
 	//*/
@@ -38,6 +38,6 @@ void StateBoyCannotMove::Update(Entity* const entity, const double dt){
 	}
 }
 
-void StateBoyCannotMove::Exit(Entity* const entity){
+void StateReptileIdle::Exit(Entity* const entity){
 	entity->SetGridTargetLocalPos(entity->GetLocalPos());
 }
