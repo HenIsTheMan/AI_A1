@@ -1,9 +1,11 @@
 #include "StateHelperFuncs.h"
 
-bool ChooseADir(Entity* const entity, const Grid<float>* const grid, const int gridRows, const int gridCols){
+bool ChooseADir(Entity* const entity, const Grid<float>* const grid){
 	const Vector3& entityLocalPos = entity->GetLocalPos();
 	const std::vector<std::vector<bool>>& gridBlockData = grid->GetBlockData();
 	const std::vector<std::vector<bool>>& gridEntityData = grid->GetEntityData();
+	const int gridRows = grid->GetRows();
+	const int gridCols = grid->GetCols();
 	std::vector<Vector3> possibleLocations;
 
 	if((int)entityLocalPos.x + 1 < gridCols
@@ -39,10 +41,12 @@ bool ChooseADir(Entity* const entity, const Grid<float>* const grid, const int g
 	return true;
 }
 
-bool ChooseBetween2Dirs(Entity* const entity, const Grid<float>* const grid, const int gridRows, const int gridCols, const Vector3(&commonDirs)[2]){
+bool ChooseBetween2Dirs(Entity* const entity, const Grid<float>* const grid, const Vector3(&commonDirs)[2]){
 	const Vector3& entityLocalPos = entity->GetLocalPos();
 	const std::vector<std::vector<bool>>& gridBlockData = grid->GetBlockData();
 	const std::vector<std::vector<bool>>& gridEntityData = grid->GetEntityData();
+	const int gridRows = grid->GetRows();
+	const int gridCols = grid->GetCols();
 	const Vector3* possibleDir = nullptr;
 
 	for(int index = 0; index < 2; ++index){

@@ -1,7 +1,5 @@
 float StateReptileIdle::im_ElapsedTime = 0.0f;
 Grid<float>* StateReptileIdle::im_Grid = nullptr;
-int StateReptileIdle::im_GridRows = 0;
-int StateReptileIdle::im_GridCols = 0;
 Vector3 StateReptileIdle::im_CommonDirs[2]{Vector3(), Vector3()};
 
 void StateReptileIdle::Enter(Entity* const entity){
@@ -18,14 +16,16 @@ void StateReptileIdle::Update(Entity* const entity, const double dt){
 	const Vector3& entityLocalPos = entity->GetLocalPos();
 	const std::vector<std::vector<bool>>& gridBlockData = im_Grid->GetBlockData();
 	const std::vector<std::vector<bool>>& gridEntityData = im_Grid->GetEntityData();
+	const int gridRows = im_Grid->GetRows();
+	const int gridCols = im_Grid->GetCols();
 
-	if(((int)entityLocalPos.x + 1 >= im_GridCols || ((int)entityLocalPos.x + 1 < im_GridCols
+	if(((int)entityLocalPos.x + 1 >= gridCols || ((int)entityLocalPos.x + 1 < gridCols
 		&& gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x + 1]
 		&& gridEntityData[(int)entityLocalPos.y][(int)entityLocalPos.x + 1]))
 		&& ((int)entityLocalPos.x - 1 < 0 || ((int)entityLocalPos.x - 1 >= 0
 		&& gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x - 1]
 		&& gridEntityData[(int)entityLocalPos.y][(int)entityLocalPos.x - 1]))
-		&& ((int)entityLocalPos.y + 1 >= im_GridRows || ((int)entityLocalPos.y + 1 < im_GridRows
+		&& ((int)entityLocalPos.y + 1 >= gridRows || ((int)entityLocalPos.y + 1 < gridRows
 		&& gridBlockData[(int)entityLocalPos.y + 1][(int)entityLocalPos.x]
 		&& gridEntityData[(int)entityLocalPos.y + 1][(int)entityLocalPos.x]))
 		&& ((int)entityLocalPos.y - 1 < 0 || ((int)entityLocalPos.y - 1 >= 0
@@ -59,7 +59,7 @@ void StateReptileIdle::Update(Entity* const entity, const double dt){
 				goStopBT = im_ElapsedTime + 0.5f;
 			} else{
 				entity->SetSpriteAniMiddleName("Move");
-				ChooseBetween2Dirs(entity, im_Grid, im_GridRows, im_GridCols, im_CommonDirs);
+				ChooseBetween2Dirs(entity, im_Grid, im_CommonDirs);
 			}
 		} else{
 			entity->SetSpriteAniMiddleName("Move");
@@ -69,7 +69,7 @@ void StateReptileIdle::Update(Entity* const entity, const double dt){
 		entity->SetTimeLeft(entity->GetTimeLeft() - (float)dt);
 
 		if(chooseDirBT <= im_ElapsedTime){
-			ChooseBetween2Dirs(entity, im_Grid, im_GridRows, im_GridCols, im_CommonDirs);
+			ChooseBetween2Dirs(entity, im_Grid, im_CommonDirs);
 			chooseDirBT = im_ElapsedTime + Math::RandFloatMinMax(1.2f, 2.5f);
 		}
 	}

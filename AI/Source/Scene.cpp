@@ -599,14 +599,10 @@ void Scene::UpdateSkeleStates(){
 	StateSkeleCannotMove* const stateSkeleCannotMove = ((StateSkeleCannotMove*)skeleSM->GetState(StateID::StateSkeleCannotMove));
 	stateSkeleCannotMove->im_ElapsedTime = elapsedTime;
 	stateSkeleCannotMove->im_Grid = &grid;
-	stateSkeleCannotMove->im_GridRows = gridRows;
-	stateSkeleCannotMove->im_GridCols = gridCols;
 
 	StateSkeleIdle* const stateSkeleIdle = ((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle));
 	stateSkeleIdle->im_ElapsedTime = elapsedTime;
 	stateSkeleIdle->im_Grid = &grid;
-	stateSkeleIdle->im_GridRows = gridRows;
-	stateSkeleIdle->im_GridCols = gridCols;
 
 	StateSkeleDead* const stateSkeleDead = ((StateSkeleDead*)skeleSM->GetState(StateID::StateSkeleDead));
 	stateSkeleDead->im_ObjPool = objPool;
@@ -616,14 +612,10 @@ void Scene::UpdateReptileStates(){
 	StateReptileCannotMove* const stateReptileCannotMove = ((StateReptileCannotMove*)reptileSM->GetState(StateID::StateReptileCannotMove));
 	stateReptileCannotMove->im_ElapsedTime = elapsedTime;
 	stateReptileCannotMove->im_Grid = &grid;
-	stateReptileCannotMove->im_GridRows = gridRows;
-	stateReptileCannotMove->im_GridCols = gridCols;
 
 	StateReptileIdle* const stateReptileIdle = ((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle));
 	stateReptileIdle->im_ElapsedTime = elapsedTime;
 	stateReptileIdle->im_Grid = &grid;
-	stateReptileIdle->im_GridRows = gridRows;
-	stateReptileIdle->im_GridCols = gridCols;
 
 	static float updateCommonDirBT = 0.0f;
 	if(updateCommonDirBT <= elapsedTime){
@@ -639,14 +631,10 @@ void Scene::UpdateBoyStates(){
 	StateBoyCannotMove* const stateBoyCannotMove = ((StateBoyCannotMove*)boySM->GetState(StateID::StateBoyCannotMove));
 	stateBoyCannotMove->im_ElapsedTime = elapsedTime;
 	stateBoyCannotMove->im_Grid = &grid;
-	stateBoyCannotMove->im_GridRows = gridRows;
-	stateBoyCannotMove->im_GridCols = gridCols;
 
 	StateBoyIdle* const stateBoyIdle = ((StateBoyIdle*)boySM->GetState(StateID::StateBoyIdle));
 	stateBoyIdle->im_ElapsedTime = elapsedTime;
 	stateBoyIdle->im_Grid = &grid;
-	stateBoyIdle->im_GridRows = gridRows;
-	stateBoyIdle->im_GridCols = gridCols;
 
 	StateBoyDead* const stateBoyDead = ((StateBoyDead*)boySM->GetState(StateID::StateBoyDead));
 	stateBoyDead->im_ObjPool = objPool;
@@ -656,14 +644,10 @@ void Scene::UpdateOrcStates(){
 	StateOrcCannotMove* const stateOrcCannotMove = ((StateOrcCannotMove*)orcSM->GetState(StateID::StateOrcCannotMove));
 	stateOrcCannotMove->im_ElapsedTime = elapsedTime;
 	stateOrcCannotMove->im_Grid = &grid;
-	stateOrcCannotMove->im_GridRows = gridRows;
-	stateOrcCannotMove->im_GridCols = gridCols;
 
 	StateOrcIdle* const stateOrcIdle = ((StateOrcIdle*)orcSM->GetState(StateID::StateOrcIdle));
 	stateOrcIdle->im_ElapsedTime = elapsedTime;
 	stateOrcIdle->im_Grid = &grid;
-	stateOrcIdle->im_GridRows = gridRows;
-	stateOrcIdle->im_GridCols = gridCols;
 
 	StateOrcDead* const stateOrcDead = ((StateOrcDead*)orcSM->GetState(StateID::StateOrcDead));
 	stateOrcDead->im_ObjPool = objPool;

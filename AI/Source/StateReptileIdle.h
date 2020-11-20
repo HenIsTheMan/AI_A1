@@ -12,8 +12,6 @@ class StateReptileIdle final{ //Static class
 public:
 	static float im_ElapsedTime;
 	static Grid<float>* im_Grid;
-	static int im_GridRows;
-	static int im_GridCols;
 	static Vector3 im_CommonDirs[2];
 
 	static void Enter(Entity* const entity);
