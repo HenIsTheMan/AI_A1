@@ -165,7 +165,7 @@ void Scene::Update(double dt){
 
 	UpdateGridAttribs();
 	if(simStarted){
-		UpdateGridData();
+		UpdateGridBlockData();
 		UpdateStates();
 		UpdateEntities(dt * gameSpd);
 	}
@@ -184,7 +184,7 @@ void Scene::Render(){
 	if(simStarted){
 		RenderGrid();
 		RenderRegions();
-		RenderGridData();
+		RenderGridBlockData();
 		RenderTranslucentBlock();
 		RenderEntities();
 	} else{
@@ -399,7 +399,7 @@ void Scene::UpdateGridAttribs(){
 	grid.SetCols(gridCols);
 }
 
-void Scene::UpdateGridData(){
+void Scene::UpdateGridBlockData(){
 	static bool isLMB = false;
 	if(!isLMB && App::IsMousePressed(0)){
 		isLMB = true;
@@ -450,10 +450,10 @@ void Scene::UpdateGridData(){
 	if(trueMouseX > xOffset + gridLineThickness * 0.5f && trueMouseX < xOffset + gridWidth - gridLineThickness * 0.5f
 		&& trueMouseY > yOffset + gridLineThickness * 0.5f && trueMouseY < yOffset + gridHeight - gridLineThickness * 0.5f){
 		if(isLMB){
-			grid.SetData(true, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
+			grid.SetBlockData(true, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
 			publisher->Notify((long int)ListenerFlags::Entity, new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
 		} else if(isRMB){
-			grid.SetData(false, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
+			grid.SetBlockData(false, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
 			publisher->Notify((long int)ListenerFlags::Entity, new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
 		}
 	}
@@ -638,18 +638,18 @@ void Scene::RenderMystery(){
 	modelStack.PopMatrix();
 }
 
-void Scene::RenderGridData(){
+void Scene::RenderGridBlockData(){
 	const float gridWidth = grid.CalcWidth();
 	const float gridHeight = grid.CalcHeight();
 
 	const float xOffset = ((float)winWidth - gridWidth) * 0.5f + gridLineThickness + gridCellWidth * 0.5f;
 	const float yOffset = ((float)winHeight - gridHeight) * 0.5f + gridLineThickness + gridCellHeight * 0.5f;
 
-	const std::vector<std::vector<bool>>& gridData = grid.GetData();
+	const std::vector<std::vector<bool>>& gridBlockData = grid.GetBlockData();
 
 	for(int i = 0; i < gridRows; ++i){
 		for(int j = 0; j < gridCols; ++j){
-			if(gridData[i][j]){
+			if(gridBlockData[i][j]){
 				modelStack.PushMatrix();
 				modelStack.Translate(
 					xOffset + (gridLineThickness + gridCellWidth) * (float)j,

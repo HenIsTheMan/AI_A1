@@ -8,19 +8,19 @@ Grid<T>::Grid():
 		0
 	)
 {
-	UpdateData();
+	UpdateBlockData();
 }
 
 template <class T>
 Grid<T>::Grid(T cellWidth, T cellHeight, T lineThickness, int rows, int cols):
-	im_Data(),
+	im_BlockData(),
 	im_CellWidth(cellWidth),
 	im_CellHeight(cellHeight),
 	im_LineThickness(lineThickness),
 	im_Rows(rows),
 	im_Cols(cols)
 {
-	UpdateData();
+	UpdateBlockData();
 }
 
 template <class T>
@@ -44,8 +44,8 @@ T Grid<T>::CalcHeight() const{
 }
 
 template <class T>
-const std::vector<std::vector<bool>>& Grid<T>::GetData() const{
-	return im_Data;
+const std::vector<std::vector<bool>>& Grid<T>::GetBlockData() const{
+	return im_BlockData;
 }
 
 template <class T>
@@ -74,8 +74,8 @@ int Grid<T>::GetCols() const{
 }
 
 template <class T>
-void Grid<T>::SetData(const bool data, const ptrdiff_t& row, const ptrdiff_t& col){
-	im_Data[row][col] = data;
+void Grid<T>::SetBlockData(const bool blockData, const ptrdiff_t& row, const ptrdiff_t& col){
+	im_BlockData[row][col] = blockData;
 }
 
 template <class T>
@@ -96,35 +96,35 @@ void Grid<T>::SetLineThickness(T lineThickness){
 template <class T>
 void Grid<T>::SetRows(int rows){
 	im_Rows = rows;
-	UpdateData();
+	UpdateBlockData();
 }
 
 template <class T>
 void Grid<T>::SetCols(int cols){
 	im_Cols = cols;
-	UpdateData();
+	UpdateBlockData();
 }
 
 template <class T>
-void Grid<T>::UpdateData(){
-	std::vector<std::vector<bool>> oldData = im_Data; //Make copy of data
-	im_Data = std::vector<std::vector<bool>>(im_Rows);
+void Grid<T>::UpdateBlockData(){
+	std::vector<std::vector<bool>> oldBlockData = im_BlockData; //Make copy of data
+	im_BlockData = std::vector<std::vector<bool>>(im_Rows);
 
 	///Create vars
 	int i, j;
-	const size_t oldDataSize = oldData.size();
+	const size_t oldBlockDataSize = oldBlockData.size();
 
 	for(i = 0; i < im_Rows; ++i){
-		im_Data[i] = std::vector<bool>(im_Cols);
+		im_BlockData[i] = std::vector<bool>(im_Cols);
 		for(j = 0; j < im_Cols; ++j){
-			im_Data[i][j] = false; //All data becomes false
+			im_BlockData[i][j] = false; //All data becomes false
 		}
 	}
 
-	for(i = 0; i < (im_Rows < (int)oldDataSize ? im_Rows : (int)oldDataSize); ++i){
-		const size_t oldAmtOfCols = oldData[i].size();
+	for(i = 0; i < (im_Rows < (int)oldBlockDataSize ? im_Rows : (int)oldBlockDataSize); ++i){
+		const size_t oldAmtOfCols = oldBlockData[i].size();
 		for(j = 0; j < (im_Cols < (int)oldAmtOfCols ? im_Cols : (int)oldAmtOfCols); ++j){
-			im_Data[i][j] = oldData[i][j];
+			im_BlockData[i][j] = oldBlockData[i][j];
 		}
 	}
 }

@@ -77,7 +77,7 @@ private:
 	Entity* CreateOrc(const CreateEntityParams& params) const; //High dmg, high health, low range, low spd
 
 	void UpdateGridAttribs();
-	void UpdateGridData();
+	void UpdateGridBlockData();
 	void UpdateStates();
 	void UpdateSkeleStates();
 	void UpdateReptileStates();
@@ -87,7 +87,7 @@ private:
 
 	void RenderGrid();
 	void RenderMystery();
-	void RenderGridData();
+	void RenderGridBlockData();
 	void RenderEntities();
 	void RenderEntitiesPart2(const Entity* const entity);
 	void RenderRegions();

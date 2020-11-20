@@ -37,12 +37,6 @@
     <ClCompile Include="Source\Listener.cpp">
       <Filter>Event</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EventAttacked.cpp">
-      <Filter>Event\Events\Post-events</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EventApproaching.cpp">
-      <Filter>Event\Events\Pre-events</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EventGridDataChanged.cpp">
       <Filter>Event\Events\Post-events</Filter>
     </ClCompile>
@@ -51,9 +45,6 @@
     </ClCompile>
     <ClCompile Include="Source\EventSimStarted.cpp">
       <Filter>Event\Events\Post-events</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EventLeaving.cpp">
-      <Filter>Event\Events\Pre-events</Filter>
     </ClCompile>
     <ClCompile Include="Source\EntityHelperFuncs.cpp">
       <Filter>Obj</Filter>
@@ -144,12 +135,6 @@
     <ClInclude Include="Source\Listener.h">
       <Filter>Event</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EventAttacked.h">
-      <Filter>Event\Events\Post-events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EventApproaching.h">
-      <Filter>Event\Events\Pre-events</Filter>
-    </ClInclude>
     <ClInclude Include="Source\EventGridDataChanged.h">
       <Filter>Event\Events\Post-events</Filter>
     </ClInclude>
@@ -158,9 +143,6 @@
     </ClInclude>
     <ClInclude Include="Source\EventSimStarted.h">
       <Filter>Event\Events\Post-events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EventLeaving.h">
-      <Filter>Event\Events\Pre-events</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateSkeleAttack.h">
       <Filter>State\States\SkeleStates</Filter>
