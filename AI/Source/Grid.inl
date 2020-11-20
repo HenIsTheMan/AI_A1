@@ -54,6 +54,11 @@ const std::vector<std::vector<bool>>& Grid<T>::GetBlockData() const{
 }
 
 template <class T>
+const std::vector<std::vector<bool>>& Grid<T>::GetEntityData() const{
+	return im_EntityData;
+}
+
+template <class T>
 T Grid<T>::GetCellWidth() const{
 	return im_CellWidth;
 }
@@ -81,6 +86,11 @@ int Grid<T>::GetCols() const{
 template <class T>
 void Grid<T>::SetBlockData(const bool blockData, const ptrdiff_t& row, const ptrdiff_t& col){
 	im_BlockData[row][col] = blockData;
+}
+
+template <class T>
+void Grid<T>::SetEntityData(const bool entityData, const ptrdiff_t& row, const ptrdiff_t& col){
+	im_EntityData[row][col] = entityData;
 }
 
 template <class T>

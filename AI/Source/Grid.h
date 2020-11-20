@@ -16,6 +16,7 @@ public:
 
 	///Getters
 	const std::vector<std::vector<bool>>& GetBlockData() const;
+	const std::vector<std::vector<bool>>& GetEntityData() const;
 	T GetCellWidth() const;
 	T GetCellHeight() const;
 	T GetLineThickness() const;
@@ -24,6 +25,7 @@ public:
 
 	///Setters
 	void SetBlockData(const bool blockData, const ptrdiff_t& row, const ptrdiff_t& col);
+	void SetEntityData(const bool entityData, const ptrdiff_t& row, const ptrdiff_t& col);
 	void SetCellWidth(T cellWidth);
 	void SetCellHeight(T cellHeight);
 	void SetLineThickness(T lineThickness);
