@@ -66,6 +66,8 @@ private:
 	int omegaTeamLocalYEnd;
 	int alphaTeamEntityCount;
 	int omegaTeamEntityCount;
+	int alphaTeamSpawnLimit;
+	int omegaTeamSpawnLimit;
 	ObjPool<Entity>* objPool;
 	Publisher* publisher;
 
@@ -112,4 +114,5 @@ private:
 	void RenderDebugInfoText(Mesh* const textMesh, const Color& textColor, const float textSize);
 	void RenderControlsText(Mesh* const textMesh, const Color& textColor, const float textSize);
 	void RenderGridAttribsText(Mesh* const textMesh, const Color& textColor, const float textSize);
+	void RenderGameInfoText(Mesh* const textMesh, const Color& textColor, const float textSize);
 };

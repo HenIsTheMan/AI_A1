@@ -73,6 +73,8 @@ Scene::Scene():
 	omegaTeamLocalYEnd(0),
 	alphaTeamEntityCount(0),
 	omegaTeamEntityCount(0),
+	alphaTeamSpawnLimit(50),
+	omegaTeamSpawnLimit(50),
 	objPool(new ObjPool<Entity>()),
 	publisher(Publisher::RetrieveGlobalObjPtr()),
 	skeleSM(new SM()),
@@ -195,6 +197,37 @@ void Scene::Update(double dt){
 		} else if(isKeyDownV && !App::Key('V')){
 			isKeyDownV = false;
 		}
+
+		static bool isKeyDownU = false;
+		if(!isKeyDownU && App::Key('U')){
+			++alphaTeamSpawnLimit;
+			isKeyDownU = true;
+		} else if(isKeyDownU && !App::Key('U')){
+			isKeyDownU = false;
+		}
+		static bool isKeyDownI = false;
+		if(!isKeyDownI && App::Key('I')){
+			--alphaTeamSpawnLimit;
+			isKeyDownI = true;
+		} else if(isKeyDownI && !App::Key('I')){
+			isKeyDownI = false;
+		}
+		static bool isKeyDownO = false;
+		if(!isKeyDownO && App::Key('O')){
+			++omegaTeamSpawnLimit;
+			isKeyDownO = true;
+		} else if(isKeyDownO && !App::Key('O')){
+			isKeyDownO = false;
+		}
+		static bool isKeyDownP = false;
+		if(!isKeyDownP && App::Key('P')){
+			--omegaTeamSpawnLimit;
+			isKeyDownP = true;
+		} else if(isKeyDownP && !App::Key('P')){
+			isKeyDownP = false;
+		}
+		alphaTeamSpawnLimit = Math::Max(0, alphaTeamSpawnLimit);
+		omegaTeamSpawnLimit = Math::Max(0, omegaTeamSpawnLimit);
 
 		UpdateGridAttribs();
 		UpdateGridBlockData();
@@ -698,14 +731,14 @@ void Scene::UpdateEntities(const double dt){
 	//alphaTeamEntityCount = 0;
 	//omegaTeamEntityCount = 0;
 
-	if(alphaTeamEntityCount < 50 && alphaTeamSpawnBT <= elapsedTime){
+	if(alphaTeamEntityCount < alphaTeamSpawnLimit && alphaTeamSpawnBT <= elapsedTime){
 		SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::AlphaTeam);
-		alphaTeamSpawnBT = elapsedTime + (!isDay ? Math::RandFloatMinMax(4.0f, 5.0f) : Math::RandFloatMinMax(2.0f, 3.0f));
+		alphaTeamSpawnBT = elapsedTime + (!isDay ? Math::RandFloatMinMax(2.0f, 3.0f) : Math::RandFloatMinMax(0.7f, 1.5f));
 		++alphaTeamEntityCount;
 	}
-	if(omegaTeamEntityCount < 50 && omegaTeamSpawnBT <= elapsedTime){
+	if(omegaTeamEntityCount < omegaTeamSpawnLimit && omegaTeamSpawnBT <= elapsedTime){
 		SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::OmegaTeam);
-		omegaTeamSpawnBT = elapsedTime + (isDay ? Math::RandFloatMinMax(4.0f, 5.0f) : Math::RandFloatMinMax(2.0f, 3.0f));
+		omegaTeamSpawnBT = elapsedTime + (isDay ? Math::RandFloatMinMax(2.0f, 3.0f) : Math::RandFloatMinMax(0.7f, 1.5f));
 		++omegaTeamEntityCount;
 	}
 
@@ -1334,28 +1367,10 @@ void Scene::RenderSceneText(){
 		);
 	}
 
-	RenderDebugInfoText(textMesh, Color(1.0f, 0.5f, 0.0f), textSize);
+	RenderDebugInfoText(textMesh, Color(0.0f, 1.0f, 0.0f), textSize);
 	RenderControlsText(textMesh, Color(1.0f, 0.0f, 1.0f), textSize);
 	RenderGridAttribsText(textMesh, Color(1.0f, 1.0f, 0.0f), textSize);
-
-	RenderTextOnScreen(
-		textMesh,
-		"Spawning start time: " + std::to_string(spawningStartTime).substr(0, std::to_string((int)spawningStartTime).length() + 3),
-		Color(0.0f, 1.0f, 0.0f),
-		textSize,
-		(float)windowWidth,
-		textSize * 19.0f,
-		TextAlignment::Right
-	);
-	RenderTextOnScreen(
-		textMesh,
-		"Spawning end time: " + std::to_string(spawningEndTime).substr(0, std::to_string((int)spawningEndTime).length() + 3),
-		Color(1.0f, 0.0f, 0.0f),
-		textSize,
-		(float)windowWidth,
-		textSize * 18.0f,
-		TextAlignment::Right
-	);
+	RenderGameInfoText(textMesh, Color(1.0f, 0.5f, 0.0f), textSize);
 }
 
 void Scene::RenderDebugInfoText(Mesh* const textMesh, const Color& textColor, const float textSize){
@@ -1374,46 +1389,6 @@ void Scene::RenderDebugInfoText(Mesh* const textMesh, const Color& textColor, co
 		textSize,
 		0.0f,
 		textSize * 1.0f
-	);
-	RenderTextOnScreen(
-		textMesh,
-		"Game Spd: " + std::to_string(gameSpd).substr(0, std::to_string((int)gameSpd).length() + 2),
-		textColor,
-		textSize,
-		0.0f,
-		textSize * 2.0f
-	);
-	RenderTextOnScreen(
-		textMesh,
-		"Inactive objs: " + std::to_string(publisher->Notify((long int)ListenerFlags::ObjPool, new EventCalcInactiveObjs(), false)),
-		textColor,
-		textSize,
-		0.0f,
-		textSize * 3.0f
-	);
-	RenderTextOnScreen(
-		textMesh,
-		"Active objs: " + std::to_string(publisher->Notify((long int)ListenerFlags::ObjPool, new EventCalcActiveObjs(), false)),
-		textColor,
-		textSize,
-		0.0f,
-		textSize * 4.0f
-	);
-	RenderTextOnScreen(
-		textMesh,
-		"Alpha count: " + std::to_string(alphaTeamEntityCount),
-		textColor,
-		textSize,
-		0.0f,
-		textSize * 5.0f
-	);
-	RenderTextOnScreen(
-		textMesh,
-		"Omega count: " + std::to_string(omegaTeamEntityCount),
-		textColor,
-		textSize,
-		0.0f,
-		textSize * 6.0f
 	);
 }
 
@@ -1506,6 +1481,38 @@ void Scene::RenderControlsText(Mesh* const textMesh, const Color& textColor, con
 		0.0f,
 		textSize * 9.0f
 	);
+	RenderTextOnScreen(
+		textMesh,
+		"U: Raise alpha spawn limit",
+		textColor,
+		textSize,
+		0.0f,
+		textSize * 8.0f
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"I: Lower alpha spawn limit",
+		textColor,
+		textSize,
+		0.0f,
+		textSize * 7.0f
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"O: Raise omega spawn limit",
+		textColor,
+		textSize,
+		0.0f,
+		textSize * 6.0f
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"P: Lower omega spawn limit",
+		textColor,
+		textSize,
+		0.0f,
+		textSize * 5.0f
+	);
 }
 
 void Scene::RenderGridAttribsText(Mesh* const textMesh, const Color& textColor, const float textSize){
@@ -1552,6 +1559,90 @@ void Scene::RenderGridAttribsText(Mesh* const textMesh, const Color& textColor, 
 		textSize,
 		(float)windowWidth,
 		textSize * 4.0f,
+		TextAlignment::Right
+	);
+}
+
+void Scene::RenderGameInfoText(Mesh* const textMesh, const Color& textColor, const float textSize){
+	RenderTextOnScreen(
+		textMesh,
+		"Spawning start time: " + std::to_string(spawningStartTime).substr(0, std::to_string((int)spawningStartTime).length() + 3),
+		textColor,
+		textSize,
+		(float)windowWidth,
+		textSize * 19.0f,
+		TextAlignment::Right
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Spawning end time: " + std::to_string(spawningEndTime).substr(0, std::to_string((int)spawningEndTime).length() + 3),
+		textColor,
+		textSize,
+		(float)windowWidth,
+		textSize * 18.0f,
+		TextAlignment::Right
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Game Spd: " + std::to_string(gameSpd).substr(0, std::to_string((int)gameSpd).length() + 2),
+		textColor,
+		textSize,
+		(float)windowWidth,
+		textSize * 17.0f,
+		TextAlignment::Right
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Active objs: " + std::to_string(publisher->Notify((long int)ListenerFlags::ObjPool, new EventCalcActiveObjs(), false)),
+		textColor,
+		textSize,
+		(float)windowWidth,
+		textSize * 16.0f,
+		TextAlignment::Right
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Inactive objs: " + std::to_string(publisher->Notify((long int)ListenerFlags::ObjPool, new EventCalcInactiveObjs(), false)),
+		textColor,
+		textSize,
+		(float)windowWidth,
+		textSize * 15.0f,
+		TextAlignment::Right
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Alpha count: " + std::to_string(alphaTeamEntityCount),
+		textColor,
+		textSize,
+		(float)windowWidth,
+		textSize * 14.0f,
+		TextAlignment::Right
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Omega count: " + std::to_string(omegaTeamEntityCount),
+		textColor,
+		textSize,
+		(float)windowWidth,
+		textSize * 13.0f,
+		TextAlignment::Right
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Alpha spawn limit: " + std::to_string(alphaTeamSpawnLimit),
+		textColor,
+		textSize,
+		(float)windowWidth,
+		textSize * 12.0f,
+		TextAlignment::Right
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Omega spawn limit: " + std::to_string(omegaTeamSpawnLimit),
+		textColor,
+		textSize,
+		(float)windowWidth,
+		textSize * 11.0f,
 		TextAlignment::Right
 	);
 }
