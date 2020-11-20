@@ -54,6 +54,7 @@ private:
 	float gameSpd;
 	float spawningStartTime;
 	float spawningEndTime;
+	int teamRegionsCase;
 	ObjPool<Entity>* objPool;
 	Publisher* publisher;
 
@@ -62,9 +63,6 @@ private:
 	SM* reptileSM;
 	SM* boySM;
 	SM* orcSM;
-
-	int alphaTeamRegionCase;
-	int omegaTeamRegionCase;
 
 	struct CreateEntityParams final{
 		CreateEntityParams() = default;

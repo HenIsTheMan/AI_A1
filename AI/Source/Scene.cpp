@@ -62,14 +62,13 @@ Scene::Scene():
 	gameSpd(1.0f),
 	spawningStartTime(0.0f),
 	spawningEndTime(300.0f),
+	teamRegionsCase(0),
 	objPool(new ObjPool<Entity>()),
 	publisher(Publisher::RetrieveGlobalObjPtr()),
 	skeleSM(new SM()),
 	reptileSM(new SM()),
 	boySM(new SM()),
-	orcSM(new SM()),
-	alphaTeamRegionCase(0),
-	omegaTeamRegionCase(0)
+	orcSM(new SM())
 {
 	Math::InitRNG();
 
@@ -195,8 +194,7 @@ void Scene::Update(double dt){
 		simStarted = true;
 		dayNightBT = elapsedTime + 7.0f;
 
-		alphaTeamRegionCase = Math::RandIntMinMax(1, 4);
-		omegaTeamRegionCase = Math::RandIntMinMax(1, 4);
+		teamRegionsCase = Math::RandIntMinMax(1, 4);
 	}
 }
 
@@ -1039,8 +1037,10 @@ void Scene::RenderRegions(){
 	float omegaPosY;
 	float omegaScaleX;
 	float omegaScaleY;
+	float dividerScaleX = 0.0f;
+	float dividerScaleY = 0.0f;
 
-	switch(alphaTeamRegionCase){
+	switch(teamRegionsCase){
 		case 1:
 			alphaPosX = (float)winWidth * 0.5f - gridWidth * 0.25f;
 			alphaPosY = (float)winHeight * 0.5f;
@@ -1051,6 +1051,9 @@ void Scene::RenderRegions(){
 			omegaPosY = (float)winHeight * 0.5f;
 			omegaScaleX = gridWidth * 0.5f;
 			omegaScaleY = gridHeight;
+
+			dividerScaleX = gridCellWidth;
+			dividerScaleY = gridHeight;
 			break;
 		case 2:
 			alphaPosX = (float)winWidth * 0.5f + gridWidth * 0.25f;
@@ -1062,6 +1065,9 @@ void Scene::RenderRegions(){
 			omegaPosY = (float)winHeight * 0.5f;
 			omegaScaleX = gridWidth * 0.5f;
 			omegaScaleY = gridHeight;
+
+			dividerScaleX = gridCellWidth;
+			dividerScaleY = gridHeight;
 			break;
 		case 3:
 			alphaPosX = (float)winWidth * 0.5f;
@@ -1073,6 +1079,9 @@ void Scene::RenderRegions(){
 			omegaPosY = (float)winHeight * 0.5f + gridHeight * 0.25f;
 			omegaScaleX = gridWidth;
 			omegaScaleY = gridHeight * 0.5f;
+
+			dividerScaleX = gridWidth;
+			dividerScaleY = gridCellHeight;
 			break;
 		case 4:
 			alphaPosX = (float)winWidth * 0.5f;
@@ -1084,9 +1093,28 @@ void Scene::RenderRegions(){
 			omegaPosY = (float)winHeight * 0.5f - gridHeight * 0.25f;
 			omegaScaleX = gridWidth;
 			omegaScaleY = gridHeight * 0.5f;
+
+			dividerScaleX = gridWidth;
+			dividerScaleY = gridCellHeight;
 			break;
 		default:
 			assert(false);
+	}
+
+	if(gridRows != 0 && gridCols != 0 && (teamRegionsCase > 2 && gridRows & 1) || (teamRegionsCase < 3 && gridCols & 1)){
+		modelStack.PushMatrix();
+		modelStack.Translate(
+			(float)winWidth * 0.5f,
+			(float)winHeight * 0.5f,
+			0.05f
+		);
+		modelStack.Scale(
+			dividerScaleX,
+			dividerScaleY,
+			1.0f
+		);
+		RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.5f, 0.5f, 0.5f), 0.8f);
+		modelStack.PopMatrix();
 	}
 
 	modelStack.PushMatrix();
