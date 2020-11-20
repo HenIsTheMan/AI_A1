@@ -55,6 +55,14 @@ private:
 	float spawningStartTime;
 	float spawningEndTime;
 	int teamRegionsCase;
+	int alphaTeamLocalXStart;
+	int alphaTeamLocalXEnd;
+	int alphaTeamLocalYStart;
+	int alphaTeamLocalYEnd;
+	int omegaTeamLocalXStart;
+	int omegaTeamLocalXEnd;
+	int omegaTeamLocalYStart;
+	int omegaTeamLocalYEnd;
 	ObjPool<Entity>* objPool;
 	Publisher* publisher;
 

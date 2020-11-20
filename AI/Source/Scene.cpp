@@ -63,6 +63,14 @@ Scene::Scene():
 	spawningStartTime(0.0f),
 	spawningEndTime(300.0f),
 	teamRegionsCase(0),
+	alphaTeamLocalXStart(0),
+	alphaTeamLocalXEnd(0),
+	alphaTeamLocalYStart(0),
+	alphaTeamLocalYEnd(0),
+	omegaTeamLocalXStart(0),
+	omegaTeamLocalXEnd(0),
+	omegaTeamLocalYStart(0),
+	omegaTeamLocalYEnd(0),
 	objPool(new ObjPool<Entity>()),
 	publisher(Publisher::RetrieveGlobalObjPtr()),
 	skeleSM(new SM()),
@@ -585,6 +593,51 @@ void Scene::UpdateGridEntityData(){
 }
 
 void Scene::UpdateEntities(const double dt){
+	switch(teamRegionsCase){
+		case 1:
+			alphaTeamLocalXStart = 0;
+			alphaTeamLocalXEnd = (int)std::floorf((float)gridCols * 0.5f) - 1;
+			alphaTeamLocalYStart = 0;
+			alphaTeamLocalYEnd = gridRows - 1;
+			omegaTeamLocalXStart = (int)std::ceilf((float)gridCols * 0.5f) - 1;
+			omegaTeamLocalXEnd = gridCols - 1;
+			omegaTeamLocalYStart = 0;
+			omegaTeamLocalYEnd = gridRows - 1;
+			break;
+		case 2:
+			alphaTeamLocalXStart = (int)std::ceilf((float)gridCols * 0.5f) - 1;
+			alphaTeamLocalXEnd = gridCols - 1;
+			alphaTeamLocalYStart = 0;
+			alphaTeamLocalYEnd = gridRows - 1;
+			omegaTeamLocalXStart = 0;
+			omegaTeamLocalXEnd = (int)std::floorf((float)gridCols * 0.5f) - 1;
+			omegaTeamLocalYStart = 0;
+			omegaTeamLocalYEnd = gridRows - 1;
+			break;
+		case 3:
+			alphaTeamLocalXStart = 0;
+			alphaTeamLocalXEnd = gridCols - 1;
+			alphaTeamLocalYStart = 0;
+			alphaTeamLocalYEnd = (int)std::floorf((float)gridRows * 0.5f) - 1;
+			omegaTeamLocalXStart = 0;
+			omegaTeamLocalXEnd = gridCols - 1;
+			omegaTeamLocalYStart = (int)std::ceilf((float)gridRows * 0.5f) - 1;
+			omegaTeamLocalYEnd = gridRows - 1;
+			break;
+		case 4:
+			alphaTeamLocalXStart = 0;
+			alphaTeamLocalXEnd = gridCols - 1;
+			alphaTeamLocalYStart = (int)std::ceilf((float)gridRows * 0.5f) - 1;
+			alphaTeamLocalYEnd = gridRows - 1;
+			omegaTeamLocalXStart = 0;
+			omegaTeamLocalXEnd = gridCols - 1;
+			omegaTeamLocalYStart = 0;
+			omegaTeamLocalYEnd = (int)std::floorf((float)gridRows * 0.5f) - 1;
+			break;
+		default:
+			assert(false);
+	}
+
 	static int control = 0;
 
 	if(control != 20){
