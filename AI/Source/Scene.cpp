@@ -11,21 +11,25 @@
 
 #include "ListenerFlags.hpp"
 
+#include "StateSkeleCannotMove.h"
 #include "StateSkeleIdle.h"
 #include "StateSkeleAttack.h"
 #include "StateSkeleDead.h"
 #include "StateSkeleRevive.h"
 
+#include "StateReptileCannotMove.h"
 #include "StateReptileIdle.h"
 #include "StateReptileAttack.h"
 #include "StateReptileDead.h"
 #include "StateReptileMultiply.h"
 
+#include "StateBoyCannotMove.h"
 #include "StateBoyIdle.h"
 #include "StateBoyAttack.h"
 #include "StateBoyDead.h"
 #include "StateBoyHeal.h"
 
+#include "StateOrcCannotMove.h"
 #include "StateOrcIdle.h"
 #include "StateOrcAttack.h"
 #include "StateOrcDead.h"
@@ -69,21 +73,25 @@ Scene::Scene():
 
 	objPool->CreateObjs(10000);
 
+	skeleSM->AddState(new State(StateID::StateSkeleCannotMove, StateSkeleCannotMove::Enter, StateSkeleCannotMove::Update, StateSkeleCannotMove::Exit));
 	skeleSM->AddState(new State(StateID::StateSkeleIdle, StateSkeleIdle::Enter, StateSkeleIdle::Update, StateSkeleIdle::Exit));
 	skeleSM->AddState(new State(StateID::StateSkeleAttack, StateSkeleAttack::Enter, StateSkeleAttack::Update, StateSkeleAttack::Exit));
 	skeleSM->AddState(new State(StateID::StateSkeleDead, StateSkeleDead::Enter, StateSkeleDead::Update, StateSkeleDead::Exit));
 	skeleSM->AddState(new State(StateID::StateSkeleRevive, StateSkeleRevive::Enter, StateSkeleRevive::Update, StateSkeleRevive::Exit));
 
+	reptileSM->AddState(new State(StateID::StateReptileCannotMove, StateReptileCannotMove::Enter, StateReptileCannotMove::Update, StateReptileCannotMove::Exit));
 	reptileSM->AddState(new State(StateID::StateReptileIdle, StateReptileIdle::Enter, StateReptileIdle::Update, StateReptileIdle::Exit));
 	reptileSM->AddState(new State(StateID::StateReptileAttack, StateReptileAttack::Enter, StateReptileAttack::Update, StateReptileAttack::Exit));
 	reptileSM->AddState(new State(StateID::StateReptileDead, StateReptileDead::Enter, StateReptileDead::Update, StateReptileDead::Exit));
 	reptileSM->AddState(new State(StateID::StateReptileMultiply, StateReptileMultiply::Enter, StateReptileMultiply::Update, StateReptileMultiply::Exit));
 
+	boySM->AddState(new State(StateID::StateBoyCannotMove, StateBoyCannotMove::Enter, StateBoyCannotMove::Update, StateBoyCannotMove::Exit));
 	boySM->AddState(new State(StateID::StateBoyIdle, StateBoyIdle::Enter, StateBoyIdle::Update, StateBoyIdle::Exit));
 	boySM->AddState(new State(StateID::StateBoyAttack, StateBoyAttack::Enter, StateBoyAttack::Update, StateBoyAttack::Exit));
 	boySM->AddState(new State(StateID::StateBoyDead, StateBoyDead::Enter, StateBoyDead::Update, StateBoyDead::Exit));
 	boySM->AddState(new State(StateID::StateBoyHeal, StateBoyHeal::Enter, StateBoyHeal::Update, StateBoyHeal::Exit));
 
+	orcSM->AddState(new State(StateID::StateOrcCannotMove, StateOrcCannotMove::Enter, StateOrcCannotMove::Update, StateOrcCannotMove::Exit));
 	orcSM->AddState(new State(StateID::StateOrcIdle, StateOrcIdle::Enter, StateOrcIdle::Update, StateOrcIdle::Exit));
 	orcSM->AddState(new State(StateID::StateOrcAttack, StateOrcAttack::Enter, StateOrcAttack::Update, StateOrcAttack::Exit));
 	orcSM->AddState(new State(StateID::StateOrcDead, StateOrcDead::Enter, StateOrcDead::Update, StateOrcDead::Exit));
@@ -221,8 +229,8 @@ Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
 	entity->SetTeam(EntityTeam::Amt);
 
 	entity->SetStateMachine(skeleSM);
-	entity->SetCurrState(skeleSM->GetState(StateID::StateSkeleIdle));
-	entity->SetNextState(skeleSM->GetState(StateID::StateSkeleIdle));
+	entity->SetCurrState(skeleSM->GetState(StateID::StateSkeleCannotMove));
+	entity->SetNextState(skeleSM->GetState(StateID::StateSkeleCannotMove));
 	entity->SetSpriteAniMiddleName("Static");
 
 	return entity;
@@ -247,8 +255,8 @@ Entity* Scene::CreateReptile(const CreateEntityParams& params) const{
 	entity->SetTeam(EntityTeam::Amt);
 
 	entity->SetStateMachine(reptileSM);
-	entity->SetCurrState(reptileSM->GetState(StateID::StateReptileIdle));
-	entity->SetNextState(reptileSM->GetState(StateID::StateReptileIdle));
+	entity->SetCurrState(reptileSM->GetState(StateID::StateReptileCannotMove));
+	entity->SetNextState(reptileSM->GetState(StateID::StateReptileCannotMove));
 	entity->SetSpriteAniMiddleName("Static");
 
 	return entity;
@@ -273,8 +281,8 @@ Entity* Scene::CreateBoy(const CreateEntityParams& params) const{
 	entity->SetTeam(EntityTeam::Amt);
 
 	entity->SetStateMachine(boySM);
-	entity->SetCurrState(boySM->GetState(StateID::StateBoyIdle));
-	entity->SetNextState(boySM->GetState(StateID::StateBoyIdle));
+	entity->SetCurrState(boySM->GetState(StateID::StateBoyCannotMove));
+	entity->SetNextState(boySM->GetState(StateID::StateBoyCannotMove));
 	entity->SetSpriteAniMiddleName("Static");
 
 	return entity;
@@ -299,8 +307,8 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 	entity->SetTeam(EntityTeam::Amt);
 
 	entity->SetStateMachine(orcSM);
-	entity->SetCurrState(orcSM->GetState(StateID::StateOrcIdle));
-	entity->SetNextState(orcSM->GetState(StateID::StateOrcIdle));
+	entity->SetCurrState(orcSM->GetState(StateID::StateOrcCannotMove));
+	entity->SetNextState(orcSM->GetState(StateID::StateOrcCannotMove));
 	entity->SetSpriteAniMiddleName("Static");
 
 	return entity;
