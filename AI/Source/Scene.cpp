@@ -1349,25 +1349,17 @@ void Scene::RenderBG(){
 
 void Scene::RenderSceneText(){
 	Mesh* const textMesh = meshList[(int)GeoType::Text];
-	const float textSize = windowHeight * 0.05f;
+	const float textSize = (float)windowHeight * 0.05f;
+	const float colorComponent = (sinf(elapsedTime * 4.0f) + 1.0f) * 0.5f;
 
 	if(!simStarted){
 		RenderTextOnScreen(
 			textMesh,
 			"Press Space to start!",
-			Color(0.0f, 0.0f, 0.0f),
-			((sinf(elapsedTime * 4.0f) + 1.0f) * 0.5f + 1.0f) * 0.5f * textSize,
+			Color(colorComponent, colorComponent, colorComponent),
+			((sinf(elapsedTime * 4.0f) + 1.0f) * 0.5f + 1.0f) * 0.5f * textSize * 2.0f,
 			(float)windowWidth * 0.5f,
-			textSize * 18.75f,
-			TextAlignment::Center
-		);
-		RenderTextOnScreen(
-			textMesh,
-			"Press Space to start!",
-			Color(),
-			((cosf(elapsedTime * 4.0f) + 1.0f) * 0.5f  + 1.0f) * 0.5f * textSize,
-			(float)windowWidth * 0.5f,
-			textSize * 0.25f,
+			textSize * 10.0f,
 			TextAlignment::Center
 		);
 	}
