@@ -54,9 +54,13 @@ void StateOrcIdle::Update(Entity* const entity, const double dt){
 			entity->SetSpriteAniMiddleName("Move");
 			MoveInDir(entity, dt);
 		}
-	} else if(chooseDirBT <= im_ElapsedTime){
-		ChooseADir(entity, im_Grid, im_GridRows, im_GridCols);
-		chooseDirBT = im_ElapsedTime + Math::RandFloatMinMax(0.9f, 2.0f);
+	} else{
+		entity->SetTimeLeft(entity->GetTimeLeft() - (float)dt);
+
+		if(chooseDirBT <= im_ElapsedTime){
+			ChooseADir(entity, im_Grid, im_GridRows, im_GridCols);
+			chooseDirBT = im_ElapsedTime + Math::RandFloatMinMax(1.2f, 2.5f);
+		}
 	}
 	//*/
 }
