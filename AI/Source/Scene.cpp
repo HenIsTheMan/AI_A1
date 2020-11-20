@@ -732,6 +732,32 @@ void Scene::RenderGridBlockData(){
 }
 
 void Scene::RenderEntities(){
+	static std::string stateTexts[(int)StateID::Amt]{
+		"StateSkeleCannotMove",
+		"StateSkeleIdle",
+		"StateSkeleAttack",
+		"StateSkeleDead",
+		"StateSkeleRevive",
+
+		"StateReptileCannotMove",
+		"StateReptileIdle",
+		"StateReptileAttack",
+		"StateReptileDead",
+		"StateReptileMultiply",
+
+		"StateBoyCannotMove",
+		"StateBoyIdle",
+		"StateBoyAttack",
+		"StateBoyDead",
+		"StateBoyHeal",
+
+		"StateOrcCannotMove",
+		"StateOrcIdle",
+		"StateOrcAttack",
+		"StateOrcDead",
+		"StateOrcImmune"
+	};
+
 	const std::vector<std::pair<bool, Entity*>>& entityPool = objPool->GetPool();
 	const size_t& entityPoolSize = entityPool.size();
 
@@ -865,14 +891,14 @@ void Scene::RenderEntities(){
 				0.0f
 			);
 			modelStack.Scale(
-				0.4f,
+				0.2f,
 				4.0f,
 				1.0f
 			);
 
 			RenderText(
 				meshList[(int)GeoType::Text],
-				entity->GetTeam() == EntityTeam::Alpha ? "Alpha" : "Omega",
+				stateTexts[(int)entity->GetCurrState()->GetID()],
 				entity->GetTeam() == EntityTeam::Alpha ? Color() : Color(0.0f, 0.0f, 0.0f),
 				TextAlignment::Center
 			);
