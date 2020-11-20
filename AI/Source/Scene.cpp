@@ -301,95 +301,97 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 }
 
 void Scene::UpdateGridAttribs(){
-	static bool isKeyDown1 = false;
-	static bool isKeyDown2 = false;
-	static bool isKeyDown3 = false;
-	static bool isKeyDown4 = false;
-	static bool isKeyDown5 = false;
-	static bool isKeyDown6 = false;
-	static bool isKeyDown7 = false;
-	static bool isKeyDown8 = false;
-	static bool isKeyDown9 = false;
-	static bool isKeyDown0 = false;
-	if(!isKeyDown1 && App::Key('1')){
-		if(gridCellWidth < gridMaxCellWidth){
-			++gridCellWidth;
+	if(simStarted){
+		static bool isKeyDown1 = false;
+		static bool isKeyDown2 = false;
+		static bool isKeyDown3 = false;
+		static bool isKeyDown4 = false;
+		static bool isKeyDown5 = false;
+		static bool isKeyDown6 = false;
+		static bool isKeyDown7 = false;
+		static bool isKeyDown8 = false;
+		static bool isKeyDown9 = false;
+		static bool isKeyDown0 = false;
+		if(!isKeyDown1 && App::Key('1')){
+			if(gridCellWidth < gridMaxCellWidth){
+				++gridCellWidth;
+			}
+			isKeyDown1 = true;
+		} else if(isKeyDown1 && !App::Key('1')){
+			isKeyDown1 = false;
 		}
-		isKeyDown1 = true;
-	} else if(isKeyDown1 && !App::Key('1')){
-		isKeyDown1 = false;
-	}
-	if(!isKeyDown2 && App::Key('2')){
-		if(gridCellWidth > gridMinCellWidth){
-			--gridCellWidth;
+		if(!isKeyDown2 && App::Key('2')){
+			if(gridCellWidth > gridMinCellWidth){
+				--gridCellWidth;
+			}
+			isKeyDown2 = true;
+		} else if(isKeyDown2 && !App::Key('2')){
+			isKeyDown2 = false;
 		}
-		isKeyDown2 = true;
-	} else if(isKeyDown2 && !App::Key('2')){
-		isKeyDown2 = false;
-	}
-	if(!isKeyDown3 && App::Key('3')){
-		if(gridCellHeight < gridMaxCellHeight){
-			++gridCellHeight;
+		if(!isKeyDown3 && App::Key('3')){
+			if(gridCellHeight < gridMaxCellHeight){
+				++gridCellHeight;
+			}
+			isKeyDown3 = true;
+		} else if(isKeyDown3 && !App::Key('3')){
+			isKeyDown3 = false;
 		}
-		isKeyDown3 = true;
-	} else if(isKeyDown3 && !App::Key('3')){
-		isKeyDown3 = false;
-	}
-	if(!isKeyDown4 && App::Key('4')){
-		if(gridCellHeight > gridMinCellHeight){
-			--gridCellHeight;
+		if(!isKeyDown4 && App::Key('4')){
+			if(gridCellHeight > gridMinCellHeight){
+				--gridCellHeight;
+			}
+			isKeyDown4 = true;
+		} else if(isKeyDown4 && !App::Key('4')){
+			isKeyDown4 = false;
 		}
-		isKeyDown4 = true;
-	} else if(isKeyDown4 && !App::Key('4')){
-		isKeyDown4 = false;
-	}
-	if(!isKeyDown5 && App::Key('5')){
-		if(gridLineThickness < gridMaxLineThickness){
-			gridLineThickness += 0.1f;
+		if(!isKeyDown5 && App::Key('5')){
+			if(gridLineThickness < gridMaxLineThickness){
+				gridLineThickness += 0.1f;
+			}
+			isKeyDown5 = true;
+		} else if(isKeyDown5 && !App::Key('5')){
+			isKeyDown5 = false;
 		}
-		isKeyDown5 = true;
-	} else if(isKeyDown5 && !App::Key('5')){
-		isKeyDown5 = false;
-	}
-	if(!isKeyDown6 && App::Key('6')){
-		if(gridLineThickness > gridMinLineThickness){
-			gridLineThickness -= 0.1f;
+		if(!isKeyDown6 && App::Key('6')){
+			if(gridLineThickness > gridMinLineThickness){
+				gridLineThickness -= 0.1f;
+			}
+			isKeyDown6 = true;
+		} else if(isKeyDown6 && !App::Key('6')){
+			isKeyDown6 = false;
 		}
-		isKeyDown6 = true;
-	} else if(isKeyDown6 && !App::Key('6')){
-		isKeyDown6 = false;
-	}
-	if(!isKeyDown7 && App::Key('7')){
-		if(gridRows < gridMaxRows){
-			++gridRows;
+		if(!isKeyDown7 && App::Key('7')){
+			if(gridRows < gridMaxRows){
+				++gridRows;
+			}
+			isKeyDown7 = true;
+		} else if(isKeyDown7 && !App::Key('7')){
+			isKeyDown7 = false;
 		}
-		isKeyDown7 = true;
-	} else if(isKeyDown7 && !App::Key('7')){
-		isKeyDown7 = false;
-	}
-	if(!isKeyDown8 && App::Key('8')){
-		if(gridRows > gridMinRows){
-			publisher->Notify((long int)ListenerFlags::Entity, new EventGridHeightShrinking(--gridRows), true);
+		if(!isKeyDown8 && App::Key('8')){
+			if(gridRows > gridMinRows){
+				publisher->Notify((long int)ListenerFlags::Entity, new EventGridHeightShrinking(--gridRows), true);
+			}
+			isKeyDown8 = true;
+		} else if(isKeyDown8 && !App::Key('8')){
+			isKeyDown8 = false;
 		}
-		isKeyDown8 = true;
-	} else if(isKeyDown8 && !App::Key('8')){
-		isKeyDown8 = false;
-	}
-	if(!isKeyDown9 && App::Key('9')){
-		if(gridCols < gridMaxCols){
-			++gridCols;
+		if(!isKeyDown9 && App::Key('9')){
+			if(gridCols < gridMaxCols){
+				++gridCols;
+			}
+			isKeyDown9 = true;
+		} else if(isKeyDown9 && !App::Key('9')){
+			isKeyDown9 = false;
 		}
-		isKeyDown9 = true;
-	} else if(isKeyDown9 && !App::Key('9')){
-		isKeyDown9 = false;
-	}
-	if(!isKeyDown0 && App::Key('0')){
-		if(gridCols > gridMinCols){
-			publisher->Notify((long int)ListenerFlags::Entity, new EventGridWidthShrinking(--gridCols), true);
+		if(!isKeyDown0 && App::Key('0')){
+			if(gridCols > gridMinCols){
+				publisher->Notify((long int)ListenerFlags::Entity, new EventGridWidthShrinking(--gridCols), true);
+			}
+			isKeyDown0 = true;
+		} else if(isKeyDown0 && !App::Key('0')){
+			isKeyDown0 = false;
 		}
-		isKeyDown0 = true;
-	} else if(isKeyDown0 && !App::Key('0')){
-		isKeyDown0 = false;
 	}
 
 	grid.SetCellWidth(gridCellWidth);
@@ -546,16 +548,36 @@ void Scene::UpdateEntities(const double dt){
 
 	std::vector<std::pair<bool, Entity*>>& entityPool = objPool->RetrievePool();
 	const size_t& entityPoolSize = entityPool.size();
+	bool shldContinue = false;
 
 	for(size_t i = 0; i < entityPoolSize; ++i){
 		if(entityPool[i].first){
 			Entity* const entity = entityPool[i].second;
 
-			switch(entity->OnEvent(entity->FetchEvent(), true)){
-				case -5:
-					objPool->DeactivateObj(entity);
-					continue;
+			const Event* myEvent = nullptr;
+			EventID ID = EventID::Amt;
+			do{
+				myEvent = entity->FetchEvent();
+				if(myEvent){
+					ID = myEvent->GetID();
+
+					switch(entity->OnEvent(myEvent, true)){
+						case -5:
+							objPool->DeactivateObj(entity);
+							shldContinue = true;
+							break;
+					}
+				}
+			} while(myEvent
+				&& (ID == EventID::EventGridDataChanged
+				|| ID == EventID::EventGridHeightShrinking
+				|| ID == EventID::EventGridWidthShrinking)
+			); //Important events must all be processed
+
+			if(shldContinue){
+				continue;
 			}
+
 			switch(entity->GetType()){
 				using namespace Obj;
 
