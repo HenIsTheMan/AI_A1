@@ -8,6 +8,8 @@
 #include "EventGridWidthShrinking.h"
 #include "EventCalcActiveObjs.h"
 #include "EventCalcInactiveObjs.h"
+#include "EventCalcAlphaCount.h"
+#include "EventCalcOmegaCount.h"
 
 #include "ListenerFlags.hpp"
 
@@ -117,6 +119,8 @@ Scene::Scene():
 	grid.SetLineThickness(gridLineThickness);
 	grid.SetRows(gridRows);
 	grid.SetCols(gridCols);
+
+	isDay = bool(rand() & 1);
 }
 
 Scene::~Scene(){
@@ -728,18 +732,16 @@ void Scene::UpdateEntities(const double dt){
 
 	static float alphaTeamSpawnBT = 0.0f;
 	static float omegaTeamSpawnBT = 0.0f;
-	//alphaTeamEntityCount = 0;
-	//omegaTeamEntityCount = 0;
+	alphaTeamEntityCount = publisher->Notify((long int)ListenerFlags::ObjPool, new EventCalcAlphaCount(), false);
+	omegaTeamEntityCount = publisher->Notify((long int)ListenerFlags::ObjPool, new EventCalcOmegaCount(), false);
 
 	if(alphaTeamEntityCount < alphaTeamSpawnLimit && alphaTeamSpawnBT <= elapsedTime){
 		SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::AlphaTeam);
 		alphaTeamSpawnBT = elapsedTime + (!isDay ? Math::RandFloatMinMax(2.0f, 3.0f) : Math::RandFloatMinMax(0.7f, 1.5f));
-		++alphaTeamEntityCount;
 	}
 	if(omegaTeamEntityCount < omegaTeamSpawnLimit && omegaTeamSpawnBT <= elapsedTime){
 		SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::OmegaTeam);
 		omegaTeamSpawnBT = elapsedTime + (isDay ? Math::RandFloatMinMax(2.0f, 3.0f) : Math::RandFloatMinMax(0.7f, 1.5f));
-		++omegaTeamEntityCount;
 	}
 
 	std::vector<std::pair<bool, Entity*>>& entityPool = objPool->RetrievePool();
