@@ -8,12 +8,12 @@ Grid<T>::Grid():
 		0
 	)
 {
-	UpdateBlockData();
 }
 
 template <class T>
 Grid<T>::Grid(T cellWidth, T cellHeight, T lineThickness, int rows, int cols):
 	im_BlockData(),
+	im_EntityData(),
 	im_CellWidth(cellWidth),
 	im_CellHeight(cellHeight),
 	im_LineThickness(lineThickness),
@@ -21,6 +21,7 @@ Grid<T>::Grid(T cellWidth, T cellHeight, T lineThickness, int rows, int cols):
 	im_Cols(cols)
 {
 	UpdateBlockData();
+	RegulateEntityData();
 }
 
 template <class T>
@@ -44,8 +45,18 @@ T Grid<T>::CalcHeight() const{
 }
 
 template <class T>
+std::vector<std::vector<bool>>& Grid<T>::RetrieveEntityData(){
+	return im_EntityData;
+}
+
+template <class T>
 const std::vector<std::vector<bool>>& Grid<T>::GetBlockData() const{
 	return im_BlockData;
+}
+
+template <class T>
+const std::vector<std::vector<bool>>& Grid<T>::GetEntityData() const{
+	return im_EntityData;
 }
 
 template <class T>
@@ -79,6 +90,11 @@ void Grid<T>::SetBlockData(const bool blockData, const ptrdiff_t& row, const ptr
 }
 
 template <class T>
+void Grid<T>::SetEntityData(const bool entityData, const ptrdiff_t& row, const ptrdiff_t& col){
+	im_EntityData[row][col] = entityData;
+}
+
+template <class T>
 void Grid<T>::SetCellWidth(T cellWidth){
 	im_CellWidth = cellWidth;
 }
@@ -97,12 +113,14 @@ template <class T>
 void Grid<T>::SetRows(int rows){
 	im_Rows = rows;
 	UpdateBlockData();
+	RegulateEntityData();
 }
 
 template <class T>
 void Grid<T>::SetCols(int cols){
 	im_Cols = cols;
 	UpdateBlockData();
+	RegulateEntityData();
 }
 
 template <class T>
@@ -125,6 +143,30 @@ void Grid<T>::UpdateBlockData(){
 		const size_t oldAmtOfCols = oldBlockData[i].size();
 		for(j = 0; j < (im_Cols < (int)oldAmtOfCols ? im_Cols : (int)oldAmtOfCols); ++j){
 			im_BlockData[i][j] = oldBlockData[i][j];
+		}
+	}
+}
+
+template <class T>
+void Grid<T>::RegulateEntityData(){
+	std::vector<std::vector<bool>> oldEntityData = im_EntityData; //Make copy of data
+	im_EntityData = std::vector<std::vector<bool>>(im_Rows);
+
+	///Create vars
+	int i, j;
+	const size_t oldEntityDataSize = oldEntityData.size();
+
+	for(i = 0; i < im_Rows; ++i){
+		im_EntityData[i] = std::vector<bool>(im_Cols);
+		for(j = 0; j < im_Cols; ++j){
+			im_EntityData[i][j] = false; //All data becomes false
+		}
+	}
+
+	for(i = 0; i < (im_Rows < (int)oldEntityDataSize ? im_Rows : (int)oldEntityDataSize); ++i){
+		const size_t oldAmtOfCols = oldEntityData[i].size();
+		for(j = 0; j < (im_Cols < (int)oldAmtOfCols ? im_Cols : (int)oldAmtOfCols); ++j){
+			im_EntityData[i][j] = oldEntityData[i][j];
 		}
 	}
 }

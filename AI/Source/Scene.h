@@ -78,6 +78,7 @@ private:
 
 	void UpdateGridAttribs();
 	void UpdateGridBlockData();
+	void UpdateGridEntityData();
 	void UpdateStates();
 	void UpdateSkeleStates();
 	void UpdateReptileStates();
