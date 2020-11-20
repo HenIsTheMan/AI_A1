@@ -61,6 +61,12 @@
     <ClCompile Include="Source\EventBlockPlaced.cpp">
       <Filter>Event\Events\Post-events</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EventCalcAlphaCount.cpp">
+      <Filter>Event\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EventCalcOmegaCount.cpp">
+      <Filter>Event\Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -218,6 +224,12 @@
     </ClInclude>
     <ClInclude Include="Source\EventBlockPlaced.h">
       <Filter>Event\Events\Post-events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventCalcAlphaCount.h">
+      <Filter>Event\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventCalcOmegaCount.h">
+      <Filter>Event\Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

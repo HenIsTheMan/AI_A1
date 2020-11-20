@@ -6,5 +6,7 @@ enum struct EventID: int{
 	EventGridWidthShrinking,
 	EventCalcActiveObjs,
 	EventCalcInactiveObjs,
+	EventCalcAlphaCount,
+	EventCalcOmegaCount,
 	Amt
 };
