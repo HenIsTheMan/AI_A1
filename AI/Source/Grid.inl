@@ -149,24 +149,13 @@ void Grid<T>::UpdateBlockData(){
 
 template <class T>
 void Grid<T>::RegulateEntityData(){
-	std::vector<std::vector<bool>> oldEntityData = im_EntityData; //Make copy of data
 	im_EntityData = std::vector<std::vector<bool>>(im_Rows);
 
-	///Create vars
 	int i, j;
-	const size_t oldEntityDataSize = oldEntityData.size();
-
 	for(i = 0; i < im_Rows; ++i){
 		im_EntityData[i] = std::vector<bool>(im_Cols);
 		for(j = 0; j < im_Cols; ++j){
 			im_EntityData[i][j] = false; //All data becomes false
-		}
-	}
-
-	for(i = 0; i < (im_Rows < (int)oldEntityDataSize ? im_Rows : (int)oldEntityDataSize); ++i){
-		const size_t oldAmtOfCols = oldEntityData[i].size();
-		for(j = 0; j < (im_Cols < (int)oldAmtOfCols ? im_Cols : (int)oldAmtOfCols); ++j){
-			im_EntityData[i][j] = oldEntityData[i][j];
 		}
 	}
 }

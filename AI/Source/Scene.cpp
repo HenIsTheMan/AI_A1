@@ -370,7 +370,7 @@ void Scene::UpdateGridAttribs(){
 	}
 	if(!isKeyDown8 && App::Key('8')){
 		if(gridRows > gridMinRows){
-			publisher->Notify((long int)ListenerFlags::Entity, new EventGridHeightShrinking(--gridRows), true);
+			publisher->Notify((long int)ListenerFlags::Entity, new EventGridHeightShrinking(--gridRows), false);
 		}
 		isKeyDown8 = true;
 	} else if(isKeyDown8 && !App::Key('8')){
@@ -386,7 +386,7 @@ void Scene::UpdateGridAttribs(){
 	}
 	if(!isKeyDown0 && App::Key('0')){
 		if(gridCols > gridMinCols){
-			publisher->Notify((long int)ListenerFlags::Entity, new EventGridWidthShrinking(--gridCols), true);
+			publisher->Notify((long int)ListenerFlags::Entity, new EventGridWidthShrinking(--gridCols), false);
 		}
 		isKeyDown0 = true;
 	} else if(isKeyDown0 && !App::Key('0')){
