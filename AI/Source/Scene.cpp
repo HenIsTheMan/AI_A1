@@ -423,16 +423,6 @@ void Scene::SpawnEntity(const Obj::EntityType type, const ListenerFlags& teamFla
 		return;
 	}
 
-	///////////////////////////////////??
-	Entity* const boy = CreateBoy({
-		localPos
-		});
-
-	boy->SetTeam(team ? EntityTeam::Alpha : EntityTeam::Omega);
-	publisher->AddListener((long int)ListenerFlags::Boy | (long int) teamFlag | (long int)ListenerFlags::Entity, boy);
-	return;
-	///////////////////////////////////??
-
 	switch(type){
 		case Obj::EntityType::Skele: {
 			Entity* const skele = CreateSkele({
