@@ -556,6 +556,7 @@ void Scene::UpdateEntities(const double dt){
 			Vector3(5.0f, 15.0f, 0.0f)
 		});
 		skele->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
+		skele->SetNextState(skele->GetStateMachine()->GetState(StateID::StateSkeleIdle));
 		publisher->AddListener((long int)ListenerFlags::Skele | (long int)ListenerFlags::Entity, skele);
 
 		Entity* reptile = CreateReptile({
@@ -563,18 +564,21 @@ void Scene::UpdateEntities(const double dt){
 		});
 		reptile->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
 		reptile->SetTarget(skele);
+		reptile->SetNextState(reptile->GetStateMachine()->GetState(StateID::StateReptileIdle));
 		publisher->AddListener((long int)ListenerFlags::Reptile | (long int)ListenerFlags::Entity, reptile);
 
 		Entity* boy = CreateBoy({
 			Vector3(5.0f, 4.0f, 0.0f)
 		});
 		boy->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
+		boy->SetNextState(boy->GetStateMachine()->GetState(StateID::StateBoyIdle));
 		publisher->AddListener((long int)ListenerFlags::Boy | (long int)ListenerFlags::Entity, boy);
 
 		Entity* orc = CreateOrc({
 			Vector3(18.0f, 3.0f, 0.0f)
 		});
 		orc->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
+		orc->SetNextState(orc->GetStateMachine()->GetState(StateID::StateOrcIdle));
 		publisher->AddListener((long int)ListenerFlags::Orc | (long int)ListenerFlags::Entity, orc);
 
 		++control;
