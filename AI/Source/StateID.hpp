@@ -5,25 +5,25 @@ enum struct StateID: int{
 	StateSkelePatrol,
 	StateSkeleAttack,
 	StateSkeleDead,
-	StateSkeleRevive,
+	StateSkeleChase,
 
 	StateReptileIdle,
 	StateReptilePatrol,
 	StateReptileAttack,
 	StateReptileDead,
-	StateReptileMultiply,
+	StateReptileChase,
 
 	StateBoyIdle,
 	StateBoyPatrol,
 	StateBoyAttack,
 	StateBoyDead,
-	StateBoyHeal,
+	StateBoyChase,
 
 	StateOrcIdle,
 	StateOrcPatrol,
 	StateOrcAttack,
 	StateOrcDead,
-	StateOrcImmune,
+	StateOrcChase,
 
 	Amt
 };

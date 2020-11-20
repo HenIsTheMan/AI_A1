@@ -206,7 +206,7 @@
     <ClInclude Include="Source\State.h" />
     <ClInclude Include="Source\StateBoyAttack.h" />
     <ClInclude Include="Source\StateBoyDead.h" />
-    <ClInclude Include="Source\StateBoyHeal.h" />
+    <ClInclude Include="Source\StateBoyChase.h" />
     <ClInclude Include="Source\StateBoyPatrol.h" />
     <ClInclude Include="Source\StateID.hpp" />
     <ClInclude Include="Source\StateMachine.h" />
@@ -214,17 +214,17 @@
     <ClInclude Include="Source\StateOrcIdle.h" />
     <ClInclude Include="Source\StateOrcDead.h" />
     <ClInclude Include="Source\StateOrcPatrol.h" />
-    <ClInclude Include="Source\StateOrcImmune.h" />
+    <ClInclude Include="Source\StateOrcChase.h" />
     <ClInclude Include="Source\StateReptileAttack.h" />
     <ClInclude Include="Source\StateReptileIdle.h" />
     <ClInclude Include="Source\StateReptileDead.h" />
     <ClInclude Include="Source\StateReptilePatrol.h" />
-    <ClInclude Include="Source\StateReptileMultiply.h" />
+    <ClInclude Include="Source\StateReptileChase.h" />
     <ClInclude Include="Source\StateSkeleAttack.h" />
     <ClInclude Include="Source\StateSkeleIdle.h" />
     <ClInclude Include="Source\StateSkeleDead.h" />
     <ClInclude Include="Source\StateSkelePatrol.h" />
-    <ClInclude Include="Source\StateSkeleRevive.h" />
+    <ClInclude Include="Source\StateSkeleChase.h" />
     <ClInclude Include="Source\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
@@ -241,24 +241,24 @@
     <None Include="Source\StateBoyAttack.inl" />
     <None Include="Source\StateBoyIdle.inl" />
     <None Include="Source\StateBoyDead.inl" />
-    <None Include="Source\StateBoyHeal.inl" />
+    <None Include="Source\StateBoyChase.inl" />
     <None Include="Source\StateBoyPatrol.inl" />
     <None Include="Source\StateMachine.inl" />
     <None Include="Source\StateOrcAttack.inl" />
     <None Include="Source\StateOrcIdle.inl" />
     <None Include="Source\StateOrcDead.inl" />
     <None Include="Source\StateOrcPatrol.inl" />
-    <None Include="Source\StateOrcImmune.inl" />
+    <None Include="Source\StateOrcChase.inl" />
     <None Include="Source\StateReptileAttack.inl" />
     <None Include="Source\StateReptileIdle.inl" />
     <None Include="Source\StateReptileDead.inl" />
     <None Include="Source\StateReptilePatrol.inl" />
-    <None Include="Source\StateReptileMultiply.inl" />
+    <None Include="Source\StateReptileChase.inl" />
     <None Include="Source\StateSkeleAttack.inl" />
     <None Include="Source\StateSkeleIdle.inl" />
     <None Include="Source\StateSkeleDead.inl" />
     <None Include="Source\StateSkelePatrol.inl" />
-    <None Include="Source\StateSkeleRevive.inl" />
+    <None Include="Source\StateSkeleChase.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

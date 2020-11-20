@@ -17,25 +17,25 @@
 #include "StateSkelePatrol.h"
 #include "StateSkeleAttack.h"
 #include "StateSkeleDead.h"
-#include "StateSkeleRevive.h"
+#include "StateSkeleChase.h"
 
 #include "StateReptileIdle.h"
 #include "StateReptilePatrol.h"
 #include "StateReptileAttack.h"
 #include "StateReptileDead.h"
-#include "StateReptileMultiply.h"
+#include "StateReptileChase.h"
 
 #include "StateBoyIdle.h"
 #include "StateBoyPatrol.h"
 #include "StateBoyAttack.h"
 #include "StateBoyDead.h"
-#include "StateBoyHeal.h"
+#include "StateBoyChase.h"
 
 #include "StateOrcIdle.h"
 #include "StateOrcPatrol.h"
 #include "StateOrcAttack.h"
 #include "StateOrcDead.h"
-#include "StateOrcImmune.h"
+#include "StateOrcChase.h"
 
 extern int windowWidth;
 extern int windowHeight;
@@ -93,25 +93,25 @@ Scene::Scene():
 	skeleSM->AddState(new State(StateID::StateSkelePatrol, StateSkelePatrol::Enter, StateSkelePatrol::Update, StateSkelePatrol::Exit));
 	skeleSM->AddState(new State(StateID::StateSkeleAttack, StateSkeleAttack::Enter, StateSkeleAttack::Update, StateSkeleAttack::Exit));
 	skeleSM->AddState(new State(StateID::StateSkeleDead, StateSkeleDead::Enter, StateSkeleDead::Update, StateSkeleDead::Exit));
-	skeleSM->AddState(new State(StateID::StateSkeleRevive, StateSkeleRevive::Enter, StateSkeleRevive::Update, StateSkeleRevive::Exit));
+	skeleSM->AddState(new State(StateID::StateSkeleChase, StateSkeleChase::Enter, StateSkeleChase::Update, StateSkeleChase::Exit));
 
 	reptileSM->AddState(new State(StateID::StateReptileIdle, StateReptileIdle::Enter, StateReptileIdle::Update, StateReptileIdle::Exit));
 	reptileSM->AddState(new State(StateID::StateReptilePatrol, StateReptilePatrol::Enter, StateReptilePatrol::Update, StateReptilePatrol::Exit));
 	reptileSM->AddState(new State(StateID::StateReptileAttack, StateReptileAttack::Enter, StateReptileAttack::Update, StateReptileAttack::Exit));
 	reptileSM->AddState(new State(StateID::StateReptileDead, StateReptileDead::Enter, StateReptileDead::Update, StateReptileDead::Exit));
-	reptileSM->AddState(new State(StateID::StateReptileMultiply, StateReptileMultiply::Enter, StateReptileMultiply::Update, StateReptileMultiply::Exit));
+	reptileSM->AddState(new State(StateID::StateReptileChase, StateReptileChase::Enter, StateReptileChase::Update, StateReptileChase::Exit));
 
 	boySM->AddState(new State(StateID::StateBoyIdle, StateBoyIdle::Enter, StateBoyIdle::Update, StateBoyIdle::Exit));
 	boySM->AddState(new State(StateID::StateBoyPatrol, StateBoyPatrol::Enter, StateBoyPatrol::Update, StateBoyPatrol::Exit));
 	boySM->AddState(new State(StateID::StateBoyAttack, StateBoyAttack::Enter, StateBoyAttack::Update, StateBoyAttack::Exit));
 	boySM->AddState(new State(StateID::StateBoyDead, StateBoyDead::Enter, StateBoyDead::Update, StateBoyDead::Exit));
-	boySM->AddState(new State(StateID::StateBoyHeal, StateBoyHeal::Enter, StateBoyHeal::Update, StateBoyHeal::Exit));
+	boySM->AddState(new State(StateID::StateBoyChase, StateBoyChase::Enter, StateBoyChase::Update, StateBoyChase::Exit));
 
 	orcSM->AddState(new State(StateID::StateOrcIdle, StateOrcIdle::Enter, StateOrcIdle::Update, StateOrcIdle::Exit));
 	orcSM->AddState(new State(StateID::StateOrcPatrol, StateOrcPatrol::Enter, StateOrcPatrol::Update, StateOrcPatrol::Exit));
 	orcSM->AddState(new State(StateID::StateOrcAttack, StateOrcAttack::Enter, StateOrcAttack::Update, StateOrcAttack::Exit));
 	orcSM->AddState(new State(StateID::StateOrcDead, StateOrcDead::Enter, StateOrcDead::Update, StateOrcDead::Exit));
-	orcSM->AddState(new State(StateID::StateOrcImmune, StateOrcImmune::Enter, StateOrcImmune::Update, StateOrcImmune::Exit));
+	orcSM->AddState(new State(StateID::StateOrcChase, StateOrcChase::Enter, StateOrcChase::Update, StateOrcChase::Exit));
 
 	publisher->AddListener((long int)ListenerFlags::ObjPool, objPool);
 
@@ -924,25 +924,25 @@ void Scene::RenderEntities(){
 		"StateSkelePatrol",
 		"StateSkeleAttack",
 		"StateSkeleDead",
-		"StateSkeleRevive",
+		"StateSkeleChase",
 
 		"StateReptileIdle",
 		"StateReptilePatrol",
 		"StateReptileAttack",
 		"StateReptileDead",
-		"StateReptileMultiply",
+		"StateReptileChase",
 
 		"StateBoyIdle",
 		"StateBoyPatrol",
 		"StateBoyAttack",
 		"StateBoyDead",
-		"StateBoyHeal",
+		"StateBoyChase",
 
 		"StateOrcIdle",
 		"StateOrcPatrol",
 		"StateOrcAttack",
 		"StateOrcDead",
-		"StateOrcImmune"
+		"StateOrcChase"
 	};
 
 	const std::vector<std::pair<bool, Entity*>>& entityPool = objPool->GetPool();
@@ -1022,16 +1022,16 @@ void Scene::RenderEntities(){
 			);
 
 			switch(entity->GetCurrState()->GetID()){
-				case StateID::StateSkeleRevive:
+				case StateID::StateSkeleChase:
 					ManualRenderMesh("SkeleHibernate", 1.0f, 1.0f, meshList[(int)GeoType::Skele], true, Color(1.0f, 0.0f, 0.0f), 0.8f);
 					break;
-				case StateID::StateReptileMultiply:
+				case StateID::StateReptileChase:
 					ManualRenderMesh("ReptileProcreate", 1.0f, 1.0f, meshList[(int)GeoType::Reptile], true, Color(1.0f, 1.0f, 0.0f), 0.8f);
 					break;
-				case StateID::StateBoyHeal:
+				case StateID::StateBoyChase:
 					ManualRenderMesh("BoyHeal", 1.0f, 1.0f, meshList[(int)GeoType::Boy], true, Color(0.0f, 1.0f, 0.0f), 0.8f);
 					break;
-				case StateID::StateOrcImmune:
+				case StateID::StateOrcChase:
 					ManualRenderMesh("OrcImmune", 1.0f, 1.0f, meshList[(int)GeoType::Orc], true, Color(0.0f, 0.0f, 1.0f), 0.8f);
 					break;
 				case StateID::StateSkeleDead:
