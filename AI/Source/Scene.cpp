@@ -195,6 +195,7 @@ void Scene::Render(){
 		0.0f
 	);
 
+	RenderBG();
 	if(simStarted){
 		RenderGrid();
 		RenderRegions();
@@ -204,7 +205,6 @@ void Scene::Render(){
 	} else{
 		RenderMystery();
 	}
-	RenderBG();
 	RenderSceneText();
 
 	modelStack.PopMatrix();
@@ -656,7 +656,7 @@ void Scene::RenderGrid(){
 		modelStack.Translate(
 			xOffset + (gridCellWidth + gridLineThickness) * (float)i,
 			(float)winHeight * 0.5f,
-			0.0f
+			0.05f
 		);
 		modelStack.Scale(
 			gridLineThickness,
@@ -673,7 +673,7 @@ void Scene::RenderGrid(){
 		modelStack.Translate(
 			(float)winWidth * 0.5f,
 			yOffset + (gridCellHeight + gridLineThickness) * (float)i,
-			0.0f
+			0.05f
 		);
 		modelStack.Scale(
 			gridWidth,
@@ -690,7 +690,7 @@ void Scene::RenderMystery(){
 	modelStack.Translate(
 		(float)winWidth * 0.5f,
 		(float)winHeight * 0.5f,
-		0.0f
+		0.05f
 	);
 	modelStack.Scale(
 		grid.CalcWidth(),
@@ -897,7 +897,7 @@ void Scene::RenderEntities(){
 			);
 
 			RenderText(
-				meshList[(int)GeoType::Text],
+				entity->GetTeam() == EntityTeam::Alpha ? meshList[(int)GeoType::TextMod2] : meshList[(int)GeoType::TextMod1],
 				stateTexts[(int)entity->GetCurrState()->GetID()],
 				entity->GetTeam() == EntityTeam::Alpha ? Color() : Color(0.0f, 0.0f, 0.0f),
 				TextAlignment::Center
@@ -1056,28 +1056,28 @@ void Scene::RenderRegions(){
 	modelStack.Translate(
 		alphaPosX,
 		alphaPosY,
-		0.0f
+		0.05f
 	);
 	modelStack.Scale(
 		alphaScaleX,
 		alphaScaleY,
 		1.0f
 	);
-	RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.7f, 0.7f, 0.7f), 1.0f);
+	RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.7f, 0.7f, 0.7f), 0.8f);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(
 		omegaPosX,
 		omegaPosY,
-		0.0f
+		0.05f
 	);
 	modelStack.Scale(
 		omegaScaleX,
 		omegaScaleY,
 		1.0f
 	);
-	RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.3f, 0.3f, 0.3f), 1.0f);
+	RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.3f, 0.3f, 0.3f), 0.8f);
 	modelStack.PopMatrix();
 }
 
