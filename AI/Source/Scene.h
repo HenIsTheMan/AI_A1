@@ -7,6 +7,7 @@
 	#define ENTITY_T_IS_VEC3
 #endif
 
+#include "ListenerFlags.hpp"
 #include "SceneSupport.h"
 #include "Grid.h"
 #include "ObjPool.h"
@@ -63,6 +64,8 @@ private:
 	int omegaTeamLocalXEnd;
 	int omegaTeamLocalYStart;
 	int omegaTeamLocalYEnd;
+	int alphaTeamEntityCount;
+	int omegaTeamEntityCount;
 	ObjPool<Entity>* objPool;
 	Publisher* publisher;
 

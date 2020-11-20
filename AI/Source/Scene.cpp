@@ -71,6 +71,8 @@ Scene::Scene():
 	omegaTeamLocalXEnd(0),
 	omegaTeamLocalYStart(0),
 	omegaTeamLocalYEnd(0),
+	alphaTeamEntityCount(0),
+	omegaTeamEntityCount(0),
 	objPool(new ObjPool<Entity>()),
 	publisher(Publisher::RetrieveGlobalObjPtr()),
 	skeleSM(new SM()),
@@ -691,14 +693,16 @@ void Scene::UpdateEntities(const double dt){
 			assert(false);
 	}
 
-	static float alphaTeamSpawnBT = 999.0f;
-	static float omegaTeamSpawnBT = 999.0f;
+	static float alphaTeamSpawnBT = 0.0f;
+	static float omegaTeamSpawnBT = 0.0f;
+	alphaTeamEntityCount = 21;
+	omegaTeamEntityCount = 21;
 
-	if(alphaTeamSpawnBT <= elapsedTime){
+	if(alphaTeamEntityCount < 20 && alphaTeamSpawnBT <= elapsedTime){
 		SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::AlphaTeam);
 		alphaTeamSpawnBT = elapsedTime + !isDay ? Math::RandFloatMinMax(4.0f, 5.0f) : Math::RandFloatMinMax(2.0f, 3.0f);
 	}
-	if(omegaTeamSpawnBT <= elapsedTime){
+	if(omegaTeamEntityCount < 20 && omegaTeamSpawnBT <= elapsedTime){
 		SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::OmegaTeam);
 		omegaTeamSpawnBT = elapsedTime + isDay ? Math::RandFloatMinMax(4.0f, 5.0f) : Math::RandFloatMinMax(2.0f, 3.0f);
 	}
@@ -1391,6 +1395,22 @@ void Scene::RenderDebugInfoText(Mesh* const textMesh, const Color& textColor, co
 		textSize,
 		0.0f,
 		textSize * 4.0f
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Alpha count: " + std::to_string(alphaTeamEntityCount),
+		textColor,
+		textSize,
+		0.0f,
+		textSize * 5.0f
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Omega count: " + std::to_string(omegaTeamEntityCount),
+		textColor,
+		textSize,
+		0.0f,
+		textSize * 6.0f
 	);
 }
 
