@@ -23,7 +23,6 @@ namespace Obj{
 		T im_LocalScale = T();
 
 		Type im_Dmg = Type();
-		Type im_Range = Type();
 		Type im_CurrHealth = Type();
 		Type im_MaxHealth = Type();
 		Type im_Spd = Type();

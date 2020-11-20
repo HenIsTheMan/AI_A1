@@ -218,7 +218,6 @@ Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
 	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
 
 	entity->SetDmg(22.0f);
-	entity->SetRange(1.2f);
 	entity->SetMaxHealth(45.0f);
 	entity->SetCurrHealth(entity->GetMaxHealth());
 	entity->SetSpd(1.4f);
@@ -244,7 +243,6 @@ Entity* Scene::CreateReptile(const CreateEntityParams& params) const{
 	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
 
 	entity->SetDmg(3.0f);
-	entity->SetRange(2.1f);
 	entity->SetMaxHealth(240.0f);
 	entity->SetCurrHealth(entity->GetMaxHealth());
 	entity->SetSpd(1.8f);
@@ -270,7 +268,6 @@ Entity* Scene::CreateBoy(const CreateEntityParams& params) const{
 	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
 
 	entity->SetDmg(10.0f);
-	entity->SetRange(1.3f);
 	entity->SetMaxHealth(85.0f);
 	entity->SetCurrHealth(entity->GetMaxHealth());
 	entity->SetSpd(1.2f);
@@ -296,7 +293,6 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
 
 	entity->SetDmg(15.0f);
-	entity->SetRange(0.7f);
 	entity->SetMaxHealth(150.0f);
 	entity->SetCurrHealth(entity->GetMaxHealth());
 	entity->SetSpd(0.8f);

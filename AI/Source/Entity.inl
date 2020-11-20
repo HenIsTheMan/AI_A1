@@ -102,11 +102,6 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
-	const Type& Entity<T, Type>::GetRange() const{
-		return im_Attribs.im_Range;
-	}
-
-	template <class T, typename Type>
 	const Type& Entity<T, Type>::GetCurrHealth() const{
 		return im_Attribs.im_CurrHealth;
 	}
@@ -179,11 +174,6 @@ namespace Obj{
 	template <class T, typename Type>
 	void Entity<T, Type>::SetDmg(const Type& dmg){
 		im_Attribs.im_Dmg = dmg;
-	}
-
-	template <class T, typename Type>
-	void Entity<T, Type>::SetRange(const Type& range){
-		im_Attribs.im_Range = range;
 	}
 
 	template <class T, typename Type>

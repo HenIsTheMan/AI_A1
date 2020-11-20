@@ -22,7 +22,6 @@ namespace Obj{
 		const T& GetLocalScale() const;
 
 		const Type& GetDmg() const;
-		const Type& GetRange() const;
 		const Type& GetCurrHealth() const;
 		const Type& GetMaxHealth() const;
 		const Type& GetSpd() const;
@@ -44,7 +43,6 @@ namespace Obj{
 		void SetLocalScale(const T& localScale);
 
 		void SetDmg(const Type& dmg);
-		void SetRange(const Type& range);
 		void SetCurrHealth(const Type& currHealth);
 		void SetMaxHealth(const Type& maxHealth);
 		void SetSpd(const Type& spd);
