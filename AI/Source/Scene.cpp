@@ -695,16 +695,18 @@ void Scene::UpdateEntities(const double dt){
 
 	static float alphaTeamSpawnBT = 0.0f;
 	static float omegaTeamSpawnBT = 0.0f;
-	alphaTeamEntityCount = 21;
-	omegaTeamEntityCount = 21;
+	//alphaTeamEntityCount = 0;
+	//omegaTeamEntityCount = 0;
 
-	if(alphaTeamEntityCount < 20 && alphaTeamSpawnBT <= elapsedTime){
+	if(alphaTeamEntityCount < 50 && alphaTeamSpawnBT <= elapsedTime){
 		SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::AlphaTeam);
-		alphaTeamSpawnBT = elapsedTime + !isDay ? Math::RandFloatMinMax(4.0f, 5.0f) : Math::RandFloatMinMax(2.0f, 3.0f);
+		alphaTeamSpawnBT = elapsedTime + (!isDay ? Math::RandFloatMinMax(4.0f, 5.0f) : Math::RandFloatMinMax(2.0f, 3.0f));
+		++alphaTeamEntityCount;
 	}
-	if(omegaTeamEntityCount < 20 && omegaTeamSpawnBT <= elapsedTime){
+	if(omegaTeamEntityCount < 50 && omegaTeamSpawnBT <= elapsedTime){
 		SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::OmegaTeam);
-		omegaTeamSpawnBT = elapsedTime + isDay ? Math::RandFloatMinMax(4.0f, 5.0f) : Math::RandFloatMinMax(2.0f, 3.0f);
+		omegaTeamSpawnBT = elapsedTime + (isDay ? Math::RandFloatMinMax(4.0f, 5.0f) : Math::RandFloatMinMax(2.0f, 3.0f));
+		++omegaTeamEntityCount;
 	}
 
 	std::vector<std::pair<bool, Entity*>>& entityPool = objPool->RetrievePool();
@@ -1188,6 +1190,7 @@ void Scene::RenderRegions(){
 			assert(false);
 	}
 
+	///Render dead zone
 	if(gridRows != 0 && gridCols != 0 && (teamRegionsCase > 2 && gridRows & 1) || (teamRegionsCase < 3 && gridCols & 1)){
 		modelStack.PushMatrix();
 		modelStack.Translate(
