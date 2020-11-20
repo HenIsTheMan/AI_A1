@@ -16,10 +16,20 @@ void StateBoyIdle::Update(Entity* const entity, const double dt){
 
 	const Vector3& entityLocalPos = entity->GetLocalPos();
 	const std::vector<std::vector<bool>>& gridBlockData = im_Grid->GetBlockData();
-	if(((int)entityLocalPos.x + 1 >= im_GridCols || ((int)entityLocalPos.x + 1 < im_GridCols && gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x + 1]))
-		&& ((int)entityLocalPos.x - 1 < 0 || ((int)entityLocalPos.x - 1 >= 0 && gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x - 1]))
-		&& ((int)entityLocalPos.y + 1 >= im_GridRows || ((int)entityLocalPos.y + 1 < im_GridRows && gridBlockData[(int)entityLocalPos.y + 1][(int)entityLocalPos.x]))
-		&& ((int)entityLocalPos.y - 1 < 0 || ((int)entityLocalPos.y - 1 >= 0 && gridBlockData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]))
+	const std::vector<std::vector<bool>>& gridEntityData = im_Grid->GetEntityData();
+
+	if(((int)entityLocalPos.x + 1 >= im_GridCols || ((int)entityLocalPos.x + 1 < im_GridCols
+		&& gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x + 1]
+		&& gridEntityData[(int)entityLocalPos.y][(int)entityLocalPos.x + 1]))
+		&& ((int)entityLocalPos.x - 1 < 0 || ((int)entityLocalPos.x - 1 >= 0
+		&& gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x - 1]
+		&& gridEntityData[(int)entityLocalPos.y][(int)entityLocalPos.x - 1]))
+		&& ((int)entityLocalPos.y + 1 >= im_GridRows || ((int)entityLocalPos.y + 1 < im_GridRows
+		&& gridBlockData[(int)entityLocalPos.y + 1][(int)entityLocalPos.x]
+		&& gridEntityData[(int)entityLocalPos.y + 1][(int)entityLocalPos.x]))
+		&& ((int)entityLocalPos.y - 1 < 0 || ((int)entityLocalPos.y - 1 >= 0
+		&& gridBlockData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]
+		&& gridEntityData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]))
 	){
 		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyCannotMove));
 		return;
