@@ -40,12 +40,6 @@
     <ClCompile Include="Source\EventGridDataChanged.cpp">
       <Filter>Event\Events\Post-events</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EventPeriodChanged.cpp">
-      <Filter>Event\Events\Post-events</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EventSimStarted.cpp">
-      <Filter>Event\Events\Post-events</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EntityHelperFuncs.cpp">
       <Filter>Obj</Filter>
     </ClCompile>
@@ -136,12 +130,6 @@
       <Filter>Event</Filter>
     </ClInclude>
     <ClInclude Include="Source\EventGridDataChanged.h">
-      <Filter>Event\Events\Post-events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EventPeriodChanged.h">
-      <Filter>Event\Events\Post-events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EventSimStarted.h">
       <Filter>Event\Events\Post-events</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateSkeleAttack.h">

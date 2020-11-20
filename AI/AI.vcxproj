@@ -155,8 +155,6 @@
     <ClCompile Include="Source\EventGridDataChanged.cpp" />
     <ClCompile Include="Source\EventGridHeightShrinking.cpp" />
     <ClCompile Include="Source\EventGridWidthShrinking.cpp" />
-    <ClCompile Include="Source\EventPeriodChanged.cpp" />
-    <ClCompile Include="Source\EventSimStarted.cpp" />
     <ClCompile Include="Source\Listener.cpp" />
     <ClCompile Include="Source\LoadImg.cpp" />
     <ClCompile Include="Source\EntryPt.cpp" />
@@ -177,8 +175,6 @@
     <ClInclude Include="Source\EventGridDataChanged.h" />
     <ClInclude Include="Source\EventGridHeightShrinking.h" />
     <ClInclude Include="Source\EventGridWidthShrinking.h" />
-    <ClInclude Include="Source\EventPeriodChanged.h" />
-    <ClInclude Include="Source\EventSimStarted.h" />
     <ClInclude Include="Source\Event.h" />
     <ClInclude Include="Source\App.h" />
     <ClInclude Include="Source\Cam.h" />
