@@ -1,3 +1,4 @@
+float StateSkeleCannotMove::im_ElapsedTime = 0.0f;
 Grid<float>* StateSkeleCannotMove::im_Grid = nullptr;
 int StateSkeleCannotMove::im_GridRows = 0;
 int StateSkeleCannotMove::im_GridCols = 0;
@@ -21,8 +22,13 @@ void StateSkeleCannotMove::Update(Entity* const entity, const double dt){
 	}
 	//*/
 
-	ChooseRandDir(entity);
+	static float chooseDirBT = 0.0f;
+	if(chooseDirBT <= im_ElapsedTime){
+		ChooseRandDir(entity);
+		chooseDirBT = im_ElapsedTime + Math::RandFloatMinMax(0.9f, 2.0f);
+	}
 }
 
 void StateSkeleCannotMove::Exit(Entity* const entity){
+	entity->SetGridTargetLocalPos(entity->GetLocalPos()); //So will change to valid dir in idle state
 }

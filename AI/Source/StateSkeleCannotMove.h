@@ -10,6 +10,7 @@ class StateSkeleCannotMove final{ //Static class
 	StateSkeleCannotMove& operator=(const StateSkeleCannotMove&) = delete;
 	StateSkeleCannotMove& operator=(StateSkeleCannotMove&&) noexcept = delete;
 public:
+	static float im_ElapsedTime;
 	static Grid<float>* im_Grid;
 	static int im_GridRows;
 	static int im_GridCols;

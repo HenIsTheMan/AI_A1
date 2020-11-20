@@ -10,6 +10,7 @@ class StateOrcCannotMove final{ //Static class
 	StateOrcCannotMove& operator=(const StateOrcCannotMove&) = delete;
 	StateOrcCannotMove& operator=(StateOrcCannotMove&&) noexcept = delete;
 public:
+	static float im_ElapsedTime;
 	static Grid<float>* im_Grid;
 	static int im_GridRows;
 	static int im_GridCols;
