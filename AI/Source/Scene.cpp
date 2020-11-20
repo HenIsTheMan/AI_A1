@@ -166,7 +166,6 @@ void Scene::Update(double dt){
 	UpdateGridAttribs();
 	if(simStarted){
 		UpdateGridBlockData();
-		UpdateGridEntityData();
 		UpdateStates();
 		UpdateEntities(dt * gameSpd);
 	}
@@ -370,7 +369,7 @@ void Scene::UpdateGridAttribs(){
 	}
 	if(!isKeyDown8 && App::Key('8')){
 		if(gridRows > gridMinRows){
-			publisher->Notify((long int)ListenerFlags::Entity, new EventGridHeightShrinking(--gridRows), false);
+			publisher->Notify((long int)ListenerFlags::Entity, new EventGridHeightShrinking(--gridRows), true);
 		}
 		isKeyDown8 = true;
 	} else if(isKeyDown8 && !App::Key('8')){
@@ -386,7 +385,7 @@ void Scene::UpdateGridAttribs(){
 	}
 	if(!isKeyDown0 && App::Key('0')){
 		if(gridCols > gridMinCols){
-			publisher->Notify((long int)ListenerFlags::Entity, new EventGridWidthShrinking(--gridCols), false);
+			publisher->Notify((long int)ListenerFlags::Entity, new EventGridWidthShrinking(--gridCols), true);
 		}
 		isKeyDown0 = true;
 	} else if(isKeyDown0 && !App::Key('0')){
@@ -456,30 +455,6 @@ void Scene::UpdateGridBlockData(){
 		} else if(isRMB){
 			grid.SetBlockData(false, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
 			publisher->Notify((long int)ListenerFlags::Entity, new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
-		}
-	}
-}
-
-void Scene::UpdateGridEntityData(){
-	std::vector<std::vector<bool>>& gridEntityData = grid.RetrieveEntityData();
-	for(int i = 0; i < gridRows; ++i){
-		for(int j = 0; j < gridCols; ++j){
-			gridEntityData[i][j] = false; //All data becomes false
-		}
-	}
-
-	std::vector<std::pair<bool, Entity*>>& entityPool = objPool->RetrievePool();
-	const size_t entityPoolSize = entityPool.size();
-
-	for(size_t i = 0; i < entityPoolSize; ++i){
-		if(entityPool[i].first){
-			Entity* const entity = entityPool[i].second;
-			const Vector3& entityLocalPos = entity->GetLocalPos();
-
-			gridEntityData[(int)std::floorf(entityLocalPos.y)][(int)std::floorf(entityLocalPos.x)] = true;
-			gridEntityData[(int)std::floorf(entityLocalPos.y)][(int)std::ceilf(entityLocalPos.x)] = true;
-			gridEntityData[(int)std::ceilf(entityLocalPos.y)][(int)std::floorf(entityLocalPos.x)] = true;
-			gridEntityData[(int)std::ceilf(entityLocalPos.y)][(int)std::ceilf(entityLocalPos.x)] = true;
 		}
 	}
 }
