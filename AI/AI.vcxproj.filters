@@ -37,9 +37,6 @@
     <ClCompile Include="Source\Listener.cpp">
       <Filter>Event</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EventGridDataChanged.cpp">
-      <Filter>Event\Events\Post-events</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Event.cpp">
       <Filter>Event</Filter>
     </ClCompile>
@@ -60,6 +57,9 @@
     </ClCompile>
     <ClCompile Include="Source\StateHelperFuncs.cpp">
       <Filter>State</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EventBlockPlaced.cpp">
+      <Filter>Event\Events\Post-events</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,9 +128,6 @@
     </ClInclude>
     <ClInclude Include="Source\Listener.h">
       <Filter>Event</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EventGridDataChanged.h">
-      <Filter>Event\Events\Post-events</Filter>
     </ClInclude>
     <ClInclude Include="Source\StateSkeleAttack.h">
       <Filter>State\States\SkeleStates</Filter>
@@ -218,6 +215,9 @@
     </ClInclude>
     <ClInclude Include="Source\StateSkeleCannotMove.h">
       <Filter>State\States\SkeleStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventBlockPlaced.h">
+      <Filter>Event\Events\Post-events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

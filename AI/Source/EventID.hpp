@@ -1,7 +1,7 @@
 #pragma once
 
 enum struct EventID: int{
-	EventGridDataChanged,
+	EventBlockPlaced,
 	EventGridHeightShrinking,
 	EventGridWidthShrinking,
 	EventCalcActiveObjs,

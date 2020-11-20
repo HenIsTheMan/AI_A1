@@ -152,7 +152,7 @@
     <ClCompile Include="Source\Event.cpp" />
     <ClCompile Include="Source\EventCalcActiveObjs.cpp" />
     <ClCompile Include="Source\EventCalcInactiveObjs.cpp" />
-    <ClCompile Include="Source\EventGridDataChanged.cpp" />
+    <ClCompile Include="Source\EventBlockPlaced.cpp" />
     <ClCompile Include="Source\EventGridHeightShrinking.cpp" />
     <ClCompile Include="Source\EventGridWidthShrinking.cpp" />
     <ClCompile Include="Source\Listener.cpp" />
@@ -173,7 +173,7 @@
     <ClInclude Include="Source\EntityTeam.hpp" />
     <ClInclude Include="Source\EventCalcActiveObjs.h" />
     <ClInclude Include="Source\EventCalcInactiveObjs.h" />
-    <ClInclude Include="Source\EventGridDataChanged.h" />
+    <ClInclude Include="Source\EventBlockPlaced.h" />
     <ClInclude Include="Source\EventGridHeightShrinking.h" />
     <ClInclude Include="Source\EventGridWidthShrinking.h" />
     <ClInclude Include="Source\Event.h" />

@@ -3,7 +3,7 @@
 #include "App.h"
 #include "SpriteAni.h"
 
-#include "EventGridDataChanged.h"
+#include "EventBlockPlaced.h"
 #include "EventGridHeightShrinking.h"
 #include "EventGridWidthShrinking.h"
 #include "EventCalcActiveObjs.h"
@@ -463,10 +463,9 @@ void Scene::UpdateGridBlockData(){
 		&& trueMouseY > yOffset + gridLineThickness * 0.5f && trueMouseY < yOffset + gridHeight - gridLineThickness * 0.5f){
 		if(isLMB){
 			grid.SetBlockData(true, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
-			publisher->Notify((long int)ListenerFlags::Entity, new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
+			publisher->Notify((long int)ListenerFlags::Entity, new EventBlockPlaced((int)mouseRow, (int)mouseCol), true);
 		} else if(isRMB){
 			grid.SetBlockData(false, (ptrdiff_t)mouseRow, (ptrdiff_t)mouseCol);
-			publisher->Notify((long int)ListenerFlags::Entity, new EventGridDataChanged((int)mouseRow, (int)mouseCol), true);
 		}
 	}
 }
@@ -607,7 +606,7 @@ void Scene::UpdateEntities(const double dt){
 					}
 				}
 			} while(myEvent
-				&& (ID == EventID::EventGridDataChanged
+				&& (ID == EventID::EventBlockPlaced
 				|| ID == EventID::EventGridHeightShrinking
 				|| ID == EventID::EventGridWidthShrinking)
 			); //Important events must all be processed

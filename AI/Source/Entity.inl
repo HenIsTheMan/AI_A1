@@ -1,4 +1,4 @@
-#include "EventGridDataChanged.h"
+#include "EventBlockPlaced.h"
 #include "EventGridHeightShrinking.h"
 #include "EventGridWidthShrinking.h"
 
@@ -24,8 +24,8 @@ namespace Obj{
 		int val = -1;
 
 		switch(myEvent->GetID()){
-			case EventID::EventGridDataChanged: {
-				const EventGridDataChanged* const eventGridDataChanged = dynamic_cast<const EventGridDataChanged*>(myEvent);
+			case EventID::EventBlockPlaced: {
+				const EventBlockPlaced* const eventGridDataChanged = dynamic_cast<const EventBlockPlaced*>(myEvent);
 				assert(eventGridDataChanged && "Val of eventGridDataChanged is nullptr!");
 
 				const float blockRow = (float)eventGridDataChanged->GetBlockRow();
