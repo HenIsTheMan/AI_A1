@@ -31,6 +31,7 @@ void StateSkeleIdle::Update(Entity* const entity, const double dt){
 		&& gridBlockData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]
 		&& gridEntityData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]))
 	){
+		std::cout << "Wow 1!\n";
 		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateSkeleCannotMove));
 		return;
 	}
@@ -40,13 +41,6 @@ void StateSkeleIdle::Update(Entity* const entity, const double dt){
 	const Vector3 entityGridTargetLocalPos = entity->GetGridTargetLocalPos();
 	static float goStopBT = 0.0f;
 	static float chooseDirBT = 0.0f;
-
-	if(goStopBT > 0.0f){
-		goStopBT -= (float)dt;
-	}
-	if(chooseDirBT > 0.0f){
-		chooseDirBT -= (float)dt;
-	}
 
 	if(entity->GetTimeLeft() <= 0.0f){
 		if((entityGridTargetLocalPos - entity->GetLocalPos()).Length() < entity->GetSpd() * (float)dt){
@@ -62,13 +56,15 @@ void StateSkeleIdle::Update(Entity* const entity, const double dt){
 			}
 		} else{
 			entity->SetSpriteAniMiddleName("Move");
-			MoveInDir(entity, im_Grid, dt);
+			MoveInDir(entity, dt);
 		}
 	} else{
 		entity->SetTimeLeft(entity->GetTimeLeft() - (float)dt);
 
-		if(chooseDirBT <= im_ElapsedTime){
+		if(entity->GetTimeLeft() <= 0.0f){
 			ChooseADir(entity, im_Grid);
+		} else if(chooseDirBT <= im_ElapsedTime){
+			ChooseRandDir(entity);
 			chooseDirBT = im_ElapsedTime + Math::RandFloatMinMax(1.2f, 2.5f);
 		}
 	}
