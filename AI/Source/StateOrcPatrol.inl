@@ -1,5 +1,6 @@
 float StateOrcPatrol::im_ElapsedTime = 0.0f;
 Grid<float>* StateOrcPatrol::im_Grid = nullptr;
+Publisher* StateOrcPatrol::publisher = Publisher::RetrieveGlobalObjPtr();
 
 void StateOrcPatrol::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Move");

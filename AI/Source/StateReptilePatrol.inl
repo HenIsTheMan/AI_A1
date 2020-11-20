@@ -1,5 +1,6 @@
 float StateReptilePatrol::im_ElapsedTime = 0.0f;
 Grid<float>* StateReptilePatrol::im_Grid = nullptr;
+Publisher* StateReptilePatrol::publisher = Publisher::RetrieveGlobalObjPtr();
 Vector3 StateReptilePatrol::im_CommonDirs[2]{Vector3(), Vector3()};
 
 void StateReptilePatrol::Enter(Entity* const entity){

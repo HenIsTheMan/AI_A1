@@ -2,9 +2,10 @@
 
 #include <vector>
 
-#include "Entity.h" //In case not included before
-#include "Grid.h" //In case not included before
-#include "ObjPool.h" //In case not included before
+#include "Entity.h"
+#include "Grid.h"
+#include "ObjPool.h"
+#include "Publisher.h"
 
 using Entity = Obj::Entity<Vector3, float>;
 

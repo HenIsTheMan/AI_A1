@@ -1,5 +1,6 @@
 float StateBoyPatrol::im_ElapsedTime = 0.0f;
 Grid<float>* StateBoyPatrol::im_Grid = nullptr;
+Publisher* StateBoyPatrol::publisher = Publisher::RetrieveGlobalObjPtr();
 
 void StateBoyPatrol::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Move");
