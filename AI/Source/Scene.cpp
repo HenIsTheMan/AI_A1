@@ -60,6 +60,8 @@ Scene::Scene():
 	isDay(true),
 	dayNightBT(0.0f),
 	gameSpd(1.0f),
+	spawningStartTime(0.0f),
+	spawningEndTime(300.0f),
 	objPool(new ObjPool<Entity>()),
 	publisher(Publisher::RetrieveGlobalObjPtr()),
 	skeleSM(new SM()),
@@ -138,15 +140,9 @@ Scene::~Scene(){
 void Scene::Update(double dt){
 	SceneSupport::Update(dt);
 
-	if(!simStarted && App::Key(VK_SPACE)){
-		simStarted = true;
-		dayNightBT = elapsedTime + 7.0f;
-
-		alphaTeamRegionCase = Math::RandIntMinMax(1, 4);
-		omegaTeamRegionCase = Math::RandIntMinMax(1, 4);
-	}
-
 	if(simStarted){
+		spawningStartTime += (float)dt;
+
 		if(dayNightBT <= elapsedTime){
 			isDay = !isDay;
 			dayNightBT = elapsedTime + 7.0f;
@@ -175,13 +171,32 @@ void Scene::Update(double dt){
 		} else if(isKeyDownL && !App::Key('L')){
 			isKeyDownL = false;
 		}
-	}
 
-	if(simStarted){
+		static bool isKeyDownC = false;
+		static bool isKeyDownV = false;
+		if(!isKeyDownC && App::Key('C')){
+			spawningEndTime += 10.0f;
+			isKeyDownC = true;
+		} else if(isKeyDownC && !App::Key('C')){
+			isKeyDownC = false;
+		}
+		if(!isKeyDownV && App::Key('V')){
+			spawningEndTime -= 10.0f;
+			isKeyDownV = true;
+		} else if(isKeyDownV && !App::Key('V')){
+			isKeyDownV = false;
+		}
+
 		UpdateGridAttribs();
 		UpdateGridBlockData();
 		UpdateStates();
 		UpdateEntities(dt * gameSpd);
+	} else if(App::Key(VK_SPACE)){
+		simStarted = true;
+		dayNightBT = elapsedTime + 7.0f;
+
+		alphaTeamRegionCase = Math::RandIntMinMax(1, 4);
+		omegaTeamRegionCase = Math::RandIntMinMax(1, 4);
 	}
 }
 
@@ -1204,6 +1219,25 @@ void Scene::RenderSceneText(){
 	RenderDebugInfoText(textMesh, Color(1.0f, 0.5f, 0.0f), textSize);
 	RenderControlsText(textMesh, Color(1.0f, 0.0f, 1.0f), textSize);
 	RenderGridAttribsText(textMesh, Color(1.0f, 1.0f, 0.0f), textSize);
+
+	RenderTextOnScreen(
+		textMesh,
+		"Spawning start time: " + std::to_string(spawningStartTime).substr(0, std::to_string((int)spawningStartTime).length() + 3),
+		Color(0.0f, 1.0f, 0.0f),
+		textSize,
+		(float)winWidth,
+		textSize * 19.0f,
+		TextAlignment::Right
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"Spawning end time: " + std::to_string(spawningEndTime).substr(0, std::to_string((int)spawningEndTime).length() + 3),
+		Color(1.0f, 0.0f, 0.0f),
+		textSize,
+		(float)winWidth,
+		textSize * 18.0f,
+		TextAlignment::Right
+	);
 }
 
 void Scene::RenderDebugInfoText(Mesh* const textMesh, const Color& textColor, const float textSize){
@@ -1313,6 +1347,30 @@ void Scene::RenderControlsText(Mesh* const textMesh, const Color& textColor, con
 		textSize,
 		0.0f,
 		textSize * 12.0f
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"1 - 10: Modify grid attribs",
+		textColor,
+		textSize,
+		0.0f,
+		textSize * 11.0f
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"C: Increase spawning end time",
+		textColor,
+		textSize,
+		0.0f,
+		textSize * 10.0f
+	);
+	RenderTextOnScreen(
+		textMesh,
+		"V: Decrease spawning end time",
+		textColor,
+		textSize,
+		0.0f,
+		textSize * 9.0f
 	);
 }
 

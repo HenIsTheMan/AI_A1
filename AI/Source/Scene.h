@@ -52,6 +52,8 @@ private:
 	bool isDay;
 	float dayNightBT;
 	float gameSpd;
+	float spawningStartTime;
+	float spawningEndTime;
 	ObjPool<Entity>* objPool;
 	Publisher* publisher;
 
