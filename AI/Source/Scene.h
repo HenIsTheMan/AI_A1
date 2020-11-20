@@ -49,6 +49,7 @@ private:
 	Grid<float> grid;
 
 	bool simStarted;
+	bool simEnded;
 	bool showLines;
 	bool isDay;
 	float dayNightBT;

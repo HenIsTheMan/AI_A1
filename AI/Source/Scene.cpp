@@ -58,6 +58,7 @@ Scene::Scene():
 	gridMaxCols(30),
 	grid(Grid<float>(0.0f, 0.0f, 0.0f, 0, 0)),
 	simStarted(false),
+	simEnded(false),
 	showLines(false),
 	isDay(true),
 	dayNightBT(0.0f),
@@ -154,6 +155,10 @@ Scene::~Scene(){
 
 void Scene::Update(double dt){
 	SceneSupport::Update(dt);
+
+	if(spawningStartTime >= spawningEndTime && (!alphaTeamEntityCount || !omegaTeamEntityCount)){
+		simEnded = true;
+	}
 
 	if(simStarted){
 		spawningStartTime += (float)dt;
@@ -255,17 +260,47 @@ void Scene::Render(){
 		0.0f
 	);
 
-	RenderBG();
-	if(simStarted){
-		RenderGrid();
-		RenderRegions();
-		RenderGridBlockData();
-		RenderTranslucentBlock();
-		RenderEntities();
+	if(simEnded){
+		RenderBG();
+
+		Mesh* const textMesh = meshList[(int)GeoType::Text];
+		const float textSize = (float)windowHeight * 0.05f;
+		std::string endText;
+		Color endColor;
+
+		if(!alphaTeamEntityCount && !omegaTeamEntityCount){
+			endText = "Draw!";
+			endColor = Color(1.0f, 0.0f, 1.0f);
+		} else if(alphaTeamEntityCount){
+			endText = "Blue Wins!";
+			endColor = Color(0.0f, 0.0f, 1.0f);
+		} else{
+			endText = "Red Wins!";
+			endColor = Color(1.0f, 0.0f, 0.0f);
+		}
+
+		RenderTextOnScreen(
+			textMesh,
+			endText,
+			endColor,
+			((cosf(elapsedTime * 4.0f) + 1.0f) * 0.5f + 1.0f) * 0.5f * textSize * 2.0f,
+			(float)windowWidth * 0.5f,
+			textSize * 10.0f,
+			TextAlignment::Center
+		);
 	} else{
-		RenderMystery();
+		RenderBG();
+		if(simStarted){
+			RenderGrid();
+			RenderRegions();
+			RenderGridBlockData();
+			RenderTranslucentBlock();
+			RenderEntities();
+		} else{
+			RenderMystery();
+		}
+		RenderSceneText();
 	}
-	RenderSceneText();
 
 	modelStack.PopMatrix();
 }
