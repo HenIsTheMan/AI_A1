@@ -224,7 +224,7 @@ Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
 	entity->SetSpd(1.4f);
 
 	entity->SetTarget(nullptr);
-	ChooseRandDir(entity, &grid, gridRows, gridCols);
+	ChooseRandDir(entity);
 	entity->SetTimeLeft(0.0f);
 	entity->SetTeam(EntityTeam::Amt);
 
@@ -250,7 +250,7 @@ Entity* Scene::CreateReptile(const CreateEntityParams& params) const{
 	entity->SetSpd(1.8f);
 
 	entity->SetTarget(nullptr);
-	ChooseRandDir(entity, &grid, gridRows, gridCols);
+	ChooseRandDir(entity);
 	entity->SetTimeLeft(0.0f);
 	entity->SetTeam(EntityTeam::Amt);
 
@@ -276,7 +276,7 @@ Entity* Scene::CreateBoy(const CreateEntityParams& params) const{
 	entity->SetSpd(1.2f);
 
 	entity->SetTarget(nullptr);
-	ChooseRandDir(entity, &grid, gridRows, gridCols);
+	ChooseRandDir(entity);
 	entity->SetTimeLeft(0.0f);
 	entity->SetTeam(EntityTeam::Amt);
 
@@ -302,7 +302,7 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 	entity->SetSpd(0.8f);
 
 	entity->SetTarget(nullptr);
-	ChooseRandDir(entity, &grid, gridRows, gridCols);
+	ChooseRandDir(entity);
 	entity->SetTimeLeft(0.0f);
 	entity->SetTeam(EntityTeam::Amt);
 
@@ -479,7 +479,11 @@ void Scene::UpdateStates(){
 }
 
 void Scene::UpdateSkeleStates(){
+	StateSkeleCannotMove* const stateSkeleCannotMove = ((StateSkeleCannotMove*)skeleSM->GetState(StateID::StateSkeleCannotMove));
+	stateSkeleCannotMove->im_Grid = &grid;
+
 	StateSkeleIdle* const stateSkeleIdle = ((StateSkeleIdle*)skeleSM->GetState(StateID::StateSkeleIdle));
+	stateSkeleIdle->im_ElapsedTime = elapsedTime;
 	stateSkeleIdle->im_Grid = &grid;
 	stateSkeleIdle->im_GridRows = gridRows;
 	stateSkeleIdle->im_GridCols = gridCols;
@@ -489,7 +493,11 @@ void Scene::UpdateSkeleStates(){
 }
 
 void Scene::UpdateReptileStates(){
+	StateReptileCannotMove* const stateReptileCannotMove = ((StateReptileCannotMove*)reptileSM->GetState(StateID::StateReptileCannotMove));
+	stateReptileCannotMove->im_Grid = &grid;
+
 	StateReptileIdle* const stateReptileIdle = ((StateReptileIdle*)reptileSM->GetState(StateID::StateReptileIdle));
+	stateReptileIdle->im_ElapsedTime = elapsedTime;
 	stateReptileIdle->im_Grid = &grid;
 	stateReptileIdle->im_GridRows = gridRows;
 	stateReptileIdle->im_GridCols = gridCols;
@@ -505,7 +513,11 @@ void Scene::UpdateReptileStates(){
 }
 
 void Scene::UpdateBoyStates(){
+	StateBoyCannotMove* const stateBoyCannotMove = ((StateBoyCannotMove*)boySM->GetState(StateID::StateBoyCannotMove));
+	stateBoyCannotMove->im_Grid = &grid;
+
 	StateBoyIdle* const stateBoyIdle = ((StateBoyIdle*)boySM->GetState(StateID::StateBoyIdle));
+	stateBoyIdle->im_ElapsedTime = elapsedTime;
 	stateBoyIdle->im_Grid = &grid;
 	stateBoyIdle->im_GridRows = gridRows;
 	stateBoyIdle->im_GridCols = gridCols;
@@ -515,7 +527,11 @@ void Scene::UpdateBoyStates(){
 }
 
 void Scene::UpdateOrcStates(){
+	StateOrcCannotMove* const stateOrcCannotMove = ((StateOrcCannotMove*)orcSM->GetState(StateID::StateOrcCannotMove));
+	stateOrcCannotMove->im_Grid = &grid;
+
 	StateOrcIdle* const stateOrcIdle = ((StateOrcIdle*)orcSM->GetState(StateID::StateOrcIdle));
+	stateOrcIdle->im_ElapsedTime = elapsedTime;
 	stateOrcIdle->im_Grid = &grid;
 	stateOrcIdle->im_GridRows = gridRows;
 	stateOrcIdle->im_GridCols = gridCols;

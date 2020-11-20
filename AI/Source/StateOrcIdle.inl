@@ -1,3 +1,4 @@
+float StateOrcIdle::im_ElapsedTime = 0.0f;
 Grid<float>* StateOrcIdle::im_Grid = nullptr;
 int StateOrcIdle::im_GridRows = 0;
 int StateOrcIdle::im_GridCols = 0;
@@ -27,27 +28,28 @@ void StateOrcIdle::Update(Entity* const entity, const double dt){
 
 	//* Update entity
 	const Vector3 entityGridTargetLocalPos = entity->GetGridTargetLocalPos();
+	static float goStopBT = 0.0f;
+	static float chooseDirBT = 0.0f;
 
 	if(entity->GetTimeLeft() <= 0.0f){
 		if((entityGridTargetLocalPos - entity->GetLocalPos()).Length() < entity->GetSpd() * (float)dt){
 			entity->SetLocalPos(roundf(entityGridTargetLocalPos.x), roundf(entityGridTargetLocalPos.y), roundf(entityGridTargetLocalPos.z)); //Snap entity's local pos
 
-			entity->SetSpriteAniMiddleName("Move");
-			ChooseRandDir(entity, im_Grid, im_GridRows, im_GridCols);
+			if(goStopBT <= im_ElapsedTime && Math::RandIntMinMax(1, 10) == 1){
+				entity->SetSpriteAniMiddleName("Static");
+				entity->SetTimeLeft((float)Math::RandIntMinMax(3, 6));
+				goStopBT = im_ElapsedTime + 0.5f;
+			} else{
+				entity->SetSpriteAniMiddleName("Move");
+				ChooseADir(entity, im_Grid, im_GridRows, im_GridCols);
+			}
 		} else{
 			entity->SetSpriteAniMiddleName("Move");
-			MoveInDir(entity, im_Grid, im_GridRows, im_GridCols, dt);
+			MoveInDir(entity, dt);
 		}
-	} else{
-		entity->SetSpriteAniMiddleName("Static");
-
-		if(entity->GetTimeLeft() < 999.0f){
-			entity->SetTimeLeft(entity->GetTimeLeft() - (float)dt);
-		}
-
-		if(Math::RandIntMinMax(1, 500) == 1){
-			ChooseRandDir(entity, im_Grid, im_GridRows, im_GridCols);
-		}
+	} else if(chooseDirBT <= im_ElapsedTime){
+		ChooseADir(entity, im_Grid, im_GridRows, im_GridCols);
+		chooseDirBT = im_ElapsedTime + Math::RandFloatMinMax(0.9f, 2.0f);
 	}
 	//*/
 }

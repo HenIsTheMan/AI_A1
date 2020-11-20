@@ -10,6 +10,7 @@ class StateBoyIdle final{ //Static class
 	StateBoyIdle& operator=(const StateBoyIdle&) = delete;
 	StateBoyIdle& operator=(StateBoyIdle&&) noexcept = delete;
 public:
+	static float im_ElapsedTime;
 	static Grid<float>* im_Grid;
 	static int im_GridRows;
 	static int im_GridCols;
