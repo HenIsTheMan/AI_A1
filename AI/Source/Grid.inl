@@ -8,7 +8,6 @@ Grid<T>::Grid():
 		0
 	)
 {
-	UpdateBlockData();
 }
 
 template <class T>
@@ -21,6 +20,7 @@ Grid<T>::Grid(T cellWidth, T cellHeight, T lineThickness, int rows, int cols):
 	im_Cols(cols)
 {
 	UpdateBlockData();
+	UpdateEntityData();
 }
 
 template <class T>
@@ -41,6 +41,11 @@ T Grid<T>::CalcWidth() const{
 template <class T>
 T Grid<T>::CalcHeight() const{
 	return im_Rows * im_CellHeight + (T)CalcAmtOfHorizLines() * im_LineThickness;
+}
+
+template <class T>
+std::vector<std::vector<bool>>& Grid<T>::RetrieveEntityData(){
+	return im_EntityData;
 }
 
 template <class T>
@@ -97,12 +102,14 @@ template <class T>
 void Grid<T>::SetRows(int rows){
 	im_Rows = rows;
 	UpdateBlockData();
+	UpdateEntityData();
 }
 
 template <class T>
 void Grid<T>::SetCols(int cols){
 	im_Cols = cols;
 	UpdateBlockData();
+	UpdateEntityData();
 }
 
 template <class T>
@@ -125,6 +132,19 @@ void Grid<T>::UpdateBlockData(){
 		const size_t oldAmtOfCols = oldBlockData[i].size();
 		for(j = 0; j < (im_Cols < (int)oldAmtOfCols ? im_Cols : (int)oldAmtOfCols); ++j){
 			im_BlockData[i][j] = oldBlockData[i][j];
+		}
+	}
+}
+
+template <class T>
+void Grid<T>::UpdateEntityData(){
+	im_EntityData = std::vector<std::vector<bool>>(im_Rows);
+	int i, j;
+
+	for(i = 0; i < im_Rows; ++i){
+		im_EntityData[i] = std::vector<bool>(im_Cols);
+		for(j = 0; j < im_Cols; ++j){
+			im_EntityData[i][j] = false; //All data becomes false
 		}
 	}
 }

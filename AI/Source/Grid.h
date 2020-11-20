@@ -12,6 +12,8 @@ public:
 	T CalcWidth() const;
 	T CalcHeight() const;
 
+	std::vector<std::vector<bool>>& RetrieveEntityData();
+
 	///Getters
 	const std::vector<std::vector<bool>>& GetBlockData() const;
 	T GetCellWidth() const;
@@ -29,6 +31,7 @@ public:
 	void SetCols(int cols);
 private:
 	std::vector<std::vector<bool>> im_BlockData;
+	std::vector<std::vector<bool>> im_EntityData;
 
 	T im_CellWidth;
 	T im_CellHeight;
@@ -38,6 +41,7 @@ private:
 	int im_Cols;
 
 	void UpdateBlockData();
+	void UpdateEntityData();
 };
 
 #include "Grid.inl"

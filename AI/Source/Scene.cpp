@@ -547,6 +547,30 @@ void Scene::UpdateOrcStates(){
 	stateOrcDead->im_ObjPool = objPool;
 }
 
+void Scene::UpdateGridEntityData(){
+	std::vector<std::vector<bool>>& gridEntityData = grid.RetrieveEntityData();
+	for(int i = 0; i < gridRows; ++i){
+		for(int j = 0; j < gridCols; ++j){
+			gridEntityData[i][j] = false; //All data becomes false
+		}
+	}
+
+	std::vector<std::pair<bool, Entity*>>& entityPool = objPool->RetrievePool();
+	const size_t entityPoolSize = entityPool.size();
+
+	for(size_t i = 0; i < entityPoolSize; ++i){
+		if(entityPool[i].first){
+			Entity* const entity = entityPool[i].second;
+			const Vector3& entityLocalPos = entity->GetLocalPos();
+
+			gridEntityData[(int)std::floorf(entityLocalPos.y)][(int)std::floorf(entityLocalPos.x)] = true;
+			gridEntityData[(int)std::floorf(entityLocalPos.y)][(int)std::ceilf(entityLocalPos.x)] = true;
+			gridEntityData[(int)std::ceilf(entityLocalPos.y)][(int)std::floorf(entityLocalPos.x)] = true;
+			gridEntityData[(int)std::ceilf(entityLocalPos.y)][(int)std::ceilf(entityLocalPos.x)] = true;
+		}
+	}
+}
+
 void Scene::UpdateEntities(const double dt){
 	static int control = 0;
 
@@ -590,7 +614,6 @@ void Scene::UpdateEntities(const double dt){
 		if(entityPool[i].first){
 			Entity* const entity = entityPool[i].second;
 
-			bool shldContinue = false;
 			const Event* myEvent = nullptr;
 			EventID ID = EventID::Amt;
 			do{
@@ -601,7 +624,6 @@ void Scene::UpdateEntities(const double dt){
 					switch(entity->OnEvent(myEvent, true)){
 						case -5:
 							objPool->DeactivateObj(entity);
-							shldContinue = true;
 							break;
 					}
 				}
@@ -610,10 +632,14 @@ void Scene::UpdateEntities(const double dt){
 				|| ID == EventID::EventGridHeightShrinking
 				|| ID == EventID::EventGridWidthShrinking)
 			); //Important events must all be processed
+		}
+	}
 
-			if(shldContinue){
-				continue;
-			}
+	UpdateGridEntityData();
+
+	for(size_t i = 0; i < entityPoolSize; ++i){
+		if(entityPool[i].first){
+			Entity* const entity = entityPool[i].second;
 
 			switch(entity->GetType()){
 				using namespace Obj;

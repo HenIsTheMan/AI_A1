@@ -83,6 +83,7 @@ private:
 	void UpdateReptileStates();
 	void UpdateBoyStates();
 	void UpdateOrcStates();
+	void UpdateGridEntityData();
 	void UpdateEntities(const double dt);
 
 	void RenderGrid();
