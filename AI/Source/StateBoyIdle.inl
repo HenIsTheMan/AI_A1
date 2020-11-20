@@ -31,6 +31,13 @@ void StateBoyIdle::Update(Entity* const entity, const double dt){
 	static float goStopBT = 0.0f;
 	static float chooseDirBT = 0.0f;
 
+	if(goStopBT > 0.0f){
+		goStopBT -= (float)dt;
+	}
+	if(chooseDirBT > 0.0f){
+		chooseDirBT -= (float)dt;
+	}
+
 	if(entity->GetTimeLeft() <= 0.0f){
 		if((entityGridTargetLocalPos - entity->GetLocalPos()).Length() < entity->GetSpd() * (float)dt){
 			entity->SetLocalPos(roundf(entityGridTargetLocalPos.x), roundf(entityGridTargetLocalPos.y), roundf(entityGridTargetLocalPos.z)); //Snap entity's local pos
