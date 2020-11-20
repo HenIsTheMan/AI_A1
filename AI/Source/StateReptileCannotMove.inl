@@ -1,4 +1,6 @@
 Grid<float>* StateReptileCannotMove::im_Grid = nullptr;
+int StateReptileCannotMove::im_GridRows = 0;
+int StateReptileCannotMove::im_GridCols = 0;
 
 void StateReptileCannotMove::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Static");

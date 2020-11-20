@@ -1,4 +1,6 @@
 Grid<float>* StateSkeleCannotMove::im_Grid = nullptr;
+int StateSkeleCannotMove::im_GridRows = 0;
+int StateSkeleCannotMove::im_GridCols = 0;
 
 void StateSkeleCannotMove::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Static");

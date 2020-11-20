@@ -1,4 +1,6 @@
 Grid<float>* StateOrcCannotMove::im_Grid = nullptr;
+int StateOrcCannotMove::im_GridRows = 0;
+int StateOrcCannotMove::im_GridCols = 0;
 
 void StateOrcCannotMove::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Static");
