@@ -90,6 +90,12 @@ Scene::Scene():
 	orcSM->AddState(new State(StateID::StateOrcImmune, StateOrcImmune::Enter, StateOrcImmune::Update, StateOrcImmune::Exit));
 
 	publisher->AddListener((long int)ListenerFlags::ObjPool, objPool);
+
+	grid.SetCellWidth(gridCellWidth);
+	grid.SetCellHeight(gridCellHeight);
+	grid.SetLineThickness(gridLineThickness);
+	grid.SetRows(gridRows);
+	grid.SetCols(gridCols);
 }
 
 Scene::~Scene(){
@@ -163,8 +169,8 @@ void Scene::Update(double dt){
 		}
 	}
 
-	UpdateGridAttribs();
 	if(simStarted){
+		UpdateGridAttribs();
 		UpdateGridBlockData();
 		UpdateStates();
 		UpdateEntities(dt * gameSpd);
@@ -301,7 +307,6 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 }
 
 void Scene::UpdateGridAttribs(){
-	if(simStarted){
 		static bool isKeyDown1 = false;
 		static bool isKeyDown2 = false;
 		static bool isKeyDown3 = false;
@@ -314,7 +319,7 @@ void Scene::UpdateGridAttribs(){
 		static bool isKeyDown0 = false;
 		if(!isKeyDown1 && App::Key('1')){
 			if(gridCellWidth < gridMaxCellWidth){
-				++gridCellWidth;
+				grid.SetCellWidth(++gridCellWidth);
 			}
 			isKeyDown1 = true;
 		} else if(isKeyDown1 && !App::Key('1')){
@@ -322,7 +327,7 @@ void Scene::UpdateGridAttribs(){
 		}
 		if(!isKeyDown2 && App::Key('2')){
 			if(gridCellWidth > gridMinCellWidth){
-				--gridCellWidth;
+				grid.SetCellWidth(--gridCellWidth);
 			}
 			isKeyDown2 = true;
 		} else if(isKeyDown2 && !App::Key('2')){
@@ -330,7 +335,7 @@ void Scene::UpdateGridAttribs(){
 		}
 		if(!isKeyDown3 && App::Key('3')){
 			if(gridCellHeight < gridMaxCellHeight){
-				++gridCellHeight;
+				grid.SetCellHeight(++gridCellHeight);
 			}
 			isKeyDown3 = true;
 		} else if(isKeyDown3 && !App::Key('3')){
@@ -338,7 +343,7 @@ void Scene::UpdateGridAttribs(){
 		}
 		if(!isKeyDown4 && App::Key('4')){
 			if(gridCellHeight > gridMinCellHeight){
-				--gridCellHeight;
+				grid.SetCellHeight(--gridCellHeight);
 			}
 			isKeyDown4 = true;
 		} else if(isKeyDown4 && !App::Key('4')){
@@ -347,6 +352,7 @@ void Scene::UpdateGridAttribs(){
 		if(!isKeyDown5 && App::Key('5')){
 			if(gridLineThickness < gridMaxLineThickness){
 				gridLineThickness += 0.1f;
+				grid.SetLineThickness(gridLineThickness);
 			}
 			isKeyDown5 = true;
 		} else if(isKeyDown5 && !App::Key('5')){
@@ -355,6 +361,7 @@ void Scene::UpdateGridAttribs(){
 		if(!isKeyDown6 && App::Key('6')){
 			if(gridLineThickness > gridMinLineThickness){
 				gridLineThickness -= 0.1f;
+				grid.SetLineThickness(gridLineThickness);
 			}
 			isKeyDown6 = true;
 		} else if(isKeyDown6 && !App::Key('6')){
@@ -362,7 +369,7 @@ void Scene::UpdateGridAttribs(){
 		}
 		if(!isKeyDown7 && App::Key('7')){
 			if(gridRows < gridMaxRows){
-				++gridRows;
+				grid.SetRows(++gridRows);
 			}
 			isKeyDown7 = true;
 		} else if(isKeyDown7 && !App::Key('7')){
@@ -371,6 +378,7 @@ void Scene::UpdateGridAttribs(){
 		if(!isKeyDown8 && App::Key('8')){
 			if(gridRows > gridMinRows){
 				publisher->Notify((long int)ListenerFlags::Entity, new EventGridHeightShrinking(--gridRows), true);
+				grid.SetRows(gridRows);
 			}
 			isKeyDown8 = true;
 		} else if(isKeyDown8 && !App::Key('8')){
@@ -378,7 +386,7 @@ void Scene::UpdateGridAttribs(){
 		}
 		if(!isKeyDown9 && App::Key('9')){
 			if(gridCols < gridMaxCols){
-				++gridCols;
+				grid.SetCols(++gridCols);
 			}
 			isKeyDown9 = true;
 		} else if(isKeyDown9 && !App::Key('9')){
@@ -387,18 +395,12 @@ void Scene::UpdateGridAttribs(){
 		if(!isKeyDown0 && App::Key('0')){
 			if(gridCols > gridMinCols){
 				publisher->Notify((long int)ListenerFlags::Entity, new EventGridWidthShrinking(--gridCols), true);
+				grid.SetCols(gridCols);
 			}
 			isKeyDown0 = true;
 		} else if(isKeyDown0 && !App::Key('0')){
 			isKeyDown0 = false;
 		}
-	}
-
-	grid.SetCellWidth(gridCellWidth);
-	grid.SetCellHeight(gridCellHeight);
-	grid.SetLineThickness(gridLineThickness);
-	grid.SetRows(gridRows);
-	grid.SetCols(gridCols);
 }
 
 void Scene::UpdateGridBlockData(){
