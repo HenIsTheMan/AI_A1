@@ -150,6 +150,7 @@
     <ClCompile Include="Source\Cam.cpp" />
     <ClCompile Include="Source\EventCalcAlphaCount.cpp" />
     <ClCompile Include="Source\EventCalcOmegaCount.cpp" />
+    <ClCompile Include="Source\EventFindNearestObj.cpp" />
     <ClCompile Include="Source\StateHelperFuncs.cpp" />
     <ClCompile Include="Source\Event.cpp" />
     <ClCompile Include="Source\EventCalcActiveObjs.cpp" />
@@ -172,6 +173,7 @@
   <ItemGroup>
     <ClInclude Include="Source\EventCalcAlphaCount.h" />
     <ClInclude Include="Source\EventCalcOmegaCount.h" />
+    <ClInclude Include="Source\EventFindNearestObj.h" />
     <ClInclude Include="Source\StateBoyIdle.h" />
     <ClInclude Include="Source\StateHelperFuncs.h" />
     <ClInclude Include="Source\EntityTeam.hpp" />

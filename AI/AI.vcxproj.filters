@@ -67,6 +67,9 @@
     <ClCompile Include="Source\EventCalcOmegaCount.cpp">
       <Filter>Event\Events</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EventFindNearestObj.cpp">
+      <Filter>Event\Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -230,6 +233,9 @@
     </ClInclude>
     <ClInclude Include="Source\StateBoyIdle.h">
       <Filter>State\States\BoyStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventFindNearestObj.h">
+      <Filter>Event\Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

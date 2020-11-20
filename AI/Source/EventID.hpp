@@ -8,5 +8,6 @@ enum struct EventID: int{
 	EventCalcInactiveObjs,
 	EventCalcAlphaCount,
 	EventCalcOmegaCount,
+	EventFindNearestObj,
 	Amt
 };
