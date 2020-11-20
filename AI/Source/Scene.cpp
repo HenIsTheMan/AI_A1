@@ -331,45 +331,53 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 	return entity;
 }
 
-void Scene::SpawnEntity(const Obj::EntityType type){
+void Scene::SpawnEntity(const Obj::EntityType type, const ListenerFlags& teamFlag){
 	switch(type){
 		case Obj::EntityType::Skele: {
 			Entity* const skele = CreateSkele({
-				Vector3(5.0f, 15.0f, 0.0f)
+				teamFlag == ListenerFlags::AlphaTeam ?
+				Vector3((float)Math::RandIntMinMax(alphaTeamLocalXStart, alphaTeamLocalXEnd), (float)Math::RandIntMinMax(alphaTeamLocalYStart, alphaTeamLocalYEnd), 0.0f)
+				: Vector3((float)Math::RandIntMinMax(omegaTeamLocalXStart, omegaTeamLocalXEnd), (float)Math::RandIntMinMax(omegaTeamLocalYStart, omegaTeamLocalYEnd), 0.0f)
 			});
 
-			skele->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
-			publisher->AddListener((long int)ListenerFlags::Skele | (long int)ListenerFlags::Entity, skele);
+			skele->SetTeam(teamFlag == ListenerFlags::AlphaTeam ? EntityTeam::Alpha : EntityTeam::Omega);
+			publisher->AddListener((long int)ListenerFlags::Skele | (long int) teamFlag | (long int)ListenerFlags::Entity, skele);
 
 			break;
 		}
 		case Obj::EntityType::Reptile: {
 			Entity* const reptile = CreateReptile({
-				Vector3(15.0f, 12.0f, 0.0f)
+				teamFlag == ListenerFlags::AlphaTeam ?
+				Vector3((float)Math::RandIntMinMax(alphaTeamLocalXStart, alphaTeamLocalXEnd), (float)Math::RandIntMinMax(alphaTeamLocalYStart, alphaTeamLocalYEnd), 0.0f)
+				: Vector3((float)Math::RandIntMinMax(omegaTeamLocalXStart, omegaTeamLocalXEnd), (float)Math::RandIntMinMax(omegaTeamLocalYStart, omegaTeamLocalYEnd), 0.0f)
 			});
 
-			reptile->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
-			publisher->AddListener((long int)ListenerFlags::Reptile | (long int)ListenerFlags::Entity, reptile);
+			reptile->SetTeam(teamFlag == ListenerFlags::AlphaTeam ? EntityTeam::Alpha : EntityTeam::Omega);
+			publisher->AddListener((long int)ListenerFlags::Reptile | (long int) teamFlag | (long int)ListenerFlags::Entity, reptile);
 
 			break;
 		}
 		case Obj::EntityType::Boy: {
 			Entity* const boy = CreateBoy({
-				Vector3(5.0f, 4.0f, 0.0f)
+				teamFlag == ListenerFlags::AlphaTeam ?
+				Vector3((float)Math::RandIntMinMax(alphaTeamLocalXStart, alphaTeamLocalXEnd), (float)Math::RandIntMinMax(alphaTeamLocalYStart, alphaTeamLocalYEnd), 0.0f)
+				: Vector3((float)Math::RandIntMinMax(omegaTeamLocalXStart, omegaTeamLocalXEnd), (float)Math::RandIntMinMax(omegaTeamLocalYStart, omegaTeamLocalYEnd), 0.0f)
 			});
 
-			boy->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
-			publisher->AddListener((long int)ListenerFlags::Boy | (long int)ListenerFlags::Entity, boy);
+			boy->SetTeam(teamFlag == ListenerFlags::AlphaTeam ? EntityTeam::Alpha : EntityTeam::Omega);
+			publisher->AddListener((long int)ListenerFlags::Boy | (long int) teamFlag | (long int)ListenerFlags::Entity, boy);
 
 			break;
 		}
 		case Obj::EntityType::Orc: {
 			Entity* const orc = CreateOrc({
-				Vector3(18.0f, 3.0f, 0.0f)
+				teamFlag == ListenerFlags::AlphaTeam ?
+				Vector3((float)Math::RandIntMinMax(alphaTeamLocalXStart, alphaTeamLocalXEnd), (float)Math::RandIntMinMax(alphaTeamLocalYStart, alphaTeamLocalYEnd), 0.0f)
+				: Vector3((float)Math::RandIntMinMax(omegaTeamLocalXStart, omegaTeamLocalXEnd), (float)Math::RandIntMinMax(omegaTeamLocalYStart, omegaTeamLocalYEnd), 0.0f)
 			});
 
-			orc->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
-			publisher->AddListener((long int)ListenerFlags::Orc | (long int)ListenerFlags::Entity, orc);
+			orc->SetTeam(teamFlag == ListenerFlags::AlphaTeam ? EntityTeam::Alpha : EntityTeam::Omega);
+			publisher->AddListener((long int)ListenerFlags::Orc | (long int) teamFlag | (long int)ListenerFlags::Entity, orc);
 
 			break;
 		}
@@ -687,11 +695,11 @@ void Scene::UpdateEntities(const double dt){
 	static float omegaTeamSpawnBT = 999.0f;
 
 	if(alphaTeamSpawnBT <= elapsedTime){
-		SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc));
+		SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::AlphaTeam);
 		alphaTeamSpawnBT = elapsedTime + !isDay ? Math::RandFloatMinMax(4.0f, 5.0f) : Math::RandFloatMinMax(2.0f, 3.0f);
 	}
 	if(omegaTeamSpawnBT <= elapsedTime){
-		SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc));
+		SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::OmegaTeam);
 		omegaTeamSpawnBT = elapsedTime + isDay ? Math::RandFloatMinMax(4.0f, 5.0f) : Math::RandFloatMinMax(2.0f, 3.0f);
 	}
 

@@ -84,7 +84,7 @@ private:
 	Entity* CreateBoy(const CreateEntityParams& params) const; //Moderate dmg, moderate health, moderate range, moderate spd
 	Entity* CreateOrc(const CreateEntityParams& params) const; //High dmg, high health, low range, low spd
 
-	void SpawnEntity(const Obj::EntityType type);
+	void SpawnEntity(const Obj::EntityType type, const ListenerFlags& teamFlag);
 
 	void UpdateGridAttribs();
 	void UpdateGridBlockData();
