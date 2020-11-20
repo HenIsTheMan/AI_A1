@@ -26,7 +26,7 @@ void ChooseRandDir(Entity* const entity, const Grid<float>* const grid, const in
 			entity->SetTimeLeft(0.0f);
 		}
 	} else{
-		NotMoving(entity);
+		entity->SetTimeLeft(1000.0f);
 	}
 }
 
@@ -58,7 +58,7 @@ void ChooseBetween2Dirs(Entity* const entity, const Grid<float>* const grid, con
 		}
 		return;
 	}
-	NotMovingInEitherDirs(entity, commonDirs);
+	entity->SetTimeLeft(1000.0f);
 }
 
 void ChooseRandPairOfPerpendicularDirs(Vector3 (&commonDirs)[2]){
@@ -82,38 +82,17 @@ void ChooseRandPairOfPerpendicularDirs(Vector3 (&commonDirs)[2]){
 	}
 }
 
-void MoveInDir(Entity* const entity, const double dt){
-	entity->SetLocalPos(entity->GetLocalPos()
-		+ entity->GetSpd() * (entity->GetGridTargetLocalPos() - entity->GetLocalPos()).Normalized() * (float)dt);
-}
-
-void NotMoving(Entity* const entity){
+void MoveInDir(Entity* const entity, const Grid<float>* const grid, const int gridRows, const int gridCols, const double dt){
 	const Vector3& entityLocalPos = entity->GetLocalPos();
+	const Vector3 entityDir = (entity->GetGridTargetLocalPos() - entityLocalPos).Normalized();
+	const std::vector<std::vector<bool>>& gridBlockData = grid->GetBlockData();
 
-	entity->SetSpriteAniMiddleName("Static");
-	entity->SetTimeLeft(1000.0f);
+	const int rowIndex = int(entityLocalPos.y + entityDir.y);
+	const int colIndex = int(entityLocalPos.x + entityDir.x);
 
-	switch(Math::RandIntMinMax(0, 3)){
-		case 0:
-			entity->SetGridTargetLocalPos(entityLocalPos + Vector3(1.0f, 0.0f, 0.0f));
-			break;
-		case 1:
-			entity->SetGridTargetLocalPos(entityLocalPos - Vector3(1.0f, 0.0f, 0.0f));
-			break;
-		case 2:
-			entity->SetGridTargetLocalPos(entityLocalPos + Vector3(0.0f, 1.0f, 0.0f));
-			break;
-		case 3:
-			entity->SetGridTargetLocalPos(entityLocalPos - Vector3(0.0f, 1.0f, 0.0f));
-			break;
+	if(!gridBlockData[rowIndex][colIndex]){
+		entity->SetLocalPos(entityLocalPos + entity->GetSpd() * entityDir * (float)dt);
+	} else{
+		entity->SetTimeLeft(1000.0f);
 	}
-}
-
-void NotMovingInEitherDirs(Entity* const entity, const Vector3(&commonDirs)[2]){
-	const Vector3& entityLocalPos = entity->GetLocalPos();
-
-	entity->SetSpriteAniMiddleName("Static");
-	entity->SetTimeLeft(1000.0f);
-
-	entity->SetGridTargetLocalPos(entityLocalPos + commonDirs[rand() & 1]);
 }

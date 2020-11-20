@@ -207,6 +207,18 @@
     <ClInclude Include="Source\StateHelperFuncs.h">
       <Filter>State</Filter>
     </ClInclude>
+    <ClInclude Include="Source\StateBoyCannotMove.h">
+      <Filter>State\States\BoyStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateOrcCannotMove.h">
+      <Filter>State\States\OrcStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateReptileCannotMove.h">
+      <Filter>State\States\ReptileStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateSkeleCannotMove.h">
+      <Filter>State\States\SkeleStates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -333,6 +345,18 @@
     </None>
     <None Include="Source\Entity.inl">
       <Filter>Obj</Filter>
+    </None>
+    <None Include="Source\StateBoyCannotMove.inl">
+      <Filter>State\States\BoyStates</Filter>
+    </None>
+    <None Include="Source\StateOrcCannotMove.inl">
+      <Filter>State\States\OrcStates</Filter>
+    </None>
+    <None Include="Source\StateReptileCannotMove.inl">
+      <Filter>State\States\ReptileStates</Filter>
+    </None>
+    <None Include="Source\StateSkeleCannotMove.inl">
+      <Filter>State\States\SkeleStates</Filter>
     </None>
   </ItemGroup>
 </Project>

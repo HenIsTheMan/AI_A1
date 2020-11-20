@@ -32,7 +32,7 @@ void StateReptileIdle::Update(Entity* const entity, const double dt){
 			}
 		} else{
 			entity->SetSpriteAniMiddleName("Move");
-			MoveInDir(entity, dt);
+			MoveInDir(entity, im_Grid, im_GridRows, im_GridCols, dt);
 		}
 	} else{
 		entity->SetSpriteAniMiddleName("Static");

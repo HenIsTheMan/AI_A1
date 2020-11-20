@@ -25,7 +25,7 @@ void StateOrcIdle::Update(Entity* const entity, const double dt){
 			ChooseRandDir(entity, im_Grid, im_GridRows, im_GridCols);
 		} else{
 			entity->SetSpriteAniMiddleName("Move");
-			MoveInDir(entity, dt);
+			MoveInDir(entity, im_Grid, im_GridRows, im_GridCols, dt);
 		}
 	} else{
 		entity->SetSpriteAniMiddleName("Static");
