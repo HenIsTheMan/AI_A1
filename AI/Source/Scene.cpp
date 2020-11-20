@@ -331,6 +331,51 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 	return entity;
 }
 
+void Scene::SpawnEntity(const Obj::EntityType type){
+	switch(type){
+		case Obj::EntityType::Skele: {
+			Entity* const skele = CreateSkele({
+				Vector3(5.0f, 15.0f, 0.0f)
+			});
+
+			skele->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
+			publisher->AddListener((long int)ListenerFlags::Skele | (long int)ListenerFlags::Entity, skele);
+
+			break;
+		}
+		case Obj::EntityType::Reptile: {
+			Entity* const reptile = CreateReptile({
+				Vector3(15.0f, 12.0f, 0.0f)
+			});
+
+			reptile->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
+			publisher->AddListener((long int)ListenerFlags::Reptile | (long int)ListenerFlags::Entity, reptile);
+
+			break;
+		}
+		case Obj::EntityType::Boy: {
+			Entity* const boy = CreateBoy({
+				Vector3(5.0f, 4.0f, 0.0f)
+			});
+
+			boy->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
+			publisher->AddListener((long int)ListenerFlags::Boy | (long int)ListenerFlags::Entity, boy);
+
+			break;
+		}
+		case Obj::EntityType::Orc: {
+			Entity* const orc = CreateOrc({
+				Vector3(18.0f, 3.0f, 0.0f)
+			});
+
+			orc->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
+			publisher->AddListener((long int)ListenerFlags::Orc | (long int)ListenerFlags::Entity, orc);
+
+			break;
+		}
+	}
+}
+
 void Scene::UpdateGridAttribs(){
 		static bool isKeyDown1 = false;
 		static bool isKeyDown2 = false;
@@ -638,39 +683,16 @@ void Scene::UpdateEntities(const double dt){
 			assert(false);
 	}
 
-	static int control = 0;
+	static float alphaTeamSpawnBT = 999.0f;
+	static float omegaTeamSpawnBT = 999.0f;
 
-	if(control != 20){
-		Entity* skele = CreateSkele({
-			Vector3(5.0f, 15.0f, 0.0f)
-		});
-		skele->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
-		//skele->SetNextState(skele->GetStateMachine()->GetState(StateID::StateSkeleIdle));
-		publisher->AddListener((long int)ListenerFlags::Skele | (long int)ListenerFlags::Entity, skele);
-
-		Entity* reptile = CreateReptile({
-			Vector3(15.0f, 12.0f, 0.0f)
-		});
-		reptile->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
-		reptile->SetTarget(skele);
-		//reptile->SetNextState(reptile->GetStateMachine()->GetState(StateID::StateReptileIdle));
-		publisher->AddListener((long int)ListenerFlags::Reptile | (long int)ListenerFlags::Entity, reptile);
-
-		Entity* boy = CreateBoy({
-			Vector3(5.0f, 4.0f, 0.0f)
-		});
-		boy->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
-		//boy->SetNextState(boy->GetStateMachine()->GetState(StateID::StateBoyIdle));
-		publisher->AddListener((long int)ListenerFlags::Boy | (long int)ListenerFlags::Entity, boy);
-
-		Entity* orc = CreateOrc({
-			Vector3(18.0f, 3.0f, 0.0f)
-		});
-		orc->SetTeam(rand() & 1 ? EntityTeam::Alpha : EntityTeam::Omega);
-		//orc->SetNextState(orc->GetStateMachine()->GetState(StateID::StateOrcIdle));
-		publisher->AddListener((long int)ListenerFlags::Orc | (long int)ListenerFlags::Entity, orc);
-
-		++control;
+	if(alphaTeamSpawnBT <= elapsedTime){
+		SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc));
+		alphaTeamSpawnBT = elapsedTime + !isDay ? Math::RandFloatMinMax(4.0f, 5.0f) : Math::RandFloatMinMax(2.0f, 3.0f);
+	}
+	if(omegaTeamSpawnBT <= elapsedTime){
+		SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc));
+		omegaTeamSpawnBT = elapsedTime + isDay ? Math::RandFloatMinMax(4.0f, 5.0f) : Math::RandFloatMinMax(2.0f, 3.0f);
 	}
 
 	std::vector<std::pair<bool, Entity*>>& entityPool = objPool->RetrievePool();
@@ -1439,7 +1461,7 @@ void Scene::RenderControlsText(Mesh* const textMesh, const Color& textColor, con
 	);
 	RenderTextOnScreen(
 		textMesh,
-		"C: Increase spawning end time",
+		"C: Raise spawning end time",
 		textColor,
 		textSize,
 		0.0f,
@@ -1447,7 +1469,7 @@ void Scene::RenderControlsText(Mesh* const textMesh, const Color& textColor, con
 	);
 	RenderTextOnScreen(
 		textMesh,
-		"V: Decrease spawning end time",
+		"V: Lower spawning end time",
 		textColor,
 		textSize,
 		0.0f,
