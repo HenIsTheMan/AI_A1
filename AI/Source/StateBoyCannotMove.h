@@ -10,6 +10,8 @@ class StateBoyCannotMove final{ //Static class
 	StateBoyCannotMove& operator=(const StateBoyCannotMove&) = delete;
 	StateBoyCannotMove& operator=(StateBoyCannotMove&&) noexcept = delete;
 public:
+	static Grid<float>* im_Grid;
+
 	static void Enter(Entity* const entity);
 	static void Update(Entity* const entity, const double dt);
 	static void Exit(Entity* const entity);

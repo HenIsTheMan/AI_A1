@@ -1,6 +1,6 @@
 #include "StateHelperFuncs.h"
 
-void ChooseRandDir(Entity* const entity, const Grid<float>* const grid, const int gridRows, const int gridCols){
+bool ChooseADir(Entity* const entity, const Grid<float>* const grid, const int gridRows, const int gridCols){
 	const Vector3& entityLocalPos = entity->GetLocalPos();
 	const std::vector<std::vector<bool>>& gridBlockData = grid->GetBlockData();
 	std::vector<Vector3> possibleLocations;
@@ -19,18 +19,14 @@ void ChooseRandDir(Entity* const entity, const Grid<float>* const grid, const in
 	}
 
 	const size_t possibleLocationsSize = possibleLocations.size();
-	if(possibleLocationsSize){
-		entity->SetGridTargetLocalPos(possibleLocations[Math::RandIntMinMax(0, possibleLocationsSize - 1)]);
-
-		if(entity->GetTimeLeft() > 999.0f){
-			entity->SetTimeLeft(0.0f);
-		}
-	} else{
-		entity->SetTimeLeft(1000.0f);
+	if(!possibleLocationsSize){
+		return false;
 	}
+	entity->SetGridTargetLocalPos(possibleLocations[Math::RandIntMinMax(0, possibleLocationsSize - 1)]);
+	return true;
 }
 
-void ChooseBetween2Dirs(Entity* const entity, const Grid<float>* const grid, const int gridRows, const int gridCols, const Vector3(&commonDirs)[2]){
+bool ChooseBetween2Dirs(Entity* const entity, const Grid<float>* const grid, const int gridRows, const int gridCols, const Vector3(&commonDirs)[2]){
 	const Vector3& entityLocalPos = entity->GetLocalPos();
 	const std::vector<std::vector<bool>>& gridBlockData = grid->GetBlockData();
 	const Vector3* possibleDir = nullptr;
@@ -49,16 +45,21 @@ void ChooseBetween2Dirs(Entity* const entity, const Grid<float>* const grid, con
 		if(!possibleDir){
 			continue;
 		}
-
-		entity->SetSpriteAniMiddleName("Move");
 		entity->SetGridTargetLocalPos(entityLocalPos + *possibleDir);
-
-		if(entity->GetTimeLeft() > 999.0f){
-			entity->SetTimeLeft(0.0f);
-		}
-		return;
+		return true;
 	}
-	entity->SetTimeLeft(1000.0f);
+	
+	return false;
+}
+
+void ChooseRandDir(Entity* const entity){
+	const Vector3 possibleDirs[4]{
+		Vector3(1.0f, 0.0f, 0.0f),
+		Vector3(-1.0f, 0.0f, 0.0f),
+		Vector3(0.0f, 1.0f, 0.0f),
+		Vector3(0.0f, -1.0f, 0.0f)
+	};
+	entity->SetGridTargetLocalPos(entity->GetLocalPos() + possibleDirs[Math::RandIntMinMax(0, 3)]);
 }
 
 void ChooseRandPairOfPerpendicularDirs(Vector3 (&commonDirs)[2]){
@@ -82,17 +83,8 @@ void ChooseRandPairOfPerpendicularDirs(Vector3 (&commonDirs)[2]){
 	}
 }
 
-void MoveInDir(Entity* const entity, const Grid<float>* const grid, const int gridRows, const int gridCols, const double dt){
+void MoveInDir(Entity* const entity, const double dt){
 	const Vector3& entityLocalPos = entity->GetLocalPos();
 	const Vector3 entityDir = (entity->GetGridTargetLocalPos() - entityLocalPos).Normalized();
-	const std::vector<std::vector<bool>>& gridBlockData = grid->GetBlockData();
-
-	const int rowIndex = int(entityLocalPos.y + entityDir.y);
-	const int colIndex = int(entityLocalPos.x + entityDir.x);
-
-	if(!gridBlockData[rowIndex][colIndex]){
-		entity->SetLocalPos(entityLocalPos + entity->GetSpd() * entityDir * (float)dt);
-	} else{
-		entity->SetTimeLeft(1000.0f);
-	}
+	entity->SetLocalPos(entityLocalPos + entity->GetSpd() * entityDir * (float)dt);
 }
