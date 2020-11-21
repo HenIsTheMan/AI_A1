@@ -724,8 +724,16 @@ void Scene::UpdateGridEntityData(){
 	for(size_t i = 0; i < entityPoolSize; ++i){
 		if(entityPool[i].first){
 			Entity* const entity = entityPool[i].second;
-			const Vector3& entityLocalPos = entity->GetLocalPos();
+			const StateID entityCurrStateID = entity->GetCurrState()->GetID();
+			if((entityCurrStateID == StateID::StateSkeleDead)
+				|| (entityCurrStateID == StateID::StateReptileDead)
+				|| (entityCurrStateID == StateID::StateBoyDead)
+				|| (entityCurrStateID == StateID::StateOrcDead)
+			){
+				continue;
+			}
 
+			const Vector3& entityLocalPos = entity->GetLocalPos();
 			gridEntityData[(int)std::floorf(entityLocalPos.y)][(int)std::floorf(entityLocalPos.x)] = true;
 			gridEntityData[(int)std::floorf(entityLocalPos.y)][(int)std::ceilf(entityLocalPos.x)] = true;
 			gridEntityData[(int)std::ceilf(entityLocalPos.y)][(int)std::floorf(entityLocalPos.x)] = true;

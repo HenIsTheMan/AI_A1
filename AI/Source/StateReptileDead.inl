@@ -1,7 +1,8 @@
 ObjPool<Entity>* StateReptileDead::im_ObjPool = nullptr;
 
 void StateReptileDead::Enter(Entity* const entity){
-	entity->SetTimeLeft(6.0f); //Just in case
+	entity->SetTimeLeft(6.0f);
+	entity->SetTarget(nullptr);
 }
 
 void StateReptileDead::Update(Entity* const entity, const double dt){

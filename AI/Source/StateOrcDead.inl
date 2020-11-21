@@ -1,7 +1,8 @@
 ObjPool<Entity>* StateOrcDead::im_ObjPool = nullptr;
 
 void StateOrcDead::Enter(Entity* const entity){
-	entity->SetTimeLeft(7.0f); //Just in case
+	entity->SetTimeLeft(7.0f);
+	entity->SetTarget(nullptr);
 }
 
 void StateOrcDead::Update(Entity* const entity, const double dt){
