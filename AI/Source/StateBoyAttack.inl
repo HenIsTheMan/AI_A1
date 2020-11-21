@@ -1,5 +1,5 @@
 void StateBoyAttack::Enter(Entity* const entity){
-	entity->SetSpriteAniMiddleName("Move");
+	entity->SetSpriteAniMiddleName("Slash");
 }
 
 void StateBoyAttack::Update(Entity* const entity, const double dt){
@@ -15,7 +15,10 @@ void StateBoyAttack::Update(Entity* const entity, const double dt){
 		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyChase));
 		return;
 	}
+
+	entity->SetGridTargetLocalPos(entity->GetLocalPos() + vec); //No need to normalize as not moving there
 }
 
 void StateBoyAttack::Exit(Entity* const entity){
+	entity->SetGridTargetLocalPos(entity->GetLocalPos());
 }

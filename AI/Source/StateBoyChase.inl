@@ -20,6 +20,11 @@ void StateBoyChase::Update(Entity* const entity, const double dt){
 			entity->SetLocalPos(roundf(entityGridTargetLocalPos.x), roundf(entityGridTargetLocalPos.y), roundf(entityGridTargetLocalPos.z)); //Snap entity's local pos
 
 			const Vector3 vec = Vector3(roundf(entityTargetLocalPos.x), roundf(entityTargetLocalPos.y), roundf(entityTargetLocalPos.z)) - entityLocalPos;
+			if((vec.x <= Math::EPSILON && -vec.x <= Math::EPSILON) && (vec.y <= Math::EPSILON && -vec.y <= Math::EPSILON)){ //If both are very close to 0.0f...
+				entity->SetSpriteAniMiddleName("Static");
+				return;
+			}
+
 			const Vector3 dir = Vector3(vec.x / fabs(vec.x), vec.y / fabs(vec.y), vec.z);
 			const float vecLenSquared = vec.LengthSquared();
 			if(vecLenSquared - 1.0f <= Math::EPSILON && 1.0f - vecLenSquared <= Math::EPSILON){

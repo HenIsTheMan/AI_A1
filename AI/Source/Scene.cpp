@@ -1144,8 +1144,8 @@ void Scene::RenderEntitiesPart2(const Entity* const entity){
 		spriteAniDelay = 1.0f;
 	} else if(entitySpriteAniMiddleName == "Move"){
 		spriteAniDelay = 0.1f;
-	} else if(entitySpriteAniMiddleName == "Attack"){
-		spriteAniDelay = 0.3f;
+	} else{
+		spriteAniDelay = 0.1f;
 	}
 
 	assert(spriteAniDelay != 0.0f);
