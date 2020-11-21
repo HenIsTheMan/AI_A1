@@ -1,5 +1,9 @@
 #include "StateHelperFuncs.h"
 
+Vector3 RotateVec(const Vector3& vec, const float& angleInRad){
+	return Vector3(vec.x * cos(angleInRad) + vec.y * -sin(angleInRad), vec.x * sin(angleInRad) + vec.y * cos(angleInRad), 0.f);
+}
+
 bool ChooseADir(Entity* const entity, const Grid<float>* const grid){
 	const Vector3& entityLocalPos = entity->GetLocalPos();
 	const std::vector<std::vector<bool>>& gridBlockData = grid->GetBlockData();

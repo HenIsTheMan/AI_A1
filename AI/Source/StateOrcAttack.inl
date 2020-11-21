@@ -46,8 +46,14 @@ void StateOrcAttack::Update(Entity* const entity, const double dt){
 			entity->SetSpriteAniMiddleName("Smack");
 			entity->SetSpriteAniElapsedTime(0.0f);
 
-			(void)im_Publisher->Notify(long int(entity->GetTeam() == EntityTeam::Alpha ? ListenerFlags::OmegaTeam : ListenerFlags::AlphaTeam),
-				new EventAttacking(entity->GetDmg(), entityTargetLocalPos), true);
+			const long flags = long int(entity->GetTeam() == EntityTeam::Alpha ? ListenerFlags::OmegaTeam : ListenerFlags::AlphaTeam);
+			const float dmg = entity->GetDmg();
+			const Vector3 dir = entityTargetLocalPos - entity->GetLocalPos();
+			const Vector3 perpendicular = RotateVec(dir, Math::DegreeToRadian(90.0f));
+
+			(void)im_Publisher->Notify(flags, new EventAttacking(dmg, entityTargetLocalPos), true);
+			(void)im_Publisher->Notify(flags, new EventAttacking(dmg * 0.25f, entityTargetLocalPos + perpendicular), true);
+			(void)im_Publisher->Notify(flags, new EventAttacking(dmg * 0.25f, entityTargetLocalPos - perpendicular), true);
 
 			entity->SetTimeLeft(0.6f); //Attack interval
 		}

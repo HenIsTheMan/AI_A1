@@ -9,6 +9,8 @@
 
 using Entity = Obj::Entity<Vector3, float>;
 
+Vector3 RotateVec(const Vector3& vec, const float& angleInRad);
+
 bool ChooseADir(Entity* const entity, const Grid<float>* const grid);
 void ChooseRandDir(Entity* const entity);
 bool ChooseBetween2Dirs(Entity* const entity, const Grid<float>* const grid, const Vector3 (&commonDirs)[2]);
