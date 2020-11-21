@@ -2,11 +2,10 @@
 
 float StateBoyPatrol::im_ElapsedTime = 0.0f;
 Grid<float>* StateBoyPatrol::im_Grid = nullptr;
-Publisher* StateBoyPatrol::publisher = Publisher::RetrieveGlobalObjPtr();
+Publisher* StateBoyPatrol::im_Publisher = Publisher::RetrieveGlobalObjPtr();
 
 void StateBoyPatrol::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Move");
-	entity->SetTarget(nullptr);
 }
 
 void StateBoyPatrol::Update(Entity* const entity, const double dt){
@@ -14,7 +13,7 @@ void StateBoyPatrol::Update(Entity* const entity, const double dt){
 		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyDead));
 		return;
 	}
-	if(publisher->Notify((long int)ListenerFlags::ObjPool, new EventFindClosestEnemy(entity), false)){
+	if(im_Publisher->Notify((long int)ListenerFlags::ObjPool, new EventFindClosestEnemy(entity), false)){
 		const Entity* const entityTarget = entity->GetTarget();
 
 		if((entityTarget->GetLocalPos() - entity->GetLocalPos()).LengthSquared() < 7.0f * 7.0f){

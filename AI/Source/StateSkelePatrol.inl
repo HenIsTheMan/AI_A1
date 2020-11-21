@@ -1,6 +1,6 @@
 float StateSkelePatrol::im_ElapsedTime = 0.0f;
 Grid<float>* StateSkelePatrol::im_Grid = nullptr;
-Publisher* StateSkelePatrol::publisher = Publisher::RetrieveGlobalObjPtr();
+Publisher* StateSkelePatrol::im_Publisher = Publisher::RetrieveGlobalObjPtr();
 
 void StateSkelePatrol::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Move");

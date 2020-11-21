@@ -11,6 +11,7 @@ class StateBoyChase final{ //Static class
 	StateBoyChase& operator=(StateBoyChase&&) noexcept = delete;
 public:
 	static Grid<float>* im_Grid;
+	static Publisher* im_Publisher;
 
 	static void Enter(Entity* const entity);
 	static void Update(Entity* const entity, const double dt);

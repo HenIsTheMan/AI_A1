@@ -12,7 +12,7 @@ class StateReptilePatrol final{ //Static class
 public:
 	static float im_ElapsedTime;
 	static Grid<float>* im_Grid;
-	static Publisher* publisher;
+	static Publisher* im_Publisher;
 	static Vector3 im_CommonDirs[2];
 
 	static void Enter(Entity* const entity);

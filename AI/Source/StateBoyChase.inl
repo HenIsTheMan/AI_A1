@@ -1,4 +1,5 @@
 Grid<float>* StateBoyChase::im_Grid = nullptr;
+Publisher* StateBoyChase::im_Publisher = Publisher::RetrieveGlobalObjPtr();
 
 void StateBoyChase::Enter(Entity* const entity){
 }
@@ -9,11 +10,11 @@ void StateBoyChase::Update(Entity* const entity, const double dt){
 		return;
 	}
 
-	const Entity* const entityTarget = entity->GetTarget();
-	if(entityTarget){
+	if(im_Publisher->Notify((long int)ListenerFlags::ObjPool, new EventFindClosestEnemy(entity), false)){
+		const Entity* const entityTarget = entity->GetTarget();
+		const Vector3& entityTargetLocalPos = entityTarget->GetLocalPos();
 		const Vector3& entityLocalPos = entity->GetLocalPos();
 		const Vector3& entityGridTargetLocalPos = entity->GetGridTargetLocalPos();
-		const Vector3& entityTargetLocalPos = entityTarget->GetLocalPos();
 
 		if((entityGridTargetLocalPos - entityLocalPos).Length() < entity->GetSpd() * (float)dt){
 			entity->SetLocalPos(roundf(entityGridTargetLocalPos.x), roundf(entityGridTargetLocalPos.y), roundf(entityGridTargetLocalPos.z)); //Snap entity's local pos
