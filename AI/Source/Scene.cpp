@@ -779,7 +779,7 @@ void Scene::UpdateEntities(const double dt){
 		if(entityPool[i].first){
 			Entity* const entity = entityPool[i].second;
 
-			const Event* myEvent = nullptr;
+			Event* myEvent = nullptr;
 			EventID ID = EventID::Amt;
 			do{
 				myEvent = entity->FetchEvent();

@@ -14,7 +14,7 @@ namespace Obj{
 		Entity<T, Type>(const EntityAttribs<T, Type>& attribs);
 		~Entity<T, Type>() = default;
 
-		int OnEvent(const Event* myEvent, const bool destroyEvent = false) override;
+		int OnEvent(Event* myEvent, const bool destroyEvent = false) override;
 
 		//* Getters
 		EntityType GetType() const;

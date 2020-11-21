@@ -6,6 +6,7 @@ Publisher* StateBoyPatrol::publisher = Publisher::RetrieveGlobalObjPtr();
 
 void StateBoyPatrol::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Move");
+	entity->SetTarget(nullptr);
 }
 
 void StateBoyPatrol::Update(Entity* const entity, const double dt){
@@ -19,8 +20,6 @@ void StateBoyPatrol::Update(Entity* const entity, const double dt){
 		if((entityTarget->GetLocalPos() - entity->GetLocalPos()).LengthSquared() < 7.0f * 7.0f){
 			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyChase));
 			return;
-		} else{
-			entity->SetTarget(nullptr);
 		}
 	}
 

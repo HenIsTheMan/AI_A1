@@ -4,7 +4,7 @@ void Listener::AddEvent(Event* const myEvent){
 	events.emplace(myEvent);
 }
 
-const Event* Listener::FetchEvent(){
+Event* Listener::FetchEvent(){
 	if(!events.empty()){
 		Event* myEvent = events.front();
 		events.pop();

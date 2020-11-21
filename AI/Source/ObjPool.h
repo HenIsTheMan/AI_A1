@@ -10,7 +10,7 @@ public:
 	ObjPool<T>();
 	~ObjPool<T>();
 
-	int OnEvent(const Event* myEvent, const bool destroyEvent = false) override;
+	int OnEvent(Event* myEvent, const bool destroyEvent = false) override;
 
 	void CreateObjs(const int amt);
 	void DeactivateObj(const T* const obj);

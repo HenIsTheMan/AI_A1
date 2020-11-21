@@ -3,6 +3,7 @@ Grid<float>* StateBoyIdle::im_Grid = nullptr;
 
 void StateBoyIdle::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Static");
+	entity->SetTarget(nullptr);
 }
 
 void StateBoyIdle::Update(Entity* const entity, const double dt){

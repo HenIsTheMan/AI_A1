@@ -1,3 +1,5 @@
+#include "EventFindClosestEnemy.h"
+
 enum struct EntityTeam: short;
 
 template <class T>
@@ -19,7 +21,7 @@ ObjPool<T>::~ObjPool(){
 }
 
 template <class T>
-int ObjPool<T>::OnEvent(const Event* myEvent, const bool destroyEvent){
+int ObjPool<T>::OnEvent(Event* myEvent, const bool destroyEvent){
 	if(!myEvent){
 		return -1;
 	}
@@ -80,16 +82,22 @@ int ObjPool<T>::OnEvent(const Event* myEvent, const bool destroyEvent){
 			break;
 		}
 		case EventID::EventFindClosestEnemy: {
-			//int count = 0;
-			//const size_t poolSize = im_ObjPool.size();
+			EventFindClosestEnemy* const eventFindClosestEnemy = static_cast<EventFindClosestEnemy*>(myEvent);
+			T* const entity = eventFindClosestEnemy->RetrieveEntity();
+			float closestDistSquared = FLT_MAX;
+			const size_t poolSize = im_ObjPool.size();
 
-			//for(size_t i = 0; i < poolSize; ++i){
-			//	if(im_ObjPool[i].first && im_ObjPool[i].second->GetTeam() == EntityTeam::Omega){
-			//		++count;
-			//	}
-			//}
+			for(size_t i = 0; i < poolSize; ++i){
+				if(im_ObjPool[i].first && im_ObjPool[i].second->GetTeam() != entity->GetTeam()){
+					const float currDistSquared = (entity->GetLocalPos() - im_ObjPool[i].second->GetLocalPos()).LengthSquared();
+					if(currDistSquared < closestDistSquared){
+						closestDistSquared = currDistSquared;
+						entity->SetTarget(im_ObjPool[i].second);
+					}
+				}
+			}
 
-			//val = count;
+			val = (int)entity->GetTarget();
 			break;
 		}
 	}

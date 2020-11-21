@@ -16,7 +16,7 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
-	int Entity<T, Type>::OnEvent(const Event* myEvent, const bool destroyEvent){
+	int Entity<T, Type>::OnEvent(Event* myEvent, const bool destroyEvent){
 		if(!myEvent){
 			return -1;
 		}
