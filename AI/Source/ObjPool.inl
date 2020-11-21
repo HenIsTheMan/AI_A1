@@ -1,4 +1,5 @@
 #include "EventFindClosestEnemy.h"
+#include "StateID.hpp"
 
 enum struct EntityTeam: short;
 
@@ -90,7 +91,14 @@ int ObjPool<T>::OnEvent(Event* myEvent, const bool destroyEvent){
 			for(size_t i = 0; i < poolSize; ++i){
 				if(im_ObjPool[i].first && im_ObjPool[i].second->GetTeam() != entity->GetTeam()){
 					const float currDistSquared = (entity->GetLocalPos() - im_ObjPool[i].second->GetLocalPos()).LengthSquared();
-					if(currDistSquared < closestDistSquared){
+					const StateID currStateID = im_ObjPool[i].second->GetCurrState()->GetID();
+
+					if(currDistSquared < closestDistSquared
+						&& (currStateID != StateID::StateSkeleDead)
+						&& (currStateID != StateID::StateReptileDead)
+						&& (currStateID != StateID::StateBoyDead)
+						&& (currStateID != StateID::StateOrcDead)
+					){
 						closestDistSquared = currDistSquared;
 						entity->SetTarget(im_ObjPool[i].second);
 					}
