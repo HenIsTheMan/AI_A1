@@ -30,6 +30,8 @@ namespace Obj{
 		Entity<T, Type>* im_Target = nullptr;
 		T im_GridTargetLocalPos = T();
 		Type im_TimeLeft = Type();
+		Type im_SpriteAniElapsedTime = Type();
+		Type im_SpriteAniDelay = Type();
 		EntityTeam im_Team = EntityTeam::Amt;
 
 		StateMachine<StateID, Entity<T, Type>>* im_StateMachine = nullptr;

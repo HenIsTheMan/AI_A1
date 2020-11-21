@@ -6,9 +6,13 @@ Vector3 StateReptilePatrol::im_CommonDirs[2]{Vector3(), Vector3()};
 void StateReptilePatrol::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Move");
 	entity->SetSpd(1.8f); //Patrol spd
+	entity->SetSpriteAniElapsedTime(0.0f);
+	entity->SetSpriteAniDelay(0.1f);
 }
 
 void StateReptilePatrol::Update(Entity* const entity, const double dt){
+	entity->SetSpriteAniElapsedTime(entity->GetSpriteAniElapsedTime() + (float)dt);
+
 	if(entity->GetCurrHealth() <= 0.0f){
 		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateReptileDead));
 		return;

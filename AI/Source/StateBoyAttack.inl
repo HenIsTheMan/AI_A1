@@ -1,9 +1,13 @@
 Publisher* StateBoyAttack::im_Publisher = Publisher::RetrieveGlobalObjPtr();
 
 void StateBoyAttack::Enter(Entity* const entity){
+	entity->SetSpriteAniElapsedTime(0.0f);
+	entity->SetSpriteAniDelay(0.1f);
 }
 
 void StateBoyAttack::Update(Entity* const entity, const double dt){
+	entity->SetSpriteAniElapsedTime(entity->GetSpriteAniElapsedTime() + (float)dt);
+
 	if(entity->GetCurrHealth() <= 0.0f){
 		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyDead));
 		return;
@@ -24,10 +28,12 @@ void StateBoyAttack::Update(Entity* const entity, const double dt){
 			entity->SetTimeLeft(1.0f); //Attack cooldown
 		} else{
 			entity->SetSpriteAniMiddleName("Slash");
+			entity->SetSpriteAniElapsedTime(0.0f);
+
 			(void)im_Publisher->Notify(long int(entity->GetTeam() == EntityTeam::Alpha ? ListenerFlags::OmegaTeam : ListenerFlags::AlphaTeam),
 				new EventAttacking(entity->GetDmg(), entityTargetLocalPos), true);
 
-			entity->SetTimeLeft(0.4f); //Attack interval
+			entity->SetTimeLeft(0.6f); //Attack interval
 		}
 	} else{
 		entity->SetTimeLeft(entity->GetTimeLeft() - (float)dt);

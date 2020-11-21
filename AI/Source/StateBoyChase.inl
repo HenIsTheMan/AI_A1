@@ -3,9 +3,13 @@ Publisher* StateBoyChase::im_Publisher = Publisher::RetrieveGlobalObjPtr();
 
 void StateBoyChase::Enter(Entity* const entity){
 	entity->SetSpd(1.6f); //Chase spd
+	entity->SetSpriteAniElapsedTime(0.0f);
+	entity->SetSpriteAniDelay(0.05f);
 }
 
 void StateBoyChase::Update(Entity* const entity, const double dt){
+	entity->SetSpriteAniElapsedTime(entity->GetSpriteAniElapsedTime() + (float)dt);
+
 	if(entity->GetCurrHealth() <= 0.0f){
 		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyDead));
 		return;
@@ -49,9 +53,12 @@ void StateBoyChase::Update(Entity* const entity, const double dt){
 				for(int i = 0; i < 2; ++i){
 					if(!gridBlockData[(int)newGridTargetLocalPos[i].y][(int)newGridTargetLocalPos[i].x]
 						&& !gridEntityData[(int)newGridTargetLocalPos[i].y][(int)newGridTargetLocalPos[i].x]
-						){ //If grid cell is empty...
+					){ //If grid cell is empty...
 						entity->SetGridTargetLocalPos(newGridTargetLocalPos[i]);
+
 						entity->SetSpriteAniMiddleName("Move");
+						entity->SetSpriteAniElapsedTime(0.0f);
+
 						move = true;
 						break;
 					}

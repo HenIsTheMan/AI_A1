@@ -320,6 +320,8 @@ Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
 	entity->SetTarget(nullptr);
 	ChooseRandDir(entity);
 	entity->SetTimeLeft(0.0f);
+	entity->SetSpriteAniElapsedTime(0.0f);
+	entity->SetSpriteAniDelay(0.0f);
 	entity->SetTeam(EntityTeam::Amt);
 
 	entity->SetStateMachine(skeleSM);
@@ -345,6 +347,8 @@ Entity* Scene::CreateReptile(const CreateEntityParams& params) const{
 	entity->SetTarget(nullptr);
 	ChooseRandDir(entity);
 	entity->SetTimeLeft(0.0f);
+	entity->SetSpriteAniElapsedTime(0.0f);
+	entity->SetSpriteAniDelay(0.0f);
 	entity->SetTeam(EntityTeam::Amt);
 
 	entity->SetStateMachine(reptileSM);
@@ -370,6 +374,8 @@ Entity* Scene::CreateBoy(const CreateEntityParams& params) const{
 	entity->SetTarget(nullptr);
 	ChooseRandDir(entity);
 	entity->SetTimeLeft(0.0f);
+	entity->SetSpriteAniElapsedTime(0.0f);
+	entity->SetSpriteAniDelay(0.0f);
 	entity->SetTeam(EntityTeam::Amt);
 
 	entity->SetStateMachine(boySM);
@@ -395,6 +401,8 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 	entity->SetTarget(nullptr);
 	ChooseRandDir(entity);
 	entity->SetTimeLeft(0.0f);
+	entity->SetSpriteAniElapsedTime(0.0f);
+	entity->SetSpriteAniDelay(0.0f);
 	entity->SetTeam(EntityTeam::Amt);
 
 	entity->SetStateMachine(orcSM);
@@ -1106,7 +1114,6 @@ void Scene::RenderEntities(){
 }
 
 void Scene::RenderEntitiesPart2(const Entity* const entity){
-	float spriteAniDelay = 0.0f;
 	Mesh* spriteAniMesh = nullptr;
 	std::string spriteAniName;
 
@@ -1135,15 +1142,7 @@ void Scene::RenderEntitiesPart2(const Entity* const entity){
 	assert(entitySpriteAniMiddleName != "");
 
 	spriteAniName += entitySpriteAniMiddleName;
-	if(entitySpriteAniMiddleName == "Static"){
-		spriteAniDelay = 1.0f;
-	} else if(entitySpriteAniMiddleName == "Move"){
-		spriteAniDelay = 0.1f;
-	} else{
-		spriteAniDelay = 0.1f;
-	}
 
-	assert(spriteAniDelay != 0.0f);
 	assert(spriteAniMesh != nullptr);
 	assert(spriteAniName != "");
 
@@ -1160,7 +1159,7 @@ void Scene::RenderEntitiesPart2(const Entity* const entity){
 		spriteAniName += (std::string)"Right";
 	}
 
-	ManualRenderMesh(spriteAniName, elapsedTime, spriteAniDelay, spriteAniMesh, false);
+	ManualRenderMesh(spriteAniName, entity->GetSpriteAniElapsedTime(), entity->GetSpriteAniDelay(), spriteAniMesh, false);
 }
 
 void Scene::RenderRegions(){

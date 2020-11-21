@@ -29,6 +29,8 @@ namespace Obj{
 		const Entity<T, Type>* GetTarget() const;
 		const T& GetGridTargetLocalPos() const;
 		const Type& GetTimeLeft() const;
+		const Type& GetSpriteAniElapsedTime() const;
+		const Type& GetSpriteAniDelay() const;
 		const EntityTeam GetTeam() const;
 
 		const StateMachine<StateID, Entity<T, Type>>* GetStateMachine() const;
@@ -50,6 +52,8 @@ namespace Obj{
 		void SetTarget(Entity<T, Type>* const target);
 		void SetGridTargetLocalPos(const T& gridTargetLocalPos);
 		void SetTimeLeft(const Type& timeLeft);
+		void SetSpriteAniElapsedTime(const Type& spriteAniElapsedTime);
+		void SetSpriteAniDelay(const Type& spriteAniDelay);
 		void SetTeam(const EntityTeam team);
 
 		void SetStateMachine(StateMachine<StateID, Entity<T, Type>>* const stateMachine);

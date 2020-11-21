@@ -3,6 +3,9 @@ Grid<float>* StateSkeleIdle::im_Grid = nullptr;
 
 void StateSkeleIdle::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Static");
+	entity->SetSpriteAniElapsedTime(1.0f);
+	entity->SetSpriteAniDelay(1.0f);
+	entity->SetTarget(nullptr);
 }
 
 void StateSkeleIdle::Update(Entity* const entity, const double dt){
@@ -30,7 +33,7 @@ void StateSkeleIdle::Update(Entity* const entity, const double dt){
 			|| ((int)entityLocalPos.y - 1 >= 0
 			&& !gridBlockData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]
 			&& !gridEntityData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x])
-			){
+		){
 			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateSkelePatrol));
 			return;
 		}

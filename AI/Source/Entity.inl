@@ -146,6 +146,16 @@ namespace Obj{
 	}
 
 	template <class T, typename Type>
+	const Type& Entity<T, Type>::GetSpriteAniElapsedTime() const{
+		return im_Attribs.im_SpriteAniElapsedTime;
+	}
+
+	template <class T, typename Type>
+	const Type& Entity<T, Type>::GetSpriteAniDelay() const{
+		return im_Attribs.im_SpriteAniDelay;
+	}
+
+	template <class T, typename Type>
 	const EntityTeam Entity<T, Type>::GetTeam() const{
 		return im_Attribs.im_Team;
 	}
@@ -218,6 +228,16 @@ namespace Obj{
 	template <class T, typename Type>
 	void Entity<T, Type>::SetTimeLeft(const Type& timeLeft){
 		im_Attribs.im_TimeLeft = timeLeft;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetSpriteAniElapsedTime(const Type& spriteAniElapsedTime){
+		im_Attribs.im_SpriteAniElapsedTime = spriteAniElapsedTime;
+	}
+
+	template <class T, typename Type>
+	void Entity<T, Type>::SetSpriteAniDelay(const Type& spriteAniDelay){
+		im_Attribs.im_SpriteAniDelay = spriteAniDelay;
 	}
 
 	template <class T, typename Type>
