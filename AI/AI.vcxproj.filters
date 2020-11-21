@@ -67,7 +67,7 @@
     <ClCompile Include="Source\EventCalcOmegaCount.cpp">
       <Filter>Event\Events</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EventFindNearestObj.cpp">
+    <ClCompile Include="Source\EventFindClosestEnemy.cpp">
       <Filter>Event\Events</Filter>
     </ClCompile>
   </ItemGroup>
@@ -222,9 +222,6 @@
     <ClInclude Include="Source\StateBoyIdle.h">
       <Filter>State\States\BoyStates</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EventFindNearestObj.h">
-      <Filter>Event\Events</Filter>
-    </ClInclude>
     <ClInclude Include="Source\StateBoyChase.h">
       <Filter>State\States\BoyStates</Filter>
     </ClInclude>
@@ -236,6 +233,9 @@
     </ClInclude>
     <ClInclude Include="Source\StateSkeleChase.h">
       <Filter>State\States\SkeleStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventFindClosestEnemy.h">
+      <Filter>Event\Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

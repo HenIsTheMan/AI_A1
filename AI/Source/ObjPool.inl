@@ -79,7 +79,7 @@ int ObjPool<T>::OnEvent(const Event* myEvent, const bool destroyEvent){
 			val = count;
 			break;
 		}
-		case EventID::EventFindNearestObj: {
+		case EventID::EventFindClosestEnemy: {
 			//int count = 0;
 			//const size_t poolSize = im_ObjPool.size();
 
