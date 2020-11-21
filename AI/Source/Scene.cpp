@@ -803,11 +803,11 @@ void Scene::UpdateEntities(const double dt){
 	if(spawningTime < spawningEndTime){
 		if(alphaTeamEntityCount < alphaTeamSpawnLimit && alphaTeamSpawnBT <= elapsedTime){
 			SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::AlphaTeam);
-			alphaTeamSpawnBT = elapsedTime + (!isDay ? Math::RandFloatMinMax(2.0f, 3.0f) : Math::RandFloatMinMax(0.7f, 1.5f));
+			alphaTeamSpawnBT = elapsedTime + (!isDay ? Math::RandFloatMinMax(1.8f, 2.5f) : Math::RandFloatMinMax(0.7f, 1.5f));
 		}
 		if(omegaTeamEntityCount < omegaTeamSpawnLimit && omegaTeamSpawnBT <= elapsedTime){
 			SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::OmegaTeam);
-			omegaTeamSpawnBT = elapsedTime + (isDay ? Math::RandFloatMinMax(2.0f, 3.0f) : Math::RandFloatMinMax(0.7f, 1.5f));
+			omegaTeamSpawnBT = elapsedTime + (isDay ? Math::RandFloatMinMax(1.8f, 2.5f) : Math::RandFloatMinMax(0.7f, 1.5f));
 		}
 	}
 
