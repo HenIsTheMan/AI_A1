@@ -1,5 +1,4 @@
 void StateBoyAttack::Enter(Entity* const entity){
-	entity->SetSpriteAniMiddleName("Slash");
 }
 
 void StateBoyAttack::Update(Entity* const entity, const double dt){
@@ -16,6 +15,20 @@ void StateBoyAttack::Update(Entity* const entity, const double dt){
 		return;
 	}
 
+	if(entity->GetTimeLeft() <= 0.0f){
+		if(entity->GetSpriteAniMiddleName() == "Slash"){
+			entity->SetSpriteAniMiddleName("Static");
+
+			entity->SetTimeLeft(1.0f); //Attack cooldown
+		} else{
+			entity->SetSpriteAniMiddleName("Slash");
+			//Send msg??
+
+			entity->SetTimeLeft(0.4f); //Attack interval
+		}
+	} else{
+		entity->SetTimeLeft(entity->GetTimeLeft() - (float)dt);
+	}
 	entity->SetGridTargetLocalPos(entity->GetLocalPos() + vec); //No need to normalize as not moving there
 }
 
