@@ -23,12 +23,12 @@ void StateBoyChase::Update(Entity* const entity, const double dt){
 			const Vector3 dir = Vector3(vec.x / fabs(vec.x), vec.y / fabs(vec.y), vec.z);
 			const float vecLenSquared = vec.LengthSquared();
 			if(vecLenSquared - 1.0f <= Math::EPSILON && 1.0f - vecLenSquared <= Math::EPSILON){
-				entity->SetSpriteAniMiddleName("Static");
+				entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyAttack));
 				return;
 			}
 
 			Vector3 newGridTargetLocalPos;
-			if(fabs(vec.x) > fabs(vec.y)){
+			if(fabs(vec.x) > fabs(vec.y)){ //what if = ??
 				newGridTargetLocalPos = entityLocalPos + Vector3(dir.x, 0.0f, 0.0f);
 			} else{
 				newGridTargetLocalPos = entityLocalPos + Vector3(0.0f, dir.y, 0.0f);
