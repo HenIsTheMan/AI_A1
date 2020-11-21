@@ -63,7 +63,7 @@ Scene::Scene():
 	isDay(true),
 	dayNightBT(0.0f),
 	gameSpd(1.0f),
-	spawningStartTime(0.0f),
+	spawningTime(0.0f),
 	spawningEndTime(300.0f),
 	teamRegionsCase(0),
 	alphaTeamLocalXStart(0),
@@ -156,12 +156,12 @@ Scene::~Scene(){
 void Scene::Update(double dt){
 	SceneSupport::Update(dt);
 
-	if(spawningStartTime >= spawningEndTime && (!alphaTeamEntityCount || !omegaTeamEntityCount)){
+	if(spawningTime >= spawningEndTime && (!alphaTeamEntityCount || !omegaTeamEntityCount)){
 		simEnded = true;
 	}
 
 	if(simStarted){
-		spawningStartTime += (float)dt;
+		spawningTime += (float)dt;
 
 		if(dayNightBT <= elapsedTime){
 			isDay = !isDay;
@@ -206,6 +206,7 @@ void Scene::Update(double dt){
 		} else if(isKeyDownV && !App::Key('V')){
 			isKeyDownV = false;
 		}
+		spawningEndTime = Math::Max(0.0f, spawningEndTime);
 
 		static bool isKeyDownU = false;
 		if(!isKeyDownU && App::Key('U')){
@@ -793,7 +794,7 @@ void Scene::UpdateEntities(const double dt){
 	alphaTeamEntityCount = publisher->Notify((long int)ListenerFlags::ObjPool, new EventCalcAlphaCount(), false);
 	omegaTeamEntityCount = publisher->Notify((long int)ListenerFlags::ObjPool, new EventCalcOmegaCount(), false);
 
-	if(spawningStartTime < spawningEndTime){
+	if(spawningTime < spawningEndTime){
 		if(alphaTeamEntityCount < alphaTeamSpawnLimit && alphaTeamSpawnBT <= elapsedTime){
 			SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::AlphaTeam);
 			alphaTeamSpawnBT = elapsedTime + (!isDay ? Math::RandFloatMinMax(2.0f, 3.0f) : Math::RandFloatMinMax(0.7f, 1.5f));
@@ -1592,7 +1593,7 @@ void Scene::RenderGridAttribsText(Mesh* const textMesh, const Color& textColor, 
 void Scene::RenderGameInfoText(Mesh* const textMesh, const Color& textColor, const float textSize){
 	RenderTextOnScreen(
 		textMesh,
-		"Spawning start time: " + std::to_string(spawningStartTime).substr(0, std::to_string((int)spawningStartTime).length() + 3),
+		"Spawning time: " + std::to_string(spawningTime).substr(0, std::to_string((int)spawningTime).length() + 3),
 		textColor,
 		textSize,
 		(float)windowWidth,

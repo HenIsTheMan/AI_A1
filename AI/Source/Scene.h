@@ -54,7 +54,7 @@ private:
 	bool isDay;
 	float dayNightBT;
 	float gameSpd;
-	float spawningStartTime;
+	float spawningTime;
 	float spawningEndTime;
 	int teamRegionsCase;
 	int alphaTeamLocalXStart;
