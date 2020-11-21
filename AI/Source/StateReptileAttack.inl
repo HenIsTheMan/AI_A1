@@ -13,6 +13,11 @@ void StateReptileAttack::Update(Entity* const entity, const double dt){
 		return;
 	}
 
+	if(!im_Publisher->Notify((long int)ListenerFlags::ObjPool, new EventFindClosestEnemy(entity), false)){
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateReptileIdle));
+		return;
+	}
+
 	const Entity* const entityTarget = entity->GetTarget();
 	const StateID entityCurrStateID = entityTarget->GetCurrState()->GetID();
 	if((entityCurrStateID == StateID::StateSkeleDead)
