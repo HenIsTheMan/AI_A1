@@ -1,5 +1,6 @@
+Grid<float>* StateBoyChase::im_Grid = nullptr;
+
 void StateBoyChase::Enter(Entity* const entity){
-	entity->SetSpriteAniMiddleName("Move");
 }
 
 void StateBoyChase::Update(Entity* const entity, const double dt){
@@ -19,11 +20,28 @@ void StateBoyChase::Update(Entity* const entity, const double dt){
 
 			const Vector3 vec = Vector3(roundf(entityTargetLocalPos.x), roundf(entityTargetLocalPos.y), roundf(entityTargetLocalPos.z)) - entityLocalPos;
 			const Vector3 dir = vec.Normalized();
+			if(vec == dir){
+				entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyIdle));
+				return;
+			}
 
+			Vector3 newGridTargetLocalPos;
 			if(fabs(vec.x) > fabs(vec.y)){
-				entity->SetGridTargetLocalPos(entityLocalPos + Vector3(dir.x, 0.0f, 0.0f));
+				newGridTargetLocalPos = entityLocalPos + Vector3(dir.x, 0.0f, 0.0f);
 			} else{
-				entity->SetGridTargetLocalPos(entityLocalPos + Vector3(0.0f, dir.y, 0.0f));
+				newGridTargetLocalPos = entityLocalPos + Vector3(0.0f, dir.y, 0.0f);
+			}
+
+			const std::vector<std::vector<bool>>& gridBlockData = im_Grid->GetBlockData();
+			const std::vector<std::vector<bool>>& gridEntityData = im_Grid->GetEntityData();
+
+			if(!gridBlockData[(int)newGridTargetLocalPos.y][(int)newGridTargetLocalPos.x]
+				&& !gridEntityData[(int)newGridTargetLocalPos.y][(int)newGridTargetLocalPos.x]
+			){ //If grid cell is empty...
+				entity->SetSpriteAniMiddleName("Move");
+				entity->SetGridTargetLocalPos(newGridTargetLocalPos);
+			} else{
+				entity->SetSpriteAniMiddleName("Static");
 			}
 		} else{
 			MoveInDir(entity, dt);

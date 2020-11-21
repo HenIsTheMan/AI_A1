@@ -671,6 +671,9 @@ void Scene::UpdateBoyStates(){
 	stateBoyPatrol->im_ElapsedTime = elapsedTime;
 	stateBoyPatrol->im_Grid = &grid;
 
+	StateBoyChase* const stateBoyChase = ((StateBoyChase*)boySM->GetState(StateID::StateBoyChase));
+	stateBoyChase->im_Grid = &grid;
+
 	StateBoyDead* const stateBoyDead = ((StateBoyDead*)boySM->GetState(StateID::StateBoyDead));
 	stateBoyDead->im_ObjPool = objPool;
 }

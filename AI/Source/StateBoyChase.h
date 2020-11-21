@@ -10,6 +10,8 @@ class StateBoyChase final{ //Static class
 	StateBoyChase& operator=(const StateBoyChase&) = delete;
 	StateBoyChase& operator=(StateBoyChase&&) noexcept = delete;
 public:
+	static Grid<float>* im_Grid;
+
 	static void Enter(Entity* const entity);
 	static void Update(Entity* const entity, const double dt);
 	static void Exit(Entity* const entity);
