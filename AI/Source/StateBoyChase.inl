@@ -48,7 +48,7 @@ void StateBoyChase::Update(Entity* const entity, const double dt){
 				|| ((int)entityLocalPos.y - 1 >= 0
 				&& !gridBlockData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]
 				&& !gridEntityData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x])
-				)){
+			)){
 				entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyIdle));
 				return;
 			}
