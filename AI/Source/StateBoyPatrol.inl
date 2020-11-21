@@ -1,3 +1,5 @@
+#include "EventFindClosestEnemy.h"
+
 float StateBoyPatrol::im_ElapsedTime = 0.0f;
 Grid<float>* StateBoyPatrol::im_Grid = nullptr;
 Publisher* StateBoyPatrol::publisher = Publisher::RetrieveGlobalObjPtr();
@@ -10,6 +12,16 @@ void StateBoyPatrol::Update(Entity* const entity, const double dt){
 	if(entity->GetCurrHealth() <= 0.0f){
 		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyDead));
 		return;
+	}
+	if(publisher->Notify((long int)ListenerFlags::ObjPool, new EventFindClosestEnemy(entity), false)){
+		const Entity* const entityTarget = entity->GetTarget();
+
+		if((entityTarget->GetLocalPos() - entity->GetLocalPos()).LengthSquared() < 7.0f * 7.0f){
+			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyChase));
+			return;
+		} else{
+			entity->SetTarget(nullptr);
+		}
 	}
 
 	const Vector3 entityGridTargetLocalPos = entity->GetGridTargetLocalPos();

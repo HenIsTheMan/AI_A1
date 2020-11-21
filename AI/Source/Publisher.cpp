@@ -18,7 +18,7 @@ int Publisher::Notify(const long int& flags, Event* myEvent, const bool async){
 
 	int sum = 0;
 	for(const std::pair<long int, Listener*>& element: im_Listeners){
-		if((long int)element.first & (long int)flags){
+		if(element.first & flags){
 			Listener* const listener = element.second;
 			if(async){
 				listener->AddEvent(myEvent->Clone()); //Shallow copy prevented
