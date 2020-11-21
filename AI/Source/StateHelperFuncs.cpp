@@ -79,13 +79,20 @@ bool ChooseBetween2Dirs(Entity* const entity, const Grid<float>* const grid, con
 }
 
 void ChooseRandDir(Entity* const entity){
-	const Vector3 possibleDirs[4]{
-		Vector3(1.0f, 0.0f, 0.0f),
-		Vector3(-1.0f, 0.0f, 0.0f),
-		Vector3(0.0f, 1.0f, 0.0f),
-		Vector3(0.0f, -1.0f, 0.0f)
-	};
-	entity->SetGridTargetLocalPos(entity->GetLocalPos() + possibleDirs[Math::RandIntMinMax(0, 3)]);
+	switch(Math::RandIntMinMax(0, 3)){
+		case 0:
+			entity->SetGridTargetLocalPos(entity->GetLocalPos() + Vector3(1.0f, 0.0f, 0.0f));
+			break;
+		case 1:
+			entity->SetGridTargetLocalPos(entity->GetLocalPos() + Vector3(-1.0f, 0.0f, 0.0f));
+			break;
+		case 2:
+			entity->SetGridTargetLocalPos(entity->GetLocalPos() + Vector3(0.0f, 1.0f, 0.0f));
+			break;
+		case 3:
+			entity->SetGridTargetLocalPos(entity->GetLocalPos() + Vector3(0.0f, -1.0f, 0.0f));
+			break;
+	}
 }
 
 void ChooseRandPairOfPerpendicularDirs(Vector3 (&commonDirs)[2]){

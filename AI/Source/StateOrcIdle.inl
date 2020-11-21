@@ -73,7 +73,7 @@ void StateOrcIdle::Update(Entity* const entity, const double dt){
 	static float chooseDirBT = 0.0f;
 	if(chooseDirBT <= im_ElapsedTime){
 		ChooseRandDir(entity);
-		chooseDirBT = im_ElapsedTime + Math::RandFloatMinMax(1.5f, 2.9f);
+		chooseDirBT = im_ElapsedTime + Math::RandFloatMinMax(2.4f, 3.5f);
 	}
 }
 
