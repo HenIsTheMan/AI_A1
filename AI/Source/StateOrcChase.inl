@@ -44,6 +44,12 @@ void StateOrcChase::Update(Entity* const entity, const double dt){
 		const Vector3& entityLocalPos = entity->GetLocalPos();
 		const Vector3& entityGridTargetLocalPos = entity->GetGridTargetLocalPos();
 
+		if((entityTargetLocalPos - entityLocalPos).LengthSquared() >= 3.0f * 3.0f){
+			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcPatrol));
+			entity->SetTarget(nullptr);
+			return;
+		}
+
 		if((entityGridTargetLocalPos - entityLocalPos).Length() < entity->GetSpd() * (float)dt){
 			entity->SetLocalPos(roundf(entityGridTargetLocalPos.x), roundf(entityGridTargetLocalPos.y), roundf(entityGridTargetLocalPos.z)); //Snap entity's local pos
 

@@ -44,6 +44,12 @@ void StateReptileChase::Update(Entity* const entity, const double dt){
 		const Vector3& entityLocalPos = entity->GetLocalPos();
 		const Vector3& entityGridTargetLocalPos = entity->GetGridTargetLocalPos();
 
+		if((entityTargetLocalPos - entityLocalPos).LengthSquared() >= 6.0f * 6.0f){
+			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateReptilePatrol));
+			entity->SetTarget(nullptr);
+			return;
+		}
+
 		if((entityGridTargetLocalPos - entityLocalPos).Length() < entity->GetSpd() * (float)dt){
 			entity->SetLocalPos(roundf(entityGridTargetLocalPos.x), roundf(entityGridTargetLocalPos.y), roundf(entityGridTargetLocalPos.z)); //Snap entity's local pos
 
