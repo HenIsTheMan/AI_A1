@@ -49,7 +49,7 @@ void StateSkeleChase::Update(Entity* const entity, const double dt){
 
 			const Vector3 vec = Vector3(roundf(entityTargetLocalPos.x), roundf(entityTargetLocalPos.y), roundf(entityTargetLocalPos.z)) - entityLocalPos;
 			if((vec.x <= Math::EPSILON && -vec.x <= Math::EPSILON) && (vec.y <= Math::EPSILON && -vec.y <= Math::EPSILON)){ //If both are very close to 0.0f...
-				entity->SetSpriteAniMiddleName("Static");
+				ChooseADir(entity, im_Grid);
 				return;
 			}
 
