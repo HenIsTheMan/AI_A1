@@ -1004,7 +1004,8 @@ void Scene::RenderEntities(){
 						1.0f
 					);
 
-					RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.0f, 1.0f, 1.0f), 1.0f);
+					RenderMesh(meshList[(int)GeoType::Quad], true,
+						entity->GetTeam() == EntityTeam::Alpha ? Color(1.0f, 1.0f, 1.0f) : Color(0.0f, 0.0f, 0.0f), 1.0f);
 					modelStack.PopMatrix();
 				}
 				glDepthFunc(GL_LESS);
