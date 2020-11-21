@@ -5,6 +5,7 @@ void StateReptileChase::Enter(Entity* const entity){
 	entity->SetSpd(2.1f); //Chase spd
 	entity->SetSpriteAniElapsedTime(0.0f);
 	entity->SetSpriteAniDelay(0.05f);
+	entity->SetSpriteAniMiddleName("Move");
 }
 
 void StateReptileChase::Update(Entity* const entity, const double dt){
@@ -83,10 +84,7 @@ void StateReptileChase::Update(Entity* const entity, const double dt){
 						&& !gridEntityData[(int)newGridTargetLocalPos[i].y][(int)newGridTargetLocalPos[i].x]
 					){ //If grid cell is empty...
 						entity->SetGridTargetLocalPos(newGridTargetLocalPos[i]);
-
-						entity->SetSpriteAniMiddleName("Move");
 						entity->SetSpriteAniElapsedTime(0.0f);
-
 						move = true;
 						break;
 					}
@@ -108,7 +106,6 @@ void StateReptileChase::Update(Entity* const entity, const double dt){
 				if(!gridBlockData[(int)newGridTargetLocalPos.y][(int)newGridTargetLocalPos.x]
 					&& !gridEntityData[(int)newGridTargetLocalPos.y][(int)newGridTargetLocalPos.x]
 				){ //If grid cell is empty...
-					entity->SetSpriteAniMiddleName("Move");
 					entity->SetGridTargetLocalPos(newGridTargetLocalPos);
 				} else{
 					ChooseADir(entity, im_Grid);
