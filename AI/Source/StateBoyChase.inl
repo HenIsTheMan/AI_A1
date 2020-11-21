@@ -27,23 +27,51 @@ void StateBoyChase::Update(Entity* const entity, const double dt){
 				return;
 			}
 
-			Vector3 newGridTargetLocalPos;
-			if(fabs(vec.x) > fabs(vec.y)){ //what if = ??
-				newGridTargetLocalPos = entityLocalPos + Vector3(dir.x, 0.0f, 0.0f);
-			} else{
-				newGridTargetLocalPos = entityLocalPos + Vector3(0.0f, dir.y, 0.0f);
-			}
+			if(fabs(vec.x) - fabs(vec.y) <= Math::EPSILON && fabs(vec.y) - fabs(vec.x) <= Math::EPSILON){ //If... are equal...
+				Vector3 newGridTargetLocalPos[2];
+				if(rand() & 1){ //Determines which axis gets checked 1st
+					newGridTargetLocalPos[0] = entityLocalPos + Vector3(dir.x, 0.0f, 0.0f);
+					newGridTargetLocalPos[1] = entityLocalPos + Vector3(0.0f, dir.y, 0.0f);
+				} else{
+					newGridTargetLocalPos[0] = entityLocalPos + Vector3(0.0f, dir.y, 0.0f);
+					newGridTargetLocalPos[1] = entityLocalPos + Vector3(dir.x, 0.0f, 0.0f);
+				}
+				const std::vector<std::vector<bool>>& gridBlockData = im_Grid->GetBlockData();
+				const std::vector<std::vector<bool>>& gridEntityData = im_Grid->GetEntityData();
 
-			const std::vector<std::vector<bool>>& gridBlockData = im_Grid->GetBlockData();
-			const std::vector<std::vector<bool>>& gridEntityData = im_Grid->GetEntityData();
-
-			if(!gridBlockData[(int)newGridTargetLocalPos.y][(int)newGridTargetLocalPos.x]
-				&& !gridEntityData[(int)newGridTargetLocalPos.y][(int)newGridTargetLocalPos.x]
-			){ //If grid cell is empty...
-				entity->SetSpriteAniMiddleName("Move");
-				entity->SetGridTargetLocalPos(newGridTargetLocalPos);
+				bool move = false;
+				for(int i = 0; i < 2; ++i){
+					if(!gridBlockData[(int)newGridTargetLocalPos[i].y][(int)newGridTargetLocalPos[i].x]
+						&& !gridEntityData[(int)newGridTargetLocalPos[i].y][(int)newGridTargetLocalPos[i].x]
+						){ //If grid cell is empty...
+						entity->SetGridTargetLocalPos(newGridTargetLocalPos[i]);
+						entity->SetSpriteAniMiddleName("Move");
+						move = true;
+						break;
+					}
+				}
+				if(!move){
+					entity->SetSpriteAniMiddleName("Static");
+				}
 			} else{
-				entity->SetSpriteAniMiddleName("Static");
+				Vector3 newGridTargetLocalPos;
+				if(fabs(vec.x) > fabs(vec.y)){
+					newGridTargetLocalPos = entityLocalPos + Vector3(dir.x, 0.0f, 0.0f);
+				} else{
+					newGridTargetLocalPos = entityLocalPos + Vector3(0.0f, dir.y, 0.0f);
+				}
+
+				const std::vector<std::vector<bool>>& gridBlockData = im_Grid->GetBlockData();
+				const std::vector<std::vector<bool>>& gridEntityData = im_Grid->GetEntityData();
+
+				if(!gridBlockData[(int)newGridTargetLocalPos.y][(int)newGridTargetLocalPos.x]
+					&& !gridEntityData[(int)newGridTargetLocalPos.y][(int)newGridTargetLocalPos.x]
+					){ //If grid cell is empty...
+					entity->SetSpriteAniMiddleName("Move");
+					entity->SetGridTargetLocalPos(newGridTargetLocalPos);
+				} else{
+					entity->SetSpriteAniMiddleName("Static");
+				}
 			}
 		} else{
 			MoveInDir(entity, dt);
