@@ -432,7 +432,9 @@ void Scene::SpawnEntity(const Obj::EntityType type, const ListenerFlags& teamFla
 	}
 
 	switch(type){
-		case Obj::EntityType::Skele: {
+		using Obj::EntityType;
+
+		case EntityType::Skele: {
 			Entity* const skele = CreateSkele({
 				localPos
 			});
@@ -442,7 +444,7 @@ void Scene::SpawnEntity(const Obj::EntityType type, const ListenerFlags& teamFla
 
 			break;
 		}
-		case Obj::EntityType::Reptile: {
+		case EntityType::Reptile: {
 			Entity* const reptile = CreateReptile({
 				localPos
 			});
@@ -452,7 +454,7 @@ void Scene::SpawnEntity(const Obj::EntityType type, const ListenerFlags& teamFla
 
 			break;
 		}
-		case Obj::EntityType::Boy: {
+		case EntityType::Boy: {
 			Entity* const boy = CreateBoy({
 				localPos
 			});
@@ -462,7 +464,7 @@ void Scene::SpawnEntity(const Obj::EntityType type, const ListenerFlags& teamFla
 
 			break;
 		}
-		case Obj::EntityType::Orc: {
+		case EntityType::Orc: {
 			Entity* const orc = CreateOrc({
 				localPos
 			});
@@ -812,7 +814,7 @@ void Scene::UpdateEntities(const double dt){
 			Entity* const entity = entityPool[i].second;
 
 			switch(entity->GetType()){
-				using namespace Obj;
+				using Obj::EntityType;
 
 				case EntityType::Skele:
 					skeleSM->CheckForStateTransition(entity);
@@ -1118,7 +1120,7 @@ void Scene::RenderEntitiesPart2(const Entity* const entity){
 	std::string spriteAniName;
 
 	switch(entity->GetType()){
-		using namespace Obj;
+		using Obj::EntityType;
 
 		case EntityType::Skele:
 			spriteAniMesh = meshList[(int)GeoType::Skele];
