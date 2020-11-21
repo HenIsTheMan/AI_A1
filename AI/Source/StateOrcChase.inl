@@ -93,7 +93,7 @@ void StateOrcChase::Update(Entity* const entity, const double dt){
 					}
 				}
 				if(!move){
-					entity->SetSpriteAniMiddleName("Static");
+					ChooseADir(entity, im_Grid);
 				}
 			} else{
 				Vector3 newGridTargetLocalPos;
@@ -112,7 +112,7 @@ void StateOrcChase::Update(Entity* const entity, const double dt){
 					entity->SetSpriteAniMiddleName("Move");
 					entity->SetGridTargetLocalPos(newGridTargetLocalPos);
 				} else{
-					entity->SetSpriteAniMiddleName("Static");
+					ChooseADir(entity, im_Grid);
 				}
 			}
 		} else{
