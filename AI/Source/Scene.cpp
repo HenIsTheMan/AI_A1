@@ -1022,18 +1022,6 @@ void Scene::RenderEntities(){
 			);
 
 			switch(entity->GetCurrState()->GetID()){
-				case StateID::StateSkeleChase:
-					ManualRenderMesh("SkeleHibernate", 1.0f, 1.0f, meshList[(int)GeoType::Skele], true, Color(1.0f, 0.0f, 0.0f), 0.8f);
-					break;
-				case StateID::StateReptileChase:
-					ManualRenderMesh("ReptileProcreate", 1.0f, 1.0f, meshList[(int)GeoType::Reptile], true, Color(1.0f, 1.0f, 0.0f), 0.8f);
-					break;
-				case StateID::StateBoyChase:
-					ManualRenderMesh("BoyHeal", 1.0f, 1.0f, meshList[(int)GeoType::Boy], true, Color(0.0f, 1.0f, 0.0f), 0.8f);
-					break;
-				case StateID::StateOrcChase:
-					ManualRenderMesh("OrcImmune", 1.0f, 1.0f, meshList[(int)GeoType::Orc], true, Color(0.0f, 0.0f, 1.0f), 0.8f);
-					break;
 				case StateID::StateSkeleDead:
 					opacity = entity->GetTimeLeft() / 4.0f;
 					ManualRenderMesh("SkeleFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Skele], true, Color(), opacity);

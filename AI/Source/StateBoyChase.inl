@@ -22,9 +22,9 @@ void StateBoyChase::Update(Entity* const entity, const double dt){
 			///??
 			const Vector3 dir = vec.Normalized();
 			if(fabs(vec.x) > fabs(vec.y)){
-				entity->SetGridTargetLocalPos(entityGridTargetLocalPos + (entityTargetLocalPos.x < entityLocalPos.x ? -dir : dir));
+				entity->SetGridTargetLocalPos(entityGridTargetLocalPos + Vector3((entityTargetLocalPos.x < entityLocalPos.x ? -dir.x : dir.x), 0.0f, 0.0f));
 			} else{
-				entity->SetGridTargetLocalPos(entityGridTargetLocalPos + (entityTargetLocalPos.y < entityLocalPos.y ? -dir : dir));
+				entity->SetGridTargetLocalPos(entityGridTargetLocalPos + Vector3(0.0f, (entityTargetLocalPos.y < entityLocalPos.y ? -dir.y : dir.y), 0.0f));
 			}
 		} else{
 			MoveInDir(entity, dt);
