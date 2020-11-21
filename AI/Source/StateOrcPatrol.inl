@@ -4,6 +4,7 @@ Publisher* StateOrcPatrol::im_Publisher = Publisher::RetrieveGlobalObjPtr();
 
 void StateOrcPatrol::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Move");
+	entity->SetSpd(0.8f); //Patrol spd
 }
 
 void StateOrcPatrol::Update(Entity* const entity, const double dt){

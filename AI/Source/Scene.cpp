@@ -270,13 +270,13 @@ void Scene::Render(){
 
 		if(!alphaTeamEntityCount && !omegaTeamEntityCount){
 			endText = "Draw!";
-			endColor = Color(1.0f, 0.0f, 1.0f);
+			endColor = Color(0.5f, 0.5f, 0.5f);
 		} else if(alphaTeamEntityCount){
-			endText = "Blue Wins!";
-			endColor = Color(0.0f, 0.0f, 1.0f);
+			endText = "Alpha Wins!";
+			endColor = Color(1.0f, 1.0f, 1.0f);
 		} else{
-			endText = "Red Wins!";
-			endColor = Color(1.0f, 0.0f, 0.0f);
+			endText = "Omega Wins!";
+			endColor = Color(0.0f, 0.0f, 0.0f);
 		}
 
 		RenderTextOnScreen(
@@ -315,7 +315,7 @@ Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
 	entity->SetDmg(22.0f);
 	entity->SetMaxHealth(45.0f);
 	entity->SetCurrHealth(entity->GetMaxHealth());
-	entity->SetSpd(1.4f);
+	entity->SetSpd(0.0f);
 
 	entity->SetTarget(nullptr);
 	ChooseRandDir(entity);
@@ -340,7 +340,7 @@ Entity* Scene::CreateReptile(const CreateEntityParams& params) const{
 	entity->SetDmg(3.0f);
 	entity->SetMaxHealth(240.0f);
 	entity->SetCurrHealth(entity->GetMaxHealth());
-	entity->SetSpd(1.8f);
+	entity->SetSpd(0.0f);
 
 	entity->SetTarget(nullptr);
 	ChooseRandDir(entity);
@@ -365,7 +365,7 @@ Entity* Scene::CreateBoy(const CreateEntityParams& params) const{
 	entity->SetDmg(10.0f);
 	entity->SetMaxHealth(85.0f);
 	entity->SetCurrHealth(entity->GetMaxHealth());
-	entity->SetSpd(1.2f);
+	entity->SetSpd(0.0f);
 
 	entity->SetTarget(nullptr);
 	ChooseRandDir(entity);
@@ -390,7 +390,7 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 	entity->SetDmg(15.0f);
 	entity->SetMaxHealth(150.0f);
 	entity->SetCurrHealth(entity->GetMaxHealth());
-	entity->SetSpd(0.8f);
+	entity->SetSpd(0.0f);
 
 	entity->SetTarget(nullptr);
 	ChooseRandDir(entity);

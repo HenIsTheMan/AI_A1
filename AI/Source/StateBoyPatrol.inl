@@ -6,6 +6,7 @@ Publisher* StateBoyPatrol::im_Publisher = Publisher::RetrieveGlobalObjPtr();
 
 void StateBoyPatrol::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Move");
+	entity->SetSpd(1.2f); //Patrol spd
 }
 
 void StateBoyPatrol::Update(Entity* const entity, const double dt){

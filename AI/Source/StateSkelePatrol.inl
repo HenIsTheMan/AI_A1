@@ -4,6 +4,7 @@ Publisher* StateSkelePatrol::im_Publisher = Publisher::RetrieveGlobalObjPtr();
 
 void StateSkelePatrol::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Move");
+	entity->SetSpd(1.4f); //Patrol spd
 }
 
 void StateSkelePatrol::Update(Entity* const entity, const double dt){

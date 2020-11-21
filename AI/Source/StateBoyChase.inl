@@ -2,6 +2,7 @@ Grid<float>* StateBoyChase::im_Grid = nullptr;
 Publisher* StateBoyChase::im_Publisher = Publisher::RetrieveGlobalObjPtr();
 
 void StateBoyChase::Enter(Entity* const entity){
+	entity->SetSpd(1.6f); //Chase spd
 }
 
 void StateBoyChase::Update(Entity* const entity, const double dt){
