@@ -756,13 +756,13 @@ void Scene::UpdateEntities(const double dt){
 			alphaTeamLocalXEnd = (int)std::floorf((float)gridCols * 0.5f) - 1;
 			alphaTeamLocalYStart = 0;
 			alphaTeamLocalYEnd = gridRows - 1;
-			omegaTeamLocalXStart = (int)std::ceilf((float)gridCols * 0.5f) - 1;
+			omegaTeamLocalXStart = (int)std::ceilf((float)gridCols * 0.5f);
 			omegaTeamLocalXEnd = gridCols - 1;
 			omegaTeamLocalYStart = 0;
 			omegaTeamLocalYEnd = gridRows - 1;
 			break;
 		case 2:
-			alphaTeamLocalXStart = (int)std::ceilf((float)gridCols * 0.5f) - 1;
+			alphaTeamLocalXStart = (int)std::ceilf((float)gridCols * 0.5f);
 			alphaTeamLocalXEnd = gridCols - 1;
 			alphaTeamLocalYStart = 0;
 			alphaTeamLocalYEnd = gridRows - 1;
@@ -778,13 +778,13 @@ void Scene::UpdateEntities(const double dt){
 			alphaTeamLocalYEnd = (int)std::floorf((float)gridRows * 0.5f) - 1;
 			omegaTeamLocalXStart = 0;
 			omegaTeamLocalXEnd = gridCols - 1;
-			omegaTeamLocalYStart = (int)std::ceilf((float)gridRows * 0.5f) - 1;
+			omegaTeamLocalYStart = (int)std::ceilf((float)gridRows * 0.5f);
 			omegaTeamLocalYEnd = gridRows - 1;
 			break;
 		case 4:
 			alphaTeamLocalXStart = 0;
 			alphaTeamLocalXEnd = gridCols - 1;
-			alphaTeamLocalYStart = (int)std::ceilf((float)gridRows * 0.5f) - 1;
+			alphaTeamLocalYStart = (int)std::ceilf((float)gridRows * 0.5f);
 			alphaTeamLocalYEnd = gridRows - 1;
 			omegaTeamLocalXStart = 0;
 			omegaTeamLocalXEnd = gridCols - 1;
