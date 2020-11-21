@@ -1,3 +1,5 @@
+#include "EventFindClosestEnemy.h"
+
 float StateOrcPatrol::im_ElapsedTime = 0.0f;
 Grid<float>* StateOrcPatrol::im_Grid = nullptr;
 Publisher* StateOrcPatrol::im_Publisher = Publisher::RetrieveGlobalObjPtr();
@@ -15,6 +17,16 @@ void StateOrcPatrol::Update(Entity* const entity, const double dt){
 	if(entity->GetCurrHealth() <= 0.0f){
 		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcDead));
 		return;
+	}
+	if(im_Publisher->Notify((long int)ListenerFlags::ObjPool, new EventFindClosestEnemy(entity), false)){
+		const Entity* const entityTarget = entity->GetTarget();
+
+		if((entityTarget->GetLocalPos() - entity->GetLocalPos()).LengthSquared() < 3.0f * 3.0f){
+			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcChase));
+			return;
+		} else{
+			entity->SetTarget(nullptr);
+		}
 	}
 
 	const Vector3 entityGridTargetLocalPos = entity->GetGridTargetLocalPos();
