@@ -179,8 +179,11 @@ void SceneSupport::Update(double dt){
 		isF2 = false;
 	}
 
+	if(App::Key('R')){
+		orthoProjectionScaleFactor = 1.0;
+	}
 	orthoProjectionScaleFactor -= dt * mouseScrollWheelYOffset * 5.0;
-	orthoProjectionScaleFactor = Math::Clamp(orthoProjectionScaleFactor, 0.3, 1.0);
+	orthoProjectionScaleFactor = Math::Clamp(orthoProjectionScaleFactor, 0.2, 1.0);
 	mouseScrollWheelYOffset = 0.0;
 
 	static_cast<SpriteAni*>(meshList[(int)GeoType::DayBG])->Update(elapsedTime);

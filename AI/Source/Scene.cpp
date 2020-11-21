@@ -156,8 +156,13 @@ Scene::~Scene(){
 void Scene::Update(double dt){
 	SceneSupport::Update(dt);
 
+	if(simEnded){
+		return;
+	}
 	if(spawningTime >= spawningEndTime && (!alphaTeamEntityCount || !omegaTeamEntityCount)){
 		simEnded = true;
+		im_Cam.Reset();
+		orthoProjectionScaleFactor = 1.0;
 	}
 
 	if(simStarted){
