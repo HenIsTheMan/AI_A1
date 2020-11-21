@@ -1,5 +1,6 @@
 float StateOrcIdle::im_ElapsedTime = 0.0f;
 Grid<float>* StateOrcIdle::im_Grid = nullptr;
+Publisher* StateOrcIdle::im_Publisher = Publisher::RetrieveGlobalObjPtr();
 
 void StateOrcIdle::Enter(Entity* const entity){
 	entity->SetSpriteAniMiddleName("Static");
@@ -14,26 +15,38 @@ void StateOrcIdle::Update(Entity* const entity, const double dt){
 		return;
 	}
 
-	if(entity->GetTimeLeft() <= 0.0f){
-		const Vector3& entityLocalPos = entity->GetLocalPos();
-		const std::vector<std::vector<bool>>& gridBlockData = im_Grid->GetBlockData();
-		const std::vector<std::vector<bool>>& gridEntityData = im_Grid->GetEntityData();
-		const int gridRows = im_Grid->GetRows();
-		const int gridCols = im_Grid->GetCols();
+	const Vector3& entityLocalPos = entity->GetLocalPos();
+	const std::vector<std::vector<bool>>& gridBlockData = im_Grid->GetBlockData();
+	const std::vector<std::vector<bool>>& gridEntityData = im_Grid->GetEntityData();
+	const int gridRows = im_Grid->GetRows();
+	const int gridCols = im_Grid->GetCols();
 
-		if(((int)entityLocalPos.x + 1 < gridCols
-			&& !gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x + 1]
-			&& !gridEntityData[(int)entityLocalPos.y][(int)entityLocalPos.x + 1])
-			|| ((int)entityLocalPos.x - 1 >= 0
-			&& !gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x - 1]
-			&& !gridEntityData[(int)entityLocalPos.y][(int)entityLocalPos.x - 1])
-			|| ((int)entityLocalPos.y + 1 < gridRows
-			&& !gridBlockData[(int)entityLocalPos.y + 1][(int)entityLocalPos.x]
-			&& !gridEntityData[(int)entityLocalPos.y + 1][(int)entityLocalPos.x])
-			|| ((int)entityLocalPos.y - 1 >= 0
-			&& !gridBlockData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]
-			&& !gridEntityData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x])
-		){
+	const bool free = ((int)entityLocalPos.x + 1 < gridCols
+		&& !gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x + 1]
+		&& !gridEntityData[(int)entityLocalPos.y][(int)entityLocalPos.x + 1])
+		|| ((int)entityLocalPos.x - 1 >= 0
+		&& !gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x - 1]
+		&& !gridEntityData[(int)entityLocalPos.y][(int)entityLocalPos.x - 1])
+		|| ((int)entityLocalPos.y + 1 < gridRows
+		&& !gridBlockData[(int)entityLocalPos.y + 1][(int)entityLocalPos.x]
+		&& !gridEntityData[(int)entityLocalPos.y + 1][(int)entityLocalPos.x])
+		|| ((int)entityLocalPos.y - 1 >= 0
+		&& !gridBlockData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]
+		&& !gridEntityData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]);
+
+	if(free && im_Publisher->Notify((long int)ListenerFlags::ObjPool, new EventFindClosestEnemy(entity), false)){
+		const Entity* const entityTarget = entity->GetTarget();
+
+		if((entityTarget->GetLocalPos() - entityLocalPos).LengthSquared() < 3.0f * 3.0f){
+			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcChase));
+			return;
+		} else{
+			entity->SetTarget(nullptr);
+		}
+	}
+
+	if(entity->GetTimeLeft() <= 0.0f){
+		if(free){
 			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcPatrol));
 			return;
 		}

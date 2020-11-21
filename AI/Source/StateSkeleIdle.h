@@ -12,6 +12,7 @@ class StateSkeleIdle final{ //Static class
 public:
 	static float im_ElapsedTime;
 	static Grid<float>* im_Grid;
+	static Publisher* im_Publisher;
 
 	static void Enter(Entity* const entity);
 	static void Update(Entity* const entity, const double dt);
