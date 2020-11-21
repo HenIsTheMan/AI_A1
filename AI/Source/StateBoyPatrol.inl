@@ -20,6 +20,8 @@ void StateBoyPatrol::Update(Entity* const entity, const double dt){
 		if((entityTarget->GetLocalPos() - entity->GetLocalPos()).LengthSquared() < 7.0f * 7.0f){
 			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyChase));
 			return;
+		} else{
+			entity->SetTarget(nullptr);
 		}
 	}
 
