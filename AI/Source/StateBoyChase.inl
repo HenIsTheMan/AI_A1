@@ -79,7 +79,7 @@ void StateBoyChase::Update(Entity* const entity, const double dt){
 
 				if(!gridBlockData[(int)newGridTargetLocalPos.y][(int)newGridTargetLocalPos.x]
 					&& !gridEntityData[(int)newGridTargetLocalPos.y][(int)newGridTargetLocalPos.x]
-					){ //If grid cell is empty...
+				){ //If grid cell is empty...
 					entity->SetSpriteAniMiddleName("Move");
 					entity->SetGridTargetLocalPos(newGridTargetLocalPos);
 				} else{

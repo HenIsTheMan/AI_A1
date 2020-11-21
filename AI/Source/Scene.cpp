@@ -649,6 +649,9 @@ void Scene::UpdateSkeleStates(){
 	stateSkelePatrol->im_ElapsedTime = elapsedTime;
 	stateSkelePatrol->im_Grid = &grid;
 
+	StateSkeleChase* const stateSkeleChase = ((StateSkeleChase*)skeleSM->GetState(StateID::StateSkeleChase));
+	stateSkeleChase->im_Grid = &grid;
+
 	StateSkeleDead* const stateSkeleDead = ((StateSkeleDead*)skeleSM->GetState(StateID::StateSkeleDead));
 	stateSkeleDead->im_ObjPool = objPool;
 }
@@ -667,6 +670,9 @@ void Scene::UpdateReptileStates(){
 		ChooseRandPairOfPerpendicularDirs(stateReptilePatrol->im_CommonDirs);
 		updateCommonDirBT = elapsedTime + 1.0f;
 	}
+
+	StateReptileChase* const stateReptileChase = ((StateReptileChase*)reptileSM->GetState(StateID::StateReptileChase));
+	stateReptileChase->im_Grid = &grid;
 
 	StateReptileDead* const stateReptileDead = ((StateReptileDead*)reptileSM->GetState(StateID::StateReptileDead));
 	stateReptileDead->im_ObjPool = objPool;
@@ -696,6 +702,9 @@ void Scene::UpdateOrcStates(){
 	StateOrcPatrol* const stateOrcPatrol = ((StateOrcPatrol*)orcSM->GetState(StateID::StateOrcPatrol));
 	stateOrcPatrol->im_ElapsedTime = elapsedTime;
 	stateOrcPatrol->im_Grid = &grid;
+
+	StateOrcChase* const stateOrcChase = ((StateOrcChase*)orcSM->GetState(StateID::StateOrcChase));
+	stateOrcChase->im_Grid = &grid;
 
 	StateOrcDead* const stateOrcDead = ((StateOrcDead*)orcSM->GetState(StateID::StateOrcDead));
 	stateOrcDead->im_ObjPool = objPool;
