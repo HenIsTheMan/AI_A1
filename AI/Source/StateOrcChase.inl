@@ -15,29 +15,6 @@ void StateOrcChase::Update(Entity* const entity, const double dt){
 		return;
 	}
 
-	const Vector3& entityLocalPos = entity->GetLocalPos();
-	const std::vector<std::vector<bool>>& gridBlockData = im_Grid->GetBlockData();
-	const std::vector<std::vector<bool>>& gridEntityData = im_Grid->GetEntityData();
-	const int gridRows = im_Grid->GetRows();
-	const int gridCols = im_Grid->GetCols();
-
-	if(!(((int)entityLocalPos.x + 1 < gridCols
-		&& !gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x + 1]
-		&& !gridEntityData[(int)entityLocalPos.y][(int)entityLocalPos.x + 1])
-		|| ((int)entityLocalPos.x - 1 >= 0
-		&& !gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x - 1]
-		&& !gridEntityData[(int)entityLocalPos.y][(int)entityLocalPos.x - 1])
-		|| ((int)entityLocalPos.y + 1 < gridRows
-		&& !gridBlockData[(int)entityLocalPos.y + 1][(int)entityLocalPos.x]
-		&& !gridEntityData[(int)entityLocalPos.y + 1][(int)entityLocalPos.x])
-		|| ((int)entityLocalPos.y - 1 >= 0
-		&& !gridBlockData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]
-		&& !gridEntityData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x])
-	)){
-		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcIdle));
-		return;
-	}
-
 	if(im_Publisher->Notify((long int)ListenerFlags::ObjPool, new EventFindClosestEnemy(entity), false)){
 		const Entity* const entityTarget = entity->GetTarget();
 		const Vector3& entityTargetLocalPos = entityTarget->GetLocalPos();
@@ -52,6 +29,28 @@ void StateOrcChase::Update(Entity* const entity, const double dt){
 
 		if((entityGridTargetLocalPos - entityLocalPos).Length() < entity->GetSpd() * (float)dt){
 			entity->SetLocalPos(roundf(entityGridTargetLocalPos.x), roundf(entityGridTargetLocalPos.y), roundf(entityGridTargetLocalPos.z)); //Snap entity's local pos
+
+			const std::vector<std::vector<bool>>& gridBlockData = im_Grid->GetBlockData();
+			const std::vector<std::vector<bool>>& gridEntityData = im_Grid->GetEntityData();
+			const int gridRows = im_Grid->GetRows();
+			const int gridCols = im_Grid->GetCols();
+
+			if(!(((int)entityLocalPos.x + 1 < gridCols
+				&& !gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x + 1]
+				&& !gridEntityData[(int)entityLocalPos.y][(int)entityLocalPos.x + 1])
+				|| ((int)entityLocalPos.x - 1 >= 0
+				&& !gridBlockData[(int)entityLocalPos.y][(int)entityLocalPos.x - 1]
+				&& !gridEntityData[(int)entityLocalPos.y][(int)entityLocalPos.x - 1])
+				|| ((int)entityLocalPos.y + 1 < gridRows
+				&& !gridBlockData[(int)entityLocalPos.y + 1][(int)entityLocalPos.x]
+				&& !gridEntityData[(int)entityLocalPos.y + 1][(int)entityLocalPos.x])
+				|| ((int)entityLocalPos.y - 1 >= 0
+				&& !gridBlockData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]
+				&& !gridEntityData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x])
+				)){
+				entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcIdle));
+				return;
+			}
 
 			const Vector3 vec = Vector3(roundf(entityTargetLocalPos.x), roundf(entityTargetLocalPos.y), roundf(entityTargetLocalPos.z)) - entityLocalPos;
 			if((vec.x <= Math::EPSILON && -vec.x <= Math::EPSILON) && (vec.y <= Math::EPSILON && -vec.y <= Math::EPSILON)){ //If both are very close to 0.0f...
