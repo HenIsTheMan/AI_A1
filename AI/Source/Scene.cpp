@@ -766,13 +766,15 @@ void Scene::UpdateEntities(const double dt){
 	alphaTeamEntityCount = publisher->Notify((long int)ListenerFlags::ObjPool, new EventCalcAlphaCount(), false);
 	omegaTeamEntityCount = publisher->Notify((long int)ListenerFlags::ObjPool, new EventCalcOmegaCount(), false);
 
-	if(alphaTeamEntityCount < alphaTeamSpawnLimit && alphaTeamSpawnBT <= elapsedTime){
-		SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::AlphaTeam);
-		alphaTeamSpawnBT = elapsedTime + (!isDay ? Math::RandFloatMinMax(2.0f, 3.0f) : Math::RandFloatMinMax(0.7f, 1.5f));
-	}
-	if(omegaTeamEntityCount < omegaTeamSpawnLimit && omegaTeamSpawnBT <= elapsedTime){
-		SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::OmegaTeam);
-		omegaTeamSpawnBT = elapsedTime + (isDay ? Math::RandFloatMinMax(2.0f, 3.0f) : Math::RandFloatMinMax(0.7f, 1.5f));
+	if(spawningStartTime < spawningEndTime){
+		if(alphaTeamEntityCount < alphaTeamSpawnLimit && alphaTeamSpawnBT <= elapsedTime){
+			SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::AlphaTeam);
+			alphaTeamSpawnBT = elapsedTime + (!isDay ? Math::RandFloatMinMax(2.0f, 3.0f) : Math::RandFloatMinMax(0.7f, 1.5f));
+		}
+		if(omegaTeamEntityCount < omegaTeamSpawnLimit && omegaTeamSpawnBT <= elapsedTime){
+			SpawnEntity((Obj::EntityType)Math::RandIntMinMax((int)Obj::EntityType::Skele, (int)Obj::EntityType::Orc), ListenerFlags::OmegaTeam);
+			omegaTeamSpawnBT = elapsedTime + (isDay ? Math::RandFloatMinMax(2.0f, 3.0f) : Math::RandFloatMinMax(0.7f, 1.5f));
+		}
 	}
 
 	std::vector<std::pair<bool, Entity*>>& entityPool = objPool->RetrievePool();
@@ -782,24 +784,16 @@ void Scene::UpdateEntities(const double dt){
 		if(entityPool[i].first){
 			Entity* const entity = entityPool[i].second;
 
+			///Process all events in event queue here as most of them will break the game if not processed here and now
 			Event* myEvent = nullptr;
-			EventID ID = EventID::Amt;
 			do{
 				myEvent = entity->FetchEvent();
-				if(myEvent){
-					ID = myEvent->GetID();
-
-					switch(entity->OnEvent(myEvent, true)){
-						case -5:
-							objPool->DeactivateObj(entity);
-							break;
-					}
+				switch(entity->OnEvent(myEvent, true)){
+					case -5:
+						objPool->DeactivateObj(entity);
+						break;
 				}
-			} while(myEvent
-				&& (ID == EventID::EventBlockPlaced
-				|| ID == EventID::EventGridHeightShrinking
-				|| ID == EventID::EventGridWidthShrinking)
-			); //Important events must all be processed
+			} while(myEvent);
 		}
 	}
 
