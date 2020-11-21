@@ -26,11 +26,11 @@ namespace Obj{
 
 		switch(myEvent->GetID()){
 			case EventID::EventBlockPlaced: {
-				const EventBlockPlaced* const eventGridDataChanged = dynamic_cast<const EventBlockPlaced*>(myEvent);
-				assert(eventGridDataChanged && "Val of eventGridDataChanged is nullptr!");
+				const EventBlockPlaced* const eventBlockPlaced = dynamic_cast<const EventBlockPlaced*>(myEvent);
+				assert(eventBlockPlaced && "Val of eventBlockPlaced is nullptr!");
 
-				const float blockRow = (float)eventGridDataChanged->GetBlockRow();
-				const float blockCol = (float)eventGridDataChanged->GetBlockCol();
+				const float blockRow = (float)eventBlockPlaced->GetBlockRow();
+				const float blockCol = (float)eventBlockPlaced->GetBlockCol();
 
 				if(im_Attribs.im_LocalPos.x > blockCol - 1.0f && im_Attribs.im_LocalPos.x < blockCol + 1.0f
 					&& im_Attribs.im_LocalPos.y > blockRow - 1.0f && im_Attribs.im_LocalPos.y < blockRow + 1.0f){
