@@ -34,14 +34,30 @@ void StateBoyIdle::Update(Entity* const entity, const double dt){
 		&& !gridBlockData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]
 		&& !gridEntityData[(int)entityLocalPos.y - 1][(int)entityLocalPos.x]);
 
-	if(free && im_Publisher->Notify((long int)ListenerFlags::ObjPool, new EventFindClosestEnemy(entity), false)){
+	if(im_Publisher->Notify((long int)ListenerFlags::ObjPool, new EventFindClosestEnemy(entity), false)){
 		const Entity* const entityTarget = entity->GetTarget();
+		const Vector3& entityTargetLocalPos = entityTarget->GetLocalPos();
 
-		if((entityTarget->GetLocalPos() - entityLocalPos).LengthSquared() < 4.0f * 4.0f){
-			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyChase));
+		const Vector3 vec = Vector3(roundf(entityTargetLocalPos.x), roundf(entityTargetLocalPos.y), roundf(entityTargetLocalPos.z)) - entityLocalPos;
+		if(vec.x <= Math::EPSILON && -vec.x <= Math::EPSILON && vec.y <= Math::EPSILON && -vec.y <= Math::EPSILON){ //If both are very close to 0.0f...
+			ChooseADir(entity, im_Grid);
 			return;
-		} else{
-			entity->SetTarget(nullptr);
+		}
+
+		const Vector3 dir = Vector3(vec.x / fabs(vec.x), vec.y / fabs(vec.y), vec.z);
+		const float vecLenSquared = vec.LengthSquared();
+		if(vecLenSquared - 1.0f <= Math::EPSILON && 1.0f - vecLenSquared <= Math::EPSILON){
+			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyAttack));
+			return;
+		}
+
+		if(free){
+			if((entityTarget->GetLocalPos() - entityLocalPos).LengthSquared() < 4.0f * 4.0f){
+				entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyChase));
+				return;
+			} else{
+				entity->SetTarget(nullptr);
+			}
 		}
 	}
 
