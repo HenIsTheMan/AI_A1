@@ -1,13 +1,13 @@
 #include "EventFindNearestObj.h"
 
-EventFindNearestObj::EventFindNearestObj(const EntityTeam team):
+EventFindNearestObj::EventFindNearestObj(Obj::Entity<Vector3, float>* const entity):
 	Event(EventID::EventFindNearestObj),
-	im_Team(team)
+	im_Entity(entity)
 {
 }
 
-EntityTeam EventFindNearestObj::GetTeam() const{
-	return im_Team;
+Obj::Entity<Vector3, float>* EventFindNearestObj::RetrieveEntity(){
+	return im_Entity;
 }
 
 EventFindNearestObj* EventFindNearestObj::Clone() const{

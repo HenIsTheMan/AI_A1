@@ -79,6 +79,19 @@ int ObjPool<T>::OnEvent(const Event* myEvent, const bool destroyEvent){
 			val = count;
 			break;
 		}
+		case EventID::EventFindNearestObj: {
+			//int count = 0;
+			//const size_t poolSize = im_ObjPool.size();
+
+			//for(size_t i = 0; i < poolSize; ++i){
+			//	if(im_ObjPool[i].first && im_ObjPool[i].second->GetTeam() == EntityTeam::Omega){
+			//		++count;
+			//	}
+			//}
+
+			//val = count;
+			break;
+		}
 	}
 
 	if(destroyEvent && myEvent){

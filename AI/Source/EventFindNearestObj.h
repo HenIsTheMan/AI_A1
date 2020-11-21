@@ -2,18 +2,17 @@
 
 #include "Event.h"
 
-#include "EntityTeam.hpp"
+#include "Entity.h"
 
 class EventFindNearestObj final: public Event{
 	EventFindNearestObj() = delete;
 public:
-	EventFindNearestObj(const EntityTeam team);
+	EventFindNearestObj(Obj::Entity<Vector3, float>* const entity);
 	~EventFindNearestObj() = default;
 
-	///Getter
-	EntityTeam GetTeam() const;
+	Obj::Entity<Vector3, float>* RetrieveEntity(); 
 private:
-	EntityTeam im_Team;
+	Obj::Entity<Vector3, float>* im_Entity;
 
 	EventFindNearestObj* Clone() const override;
 };
