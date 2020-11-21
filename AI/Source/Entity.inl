@@ -1,4 +1,5 @@
 #include "EventBlockPlaced.h"
+#include "EventAttacking.h"
 #include "EventGridHeightShrinking.h"
 #include "EventGridWidthShrinking.h"
 
@@ -35,6 +36,19 @@ namespace Obj{
 					&& im_Attribs.im_LocalPos.y > blockRow - 1.0f && im_Attribs.im_LocalPos.y < blockRow + 1.0f){
 					val = -5;
 				}
+				break;
+			}
+			case EventID::EventAttacking: {
+				const EventAttacking* const eventAttacking = dynamic_cast<const EventAttacking*>(myEvent);
+				assert(eventAttacking && "Val of eventAttacking is nullptr!");
+
+				const Vector3& eventAttackingLocalPos = eventAttacking->GetLocalPos();
+				if(im_Attribs.im_LocalPos.x > eventAttackingLocalPos.x - 1.0f && im_Attribs.im_LocalPos.x < eventAttackingLocalPos.x + 1.0f
+					&& im_Attribs.im_LocalPos.y > eventAttackingLocalPos.y - 1.0f && im_Attribs.im_LocalPos.y < eventAttackingLocalPos.y + 1.0f){
+					val = 1;
+					im_Attribs.im_CurrHealth -= eventAttacking->GetDmg();
+				}
+
 				break;
 			}
 			case EventID::EventGridHeightShrinking: {

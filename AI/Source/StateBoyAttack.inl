@@ -1,3 +1,5 @@
+Publisher* StateBoyAttack::im_Publisher = Publisher::RetrieveGlobalObjPtr();
+
 void StateBoyAttack::Enter(Entity* const entity){
 }
 
@@ -22,7 +24,8 @@ void StateBoyAttack::Update(Entity* const entity, const double dt){
 			entity->SetTimeLeft(1.0f); //Attack cooldown
 		} else{
 			entity->SetSpriteAniMiddleName("Slash");
-			//Send msg??
+			(void)im_Publisher->Notify(long int(entity->GetTeam() == EntityTeam::Alpha ? ListenerFlags::OmegaTeam : ListenerFlags::AlphaTeam),
+				new EventAttacking(entity->GetDmg(), entityTargetLocalPos), true);
 
 			entity->SetTimeLeft(0.4f); //Attack interval
 		}

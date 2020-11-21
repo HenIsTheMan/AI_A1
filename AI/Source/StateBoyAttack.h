@@ -10,6 +10,8 @@ class StateBoyAttack final{ //Static class
 	StateBoyAttack& operator=(const StateBoyAttack&) = delete;
 	StateBoyAttack& operator=(StateBoyAttack&&) noexcept = delete;
 public:
+	static Publisher* im_Publisher;
+
 	static void Enter(Entity* const entity);
 	static void Update(Entity* const entity, const double dt);
 	static void Exit(Entity* const entity);

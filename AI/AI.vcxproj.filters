@@ -70,6 +70,9 @@
     <ClCompile Include="Source\EventFindClosestEnemy.cpp">
       <Filter>Event\Events</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EventAttacking.cpp">
+      <Filter>Event\Events\Pre-events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -236,6 +239,9 @@
     </ClInclude>
     <ClInclude Include="Source\EventFindClosestEnemy.h">
       <Filter>Event\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventAttacking.h">
+      <Filter>Event\Events\Pre-events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

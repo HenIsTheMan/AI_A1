@@ -2,6 +2,7 @@
 
 enum struct EventID: int{
 	EventBlockPlaced,
+	EventAttacking,
 	EventGridHeightShrinking,
 	EventGridWidthShrinking,
 	EventCalcActiveObjs,
