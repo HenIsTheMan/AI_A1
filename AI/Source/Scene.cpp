@@ -87,7 +87,7 @@ Scene::Scene():
 {
 	Math::InitRNG();
 
-	objPool->CreateObjs(10000);
+	objPool->CreateObjs(2000);
 
 	skeleSM->AddState(new State(StateID::StateSkeleIdle, StateSkeleIdle::Enter, StateSkeleIdle::Update, StateSkeleIdle::Exit));
 	skeleSM->AddState(new State(StateID::StateSkelePatrol, StateSkelePatrol::Enter, StateSkelePatrol::Update, StateSkelePatrol::Exit));
@@ -242,8 +242,8 @@ void Scene::Update(double dt){
 		} else if(isKeyDownP && !App::Key('P')){
 			isKeyDownP = false;
 		}
-		alphaTeamSpawnLimit = Math::Max(0, alphaTeamSpawnLimit);
-		omegaTeamSpawnLimit = Math::Max(0, omegaTeamSpawnLimit);
+		alphaTeamSpawnLimit = Math::Clamp(alphaTeamSpawnLimit, 0, 500);
+		omegaTeamSpawnLimit = Math::Clamp(omegaTeamSpawnLimit, 0, 500);
 
 		UpdateGridAttribs();
 		UpdateGridBlockData();
