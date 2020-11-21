@@ -170,6 +170,7 @@ void Scene::Update(double dt){
 
 		if(dayNightBT <= elapsedTime){
 			isDay = !isDay;
+			teamRegionsCase = Math::RandIntMinMax(1, 4);
 			dayNightBT = elapsedTime + 7.0f;
 		}
 
