@@ -357,7 +357,7 @@ Entity* Scene::CreateReptile(const CreateEntityParams& params) const{
 	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
 
 	entity->SetDmg(3.0f);
-	entity->SetMaxHealth(240.0f);
+	entity->SetMaxHealth(170.0f);
 	entity->SetCurrHealth(entity->GetMaxHealth());
 	entity->SetSpd(0.0f);
 
@@ -1715,20 +1715,43 @@ int Scene::OnEvent(Event* myEvent, const bool destroyEvent){
 
 	switch(myEvent->GetID()){
 		case EventID::EventProcreated: {
-			std::cout << "Here!";
-
 			const EventProcreated* const eventProcreated = static_cast<const EventProcreated*>(myEvent);
 
-			Entity* const reptile = CreateReptile({
-				eventProcreated->GetLocalPos()
+			std::vector<Vector3> possibleOffsets{
+				Vector3(1.0f, 0.0f, 0.0f),
+				Vector3(-1.0f, 0.0f, 0.0f),
+				Vector3(0.0f, 1.0f, 0.0f),
+				Vector3(0.0f, -1.0f, 0.0f),
+				Vector3(1.0f, 1.0f, 0.0f),
+				Vector3(-1.0f, 1.0f, 0.0f),
+				Vector3(1.0f, -1.0f, 0.0f),
+				Vector3(-1.0f, -1.0f, 0.0f)
+			};
+			std::random_shuffle(possibleOffsets.begin(), possibleOffsets.end(), [](const int i){
+				return rand() % i;
 			});
+			const size_t possibleOffsetsSize = possibleOffsets.size();
+			const std::vector<std::vector<bool>>& gridBlockData = grid.GetBlockData();
+			const std::vector<std::vector<bool>>& gridEntityData = grid.GetEntityData();
 
-			const ListenerFlags& teamFlag = eventProcreated->GetTeamFlag();
-			const bool team = teamFlag == ListenerFlags::AlphaTeam;
-			reptile->SetTeam(team ? EntityTeam::Alpha : EntityTeam::Omega);
-			publisher->AddListener((long int)ListenerFlags::Reptile | (long int) teamFlag | (long int)ListenerFlags::Entity, reptile);
+			for(size_t i = 0; i < possibleOffsetsSize; ++i){
+				const Vector3 spawnLocalPos = eventProcreated->GetLocalPos() + possibleOffsets[i];
+				if(gridBlockData[(int)spawnLocalPos.y][(int)spawnLocalPos.x] || gridEntityData[(int)spawnLocalPos.y][(int)spawnLocalPos.x]){ //If grid cell is not empty...
+					continue;
+				}
 
-			val = 1;
+				Entity* const reptile = CreateReptile({
+					spawnLocalPos
+				});
+
+				const ListenerFlags& teamFlag = eventProcreated->GetTeamFlag();
+				const bool team = teamFlag == ListenerFlags::AlphaTeam;
+				reptile->SetTeam(team ? EntityTeam::Alpha : EntityTeam::Omega);
+				publisher->AddListener((long int)ListenerFlags::Reptile | (long int)teamFlag | (long int)ListenerFlags::Entity, reptile);
+
+				val = 1;
+				break;
+			}
 			break;
 		}
 	}
