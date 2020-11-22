@@ -243,6 +243,18 @@
     <ClInclude Include="Source\EventAttacking.h">
       <Filter>Event\Events\Pre-events</Filter>
     </ClInclude>
+    <ClInclude Include="Source\StateOrcExplosive.h">
+      <Filter>State\States\OrcStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateReptileProcreate.h">
+      <Filter>State\States\ReptileStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateSkeleDeadButNotDead.h">
+      <Filter>State\States\SkeleStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StateBoyImmune.h">
+      <Filter>State\States\BoyStates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -380,6 +392,18 @@
       <Filter>State\States\ReptileStates</Filter>
     </None>
     <None Include="Source\StateSkeleChase.inl">
+      <Filter>State\States\SkeleStates</Filter>
+    </None>
+    <None Include="Source\StateBoyImmune.inl">
+      <Filter>State\States\BoyStates</Filter>
+    </None>
+    <None Include="Source\StateOrcExplosive.inl">
+      <Filter>State\States\OrcStates</Filter>
+    </None>
+    <None Include="Source\StateReptileProcreate.inl">
+      <Filter>State\States\ReptileStates</Filter>
+    </None>
+    <None Include="Source\StateSkeleDeadButNotDead.inl">
       <Filter>State\States\SkeleStates</Filter>
     </None>
   </ItemGroup>
