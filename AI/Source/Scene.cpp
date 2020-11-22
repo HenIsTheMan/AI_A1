@@ -329,8 +329,8 @@ Entity* Scene::CreateSkele(const CreateEntityParams& params) const{
 	entity->SetLocalPos(params.im_LocalPos);
 	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
 
-	entity->SetDmg(22.0f);
-	entity->SetMaxHealth(45.0f);
+	entity->SetDmg(25.0f);
+	entity->SetMaxHealth(70.0f);
 	entity->SetCurrHealth(entity->GetMaxHealth());
 	entity->SetSpd(0.0f);
 
@@ -356,8 +356,8 @@ Entity* Scene::CreateReptile(const CreateEntityParams& params) const{
 	entity->SetLocalPos(params.im_LocalPos);
 	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
 
-	entity->SetDmg(3.0f);
-	entity->SetMaxHealth(170.0f);
+	entity->SetDmg(10.0f);
+	entity->SetMaxHealth(150.0f);
 	entity->SetCurrHealth(entity->GetMaxHealth());
 	entity->SetSpd(0.0f);
 
@@ -383,8 +383,8 @@ Entity* Scene::CreateBoy(const CreateEntityParams& params) const{
 	entity->SetLocalPos(params.im_LocalPos);
 	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
 
-	entity->SetDmg(10.0f);
-	entity->SetMaxHealth(85.0f);
+	entity->SetDmg(15.0f);
+	entity->SetMaxHealth(120.0f);
 	entity->SetCurrHealth(entity->GetMaxHealth());
 	entity->SetSpd(0.0f);
 
@@ -410,8 +410,8 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 	entity->SetLocalPos(params.im_LocalPos);
 	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
 
-	entity->SetDmg(12.0f);
-	entity->SetMaxHealth(120.0f);
+	entity->SetDmg(20.0f);
+	entity->SetMaxHealth(100.0f);
 	entity->SetCurrHealth(entity->GetMaxHealth());
 	entity->SetSpd(0.0f);
 

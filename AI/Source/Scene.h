@@ -85,10 +85,10 @@ private:
 		Vector3 im_LocalPos = Vector3();
 	};
 
-	Entity* CreateSkele(const CreateEntityParams& params) const; //Very high dmg, very low health, moderate range, moderate spd
-	Entity* CreateReptile(const CreateEntityParams& params) const; //Very low dmg, very high health, high range, high spd
-	Entity* CreateBoy(const CreateEntityParams& params) const; //Moderate dmg, moderate health, moderate range, moderate spd
-	Entity* CreateOrc(const CreateEntityParams& params) const; //High dmg, high health, low range, low spd
+	Entity* CreateSkele(const CreateEntityParams& params) const;
+	Entity* CreateReptile(const CreateEntityParams& params) const;
+	Entity* CreateBoy(const CreateEntityParams& params) const;
+	Entity* CreateOrc(const CreateEntityParams& params) const;
 
 	void SpawnEntity(const Obj::EntityType type, const ListenerFlags& teamFlag);
 
