@@ -13,5 +13,6 @@ enum struct ListenerFlags: long int{ //Flags enum
 	AlphaTeam = BIT(6),
 	OmegaTeam = BIT(7),
 	Entity = BIT(8),
-	Amt = 8
+	Scene = BIT(9),
+	Amt = 9
 };

@@ -1706,3 +1706,24 @@ void Scene::RenderGameInfoText(Mesh* const textMesh, const Color& textColor, con
 		TextAlignment::Right
 	);
 }
+
+int Scene::OnEvent(Event* myEvent, const bool destroyEvent){
+	if(!myEvent){
+		return -1;
+	}
+
+	int val = -1;
+
+	switch(myEvent->GetID()){
+		case EventID::EventCalcActiveObjs: {
+			val = 999;
+			break;
+		}
+	}
+
+	if(destroyEvent && myEvent){
+		delete myEvent;
+		myEvent = nullptr;
+	}
+	return val;
+}

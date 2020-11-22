@@ -21,7 +21,7 @@
 using Entity = Obj::Entity<Vector3, float>; //Can because Entity<Vector3, float> is in another namespace
 using SM = StateMachine<StateID, Entity>;
 
-class Scene final: public SceneSupport{
+class Scene final: public SceneSupport, public Listener{
 public:
 	Scene();
 	~Scene();
@@ -116,4 +116,6 @@ private:
 	void RenderControlsText(Mesh* const textMesh, const Color& textColor, const float textSize);
 	void RenderGridAttribsText(Mesh* const textMesh, const Color& textColor, const float textSize);
 	void RenderGameInfoText(Mesh* const textMesh, const Color& textColor, const float textSize);
+
+	int OnEvent(Event* myEvent, const bool destroyEvent = false) override;
 };
