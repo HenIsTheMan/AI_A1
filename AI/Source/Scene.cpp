@@ -1137,23 +1137,30 @@ void Scene::RenderEntities(){
 			);
 			modelStack.PopMatrix();
 
-			modelStack.PushMatrix();
+			const StateID currStateID = entity->GetCurrState()->GetID();
+			if((currStateID != StateID::StateSkeleDead)
+				&& (currStateID != StateID::StateReptileDead)
+				&& (currStateID != StateID::StateBoyDead)
+				&& (currStateID != StateID::StateOrcDead)
+			){
+				modelStack.PushMatrix();
 
-			modelStack.Translate(
-				-(1.f - ratio) * 0.5f,
-				0.0f,
-				0.0f
-			);
-			modelStack.Scale(
-				ratio - 0.05f,
-				0.5f,
-				1.0f
-			);
+				modelStack.Translate(
+					-(1.f - ratio) * 0.5f,
+					0.0f,
+					0.0f
+				);
+				modelStack.Scale(
+					ratio - 0.05f,
+					0.5f,
+					1.0f
+				);
 
-			RenderMesh(meshList[(int)GeoType::Quad], true, Color(ratio < 0.5f ? 1.0f : (1.0f - ratio) * 2.0f, ratio > 0.5f ? 1.0f : ratio * 2.0f, 0.0f), opacity);
-			modelStack.PopMatrix();
+				RenderMesh(meshList[(int)GeoType::Quad], true, Color(ratio < 0.5f ? 1.0f : (1.0f - ratio) * 2.0f, ratio > 0.5f ? 1.0f : ratio * 2.0f, 0.0f), opacity);
+				modelStack.PopMatrix();
 
-			RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.1f, 0.1f, 0.1f), opacity);
+				RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.1f, 0.1f, 0.1f), opacity);
+			}
 			modelStack.PopMatrix();
 
 			modelStack.PopMatrix();
