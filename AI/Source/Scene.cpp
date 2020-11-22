@@ -18,24 +18,28 @@
 #include "StateSkeleAttack.h"
 #include "StateSkeleDead.h"
 #include "StateSkeleChase.h"
+#include "StateSkeleDeadButNotDead.h"
 
 #include "StateReptileIdle.h"
 #include "StateReptilePatrol.h"
 #include "StateReptileAttack.h"
 #include "StateReptileDead.h"
 #include "StateReptileChase.h"
+#include "StateReptileProcreate.h"
 
 #include "StateBoyIdle.h"
 #include "StateBoyPatrol.h"
 #include "StateBoyAttack.h"
 #include "StateBoyDead.h"
 #include "StateBoyChase.h"
+#include "StateBoyImmune.h"
 
 #include "StateOrcIdle.h"
 #include "StateOrcPatrol.h"
 #include "StateOrcAttack.h"
 #include "StateOrcDead.h"
 #include "StateOrcChase.h"
+#include "StateOrcExplosive.h"
 
 extern int windowWidth;
 extern int windowHeight;
@@ -94,24 +98,28 @@ Scene::Scene():
 	skeleSM->AddState(new State(StateID::StateSkeleAttack, StateSkeleAttack::Enter, StateSkeleAttack::Update, StateSkeleAttack::Exit));
 	skeleSM->AddState(new State(StateID::StateSkeleDead, StateSkeleDead::Enter, StateSkeleDead::Update, StateSkeleDead::Exit));
 	skeleSM->AddState(new State(StateID::StateSkeleChase, StateSkeleChase::Enter, StateSkeleChase::Update, StateSkeleChase::Exit));
+	skeleSM->AddState(new State(StateID::StateSkeleDeadButNotDead, StateSkeleDeadButNotDead::Enter, StateSkeleDeadButNotDead::Update, StateSkeleDeadButNotDead::Exit));
 
 	reptileSM->AddState(new State(StateID::StateReptileIdle, StateReptileIdle::Enter, StateReptileIdle::Update, StateReptileIdle::Exit));
 	reptileSM->AddState(new State(StateID::StateReptilePatrol, StateReptilePatrol::Enter, StateReptilePatrol::Update, StateReptilePatrol::Exit));
 	reptileSM->AddState(new State(StateID::StateReptileAttack, StateReptileAttack::Enter, StateReptileAttack::Update, StateReptileAttack::Exit));
 	reptileSM->AddState(new State(StateID::StateReptileDead, StateReptileDead::Enter, StateReptileDead::Update, StateReptileDead::Exit));
 	reptileSM->AddState(new State(StateID::StateReptileChase, StateReptileChase::Enter, StateReptileChase::Update, StateReptileChase::Exit));
+	reptileSM->AddState(new State(StateID::StateReptileProcreate, StateReptileProcreate::Enter, StateReptileProcreate::Update, StateReptileProcreate::Exit));
 
 	boySM->AddState(new State(StateID::StateBoyIdle, StateBoyIdle::Enter, StateBoyIdle::Update, StateBoyIdle::Exit));
 	boySM->AddState(new State(StateID::StateBoyPatrol, StateBoyPatrol::Enter, StateBoyPatrol::Update, StateBoyPatrol::Exit));
 	boySM->AddState(new State(StateID::StateBoyAttack, StateBoyAttack::Enter, StateBoyAttack::Update, StateBoyAttack::Exit));
 	boySM->AddState(new State(StateID::StateBoyDead, StateBoyDead::Enter, StateBoyDead::Update, StateBoyDead::Exit));
 	boySM->AddState(new State(StateID::StateBoyChase, StateBoyChase::Enter, StateBoyChase::Update, StateBoyChase::Exit));
+	boySM->AddState(new State(StateID::StateBoyImmune, StateBoyImmune::Enter, StateBoyImmune::Update, StateBoyImmune::Exit));
 
 	orcSM->AddState(new State(StateID::StateOrcIdle, StateOrcIdle::Enter, StateOrcIdle::Update, StateOrcIdle::Exit));
 	orcSM->AddState(new State(StateID::StateOrcPatrol, StateOrcPatrol::Enter, StateOrcPatrol::Update, StateOrcPatrol::Exit));
 	orcSM->AddState(new State(StateID::StateOrcAttack, StateOrcAttack::Enter, StateOrcAttack::Update, StateOrcAttack::Exit));
 	orcSM->AddState(new State(StateID::StateOrcDead, StateOrcDead::Enter, StateOrcDead::Update, StateOrcDead::Exit));
 	orcSM->AddState(new State(StateID::StateOrcChase, StateOrcChase::Enter, StateOrcChase::Update, StateOrcChase::Exit));
+	orcSM->AddState(new State(StateID::StateOrcExplosive, StateOrcExplosive::Enter, StateOrcExplosive::Update, StateOrcExplosive::Exit));
 
 	publisher->AddListener((long int)ListenerFlags::ObjPool, objPool);
 
@@ -956,24 +964,28 @@ void Scene::RenderEntities(){
 		"StateSkeleAttack",
 		"StateSkeleDead",
 		"StateSkeleChase",
+		"StateSkeleDeadButNotDead",
 
 		"StateReptileIdle",
 		"StateReptilePatrol",
 		"StateReptileAttack",
 		"StateReptileDead",
 		"StateReptileChase",
+		"StateReptileProcreate",
 
 		"StateBoyIdle",
 		"StateBoyPatrol",
 		"StateBoyAttack",
 		"StateBoyDead",
 		"StateBoyChase",
+		"StateBoyImmune",
 
 		"StateOrcIdle",
 		"StateOrcPatrol",
 		"StateOrcAttack",
 		"StateOrcDead",
-		"StateOrcChase"
+		"StateOrcChase",
+		"StateOrcExplosive",
 	};
 
 	const std::vector<std::pair<bool, Entity*>>& entityPool = objPool->GetPool();
