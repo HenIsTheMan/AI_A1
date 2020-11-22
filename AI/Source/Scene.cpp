@@ -1518,7 +1518,7 @@ void Scene::RenderControlsText(Mesh* const textMesh, const Color& textColor, con
 	);
 	RenderTextOnScreen(
 		textMesh,
-		"1 - 10: Modify grid attribs",
+		"0 - 9: Modify grid attribs",
 		textColor,
 		textSize,
 		0.0f,
