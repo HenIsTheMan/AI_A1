@@ -1082,6 +1082,18 @@ void Scene::RenderEntities(){
 					opacity = entity->GetTimeLeft() / 7.0f;
 					ManualRenderMesh("OrcFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Orc], true, Color(), opacity);
 					break;
+				case StateID::StateSkeleDeadButNotDead:
+					ManualRenderMesh("SkeleFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Skele], true, Color(1.0f, 0.0f, 0.0f), 1.0f);
+					break;
+				case StateID::StateReptileProcreate:
+					ManualRenderMesh("ReptileStaticDown", 1.0f, 1.0f, meshList[(int)GeoType::Reptile], true, Color(0.0f, 1.0f, 0.0f), 1.0f);
+					break;
+				case StateID::StateBoyImmune:
+					ManualRenderMesh("BoyStaticDown", 1.0f, 1.0f, meshList[(int)GeoType::Boy], true, Color(0.0f, 0.0f, 1.0f), 1.0f);
+					break;
+				case StateID::StateOrcExplosive:
+					ManualRenderMesh("OrcFacePlant", 1.0f, 1.0f, meshList[(int)GeoType::Orc], true, Color(1.0f, 0.0f, 0.0f), 1.0f);
+					break;
 				default:
 					RenderEntitiesPart2(entity);
 			}
@@ -1194,7 +1206,7 @@ void Scene::RenderEntitiesPart2(const Entity* const entity){
 	} else if(vec.y < 0.0f){
 		spriteAniName += (std::string)"Down";
 	} else{
-		spriteAniName += (std::string)"Right";
+		spriteAniName += (std::string)"Down";
 	}
 
 	ManualRenderMesh(spriteAniName, entity->GetSpriteAniElapsedTime(), entity->GetSpriteAniDelay(), spriteAniMesh, false);
