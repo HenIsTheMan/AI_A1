@@ -3,13 +3,14 @@ Publisher* StateOrcAttack::im_Publisher = Publisher::RetrieveGlobalObjPtr();
 void StateOrcAttack::Enter(Entity* const entity){
 	entity->SetSpriteAniElapsedTime(0.0f);
 	entity->SetSpriteAniDelay(0.1f);
+	entity->SetTimeLeft(0.0f);
 }
 
 void StateOrcAttack::Update(Entity* const entity, const double dt){
 	entity->SetSpriteAniElapsedTime(entity->GetSpriteAniElapsedTime() + (float)dt);
 
 	if(entity->GetCurrHealth() <= 0.0f){
-		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcDead));
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcExplosive));
 		return;
 	}
 
@@ -51,9 +52,9 @@ void StateOrcAttack::Update(Entity* const entity, const double dt){
 			const Vector3 dir = entityTargetLocalPos - entity->GetLocalPos();
 			const Vector3 perpendicular = RotateVec(dir, Math::DegreeToRadian(90.0f));
 
-			(void)im_Publisher->Notify(flags, new EventAttacking(dmg, entityTargetLocalPos), true);
-			(void)im_Publisher->Notify(flags, new EventAttacking(dmg * 0.25f, entityTargetLocalPos + perpendicular), true);
-			(void)im_Publisher->Notify(flags, new EventAttacking(dmg * 0.25f, entityTargetLocalPos - perpendicular), true);
+			(void)im_Publisher->Notify(flags, new EventAttacking(dmg, entityTargetLocalPos), false);
+			(void)im_Publisher->Notify(flags, new EventAttacking(dmg * 0.25f, entityTargetLocalPos + perpendicular), false);
+			(void)im_Publisher->Notify(flags, new EventAttacking(dmg * 0.25f, entityTargetLocalPos - perpendicular), false);
 
 			entity->SetTimeLeft(0.6f); //Attack interval
 		}

@@ -3,6 +3,7 @@ Publisher* StateReptileAttack::im_Publisher = Publisher::RetrieveGlobalObjPtr();
 void StateReptileAttack::Enter(Entity* const entity){
 	entity->SetSpriteAniElapsedTime(0.0f);
 	entity->SetSpriteAniDelay(0.1f);
+	entity->SetTimeLeft(0.0f);
 }
 
 void StateReptileAttack::Update(Entity* const entity, const double dt){
@@ -47,7 +48,7 @@ void StateReptileAttack::Update(Entity* const entity, const double dt){
 			entity->SetSpriteAniElapsedTime(0.0f);
 
 			(void)im_Publisher->Notify(long int(entity->GetTeam() == EntityTeam::Alpha ? ListenerFlags::OmegaTeam : ListenerFlags::AlphaTeam),
-				new EventAttacking(entity->GetDmg(), entityTargetLocalPos), true);
+				new EventAttacking(entity->GetDmg(), entityTargetLocalPos), false);
 
 			entity->SetTimeLeft(0.6f); //Attack interval
 		}

@@ -12,7 +12,7 @@ void StateOrcChase::Update(Entity* const entity, const double dt){
 	entity->SetSpriteAniElapsedTime(entity->GetSpriteAniElapsedTime() + (float)dt);
 
 	if(entity->GetCurrHealth() <= 0.0f){
-		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcDead));
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcExplosive));
 		return;
 	}
 

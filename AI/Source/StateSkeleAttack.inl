@@ -3,6 +3,7 @@ Publisher* StateSkeleAttack::im_Publisher = Publisher::RetrieveGlobalObjPtr();
 void StateSkeleAttack::Enter(Entity* const entity){
 	entity->SetSpriteAniElapsedTime(0.0f);
 	entity->SetSpriteAniDelay(0.1f);
+	entity->SetTimeLeft(0.0f);
 }
 
 void StateSkeleAttack::Update(Entity* const entity, const double dt){
@@ -50,8 +51,8 @@ void StateSkeleAttack::Update(Entity* const entity, const double dt){
 			const float dmg = entity->GetDmg();
 			const Vector3 dir = entityTargetLocalPos - entity->GetLocalPos();
 
-			(void)im_Publisher->Notify(flags, new EventAttacking(dmg, entityTargetLocalPos), true);
-			(void)im_Publisher->Notify(flags, new EventAttacking(dmg * 0.5f, entityTargetLocalPos + dir), true);
+			(void)im_Publisher->Notify(flags, new EventAttacking(dmg, entityTargetLocalPos), false);
+			(void)im_Publisher->Notify(flags, new EventAttacking(dmg * 0.5f, entityTargetLocalPos + dir), false);
 
 			entity->SetTimeLeft(0.6f); //Attack interval
 		}

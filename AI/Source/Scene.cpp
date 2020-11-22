@@ -408,8 +408,8 @@ Entity* Scene::CreateOrc(const CreateEntityParams& params) const{
 	entity->SetLocalPos(params.im_LocalPos);
 	entity->SetLocalScale(1.0f, 1.0f, 1.0f);
 
-	entity->SetDmg(15.0f);
-	entity->SetMaxHealth(150.0f);
+	entity->SetDmg(12.0f);
+	entity->SetMaxHealth(120.0f);
 	entity->SetCurrHealth(entity->GetMaxHealth());
 	entity->SetSpd(0.0f);
 

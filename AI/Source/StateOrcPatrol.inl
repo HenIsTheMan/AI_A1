@@ -15,7 +15,7 @@ void StateOrcPatrol::Update(Entity* const entity, const double dt){
 	entity->SetSpriteAniElapsedTime(entity->GetSpriteAniElapsedTime() + (float)dt);
 
 	if(entity->GetCurrHealth() <= 0.0f){
-		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcDead));
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcExplosive));
 		return;
 	}
 	if(im_Publisher->Notify((long int)ListenerFlags::ObjPool, new EventFindClosestEnemy(entity), false)){

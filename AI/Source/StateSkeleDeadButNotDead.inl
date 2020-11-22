@@ -1,7 +1,8 @@
 void StateSkeleDeadButNotDead::Enter(Entity* const entity){
-	entity->SetMaxHealth(160.0f);
+	entity->SetMaxHealth(110.0f);
 	entity->SetCurrHealth(entity->GetMaxHealth());
 	entity->SetTimeLeft(8.0f);
+	entity->SetTarget(nullptr);
 }
 
 void StateSkeleDeadButNotDead::Update(Entity* const entity, const double dt){
@@ -22,5 +23,7 @@ void StateSkeleDeadButNotDead::Exit(Entity* const entity){
 		entity->SetMaxHealth(45.0f);
 		entity->SetCurrHealth(entity->GetMaxHealth());
 		entity->SetTimeLeft(0.0f);
+	} else{
+		entity->SetCurrHealth(0.0f);
 	}
 }

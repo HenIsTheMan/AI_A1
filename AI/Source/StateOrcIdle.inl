@@ -11,7 +11,7 @@ void StateOrcIdle::Enter(Entity* const entity){
 
 void StateOrcIdle::Update(Entity* const entity, const double dt){
 	if(entity->GetCurrHealth() <= 0.0f){
-		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcDead));
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcExplosive));
 		return;
 	}
 
