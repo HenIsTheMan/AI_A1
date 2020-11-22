@@ -15,7 +15,7 @@ void StateOrcAttack::Update(Entity* const entity, const double dt){
 	}
 
 	if(!im_Publisher->Notify((long int)ListenerFlags::ObjPool, new EventFindClosestEnemy(entity), false)){
-		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcIdle));
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcPatrol));
 		return;
 	}
 
