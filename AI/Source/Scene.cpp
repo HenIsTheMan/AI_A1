@@ -1736,7 +1736,11 @@ int Scene::OnEvent(Event* myEvent, const bool destroyEvent){
 
 			for(size_t i = 0; i < possibleOffsetsSize; ++i){
 				const Vector3 spawnLocalPos = eventProcreated->GetLocalPos() + possibleOffsets[i];
-				if(gridBlockData[(int)spawnLocalPos.y][(int)spawnLocalPos.x] || gridEntityData[(int)spawnLocalPos.y][(int)spawnLocalPos.x]){ //If grid cell is not empty...
+				if(spawnLocalPos.x >= gridCols
+					|| spawnLocalPos.y >= gridRows
+					|| gridBlockData[(int)spawnLocalPos.y][(int)spawnLocalPos.x]
+					|| gridEntityData[(int)spawnLocalPos.y][(int)spawnLocalPos.x]
+				){ //If grid cell is not empty...
 					continue;
 				}
 
