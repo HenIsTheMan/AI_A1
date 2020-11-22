@@ -1150,7 +1150,7 @@ void Scene::RenderEntities(){
 				1.0f
 			);
 
-			RenderMesh(meshList[(int)GeoType::Quad], true, Color(1.0f - ratio, ratio, 0.0f), opacity);
+			RenderMesh(meshList[(int)GeoType::Quad], true, Color(ratio < 0.5f ? 1.0f : (1.0f - ratio) * 2.0f, ratio > 0.5f ? 1.0f : ratio * 2.0f, 0.0f), opacity);
 			modelStack.PopMatrix();
 
 			RenderMesh(meshList[(int)GeoType::Quad], true, Color(0.1f, 0.1f, 0.1f), opacity);
