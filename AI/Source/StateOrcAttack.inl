@@ -42,7 +42,7 @@ void StateOrcAttack::Update(Entity* const entity, const double dt){
 		if(entity->GetSpriteAniMiddleName() == "Smack"){
 			entity->SetSpriteAniMiddleName("Static");
 
-			entity->SetTimeLeft(1.0f); //Attack cooldown
+			entity->SetTimeLeft(0.9f); //Attack cooldown
 		} else{
 			entity->SetSpriteAniMiddleName("Smack");
 			entity->SetSpriteAniElapsedTime(0.0f);
@@ -56,7 +56,7 @@ void StateOrcAttack::Update(Entity* const entity, const double dt){
 			(void)im_Publisher->Notify(flags, new EventAttacking(dmg * 0.25f, entityTargetLocalPos + perpendicular), false);
 			(void)im_Publisher->Notify(flags, new EventAttacking(dmg * 0.25f, entityTargetLocalPos - perpendicular), false);
 
-			entity->SetTimeLeft(0.6f); //Attack interval
+			entity->SetTimeLeft(0.7f); //Attack interval
 		}
 	} else{
 		entity->SetTimeLeft(entity->GetTimeLeft() - (float)dt);

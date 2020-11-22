@@ -4,7 +4,7 @@ Publisher* StateSkeleChase::im_Publisher = Publisher::RetrieveGlobalObjPtr();
 void StateSkeleChase::Enter(Entity* const entity){
 	entity->SetSpd(1.8f); //Chase spd
 	entity->SetSpriteAniElapsedTime(0.0f);
-	entity->SetSpriteAniDelay(0.05f);
+	entity->SetSpriteAniDelay(0.08f);
 	entity->SetSpriteAniMiddleName("Move");
 }
 

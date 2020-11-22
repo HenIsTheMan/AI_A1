@@ -47,7 +47,7 @@ void StateReptileAttack::Update(Entity* const entity, const double dt){
 		if(entity->GetSpriteAniMiddleName() == "Shoot"){
 			entity->SetSpriteAniMiddleName("Static");
 
-			entity->SetTimeLeft(1.0f); //Attack cooldown
+			entity->SetTimeLeft(0.6f); //Attack cooldown
 		} else{
 			entity->SetSpriteAniMiddleName("Shoot");
 			entity->SetSpriteAniElapsedTime(0.0f);
@@ -55,7 +55,7 @@ void StateReptileAttack::Update(Entity* const entity, const double dt){
 			(void)im_Publisher->Notify(long int(entity->GetTeam() == EntityTeam::Alpha ? ListenerFlags::OmegaTeam : ListenerFlags::AlphaTeam),
 				new EventAttacking(entity->GetDmg(), entityTargetLocalPos), false);
 
-			entity->SetTimeLeft(0.6f); //Attack interval
+			entity->SetTimeLeft(1.0f); //Attack interval
 		}
 	} else{
 		entity->SetTimeLeft(entity->GetTimeLeft() - (float)dt);

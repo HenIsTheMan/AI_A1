@@ -35,7 +35,7 @@ void StateBoyPatrol::Update(Entity* const entity, const double dt){
 
 		if(Math::RandIntMinMax(1, 4) == 1){
 			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyIdle));
-			entity->SetTimeLeft(Math::RandFloatMinMax(2.0f, 5.0f));
+			entity->SetTimeLeft(Math::RandFloatMinMax(1.7f, 3.9f));
 		} else if(!ChooseADir(entity, im_Grid)){
 			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyIdle));
 			entity->SetTimeLeft(0.0f);

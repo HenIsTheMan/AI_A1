@@ -41,7 +41,7 @@ void StateOrcPatrol::Update(Entity* const entity, const double dt){
 
 		if(entity->GetTimeLeft() > 999.0f){
 			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcIdle));
-			entity->SetTimeLeft(Math::RandFloatMinMax(2.0f, 5.0f));
+			entity->SetTimeLeft(Math::RandFloatMinMax(1.5f, 4.0f));
 		} else{
 			entity->SetTimeLeft(1000.0f);
 		}

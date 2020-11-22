@@ -47,7 +47,7 @@ void StateBoyAttack::Update(Entity* const entity, const double dt){
 		if(entity->GetSpriteAniMiddleName() == "Slash"){
 			entity->SetSpriteAniMiddleName("Static");
 
-			entity->SetTimeLeft(1.0f); //Attack cooldown
+			entity->SetTimeLeft(0.8f); //Attack cooldown
 		} else{
 			entity->SetSpriteAniMiddleName("Slash");
 			entity->SetSpriteAniElapsedTime(0.0f);
