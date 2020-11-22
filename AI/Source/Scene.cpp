@@ -1137,12 +1137,7 @@ void Scene::RenderEntities(){
 			);
 			modelStack.PopMatrix();
 
-			const StateID currStateID = entity->GetCurrState()->GetID();
-			if((currStateID != StateID::StateSkeleDead)
-				&& (currStateID != StateID::StateReptileDead)
-				&& (currStateID != StateID::StateBoyDead)
-				&& (currStateID != StateID::StateOrcDead)
-			){
+			if(entity->GetCurrHealth() > 0.0f){
 				modelStack.PushMatrix();
 
 				modelStack.Translate(

@@ -1,7 +1,7 @@
 Publisher* StateOrcExplosive::im_Publisher = Publisher::RetrieveGlobalObjPtr();
 
 void StateOrcExplosive::Enter(Entity* const entity){
-	entity->SetMaxHealth(30.0f);
+	entity->SetMaxHealth(80.0f);
 	entity->SetCurrHealth(entity->GetMaxHealth());
 	entity->SetTimeLeft(7.0f);
 	entity->SetTarget(nullptr);

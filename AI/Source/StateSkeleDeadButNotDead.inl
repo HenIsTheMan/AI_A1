@@ -20,7 +20,7 @@ void StateSkeleDeadButNotDead::Update(Entity* const entity, const double dt){
 
 void StateSkeleDeadButNotDead::Exit(Entity* const entity){
 	if(entity->GetNextState()->GetID() == StateID::StateSkeleIdle){
-		entity->SetMaxHealth(45.0f);
+		entity->SetMaxHealth(70.0f);
 		entity->SetCurrHealth(entity->GetMaxHealth());
 		entity->SetTimeLeft(0.0f);
 	} else{
