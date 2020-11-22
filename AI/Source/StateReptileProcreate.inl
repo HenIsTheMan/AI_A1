@@ -4,6 +4,7 @@ Publisher* StateReptileProcreate::im_Publisher = Publisher::RetrieveGlobalObjPtr
 
 void StateReptileProcreate::Enter(Entity* const entity){
 	entity->SetTimeLeft(10.0f);
+	entity->SetTarget(nullptr);
 }
 
 void StateReptileProcreate::Update(Entity* const entity, const double dt){

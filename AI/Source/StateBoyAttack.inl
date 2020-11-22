@@ -39,6 +39,11 @@ void StateBoyAttack::Update(Entity* const entity, const double dt){
 	}
 
 	if(entity->GetTimeLeft() <= 0.0f){
+		if(Math::RandIntMinMax(1, 10) == 1){
+			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyImmune));
+			return;
+		}
+
 		if(entity->GetSpriteAniMiddleName() == "Slash"){
 			entity->SetSpriteAniMiddleName("Static");
 

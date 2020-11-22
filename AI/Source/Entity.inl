@@ -46,7 +46,9 @@ namespace Obj{
 				if(im_Attribs.im_LocalPos.x > eventAttackingLocalPos.x - 1.0f && im_Attribs.im_LocalPos.x < eventAttackingLocalPos.x + 1.0f
 					&& im_Attribs.im_LocalPos.y > eventAttackingLocalPos.y - 1.0f && im_Attribs.im_LocalPos.y < eventAttackingLocalPos.y + 1.0f){
 					val = 1;
-					im_Attribs.im_CurrHealth -= eventAttacking->GetDmg();
+					if(im_Attribs.im_CurrState->GetID() != StateID::StateBoyImmune){
+						im_Attribs.im_CurrHealth -= eventAttacking->GetDmg();
+					}
 				}
 
 				break;
