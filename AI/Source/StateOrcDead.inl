@@ -13,5 +13,4 @@ void StateOrcDead::Update(Entity* const entity, const double dt){
 }
 
 void StateOrcDead::Exit(Entity* const entity){
-	entity->SetTimeLeft(0.0f); //Just in case
 }

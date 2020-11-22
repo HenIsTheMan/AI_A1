@@ -13,5 +13,4 @@ void StateReptileDead::Update(Entity* const entity, const double dt){
 }
 
 void StateReptileDead::Exit(Entity* const entity){
-	entity->SetTimeLeft(0.0f); //Just in case
 }

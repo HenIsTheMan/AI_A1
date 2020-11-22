@@ -13,5 +13,4 @@ void StateBoyDead::Update(Entity* const entity, const double dt){
 }
 
 void StateBoyDead::Exit(Entity* const entity){
-	entity->SetTimeLeft(0.0f); //Just in case
 }
