@@ -1,17 +1,8 @@
-ObjPool<Entity>* StateOrcDead::im_ObjPool = nullptr;
-
-void StateOrcDead::Enter(Entity* const entity){
-	entity->SetTimeLeft(7.0f);
-	entity->SetTarget(nullptr);
+void StateSkeleDeadButNotDead::Enter(Entity* const entity){
 }
 
-void StateOrcDead::Update(Entity* const entity, const double dt){
-	entity->SetTimeLeft(entity->GetTimeLeft() - (float)dt);
-	if(entity->GetTimeLeft() <= 0.0f){
-		im_ObjPool->DeactivateObj(entity);
-	}
+void StateSkeleDeadButNotDead::Update(Entity* const entity, const double dt){
 }
 
-void StateOrcDead::Exit(Entity* const entity){
-	entity->SetTimeLeft(0.0f); //Just in case
+void StateSkeleDeadButNotDead::Exit(Entity* const entity){
 }
