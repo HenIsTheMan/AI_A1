@@ -12,7 +12,7 @@ void StateOrcExplosive::Update(Entity* const entity, const double dt){
 		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcDead));
 
 		const Vector3& entityLocalPos = entity->GetLocalPos();
-		const float dmg = entity->GetDmg() * 0.5f;
+		const float dmg = entity->GetDmg() * 0.8f;
 
 		(void)im_Publisher->Notify((long int)ListenerFlags::Entity, new EventAttacking(dmg, entityLocalPos + Vector3(1.0f, 0.0f, 0.0f)), false);
 		(void)im_Publisher->Notify((long int)ListenerFlags::Entity, new EventAttacking(dmg, entityLocalPos + Vector3(-1.0f, 0.0f, 0.0f)), false);
