@@ -33,10 +33,7 @@ void StateSkelePatrol::Update(Entity* const entity, const double dt){
 	if((entityGridTargetLocalPos - entity->GetLocalPos()).Length() < entity->GetSpd() * (float)dt){
 		entity->SetLocalPos(roundf(entityGridTargetLocalPos.x), roundf(entityGridTargetLocalPos.y), roundf(entityGridTargetLocalPos.z)); //Snap entity's local pos
 
-		if(Math::RandIntMinMax(1, 4) == 1){
-			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateSkeleIdle));
-			entity->SetTimeLeft(Math::RandFloatMinMax(2.0f, 5.0f));
-		} else if(!ChooseADir(entity, im_Grid)){
+		if(!ChooseADir(entity, im_Grid)){
 			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateSkeleIdle));
 			entity->SetTimeLeft(0.0f);
 		}
