@@ -691,6 +691,9 @@ void Scene::UpdateReptileStates(){
 
 	StateReptileDead* const stateReptileDead = ((StateReptileDead*)reptileSM->GetState(StateID::StateReptileDead));
 	stateReptileDead->im_ObjPool = objPool;
+
+	StateReptileProcreate* const stateReptileProcreate = ((StateReptileProcreate*)reptileSM->GetState(StateID::StateReptileProcreate));
+	stateReptileProcreate->im_ObjPool = objPool;
 }
 
 void Scene::UpdateBoyStates(){
