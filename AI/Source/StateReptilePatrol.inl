@@ -34,10 +34,7 @@ void StateReptilePatrol::Update(Entity* const entity, const double dt){
 	if((entityGridTargetLocalPos - entity->GetLocalPos()).Length() < entity->GetSpd() * (float)dt){
 		entity->SetLocalPos(roundf(entityGridTargetLocalPos.x), roundf(entityGridTargetLocalPos.y), roundf(entityGridTargetLocalPos.z)); //Snap entity's local pos
 
-		if(Math::RandIntMinMax(1, 4) == 1){
-			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateReptileIdle));
-			entity->SetTimeLeft(Math::RandFloatMinMax(2.0f, 5.0f));
-		} else if(!ChooseBetween2Dirs(entity, im_Grid, im_CommonDirs)){
+		if(!ChooseBetween2Dirs(entity, im_Grid, im_CommonDirs)){
 			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateReptileIdle));
 			entity->SetTimeLeft(0.0f);
 		}
