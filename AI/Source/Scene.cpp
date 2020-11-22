@@ -122,6 +122,7 @@ Scene::Scene():
 	orcSM->AddState(new State(StateID::StateOrcExplosive, StateOrcExplosive::Enter, StateOrcExplosive::Update, StateOrcExplosive::Exit));
 
 	publisher->AddListener((long int)ListenerFlags::ObjPool, objPool);
+	publisher->AddListener((long int)ListenerFlags::Scene, this);
 
 	grid.SetCellWidth(gridCellWidth);
 	grid.SetCellHeight(gridCellHeight);
@@ -257,6 +258,7 @@ void Scene::Update(double dt){
 		UpdateGridBlockData();
 		UpdateStates();
 		UpdateEntities(dt * gameSpd);
+		OnEvent(FetchEvent(), true);
 	} else if(App::Key(VK_SPACE)){
 		simStarted = true;
 		dayNightBT = elapsedTime + 7.0f;
@@ -691,9 +693,6 @@ void Scene::UpdateReptileStates(){
 
 	StateReptileDead* const stateReptileDead = ((StateReptileDead*)reptileSM->GetState(StateID::StateReptileDead));
 	stateReptileDead->im_ObjPool = objPool;
-
-	StateReptileProcreate* const stateReptileProcreate = ((StateReptileProcreate*)reptileSM->GetState(StateID::StateReptileProcreate));
-	stateReptileProcreate->im_ObjPool = objPool;
 }
 
 void Scene::UpdateBoyStates(){
@@ -1715,8 +1714,21 @@ int Scene::OnEvent(Event* myEvent, const bool destroyEvent){
 	int val = -1;
 
 	switch(myEvent->GetID()){
-		case EventID::EventCalcActiveObjs: {
-			val = 999;
+		case EventID::EventProcreated: {
+			std::cout << "Here!";
+
+			const EventProcreated* const eventProcreated = static_cast<const EventProcreated*>(myEvent);
+
+			Entity* const reptile = CreateReptile({
+				eventProcreated->GetLocalPos()
+			});
+
+			const ListenerFlags& teamFlag = eventProcreated->GetTeamFlag();
+			const bool team = teamFlag == ListenerFlags::AlphaTeam;
+			reptile->SetTeam(team ? EntityTeam::Alpha : EntityTeam::Omega);
+			publisher->AddListener((long int)ListenerFlags::Reptile | (long int) teamFlag | (long int)ListenerFlags::Entity, reptile);
+
+			val = 1;
 			break;
 		}
 	}

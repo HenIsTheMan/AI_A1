@@ -152,6 +152,7 @@
     <ClCompile Include="Source\EventCalcAlphaCount.cpp" />
     <ClCompile Include="Source\EventCalcOmegaCount.cpp" />
     <ClCompile Include="Source\EventFindClosestEnemy.cpp" />
+    <ClCompile Include="Source\EventProcreated.cpp" />
     <ClCompile Include="Source\StateHelperFuncs.cpp" />
     <ClCompile Include="Source\Event.cpp" />
     <ClCompile Include="Source\EventCalcActiveObjs.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="Source\EventCalcAlphaCount.h" />
     <ClInclude Include="Source\EventCalcOmegaCount.h" />
     <ClInclude Include="Source\EventFindClosestEnemy.h" />
+    <ClInclude Include="Source\EventProcreated.h" />
     <ClInclude Include="Source\StateBoyIdle.h" />
     <ClInclude Include="Source\StateBoyImmune.h" />
     <ClInclude Include="Source\StateHelperFuncs.h" />

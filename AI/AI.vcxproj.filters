@@ -73,6 +73,9 @@
     <ClCompile Include="Source\EventAttacking.cpp">
       <Filter>Event\Events\Pre-events</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EventProcreated.cpp">
+      <Filter>Event\Events\Post-events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h">
@@ -254,6 +257,9 @@
     </ClInclude>
     <ClInclude Include="Source\StateBoyImmune.h">
       <Filter>State\States\BoyStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventProcreated.h">
+      <Filter>Event\Events\Post-events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

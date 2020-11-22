@@ -39,7 +39,7 @@ void StateReptileAttack::Update(Entity* const entity, const double dt){
 	}
 
 	if(entity->GetTimeLeft() <= 0.0f){
-		if(Math::RandIntMinMax(1, 8) == 1){
+		if(Math::RandIntMinMax(1, 20) == 1){
 			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateReptileProcreate));
 			return;
 		}
