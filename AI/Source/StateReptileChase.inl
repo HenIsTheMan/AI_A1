@@ -44,7 +44,7 @@ void StateReptileChase::Update(Entity* const entity, const double dt){
 			return;
 		}
 
-		if((entityTargetLocalPos - entityLocalPos).LengthSquared() >= 6.0f * 6.0f){
+		if((entityTargetLocalPos - entityLocalPos).LengthSquared() > 6.0f * 6.0f){
 			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateReptilePatrol));
 			entity->SetTarget(nullptr);
 			return;

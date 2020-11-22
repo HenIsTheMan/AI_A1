@@ -21,7 +21,7 @@ void StateBoyPatrol::Update(Entity* const entity, const double dt){
 	if(im_Publisher->Notify((long int)ListenerFlags::ObjPool, new EventFindClosestEnemy(entity), false)){
 		const Entity* const entityTarget = entity->GetTarget();
 
-		if((entityTarget->GetLocalPos() - entity->GetLocalPos()).LengthSquared() < 4.0f * 4.0f){
+		if((entityTarget->GetLocalPos() - entity->GetLocalPos()).LengthSquared() <= 4.0f * 4.0f){
 			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyChase));
 			return;
 		} else{

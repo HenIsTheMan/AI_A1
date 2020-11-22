@@ -52,7 +52,7 @@ void StateBoyIdle::Update(Entity* const entity, const double dt){
 		}
 
 		if(free){
-			if((entityTarget->GetLocalPos() - entityLocalPos).LengthSquared() < 4.0f * 4.0f){
+			if((entityTarget->GetLocalPos() - entityLocalPos).LengthSquared() <= 4.0f * 4.0f){
 				entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyChase));
 				return;
 			} else{

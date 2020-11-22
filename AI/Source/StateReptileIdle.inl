@@ -52,7 +52,7 @@ void StateReptileIdle::Update(Entity* const entity, const double dt){
 		}
 
 		if(free){
-			if((entityTarget->GetLocalPos() - entityLocalPos).LengthSquared() < 6.0f * 6.0f){
+			if((entityTarget->GetLocalPos() - entityLocalPos).LengthSquared() <= 6.0f * 6.0f){
 				entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateReptileChase));
 				return;
 			} else{

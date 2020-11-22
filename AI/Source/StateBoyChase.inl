@@ -22,7 +22,7 @@ void StateBoyChase::Update(Entity* const entity, const double dt){
 		const Vector3& entityLocalPos = entity->GetLocalPos();
 		const Vector3& entityGridTargetLocalPos = entity->GetGridTargetLocalPos();
 
-		if((entityTargetLocalPos - entityLocalPos).LengthSquared() >= 4.0f * 4.0f){
+		if((entityTargetLocalPos - entityLocalPos).LengthSquared() > 4.0f * 4.0f){
 			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateBoyPatrol));
 			entity->SetTarget(nullptr);
 			return;

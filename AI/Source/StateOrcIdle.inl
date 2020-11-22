@@ -52,7 +52,7 @@ void StateOrcIdle::Update(Entity* const entity, const double dt){
 		}
 
 		if(free){
-			if((entityTarget->GetLocalPos() - entityLocalPos).LengthSquared() < 3.0f * 3.0f){
+			if((entityTarget->GetLocalPos() - entityLocalPos).LengthSquared() <= 3.0f * 3.0f){
 				entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateOrcChase));
 				return;
 			} else{

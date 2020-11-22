@@ -52,7 +52,7 @@ void StateSkeleIdle::Update(Entity* const entity, const double dt){
 		}
 
 		if(free){
-			if((entityTarget->GetLocalPos() - entityLocalPos).LengthSquared() < 5.0f * 5.0f){
+			if((entityTarget->GetLocalPos() - entityLocalPos).LengthSquared() <= 5.0f * 5.0f){
 				entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateSkeleChase));
 				return;
 			} else{

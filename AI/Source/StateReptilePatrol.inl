@@ -22,7 +22,7 @@ void StateReptilePatrol::Update(Entity* const entity, const double dt){
 	if(im_Publisher->Notify((long int)ListenerFlags::ObjPool, new EventFindClosestEnemy(entity), false)){
 		const Entity* const entityTarget = entity->GetTarget();
 
-		if((entityTarget->GetLocalPos() - entity->GetLocalPos()).LengthSquared() < 6.0f * 6.0f){
+		if((entityTarget->GetLocalPos() - entity->GetLocalPos()).LengthSquared() <= 6.0f * 6.0f){
 			entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateReptileChase));
 			return;
 		} else{
