@@ -11,7 +11,7 @@ void StateSkeleIdle::Enter(Entity* const entity){
 
 void StateSkeleIdle::Update(Entity* const entity, const double dt){
 	if(entity->GetCurrHealth() <= 0.0f){
-		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateSkeleDead));
+		entity->SetNextState(entity->GetStateMachine()->GetState(StateID::StateSkeleDeadButNotDead));
 		return;
 	}
 
