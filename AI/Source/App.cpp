@@ -117,7 +117,7 @@ void App::Run(){
 		}
 		if(!isF1 && Key(VK_F1)){
 			const GLFWvidmode* const& mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-			glfwSetWindowMonitor(im_window, glfwGetWindowMonitor(im_window) ?	nullptr : glfwGetPrimaryMonitor(), 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
+			glfwSetWindowMonitor(im_window, glfwGetWindowMonitor(im_window) ? nullptr : glfwGetPrimaryMonitor(), 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
 			isF1 = true;
 		} else if(isF1 && !Key(VK_F1)){
 			isF1 = false;
