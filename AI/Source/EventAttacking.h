@@ -10,7 +10,7 @@ public:
 	EventAttacking(const float dmg, const Vector3& localPos);
 	~EventAttacking() = default;
 
-	///Getter
+	///Getters
 	float GetDmg() const;
 	const Vector3& GetLocalPos() const;
 private:
